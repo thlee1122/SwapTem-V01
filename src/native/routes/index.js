@@ -21,13 +21,31 @@ import ForgotPasswordComponent from '../components/ForgotPassword';
 import LocaleContainer from '../../containers/Locale';
 import LocaleComponent from '../components/Locale';
 
+import MyAccountComponent from '../components/MyAccount';
+
+import AccountSettingsComponent from '../components/AccountSettings';
+
+
+import ReportPageComponent from '../components/ReportPage';
+
+import RegisterItemComponent from '../components/RegisterItemComponent';
+
 import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
 
 import MemberContainer from '../../containers/Member';
 import ProfileComponent from '../components/Profile';
 
-import AboutComponent from '../components/About';
+import MainPage from '../components/MainPage';
+
+import SingleProductComponent from '../components/SingleProduct';
+
+import InboxComponent from '../components/Inbox';
+
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
+import SearchResultPageComponent from '../components/SearchResultPage';
 
 const Index = (
   <Stack hideNavBar>
@@ -42,19 +60,50 @@ const Index = (
         <Stack
           key="home"
           title={AppConfig.appName.toUpperCase()}
-          icon={() => <Icon name="planet" {...DefaultProps.icons} />}
+          // icon={() => <Icon name="planet" {...DefaultProps.icons} />}
+          icon={() => <MaterialIcon name="home" size={25} color="white" />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="home" component={AboutComponent} />
+          {/* <Scene key="home" component={MainPage} /> */}
+          <Scene key="home" component={RegisterItemComponent} />
+
+          <Scene
+            back
+            key="searchResult"
+            title="Search Result"
+            {...DefaultProps.navbarProps}
+            component={SignUpContainer}
+            Layout={SearchResultPageComponent}
+          />
         </Stack>
 
-        <Stack
+        {/* <Stack
           key="recipes"
           title="RECIPES"
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
+        </Stack> */}
+
+        <Stack
+          key="inbox"
+          title="INBOX"
+          // icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          icon={() => <FontAwesomeIcon name="inbox" size={25} color="white"/>}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="inbox" component={LocaleContainer} Layout={InboxComponent} />
+        </Stack>
+
+        <Stack
+          key="registerItem"
+          title="REGISTER ITEM"
+          // icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          icon={() => <FontAwesomeIcon name="camera" size={23} color="white"/>}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="inbox" component={LocaleContainer} Layout={RegisterItemComponent} />
         </Stack>
 
         <Stack
@@ -96,6 +145,61 @@ const Index = (
             component={LocaleContainer}
             Layout={LocaleComponent}
           />
+
+
+          {/* EDIT START */}
+          <Scene
+            back
+            key="privacy"
+            title="HOW WE PROTECT YOUR PRIVACY"
+            {...DefaultProps.navbarProps}
+            component={LocaleContainer}
+            Layout={LocaleComponent}
+          />
+
+          <Scene
+            back
+            key="myaccount"
+            title="MY ACCOUNT"
+            {...DefaultProps.navbarProps}
+            component={LocaleContainer}
+            Layout={MyAccountComponent}
+          />
+
+          <Scene
+            back
+            key="accountSettings"
+            title="ACCOUNT SETTINGS"
+            {...DefaultProps.navbarProps}
+            component={LocaleContainer}
+            Layout={AccountSettingsComponent}
+          />
+
+
+
+          <Scene
+            back
+            key="reportItem"
+            title="Report Item"
+            {...DefaultProps.navbarProps}
+            component={LocaleContainer}
+            Layout={ReportPageComponent}
+          />
+
+          <Scene
+            back
+            key="singleProduct"
+            title="Single Product"
+            {...DefaultProps.navbarProps}
+            component={LocaleContainer}
+            Layout={SingleProductComponent}
+          />
+
+
+
+          {/* EDIT END */}
+
+
           <Scene
             back
             key="updateProfile"
