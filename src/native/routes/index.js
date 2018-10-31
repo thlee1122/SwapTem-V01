@@ -64,8 +64,8 @@ const Index = (
           icon={() => <MaterialIcon name="home" size={25} color="white" />}
           {...DefaultProps.navbarProps}
         >
-          {/* <Scene key="home" component={MainPage} /> */}
-          <Scene key="home" component={RegisterItemComponent} />
+          <Scene key="home" component={MainPage} />
+          {/* <Scene key="home" component={RegisterItemComponent} /> */}
 
           <Scene
             back
