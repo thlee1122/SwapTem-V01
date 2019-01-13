@@ -1,9 +1,10 @@
 /* global window */
-import { createStore, applyMiddleware, compose } from 'redux';
-import { persistStore, persistCombineReducers } from 'redux-persist';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { persistStore, persistCombineReducers, autoRehydrate } from 'redux-persist';
 import storage from 'redux-persist/es/storage'; // default: localStorage if web, AsyncStorage if react-native
 import thunk from 'redux-thunk';
 import reducers from '../reducers';
+import apiMiddleware from './apiMiddleware';
 
 // Redux Persist config
 const config = {
@@ -14,13 +15,14 @@ const config = {
 
 const reducer = persistCombineReducers(config, reducers);
 
-const middleware = [thunk];
+// const middleware = [thunk];
 
 const configureStore = () => {
   const store = createStore(
     reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    compose(applyMiddleware(...middleware)),
+    compose(applyMiddleware(thunk, apiMiddleware)),
+    // autoRehydrate()
   );
 
   const persistor = persistStore(
@@ -28,6 +30,8 @@ const configureStore = () => {
     null,
     () => { store.getState(); },
   );
+
+  persistor.purge()
 
   return { persistor, store };
 };

@@ -44,10 +44,23 @@ import InboxComponent from '../components/Inbox';
 
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import SearchResultPageComponent from '../components/SearchResultPage';
 
+import OfferComponent from '../components/OfferComponent';
+
+import AcceptedSwapProductPage from '../components/AcceptedSwapProductPage';
+import ScheduleMeetupPage from '../components/ScheduleMeetupPage';
+
+import ChatRoomComponent from '../components/ChatRoom';
+import ReviewPage         from '../components/ReviewPage';
+
+import MyReview         from '../components/MyReview';
+import LikedItems       from '../components/LikedItems';
+
 const Index = (
+
   <Stack hideNavBar>
     <Scene hideNavBar>
       <Tabs
@@ -64,7 +77,9 @@ const Index = (
           icon={() => <MaterialIcon name="home" size={25} color="white" />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="home" component={MainPage} />
+          <Scene key="home" component={MainPage} /> 
+          <Scene title="Item" key="singleProduct" component={SingleProductComponent} />
+          <Scene title="Reviews" key="reviewPage" component={ReviewPage} />
           {/* <Scene key="home" component={RegisterItemComponent} /> */}
 
           <Scene
@@ -87,6 +102,30 @@ const Index = (
         </Stack> */}
 
         <Stack
+          key="offer"
+          title="OFFER"
+          // icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          icon={() => <MaterialCommunityIcons name="cards" size={25} color="white"/>}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="inbox" component={LocaleContainer} Layout={OfferComponent} />
+
+          <Scene key="acceptedSwapProductPage" component={AcceptedSwapProductPage} />
+          <Scene title="Schedule A Meeting" key="scheduleMeetupPage" component={ScheduleMeetupPage} />
+        </Stack>
+
+        <Stack
+          key="registerItem"
+          title="REGISTER ITEM"
+          // icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          onPress={() => { alert("sdsdsds")}}
+          icon={() => <FontAwesomeIcon name="camera" size={23} color="white"/>}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="inbox" component={LocaleContainer} Layout={RegisterItemComponent} />
+        </Stack>
+
+         <Stack
           key="inbox"
           title="INBOX"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
@@ -94,17 +133,8 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="inbox" component={LocaleContainer} Layout={InboxComponent} />
-        </Stack>
-
-        <Stack
-          key="registerItem"
-          title="REGISTER ITEM"
-          // icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          icon={() => <FontAwesomeIcon name="camera" size={23} color="white"/>}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="inbox" component={LocaleContainer} Layout={RegisterItemComponent} />
-        </Stack>
+          <Scene title= "CHAT" key="chatRoom" component={ChatRoomComponent} />
+        </Stack>        
 
         <Stack
           key="profile"
@@ -113,6 +143,8 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene key="myReviews" title="MY REVIEWS" component={MyReview} />
+          <Scene key="likedItems" title="LIKED ITEMS" component={LikedItems} />
           <Scene
             back
             key="signUp"
@@ -171,8 +203,8 @@ const Index = (
             key="accountSettings"
             title="ACCOUNT SETTINGS"
             {...DefaultProps.navbarProps}
-            component={LocaleContainer}
-            Layout={AccountSettingsComponent}
+            // component={LocaleContainer}
+            component={AccountSettingsComponent}
           />
 
 
@@ -191,8 +223,8 @@ const Index = (
             key="singleProduct"
             title="Single Product"
             {...DefaultProps.navbarProps}
-            component={LocaleContainer}
-            Layout={SingleProductComponent}
+            // component={LocaleContainer}
+            component={SingleProductComponent}
           />
 
 
@@ -212,7 +244,7 @@ const Index = (
       </Tabs>
     </Scene>
 
-    <Scene
+    {/* <Scene
       back
       clone
       key="recipe"
@@ -220,7 +252,7 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={RecipesContainer}
       Layout={RecipeViewComponent}
-    />
+    /> */}
   </Stack>
 );
 

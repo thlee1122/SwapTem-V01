@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import get                                              from 'lodash.get';
 import PropTypes from 'prop-types';
 import { View, TouchableOpacity } from 'react-native';
 import {
@@ -48,14 +49,17 @@ class AccountSettings extends Component {
           iconName: "log-out" }
       ];
 
+    const { userInfo } = this.props;
+    const name = get(userInfo, "name", "");
+
     return (
       <Container>
         <Content style={{backgroundColor: 'white'}}>
           <List>
             <View style={{flex: 1, flexDirection: 'row'}}>
               <View style={{marginLeft: 20, marginTop: 25}}>
-                <Text style={{fontWeight: 'bold', fontSize: 25}}>Tae Hoon Lee</Text>
-                <TouchableOpacity onPress={Actions.myaccount}>
+                <Text style={{fontWeight: 'bold', fontSize: 25}}>{name}</Text>
+                <TouchableOpacity onPress={Actions.profileHome}>
                   <Text style={{color: "#00529b", marginTop: 10}}>View your account</Text>
                 </TouchableOpacity>
               </View>

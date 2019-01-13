@@ -10,17 +10,27 @@ import { translate } from '../../i18n';
 import Header from './Header';
 import Spacer from './Spacer';
 
+import Expo from 'expo';
+// import {View as RNView} from 'react-native';
+// import { LoginButton } from 'react-native-fbsdk';
+//const FBSDK = require('react-native-fbsdk');
+/*
+const {
+  LoginButton,
+  AccessToken
+} = FBSDK;
+*/
 class Login extends React.Component {
-  static propTypes = {
-    member: PropTypes.shape({
-      email: PropTypes.string,
-    }),
-    locale: PropTypes.string,
-    error: PropTypes.string,
-    success: PropTypes.string,
-    loading: PropTypes.bool.isRequired,
-    onFormSubmit: PropTypes.func.isRequired,
-  }
+  // static propTypes = {
+  //   member: PropTypes.shape({
+  //     email: PropTypes.string,
+  //   }),
+  //   locale: PropTypes.string,
+  //   error: PropTypes.string,
+  //   success: PropTypes.string,
+  //   loading: PropTypes.bool.isRequired,
+  //   onFormSubmit: PropTypes.func.isRequired,
+  // }
 
   static defaultProps = {
     error: null,
@@ -34,6 +44,9 @@ class Login extends React.Component {
     this.state = {
       email: (props.member && props.member.email) ? props.member.email : '',
       password: '',
+      loggedIn: false,
+      name: "",
+      photoUrl: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -53,6 +66,39 @@ class Login extends React.Component {
       .catch(e => console.log(`Error: ${e}`));
   }
 
+  handleGoogleSignin = async () => {
+    // console.log("Google Sign In has been pressed");
+
+    const googleOAuthClientID = "273007938095-lj39nobbh02i5smuejsgrhagheqk3krl.apps.googleusercontent.com";
+
+    try {
+      const result = await Expo.Google.logInAsync({
+        androidClientId: googleOAuthClientID,
+        // iosClientId: YOUR_CLIENT_ID_HERE,
+        scopes: ['profile', 'email'],
+      });
+
+      if (result.type === 'success') {
+        console.log("@@@@", result);
+        // return result.accessToken;
+
+        this.setState({
+          loggedIn: true,
+          name: result.user.name,
+          photoUrl: result.user.photoUrl
+        });
+
+      } else {
+        // return {cancelled: true};
+        console.log("login cancelled");
+      }
+    } catch(e) {
+      // return {error: true};
+      console.log("error", e);
+    }
+
+  }
+
   render() {
     const {
       loading,
@@ -62,11 +108,31 @@ class Login extends React.Component {
     } = this.props;
     const { email } = this.state;
 
+    // const google OAuth Client ID = "273007938095-lj39nobbh02i5smuejsgrhagheqk3krl.apps.googleusercontent.com";
+
     if (loading) return <Loading />;
 
     return (
-      <Container>
+
+      <Container style={{backgroundColor: 'white'}}>
         <Content>
+          {/* <RNView>
+            <LoginButton
+              publishPermissions={["email"]}
+              onLoginFinished={
+                (error, result) => {
+                  if (error) {
+                    alert("Login failed with error: " + error.message);
+                  } else if (result.isCancelled) {
+                    alert("Login was cancelled");
+                  } else {
+                    alert("Login was successful with permissions: " + result.grantedPermissions)
+                  }
+                }
+              }
+              onLogoutFinished={() => alert("User logged out")}/>
+          </RNView> */}
+
           <View padder>
             <Header
               title="Welcome back"
@@ -106,6 +172,16 @@ class Login extends React.Component {
                   {translate('Login', locale)}
                 </Text>
               </Button>
+
+              {/* <Button onPress={this.handleGoogleSignin} style={{marginTop: 15}}>
+                <Text>
+                  Google Sign In
+                </Text>
+              </Button> */}
+
+              
+
+              
             </View>
           </Form>
         </Content>
