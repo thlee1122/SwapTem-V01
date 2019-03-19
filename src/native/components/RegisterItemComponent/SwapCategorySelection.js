@@ -12,6 +12,10 @@ class SwapCategorySelection extends React.Component {
     const { selectedSwapCategoriesState, swapCategorySelectionError, selectedSwapCategories,
     onSelectedItemsChange, onSelectedItemObjectsChange } = this.props;
 
+    console.log("@@@@ inside SwapCateogrySelection", selectedSwapCategories);
+
+    newSelectedSwapCategories = [22, 23];
+
     return (
       <React.Fragment>
         <View style={styles.swapCategorySelectionSection}>
@@ -42,6 +46,7 @@ class SwapCategorySelection extends React.Component {
             onSelectedItemsChange={(selectedItems) => onSelectedItemsChange("swapCategorySelection", selectedItems)}
             onSelectedItemObjectsChange={(selectedItems) => onSelectedItemObjectsChange("swapCategorySelection", selectedItems)}
             selectedItems={selectedSwapCategories}
+            // selectedItems={newSelectedSwapCategories}
             submitButtonText="Submit"
             colors={{
               success: '#3578e5',

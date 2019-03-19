@@ -8,8 +8,6 @@ class InterestedCategorySection extends React.Component {
 
   render() {
     const { interestedCategories, handleEdit } = this.props;
-    
-    console.log("~~~~~~", interestedCategories);
 
     return (
       <View style={styles.interestedCategorySection}>

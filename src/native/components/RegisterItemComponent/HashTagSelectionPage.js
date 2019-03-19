@@ -1,4 +1,5 @@
 import React                                        from "react";
+import { connect }                                      from 'react-redux';
 import { View, Dimensions, ActivityIndicator, 
          TouchableOpacity }                                    from 'react-native';
 import { Text, Button }                             from 'native-base';
@@ -6,6 +7,9 @@ import MentionsTextInput                            from 'react-native-mentions'
 import styles                                       from '../../styles/RegisterItemStyles';
 import * as hashTagData                                 from '../../data/sampleHashTagData.json';
 import SingleRecommendedHashTag                     from './SingleRecommendedHashTag';
+import { getRecommendedHashTags }                       from '../../../actions/recommendedHashTagsActions';
+
+
 
 class HashTagSelectionPage extends React.Component {
   constructor(props) {
@@ -16,7 +20,11 @@ class HashTagSelectionPage extends React.Component {
       hashTagSampleData: [],
       data: [],
       hashTags: "",
-      predictions: {},
+
+      // predictions: {},
+
+      recommendedHashTags: [],
+      
       recommendedHashTagClicked: false,
       recommendedHashTagPillColor: 'white',
       recommendedHashTagPillTextColor: '#00529b',
@@ -27,17 +35,27 @@ class HashTagSelectionPage extends React.Component {
   }
 
   componentDidMount() {
+    const { getRecommendedHashTags } = this.props;
+
+    getRecommendedHashTags();
+
     this.setState({
       hashTagSampleData: hashTagData.results
     });
   }
 
   componentWillReceiveProps = (nextProps) => {
-    if(this.props.predictions !== nextProps.predictions) {
+    if(this.props.recommendedHashTags.recommendedHashTags !== nextProps.recommendedHashTags.recommendedHashTags) {
       this.setState({
-        predictions: nextProps.predictions
+        recommendedHashTags: nextProps.recommendedHashTags.recommendedHashTags
       });
     }
+
+    // if(this.props.predictions !== nextProps.predictions) {
+    //   this.setState({
+    //     predictions: nextProps.predictions
+    //   });
+    // }
   }
 
   renderSuggestionsRow({ item }, hidePanel) {
@@ -100,8 +118,12 @@ class HashTagSelectionPage extends React.Component {
 
   render() {
     const { hashTags, handleTextChange, callback, renderSuggestionsRow, 
-            data, handleInputSubmit, predictions } = this.props;
+            data, handleInputSubmit } = this.props;
     const { width } = Dimensions.get('window');
+
+
+    console.log("@@@@@ inside HashTagSelectionPage this.props", this.props);
+    console.log("@@@@@ inside HashTagSelectionPage this.state", this.state);
 
     return (
       <React.Fragment>
@@ -112,25 +134,27 @@ class HashTagSelectionPage extends React.Component {
           </Text> */}
           
           {
-            Object.keys(this.state.predictions).length !== 0 && this.state.predictions.prediction.length !== 0 ?
+            // Object.keys(this.state.predictions).length !== 0 && this.state.predictions.prediction.length !== 0 ?
+            this.state.recommendedHashTags.length !== 0 ?
             <React.Fragment>
               <Text style={{color: "#00529b", marginBottom: 10}}>
                 Select to use <Text style={{fontWeight: 'bold', color: "#00529b"}}>Recommended Hash Tags. </Text>
               </Text>
-              <View style={{flexDirection: 'row', marginBottom: 10}}>
+              <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row'}}>
                 {
-                  Object.keys(this.state.predictions).map((prediction, index) => {
-                    let singlePrediction = this.state.predictions.prediction[index].tag;
+                  this.state.recommendedHashTags.map((item, index) => {
+                    let singleItem = item
 
                     return (
                       <SingleRecommendedHashTag
                         key={index}
                         index={index}
                         handleRecommendedHashTag={this.handleRecommendedHashTag}
-                        singlePrediction={singlePrediction}
+                        singlePrediction={singleItem}
                       />
                     );
                   })
+                  
                 }
               </View>
             </React.Fragment>
@@ -181,4 +205,19 @@ class HashTagSelectionPage extends React.Component {
   }
 }
 
-export default HashTagSelectionPage;
+const mapStateToProps = state => ({
+  // registerItem: state.registerItem || {},
+  recommendedHashTags: state.recommendedHashTags || {}
+});
+
+const mapDispatchToProps = {
+  // postItem: postItem,
+  // getMetadata: getMetadata,
+  // getItem: getItem,
+  // detectImage: detectImage,
+  getRecommendedHashTags: getRecommendedHashTags
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HashTagSelectionPage);
+
+// export default HashTagSelectionPage;

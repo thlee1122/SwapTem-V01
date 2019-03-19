@@ -3,7 +3,6 @@ import {
   View, Image, Animated, ScrollView, 
   TextInput, KeyboardAvoidingView, Platform, 
   TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';  
-
 import {
   Container, Content, List, ListItem, Body, 
   Left, Right, Text, Button, Tabs, Tab, 
@@ -13,7 +12,6 @@ import { Switch }                                   from 'react-native-switch';
 import styles                                       from '../../styles/RegisterItemStyles';
 import { clothingTypes, shoesTypes, bagsTypes,
          accessoriesTypes }                         from '../../data/sampleRegisterItemData';
-
 import InterestedCategorySection                    from './InterestedCategorySection';
 import SwapCategorySelection                        from './SwapCategorySelection';
 
@@ -24,6 +22,10 @@ class TradeSelection extends React.Component {
             handleSwitch, handleInputSubmit, handleEdit, interestedCategories,
             interestedCategoryEdit, selectedSwapCategoriesState, swapCategorySelectionError,
             selectedSwapCategories, onSelectedItemsChange, onSelectedItemObjectsChange } = this.props;
+
+
+            console.log("&&&&&& selectedSwapCategories", selectedSwapCategories);
+            console.log("&&&&&& interestedCategories", interestedCategories);
 
     return (
       <React.Fragment>

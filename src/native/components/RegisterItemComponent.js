@@ -1,6 +1,7 @@
 import React, { Component }                             from 'react';
 import get                                              from 'lodash.get';
 import { connect }                                      from 'react-redux';
+import { Actions }                                      from 'react-native-router-flux';
 import { View, Image, ScrollView, TouchableOpacity, 
          Dimensions, ActivityIndicator }                from 'react-native';  
 import { Container, Text, Button}                       from 'native-base';
@@ -27,8 +28,8 @@ import SwapCategorySelection                            from './RegisterItemComp
 import ValueInputSection                                from './RegisterItemComponent/ValueInputSection';
 import CategorySelectionPage                            from './RegisterItemComponent/CategorySelectionPage';
 import HashTagSelectionSection                          from './RegisterItemComponent/HashTagSelectionSection';
-import InterestedCategorySection                        from './RegisterItemComponent/InterestedCategorySection';
 import HashTagSelectionPage                             from './RegisterItemComponent/HashTagSelectionPage';
+import RegisterItemSubmissionPage                       from './RegisterItemComponent/RegisterItemSubmissionPage';
 import { postItem, getMetadata, 
          getItem, detectImage }                         from '../../actions/registerItemActions';
 
@@ -88,7 +89,9 @@ class RegisterItemComponent extends Component {
       valueInputSectionSubmitted: false,
       typeSizeGenderSubmitted: false,
       textbookSelectionSubmitted: false,
-      itemRegisterStep: 1
+      itemRegisterStep: 1,
+
+      finalSubmission: false
     };
     
     this.registerDataObj = {
@@ -602,6 +605,15 @@ class RegisterItemComponent extends Component {
       console.log("222222222", finalRegisterItemData);
 
       this.props.postItem(finalRegisterItemData);
+
+      // Actions.registerItemSubmission({ User: User })
+      // Actions.registerItemSubmission();
+
+      this.setState({
+        itemRegisterStep: this.state.itemRegisterStep + 1,
+        valueInputSectionSubmitted: true,
+        finalSubmission: true
+      });
     }
   }
 
@@ -747,8 +759,10 @@ class RegisterItemComponent extends Component {
     const predictions = get(imageDetection, "predictions", []);
 
     console.log("~~~~~~~", this.props);
-    console.log(this.state);
-    console.log(this.registerDataObj);
+    // console.log(this.state);
+    // console.log(this.registerDataObj);
+
+    console.log("!!!! imageDetection", imageDetection);
 
     return (
       <Container>
@@ -978,6 +992,28 @@ class RegisterItemComponent extends Component {
                 : null
               }
               {/* Value Input Section END */}
+
+              {/* Register Item Submission Page START */}
+              {
+                this.state.pictureUrl !== undefined && 
+                this.state.pictureUrl !== "" && 
+                this.state.hashTagSubmitted === true &&
+                this.state.categorySubmitted === true && 
+                this.state.tradeSelectionSubmitted === true &&
+                this.state.conditionSelectionSubmitted === true && 
+                this.state.descriptionSelectionSubmitted === true &&
+                this.state.itemRegisterStep === 9 &&
+                this.state.valueInputSectionSubmitted === true &&
+                this.state.finalSubmission === true ?
+
+                <RegisterItemSubmissionPage 
+                  registerDataObj={this.registerDataObj}
+                />
+
+                : null
+              }
+
+              {/* Register Item Submission Page END */}
             </ScrollView>
         </View>
       </Container>

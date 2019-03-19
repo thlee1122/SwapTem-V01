@@ -52,7 +52,9 @@ class SingleRecommendedHashTag extends React.Component {
             paddingLeft: 15,
             // backgroundColor: "#00529b",
             backgroundColor: this.state.recommendedHashTagPillColor,
-            borderRadius: 5
+            borderRadius: 5,
+            marginRight: 15,
+            marginBottom: 10
           }}
           onPress={(e) => this.handleHashTagClick(index, singlePrediction)}
         >
@@ -63,7 +65,7 @@ class SingleRecommendedHashTag extends React.Component {
               fontWeight: 'bold'
             }}
           >
-            {`#${singlePrediction}`}
+            {`${singlePrediction}`}
           </Text>
         </TouchableOpacity>
       </React.Fragment>

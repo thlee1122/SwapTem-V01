@@ -51,7 +51,7 @@ class LikeComponent extends Component {
 
   render() {
     return (
-      <View style={{position: 'absolute', zIndex: 10, marginLeft: 130, marginTop: 10 }}>
+      <View style={{position: 'absolute', zIndex: 10, marginLeft: '80%', marginTop: 10 }}>
         <TouchableOpacity
           onPress={() => this.handleLike()}
         >

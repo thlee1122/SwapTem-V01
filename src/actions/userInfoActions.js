@@ -2,7 +2,7 @@ import * as types from './userInfoTypes';
 
 export const getUserInfo = () => {
   return (dispatch, getState) => {
-    debugger;
+    // debugger;
     dispatch({
       type: 'API_REQUEST',
       options: {

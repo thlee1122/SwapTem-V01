@@ -1,27 +1,77 @@
 import React                                        from "react";
-// import get                                       from "lodash.get";
-import { 
-  View, Image, Animated, ScrollView, 
-  TextInput, KeyboardAvoidingView, Platform, 
-  TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';  
-
-import {
-  Container, Content, List, ListItem, Body, 
-  Left, Right, Text, Button, Tabs, Tab, 
-  TabHeading, Card, CardItem }                      from 'native-base';
+import { View }                                     from 'react-native';  
+import { Text  }                                    from 'native-base';
 import { Dropdown }                                 from 'react-native-material-dropdown';
 import styles                                       from '../../styles/RegisterItemStyles';
-import { clothingTypes, shoesTypes, bagsTypes,
-         accessoriesTypes }                         from '../../data/sampleRegisterItemData';
 
 class FashionTypeSelection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.clothingFilters = [];
+    this.shoesFilters = [];
+    this.bagsFilters = [];
+    this.jewelryFilters = [];
+  };
+
+  componentWillMount() {
+    const { fashionSubCategories } = this.props;
+    let tempClothingFilters = [];
+    let tempShoesFilters = [];
+    let tempBagsFilters = [];
+    let tempJewelryFilters = [];
+
+    fashionSubCategories[0].children.map((item, index) => {
+      if(item.name === "Clothing") {
+        tempClothingFilters.push(item.categoryFilters);
+      } else if(item.name === "Shoes") {
+        tempShoesFilters.push(item.categoryFilters);
+      } else if(item.name === "Bags") {
+        tempBagsFilters.push(item.categoryFilters);
+      } else if(item.name === "Jewelry") {
+        tempJewelryFilters.push(item.categoryFilters);
+      }
+    });
+
+    tempClothingFilters[0].map((item, index) => {
+      let singleFilter = {};
+      singleFilter.value = item.name;
+      singleFilter.id = item.id;
+
+      this.clothingFilters.push(singleFilter);
+    });
+
+    tempShoesFilters[0].map((item, index) => {
+      let singleFilter = {};
+      singleFilter.value = item.name;
+      singleFilter.id = item.id;
+
+      this.shoesFilters.push(singleFilter);
+    });
+
+    tempBagsFilters[0].map((item, index) => {
+      let singleFilter = {};
+      singleFilter.value = item.name;
+      singleFilter.id = item.id;
+
+      this.bagsFilters.push(singleFilter);
+    });
+
+    tempJewelryFilters[0].map((item, index) => {
+      let singleFilter = {};
+      singleFilter.value = item.name;
+      singleFilter.id = item.id;
+
+      this.jewelryFilters.push(singleFilter);
+    });
+  }
 
   render() {
     const { typeSelectionError, categories, handleDropDown } = this.props;
 
     return (
       <React.Fragment>
-        <View style={{flexDirection: 'column', marginTop: 30, marginLeft: 13}}>
+        <View style={{flexDirection: 'column', marginTop: 30, width: 350, alignSelf: 'center'}}>
           <Text style={styles.categorySectionTitle}>Item Type</Text>
           <Text style={[styles.tradeSectionSubTitle, {color: typeSelectionError === true ? "red" : "#00529b"}]}>
             Please select a Type for your Fashion Item.
@@ -35,10 +85,10 @@ class FashionTypeSelection extends React.Component {
             baseColor="black"
             selectedItemColor="#3578e5"
             data={
-              categories.categoryLevelTwo.indexOf(0) !== -1 ? clothingTypes
-              : categories.categoryLevelTwo.indexOf(1) !== -1 ? shoesTypes
-              : categories.categoryLevelTwo.indexOf(2) !== -1 ? bagsTypes
-              : categories.categoryLevelTwo.indexOf(3) !== -1 ? accessoriesTypes
+              categories.categoryLevelTwo === "4a380c0c-9b9e-459d-b988-b7d9b2720d7d" ? this.clothingFilters 
+              : categories.categoryLevelTwo === "07f12a59-6272-49c5-ad38-ba7623c0cf84" ? this.shoesFilters
+              : categories.categoryLevelTwo === "6a60e00e-f8e5-4f49-92fb-62d2d1154452" ? this.bagsFilters
+              : categories.categoryLevelTwo === "ed8f58f9-aed2-449b-b61c-7fb92ea36b8e" ? this.jewelryFilters
               : null
             }
             dropdownPosition={4.2}

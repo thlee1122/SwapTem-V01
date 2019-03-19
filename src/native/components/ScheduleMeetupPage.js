@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, TouchableOpacity, Text, PanResponder, Linking, Platform } from 'react-native';
+import { View, Image, StyleSheet, TouchableOpacity, Text, PanResponder, Linking, Platform, Dimensions } from 'react-native';
 import { Button, Container, Content, Tabs, Tab, TabHeading, Card, CardItem, List, ListItem } from 'native-base';
 // import { connect } from 'react-redux';
 import Carousel from 'react-native-snap-carousel';
@@ -148,6 +148,8 @@ class ScheduleMeetupPage extends Component {
 
 	render() {
     const { swapCard } = this.props;
+    const { height, width } = Dimensions.get('window');
+    const carouselWidth = width * 0.92;
 
 		return (
 			<Container>
@@ -162,10 +164,11 @@ class ScheduleMeetupPage extends Component {
                 ref={(c) => { this._carousel = c; }}
                 data={userSelectedMeetupLocation}
                 renderItem={this.renderCarouselCard}
-                sliderWidth={360}
+                sliderWidth={carouselWidth}
                 itemWidth={230}
-                containerCustomStyle={{ marginRight: 20 }}
+                containerCustomStyle={{ marginRight: 0 }}
                 contentContainerCustomStyle={{ marginLeft: -65 }}
+                style={{flex: 1}}
               />
             </View>
 

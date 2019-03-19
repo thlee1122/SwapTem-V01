@@ -9,12 +9,8 @@ import { topSizes, pantSizes, shoesSizes }          from '../../data/sampleRegis
 class GenderSizeSection extends React.Component {
 
   render() {
-    const { genderError, genderClicked, gender, categoryLevelThree, size, type,
+    const { genderError, genderClicked, categoryLevelThree, gender, size, type,
             handleSelection, categories, sizeError, handleDropDown, handleInputSubmit } = this.props;
-
-    console.log("inside genderSizeSection levelTwo", categories);
-    console.log("inside genderSizeSection categoryLevelThree", categoryLevelThree);
-    console.log("inside genderSizeSection categoryLevelThree", typeof categoryLevelThree);
 
     return (
       <React.Fragment>
@@ -50,13 +46,14 @@ class GenderSizeSection extends React.Component {
         </View>
 
         {
-          categories.categoryLevelTwo.indexOf(0) !== -1 ||
-          categories.categoryLevelTwo.indexOf(1) !== -1 ?
+          categoryLevelThree !== "" && (categories.categoryLevelTwo === "4a380c0c-9b9e-459d-b988-b7d9b2720d7d" ||
+          categories.categoryLevelTwo === "07f12a59-6272-49c5-ad38-ba7623c0cf84") ?
           <View style={styles.sizeSection}>
             <Text style={{fontWeight: 'bold', fontSize: 22, marginBottom: 10}}>Size</Text>
             <Text style={[styles.sizeSectionSubTitle, {color: sizeError === true ? "red" : "#00529b"}]}>
               Please select Size for your item.
             </Text>
+            
             <Dropdown
               label={"Please select size"}
               labelFontSize={13}
@@ -65,13 +62,14 @@ class GenderSizeSection extends React.Component {
               baseColor="black"
               selectedItemColor="#3578e5"
               data={
-                categories.categoryLevelTwo.indexOf(1) !== -1 ? shoesSizes
-                : categoryLevelThree === "Outerwear" || 
-                  categoryLevelThree==="Tees" ||
-                  categoryLevelThree==="Casual Shirts" ||
-                  categoryLevelThree==="Dress Shirts" ||
-                  categoryLevelThree==="Activewear" ||
-                  categoryLevelThree==="Sweaters" ? topSizes
+                categories.categoryLevelTwo === "07f12a59-6272-49c5-ad38-ba7623c0cf84" ? shoesSizes
+                : categoryLevelThree === "Jackets & Coats" || 
+                  categoryLevelThree === "Tops & Tees" ||
+                  categoryLevelThree === "Shirts" ||
+                  categoryLevelThree === "Dresses" ||
+                  categoryLevelThree === "Activewear" ||
+                  categoryLevelThree === "Sweaters" ||
+                  categoryLevelThree === "Socks, Necties & Scarves" ? topSizes
                 : pantSizes
               }
               dropdownPosition={4.2}

@@ -29,6 +29,7 @@ import AccountSettingsComponent from '../components/AccountSettings';
 import ReportPageComponent from '../components/ReportPage';
 
 import RegisterItemComponent from '../components/RegisterItemComponent';
+import NewRegisterItemComponent from '../components/newRegisterItemComponent';
 
 import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
@@ -59,6 +60,19 @@ import ReviewPage         from '../components/ReviewPage';
 import MyReview         from '../components/MyReview';
 import LikedItems       from '../components/LikedItems';
 
+import UserProfile      from '../components/UserProfile';
+
+import MySwapItems      from '../components/MySwapItems';
+import MyItemList       from '../components/MyItemList';
+
+import OfferSubmissionPage from '../components/OfferSubmissionPage';
+import RegisterItemSubmissionPage from '../components/RegisterItemComponent/RegisterItemSubmissionPage';
+import shareMyMeetingPage from '../components/ChatRoomScreens/ShareMyMeetingPage';
+import ContactsPage from '../components/ChatRoomScreens/ContactsPage';
+import ShareMeetingReminder from '../components/ChatRoomScreens/ShareMeetingReminder';
+import TrustedContactConfirmPage from '../components/ChatRoomScreens/TrustedContactConfirmPage';
+
+
 const Index = (
 
   <Stack hideNavBar>
@@ -77,18 +91,19 @@ const Index = (
           icon={() => <MaterialIcon name="home" size={25} color="white" />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="home" component={MainPage} /> 
+          <Scene key="home" component={MainPage} />
           <Scene title="Item" key="singleProduct" component={SingleProductComponent} />
           <Scene title="Reviews" key="reviewPage" component={ReviewPage} />
+          <Scene title="User Profile" key="userProfilePage" component={UserProfile} />
+          <Scene title="My Swap Items" key="mySwapItemsPage" component={MySwapItems} />
+          <Scene title="My Items" key="myItemListPage" component={MyItemList} />
+          <Scene title="Swap Requested" key="offerSubmissionPage" component={OfferSubmissionPage} />
           {/* <Scene key="home" component={RegisterItemComponent} /> */}
 
           <Scene
             back
             key="searchResult"
-            title="Search Result"
-            {...DefaultProps.navbarProps}
-            component={SignUpContainer}
-            Layout={SearchResultPageComponent}
+            component={SearchResultPageComponent}
           />
         </Stack>
 
@@ -111,7 +126,7 @@ const Index = (
           <Scene key="inbox" component={LocaleContainer} Layout={OfferComponent} />
 
           <Scene key="acceptedSwapProductPage" component={AcceptedSwapProductPage} />
-          <Scene title="Schedule A Meeting" key="scheduleMeetupPage" component={ScheduleMeetupPage} />
+          <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPage" component={ScheduleMeetupPage} />
         </Stack>
 
         <Stack
@@ -122,7 +137,9 @@ const Index = (
           icon={() => <FontAwesomeIcon name="camera" size={23} color="white"/>}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="inbox" component={LocaleContainer} Layout={RegisterItemComponent} />
+          {/* <Scene key="registerItemSubmission" component={RegisterItemSubmissionPage} /> */}
+          {/* <Scene key="registerItem" component={LocaleContainer} Layout={RegisterItemComponent} /> */}
+          <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
         </Stack>
 
          <Stack
@@ -134,6 +151,33 @@ const Index = (
         >
           <Scene key="inbox" component={LocaleContainer} Layout={InboxComponent} />
           <Scene title= "CHAT" key="chatRoom" component={ChatRoomComponent} />
+          <Scene
+            back
+            title=""
+            key="shareMyMeetingPage"
+            component={shareMyMeetingPage}
+          />
+          <Scene
+            back
+            title=""
+            key="contactsPage"
+            component={ContactsPage}
+          />
+
+          <Scene
+            back
+            title=""
+            key="shareMeetingReminder"
+            component={ShareMeetingReminder}
+          />
+
+          <Scene
+            back
+            title=""
+            key="trustedContactConfirmPage"
+            component={TrustedContactConfirmPage}
+          />
+          <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPageTwo" component={ScheduleMeetupPage} />
         </Stack>        
 
         <Stack

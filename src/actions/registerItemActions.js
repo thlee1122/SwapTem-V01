@@ -66,6 +66,23 @@ export const getMetadata = () => {
   };
 };
 
+// export const getRecommendedHashTags = () => {
+//   return (dispatch, getState) => {
+//     dispatch({
+//       type: 'API_REQUEST',
+//       options: {
+//         method: 'GET',
+//         endpoint: 'http://3.17.41.182:3000/v1/item/recommendHashtags?filterId=',
+//         actionTypes: {
+//           success: types.GET_RECOMMENDED_HASHTAGS_SUCCESS,
+//           // loading: types.GET_RECOMMENDED_HASHTAGS_LOADING,
+//           error: types.GET_RECOMMENDED_HASHTAGS_ERROR
+//         }
+//       }
+//     });
+//   };
+// }
+
 export const getItem = () => {
   return (dispatch, getState) => {
     // debugger;

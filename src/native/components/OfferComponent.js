@@ -271,7 +271,7 @@ class OfferPage extends Component {
 		return (
 			<Container>
         <Content style={styles.mainContent}>
-          <Tabs style={{height: 630}} locked={true}>
+          <Tabs style={{height: 725}} locked={true}>
             <Tab
               heading={ 
                 <TabHeading>

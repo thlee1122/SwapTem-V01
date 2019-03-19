@@ -2,9 +2,10 @@ import * as types from '../actions/registerItemTypes';
 
 export const initialState = {
   postItem: {},
-  getMetadata: {},
+  metadata: {},
   getItem: {},
-  imageDetection: {}
+  imageDetection: {},
+  recommendedHashTags: []
 };
 
 const registerItem = (state = initialState, action) => {
@@ -48,10 +49,17 @@ const registerItem = (state = initialState, action) => {
 
     case types.GET_METADATA_SUCCESS:
       // debugger;
-      return { ...state, loading: false, getMetadata: action.data};
+      return { ...state, loading: false, metadata: action.data};
 
     case types.GET_METADATA_ERROR:
       // debugger;
+      return { ...state, loading: false, error: action.data};
+
+
+    case types.GET_RECOMMENDED_HASHTAGS_SUCCESS:
+      return { ...state, loading: false, recommendedHashTags: action.data };
+
+    case types.GET_RECOMMENDED_HASHTAGS_SUCCESS:
       return { ...state, loading: false, error: action.data};
 
       

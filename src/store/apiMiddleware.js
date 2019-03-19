@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 function buildURL(options) {
-	console.log("@@@", options);
-	debugger;
+	// console.log("@@@", options);
+	// debugger;
 
   // let URL = '';
 
@@ -20,7 +20,7 @@ function buildURL(options) {
 }
 
 function createAxiosConfig(options) {
-  console.log("@#$%", options.headers);
+  // console.log("@#$%", options.headers);
 
   let axiosConfig = {
     method: options.method.toLowerCase(),
@@ -29,7 +29,7 @@ function createAxiosConfig(options) {
     headers: options.headers
   };
 
-  debugger;
+  // debugger;
 
   if (options.data !== undefined)
     axiosConfig.data = options.data;
@@ -38,8 +38,8 @@ function createAxiosConfig(options) {
 }
 
 function successDispatch(dispatch, axiosConfig, options, response) {
-	console.log("@@@@@", response);
-	debugger;
+	// console.log("@@@@@", response);
+	// debugger;
 
   if (options.actionTypes.success === undefined)
     throw `Please define 'success' actionType for request ${axiosConfig.url}`;

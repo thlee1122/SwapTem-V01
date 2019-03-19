@@ -201,7 +201,7 @@ class Profile extends React.Component {
                   </Text>
                 </View>
 
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
+                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
                   <Left>
                     <MaterialIcon name="smartphone" size={22} color="#00529b" />
                   </Left>
@@ -212,7 +212,7 @@ class Profile extends React.Component {
                   </Body>
                 </ListItem>
 
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
+                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
                   <Left>
                     <MaterialIcon name="email" size={22} color="#00529b" />
                   </Left>
@@ -230,7 +230,7 @@ class Profile extends React.Component {
                 </ListItem>
 
 
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
+                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
                   <Left>
                     <FontAwesomeIcon name="facebook-official" size={22} color="#00529b" />
                   </Left>
@@ -244,7 +244,7 @@ class Profile extends React.Component {
                 <ListItem
                   onPress={ () => { Actions.likedItems({ userInfo: userInfo }) }} 
                   icon 
-                  style={{width: 320}}>
+                  style={{width: "90%"}}>
                   <Left>
                     <FontAwesomeIcon name="heart" size={22} color="#00529b" />
                   </Left>
@@ -255,7 +255,7 @@ class Profile extends React.Component {
                   </Body>
                 </ListItem>
 
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
+                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
                   <Left>
                     <FontAwesomeIcon name="share-alt" size={22} color="#00529b" />
                   </Left>
@@ -290,7 +290,7 @@ class Profile extends React.Component {
 
                 {/* Profile Product, Follower, Following Numbers START*/}
                 <View style={{flex: 1, flexDirection: 'row', marginTop: 20}}>
-                  <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: '#959595', width: 118, height: 60}}>
+                  <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: '#959595', width: "33%", height: 60}}>
                     <Text style={{fontSize: 20, fontWeight: "bold", textAlign: 'center', marginTop: 8}}>
                       10
                     </Text>
@@ -300,7 +300,7 @@ class Profile extends React.Component {
                     </Text>
                   </View>
 
-                  <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderColor: '#959595', width: 118, height: 60}}>
+                  <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderColor: '#959595', width: "33%", height: 60}}>
                     <Text style={{fontSize: 20, fontWeight: "bold", textAlign: 'center', marginTop: 8}}>
                       Sample
                     </Text>
@@ -312,9 +312,9 @@ class Profile extends React.Component {
 
                   <TouchableOpacity
                     onPress={ () => { Actions.myReviews({ MyReviews: MyReviews, userInfo: userInfo }) }}
-
+                    style={{width: "33%"}}
                   >
-                    <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderLeftWidth: 1, borderColor: '#959595', width: 118, height: 60}}>
+                    <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderLeftWidth: 1, borderColor: '#959595', width: "100%", height: 60}}>
                       <Text style={{fontSize: 20, fontWeight: "bold", textAlign: 'center', marginTop: 8}}>
                         {MyReviews.length}
                       </Text>
@@ -329,7 +329,7 @@ class Profile extends React.Component {
 
                 {/* Profile page product feed START */}
                 <View>
-                  <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 15}}>
+                  <View style={{flex: 1, flexDirection: 'column', marginTop: 15}}>
                     <View 
                       style={{
                         flex: 1,
@@ -341,7 +341,7 @@ class Profile extends React.Component {
                       {
                         data.map((item, index) => {
                           const hashTags = item.HashTags;
-                          const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.Files[0].thumbPath}`;
+                          const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
                           let itemPrice = Number(item.price).toFixed(2);
                           let itemHashTags = [];
                           let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
@@ -357,16 +357,24 @@ class Profile extends React.Component {
 
                           return (
                             <TouchableOpacity
-                              style={{marginBottom: 10}} 
+                              style={{
+                                marginBottom: 10, 
+                                width: "49%", 
+                                marginRight: index === 0 || index % 2 === 0 ? 5 : 0
+                              }} 
                               key={item.id}
                               onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
                             >
                             <View 
-                              style={{width: '96.5%', marginBottom: 5, marginRight: 5, backgroundColor: 'rgb(250,250,250)'}}
+                              style={{
+                                width: '100%', 
+                                marginBottom: 5,
+                                backgroundColor: 'rgb(250,250,250)'
+                              }}
                             >
                               <Image 
                                 source={{uri: thumbnailUrl}}
-                                style={{width: 164, height: 180, borderRadius: 5}}
+                                style={{width: "100%", height: 180, borderRadius: 5}}
                               />
 
                               {/* <LikeComponent 
@@ -381,8 +389,8 @@ class Profile extends React.Component {
                                   opacity: 0.7, 
                                   position: 'absolute', 
                                   marginTop: -30, 
-                                  width: 164, 
-                                  height:30,
+                                  width: "100%", 
+                                  height: 30,
                                   flexDirection: 'row'
                                 }}>
                                   <MaterialIcon name="location-on" size={18} color="white" style={{padding: 6}}/>

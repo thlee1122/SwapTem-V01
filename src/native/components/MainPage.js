@@ -1,71 +1,40 @@
-import React from 'react';
-import get                                              from 'lodash.get';
-import { connect }                                      from 'react-redux';
-import { TextInput, View, Image, Modal, Alert, TouchableHighlight, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
-import {
-  Container, Content, H1, H2, H3, List, ListItem, Body, Left, Right, Text, Button, Tabs, Tab, TabHeading, Card, CardItem,
-} from 'native-base';
-import { LinearGradient } from 'expo';
-
-import Spacer from './Spacer';
-
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-
-import { Actions } from 'react-native-router-flux';
-
-import Autocomplete from 'react-native-autocomplete-input';
-
-import MentionsTextInput from 'react-native-mentions';
-
-import * as hashTagData from '../data/sampleHashTagData.json';
+import React                                                        from 'react';
+import get                                                          from 'lodash.get';
+import { connect }                                                  from 'react-redux';
+import { TextInput, View, Image, Modal, Alert, Dimensions,
+         TouchableHighlight, TouchableOpacity, ScrollView }         from 'react-native';
+import { Container, Content, Text, Button, Card, CardItem }         from 'native-base';
+import { LinearGradient }                                           from 'expo';
+import Spacer                                                       from './Spacer';
+import MaterialIcon                                                 from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcon                                        from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Actions }                                                  from 'react-native-router-flux';
+// import Autocomplete                                                 from 'react-native-autocomplete-input';
+// import MentionsTextInput                                            from 'react-native-mentions';
 import { postItem, getMetadata, 
-         getItem, detectImage }                         from '../../actions/registerItemActions';
-import { getUserInfo }                                  from '../../actions/userInfoActions';
-
-import LikeComponent      from './LikeComponent';
-import Login              from './Login';
-
-const API = 'https://swapi.co/api';
+         getItem, detectImage }                                     from '../../actions/registerItemActions';
+import { getUserInfo }                                              from '../../actions/userInfoActions';
+import LikeComponent                                                from './LikeComponent';
+import Login                                                        from './Login';
+import { searchTrendingKeywords, categories }                       from '../data/sampleTrendingKeywords';
 
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      text: 'Useless Placeholder',
+      text: 'Search keywords',
       modalVisible: false,
-      liked: false,
-
-
-      films: [],
-      query: "",
-      hashTags: [],
-
-      hashTagValues: "",
-      keyword: "",
-      data: [],
-
-      loggedIn: false
+      loggedIn: false,
+      searchStart: false
     };
 
-    this.reqTimer = 0;
     this.currentUserId = "";
   }
 
   componentDidMount() {
-    // console.log(hashTagData);
-
-    fetch(`${API}/films/`).then(res => res.json()).then((json) => {
-      const { results: films } = json;
-      this.setState({ films });
-    });
-
-    this.setState({
-      hashTags: hashTagData.results,
-      data: hashTagData.results
-    });
-
     this.props.getItem();
     this.props.getUserInfo();
+    this.props.getMetadata();
   }
 
   setModalVisible(visible) {
@@ -79,413 +48,81 @@ class MainPage extends React.Component {
     // Actions.searchResult();
   }
 
-  findFilm(query) {
-    if(query === "") return [];
-
-    // const { films } = this.state;
-    // const regex = new RegExp(`${query.trim()}`, 'i');
-    // return films.filter(film => film.title.search(regex) >= 0);
-
-    const { hashTags } = this.state;
-    const regex = new RegExp(`${query.trim()}`, 'i');
-    return hashTags.filter(hashTag => hashTag.hashTagValue.search(regex) >= 0);
-  }
-
-  getUserSuggestions = (keyword) => {
-    const { hashTags } = this.state;
-    const regex = new RegExp(`${keyword.trim()}`, 'i');
-
-    return hashTags.filter(hashTag => hashTag.hashTagValue.search(regex) >= 0);
-  }
-
-
-  callback = (keyword) => {
-    const { hashTags } = this.state;
-    const regex = new RegExp(`${keyword.trim()}`, 'i');
-    if (this.reqTimer) {
-      clearTimeout(this.reqTimer);
-    }
-
-    let newValue = hashTags.filter(hashTag => hashTag.hashTagValue.search(regex) >= 0);
-
-    this.reqTimer = setTimeout(() => {
-      this.setState({
-        keyword: keyword,
-        data: [...newValue]
-      })
-    }, 200);
-
-    // this.reqTimer = setTimeout(() => {
-    //   this.getUserSuggestions(keyword)
-    //     .then(data => {
-    //         this.setState({
-    //           keyword: keyword,
-    //           data: [...data]
-    //         })
-    //       })
-    //       .catch(err => {
-    //         console.log(err);
-    //       });
-    // }, 200);
-
-    // this.reqTimer = setTimeout(() => {
-    //   getUserSuggestions(keyword)
-    //     .then(data => {
-    //       this.setState({
-    //         keyword: keyword,
-    //         data: [...data]
-    //       })
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }, 200);
-  }
-
-  onSuggestionTap = (hashTagValue, hidePanel) => {
-    hidePanel();
-    const comment = this.state.hashTagValues.slice(0, - this.state.keyword.length)
-
+  handleSearchTextChange = (text) => {
     this.setState({
-      data: [],
-      hashTagValues: comment + hashTagValue
-    })
+      text: text
+    });
   }
 
-  renderSuggestionsRow({ item }, hidePanel) {
-    return (
-      <TouchableOpacity 
-        key={item} 
-        style={{marginTop: 13}}
-        onPress={() => this.onSuggestionTap(item.hashTagValue, hidePanel)}
-      >
-        <View key={item}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{left: 15}}>{item.hashTagValue}</Text>
-            <Text style={{position: 'absolute', right: 15}}>{(item.numberOfPosts).toLocaleString('en')} posts</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
-  handleLogin = (loginStatus) => {
-    
+  handleLogin = (loginStatus) => { 
   }
 
   render() {
-    const { query } = this.state;
-    // const films = this.findFilm(query);
-
-    const hashTags = this.findFilm(query);
-
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
-
     const registerItem = get(this.props, "registerItem", {});
     const getItem = get(registerItem, 'getItem', {});
     const data = get(getItem, 'data', []);
+    const userInfo = get(this.props.userInfo, "userInfo", {});
     this.currentUserId = this.props.userInfo.userInfo.id;
-    // const imageDetection = get(registerItem, "imageDetection", {});
-
-    // console.log(this.state);
-
-
     const { height, width } = Dimensions.get('window');
-    console.log("~~~~~~", this.props);
+    const metadata = get(registerItem, "metadata", {});
+    const metaDatatags = get(metadata, "tags", []);
+    // const tags = get(metadata, "tags", []);
+
+    // console.log("~~~~~~", this.props);
+    // console.log("@@@@@ userInfo", userInfo);
+    const tags = ["textbook", "electronics", "data"];
 
     return (
       <React.Fragment>
         {
           this.state.loggedIn === true ?
-          <Login 
-            handleLogin = {this.handleLogin}
-          />
+          <Login handleLogin = {this.handleLogin} />
           :
           <Container style={{backgroundColor: 'white'}}>
             <Content padder style={{backgroundColor: 'white'}}>
 
               {/* Trending This Week Modal START */}
-              <Modal
+              {/* <Modal
                 animationType="slide"
                 animationIn={'slideInLeft'}
                 animationOut={'slideOutRight'}
                 transparent={true}
                 visible={this.state.modalVisible}
-                onRequestClose={() => {
-                  this.setModalVisible(false)
-                }}
-                style={{marginTop: 100}}
+                onRequestClose={() => { this.setModalVisible(false) }}
               >
-                <View style={{backgroundColor: 'white', marginTop: 140, height: 100 }}>
-                  <View style={{flex: 1, flexDirection: 'row', marginLeft: 20, marginTop: 15}}>
-                    <Text style={{fontWeight: 'bold', fontSize: 30}}>Trending this week</Text>
-
+                <View style={{backgroundColor: 'white', marginTop: 140, }}>
+                  <View style={{height: 50, flexDirection: 'row', marginLeft: 20, marginTop: 15}}>
+                    <Text style={{fontSize: 25, fontWeight: 'bold', marginTop: 5}}>Trending this week</Text>
                     <TouchableHighlight
-                    onPress={() => {
-                      this.setModalVisible(!this.state.modalVisible);
-                    }}
-                    style={{marginLeft: 50, marginTop: 5}}
+                      onPress={() => { this.setModalVisible(!this.state.modalVisible); }}
+                      style={{position: 'absolute', marginTop: 10, right: 20}}
                     >
-                      <MaterialIcon name="close" size={20}/>
+                      <MaterialIcon name="close" size={25}/>
                     </TouchableHighlight>
                   </View>
 
-                  <Tabs style={{position: 'absolute', marginTop: 60, height: 510}}>
-                    <Tab heading={ <TabHeading><Text style={{fontSize: 20}}>Top Items</Text></TabHeading>}>
-                      <Content>
-                        <View>                    
-                          <List>
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Laptop</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>55,891 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                
-                                <Button 
-                                  style={{
-                                    backgroundColor: 'white', 
-                                    borderWidth: 1, 
-                                    borderColor: '#00529b', 
-                                    borderRadius: 10, 
-                                    marginRight: 10, 
-                                    width: 80, 
-                                    height: 35
-                                  }}
-                                  onPress={this.handleSearchButton} 
-                                >
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                            
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>MacBook</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>51,087 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Jeans</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>47,922 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Handbag</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>42,763 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Sweater</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>40,862 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Wii</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>38,972 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Jacket</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>36,722 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-                          </List>
-                        </View>
-                      </Content>
-                    </Tab>
-
-                    <Tab heading={ <TabHeading><Text style={{fontSize: 20}}>Top Items</Text></TabHeading>}>
-                      <Content>
-                        <View>                    
-                          <List>
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Apple</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>55,891 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Nintendo</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>51,087 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Coach</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>47,922 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Jordan</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>42,763 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Nike</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>40,862 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Samsung</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>38,972 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-
-                            <ListItem style={{flex: 1, flexDirection: 'row', height: 80, right: 10}}>
-                              <View style={{flex: 1, flexDirection: 'column', marginLeft: 10, marginTop: 5}}>
-                                <Text style={{fontWeight: 'bold', position: 'absolute', left: 0, marginTop: -20}}>Adidas</Text>
-                                <Text style={{fontSize: 12, color: "#959595", position: 'absolute', left: 0}}>36,722 searches</Text>
-                              </View>
-                              <View style={{flex: 1, flexDirection: 'row', position: 'absolute', right: 0}}>
-                                <Button style={{backgroundColor: 'white', borderWidth: 1, borderColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{color: "#00529b", fontSize: 15, paddingLeft: 15}}>Search</Text>
-                                </Button>
-                                <Text style={{marginRight: 10}}>or</Text>
-                                <Button style={{backgroundColor: '#00529b', borderRadius: 10, marginRight: 10, width: 80, height: 35}}>
-                                  <Text style={{fontSize: 15, paddingLeft: 25}}>Post</Text>
-                                </Button>
-                              </View>
-                            </ListItem>
-                          </List>
-                        </View>
-                      </Content>
-                    </Tab>
-                  </Tabs>
+                  <ScrollView style={{ borderWidth: 1, height: 610}}>
+                    {
+                      searchTrendingKeywords.map((item, index) => {
+                        const keyWord = item.keyWord;
+                        const numberOfPosts = item.numberOfPosts;
+                        
+                        return (
+                          <TouchableOpacity key={index} style={{borderWidth: 1, borderColor: '#959595'}}>
+                            <View style={{flexDirection: 'row', paddingLeft: 15, paddingRight: 15, paddingTop: 20, paddingBottom: 20}}>
+                              <Text style={{fontSize: 20, fontWeight: "700", color: "#00529b"}}>{keyWord}</Text>
+                              <Text style={{paddingTop: 5, position: 'absolute', right: 15, marginTop: 20, color: '#959595'}}>
+                                {`${numberOfPosts.toLocaleString('en')} posts`}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        );
+                      })
+                    }
+                  </ScrollView>
                 </View>
-              </Modal>
+              </Modal> */}
               {/* Trending This Week Modal END */}
 
               {/* Search Bar START */}
@@ -505,26 +142,26 @@ class MainPage extends React.Component {
                 <MaterialIcon name="search" size={25} color="#00529b" style={{paddingLeft: 50}}/>
                 <TextInput
                   style={{
-                    height: 40, 
-                    // borderColor: 'black', 
-                    // borderWidth: 1, 
-                    // backgroundColor: '#EDEDED', 
-                    // borderRadius: 10, 
+                    height: 40,
                     color: "#00529b", 
                     fontWeight: 'bold',
                     width: 300, 
                   }}
-                  onChangeText={(text) => this.setState({text})}
+                  onChangeText={(text) => this.handleSearchTextChange({text})}
                   value={this.state.text}
                   paddingLeft={10}
                   textAlignVertical='top'
-                  // value="Placeholder"
                   maxLength={40}
                   onFocus={() => {
-                    this.setModalVisible(true);
+                    Actions.searchResult({
+                      metaDatatags: metaDatatags
+                    });
                   }}
                 />
               </View>
+
+
+
               {/* Search Bar END */}
 
               {/* Main Page Category Section START */}
@@ -540,57 +177,31 @@ class MainPage extends React.Component {
 
               <Spacer size={15} />
               
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center',}}>
-                  <View 
-                    style={{ width: 50, 
-                        height: 50, 
-                        backgroundColor:'#959595',
-                        borderRadius: 50 }}
-                  />
-                  <Text style={{fontSize: 13, marginTop: 5}}>Trending</Text>
-                </View>
-
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center',}}>
-                  <View 
-                    style={{ width: 50, 
-                        height: 50, 
-                        backgroundColor:'#959595',
-                        borderRadius: 50 }}
-                  />
-                  <Text numberOfLines={2} style={{fontSize: 13, marginTop: 5, width: 50, textAlign: 'center'}}>Men Wear</Text>
-                </View>
-
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center',}}>
-                  <View 
-                    style={{ width: 50, 
-                        height: 50, 
-                        backgroundColor:'#959595',
-                        borderRadius: 50 }}
-                  />
-                  <Text numberOfLines={2} style={{fontSize: 13, marginTop: 5, width: 50, textAlign: 'center'}}>Women Wear</Text>
-                </View>
-
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center',}}>
-                  <View 
-                    style={{ width: 50, 
-                        height: 50, 
-                        backgroundColor:'#959595',
-                        borderRadius: 50 }}
-                  />
-                  <Text style={{fontSize: 13, marginTop: 5}}>Electronics</Text>
-                </View>
-
-                <View style={{flex: 1, flexDirection: 'column', alignItems: 'center',}}>
-                  <View 
-                    style={{ width: 50, 
-                        height: 50, 
-                        backgroundColor:'#959595',
-                        borderRadius: 50 }}
-                  />
-                  <Text style={{fontSize: 13, marginTop: 5, textAlign: 'center'}}>Home</Text>
-                </View>
-              </View>
+              <ScrollView 
+                style={{flex: 1, flexDirection: 'row', marginLeft: 5}}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                {
+                  categories.map((category) => {
+                    return (
+                      <TouchableOpacity key={category.categoryId}>
+                        <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginRight: 20}}>
+                          <View 
+                            style={{ width: 50, 
+                                height: 50, 
+                                backgroundColor:'#959595',
+                                borderRadius: 50 }}
+                          />
+                          <Text style={{fontSize: 15, marginTop: 5, fontWeight: '500', textAlign: 'center'}}>
+                            {category.categoryName}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })
+                }
+              </ScrollView>
               <Spacer size={7} />
               {/* Main Page Category Section END */}
 
@@ -607,11 +218,7 @@ class MainPage extends React.Component {
               <Spacer size={15} />
 
               <View>
-                <View style={{flex: 1, flexDirection: 'column', marginLeft: 10}}>
-                  {/* <Text style={{fontWeight: 'bold', fontSize: 20, marginBottom: 10}}>
-                    Trending
-                  </Text> */}
-                  
+                <View style={{flex: 1, flexDirection: 'column', marginLeft: 10}}>                  
                   <View 
                     style={{
                       flex: 1,
@@ -623,50 +230,35 @@ class MainPage extends React.Component {
                     {
                       data.map((item, index) => {
                         const hashTags = item.HashTags;
-                        const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.Files[0].thumbPath}`;
+                        const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
                         let itemPrice = Number(item.price).toFixed(2);
                         let itemHashTags = [];
                         let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
                         let cartUserIdArray = [];
 
                         const locationCoordinates = item.User.location.coordinates;
-
-                        // console.log("@@@", hashTags);
                         
                         for(let i = 0; i < hashTags.length; i++) {
                           let text = `#${hashTags[i].text}`;
                           itemHashTags.push(text);
                         }
-
-                        // console.log("!!!! inside mainPage", item);
-                        // console.log("!!!! cart User", item.CartUser);
-
-                        // for(let i = 0; i < item.CartUser.length; i++) {
-                        //   cartUserIdArray.push((item.CartUser)[i].id);
-                        // }
-
-                        // if(cartUserIdArray.indexOf(this.currentUserId)) {
-                        //   this.setState({
-                        //     liked: true
-                        //   });
-
-                        // } else {
-                        //   this.setState({
-                        //     liked: false
-                        //   });
-                        // }
-
+ 
                         return (
                           <TouchableOpacity 
                             key={item.id}
-                            onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
+                            onPress={ () => { Actions.singleProduct({ 
+                              singleProduct: item, 
+                              locationCoordinates: locationCoordinates,
+                              userInfo: userInfo
+                            }) }}
+                            style={{width: '47%', marginRight: 10}}
                           >
                           <View 
-                            style={{width: '96.5%', marginBottom: 5, marginRight: 5, backgroundColor: 'rgb(250,250,250)'}}
+                            style={{width: '100%', marginBottom: 5, marginRight: 5, backgroundColor: 'rgb(250,250,250)'}}
                           >
                             <Image 
                               source={{uri: thumbnailUrl}}
-                              style={{width: 164, height: 180, borderRadius: 5}}
+                              style={{width: '100%', height: 180, borderRadius: 5}}
                             />
 
                             <LikeComponent 
@@ -681,7 +273,7 @@ class MainPage extends React.Component {
                                 opacity: 0.7, 
                                 position: 'absolute', 
                                 marginTop: -30, 
-                                width: 164, 
+                                width: '100%', 
                                 height:30,
                                 flexDirection: 'row'
                               }}>
@@ -694,7 +286,7 @@ class MainPage extends React.Component {
                             
                             <View style={{flexDirection: 'row', padding: 5}}>
                               {
-                                item.spec.sell === true ?
+                                item.sell === true ?
                                 <View style={{
                                   borderRadius: 5,
                                   borderWidth: 1,
@@ -712,7 +304,7 @@ class MainPage extends React.Component {
                               }
 
                               {
-                                item.spec.swap === true ?
+                                item.swap === true ?
                                 <View style={{
                                   borderRadius: 5,
                                   borderWidth: 1,
@@ -733,24 +325,30 @@ class MainPage extends React.Component {
                               {itemHashTags.join(" ")}
                             </Text>
 
-                            <Text style={{fontSize: 14, marginLeft: 5, marginBottom: 5, color: 'rgb(30,30,30)'}}>
-                              {`$${itemPrice}`}
-                            </Text>
+                            <View style={{flexDirection: 'row'}}>
+                              <Text style={{fontSize: 14, marginLeft: 5, marginBottom: 5, color: 'rgb(30,30,30)'}}>
+                                {`$${itemPrice}`}
+                              </Text>
+
+                              <View style={{flexDirection: 'row', marginLeft: 10}}>
+                                <MaterialCommunityIcon name="coin" size={20} color="#FBDB0A" style={{marginTop: -1}}/>
+                                <Text style={{fontSize: 14, marginLeft: 2, marginBottom: 5, color: 'rgb(30,30,30)'}}>
+                                  100.00
+                                </Text>
+                              </View>
+                            </View>
                           </View>
                           </TouchableOpacity>
                         );
                       })
                     }
                   </View>
-
-
                 </View>
               </View>
               {/* Main Page Trending Body END */}
             </Content>
           </Container>
         }
-
       </React.Fragment>
     );
   }
@@ -763,7 +361,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getItem: getItem,
-  getUserInfo: getUserInfo
+  getUserInfo: getUserInfo,
+  getMetadata: getMetadata
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
