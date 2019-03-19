@@ -23,6 +23,7 @@ class NewCategorySelectionPage extends React.Component {
     this.predictionMainCategoryId = "";
     this.predictionSubCategoryId = "";
     this.newMainCategorySelected = false;
+    this.predictionTag = "";
   }
 
   componentWillMount() {
@@ -30,6 +31,7 @@ class NewCategorySelectionPage extends React.Component {
             homeSubCategories, } = this.props;
     const result = get(predictions, "result", []);
     const predictionCategory = get(result[0], "category", {});
+    const predictionTag = get(result[0], "tag", "");
     const parentId = get(predictionCategory, "ParentId", "");
     const subId = get(predictionCategory, "id", "");
     const tempMainCategories = mainCategories[0].children;
@@ -39,6 +41,7 @@ class NewCategorySelectionPage extends React.Component {
 
     this.predictionMainCategoryId = [parentId];
     this.predictionSubCategoryId = [subId];
+    this.predictionTag = predictionTag;
 
     tempMainCategories.map((item, index) => {
       if(item.id === parentId) {
@@ -89,8 +92,6 @@ class NewCategorySelectionPage extends React.Component {
             newMainCategorySelected, newMainCategory, newSubCategorySelected, 
             newSubCategory, handleInputSubmit, handleRecommendCategoryButton } = this.props;
 
-    console.log("111111 category page this.props", this.props);
-
     return (
       <React.Fragment>
         <View style={{
@@ -99,7 +100,24 @@ class NewCategorySelectionPage extends React.Component {
           alignSelf: 'center'
         }}>
           <Text style={styles.hashTagPageTitle}>Please Select Categories.</Text>
-          <Text style={{color: '#00529b', fontWeight: 'bold', marginBottom: 5}}>Recommended Category:</Text>
+
+          {
+            this.predictionTag !== "" ?
+            <Text style={{color: '#00529b', marginBottom: 10, fontWeight: '500'}}>
+              {`You have uploaded `}
+              <Text style={{color: '#00529b', fontWeight: 'bold'}}>
+                {this.predictionTag.toUpperCase()}
+              </Text>.
+            </Text>
+            : null
+          }
+
+          <Text style={{color: '#00529b', fontWeight: '500', marginBottom: 5}}>
+            {`Here are `}
+            <Text style={{color: '#00529b', fontWeight: 'bold'}}>
+              Recommended Categories
+            </Text>:
+          </Text>
           
           {
             this.newMainCategorySelected === true ?

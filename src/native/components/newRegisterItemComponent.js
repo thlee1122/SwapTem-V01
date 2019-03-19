@@ -609,8 +609,11 @@ class RegisterItemComponent extends Component {
 
     // }
 
+    // console.log("@@@@ inside handleSubmit function", inputType);
+    // console.log("~~~~~~~ this.state.finalSubmitError", this.state.finalSubmitError);
 
-    if(this.state.finalSubmitError === false) {
+    if(inputType === "ValueInput") {
+    // if(this.state.finalSubmitError === false) {
       debugger;
       //call POST action     
       const finalRegisterItemData = Object.assign({}, this.registerDataObj);
@@ -797,6 +800,17 @@ class RegisterItemComponent extends Component {
             }
 
             {/* Value Input Page START */}
+
+            {/* Register Item Submission Page START */}
+            {
+              this.state.itemRegisterStep === 8 ?
+              <RegisterItemSubmissionPage 
+                registerDataObj={this.registerDataObj}
+              />
+              : null
+            }
+            {/* Register Item Submission Page END */}
+
 
           </ScrollView>
         </View>

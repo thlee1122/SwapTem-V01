@@ -40,6 +40,7 @@ class ValueInputSection extends React.Component {
             paddingLeft={10}
             placeholder="Please input value for your item. Ex. 20.00"
             value={itemValue}
+            keyboardType='numeric'
             onChangeText={(text) => handleTextChange("itemValueInput", text)}
             onFocus={(e) => handleTextInputFocus("itemValueInput")}
             onBlur={(e) => handleTextInputBlur("itemValueInput")}

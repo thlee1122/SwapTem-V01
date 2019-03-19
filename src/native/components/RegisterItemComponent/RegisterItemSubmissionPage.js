@@ -72,6 +72,7 @@ class RegisterItemSubmissionPage extends Component {
               style={{
                 width: 150,
                 height: 150,
+                alignSelf: 'center'
                 // borderWidth: 1
               }}
             />
