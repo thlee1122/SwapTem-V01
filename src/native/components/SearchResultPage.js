@@ -81,9 +81,11 @@ class SearchResultPage extends Component {
 
 		let searchResults = metaDatatags.filter((tag) => {
 			// return (tag.text).indexOf((this.state.textValue).toLowerCase()) !== -1
-			return (tag.text).startsWith(this.state.textValue) === true
+			return ((tag.text).toLowerCase()).startsWith(this.state.textValue.toLowerCase()) === true
 		});
 
+
+		console.log("@@@@ inside SearchResultPage this.props", this.props);
 		console.log("@@@@ inside SearchResultPage metaDatatags", metaDatatags);
 		console.log("@@@@ inside SearchResultPage searchResults", searchResults);
 
@@ -138,6 +140,7 @@ class SearchResultPage extends Component {
 				  		{
 				  			searchResults.map((result, index) => {
 				  				let newText = this.highlightText(result.text, this.state.textValue, index);
+				  				let newResultText = result.text.charAt(0).toUpperCase() + result.text.slice(1)
 
 				  				return (
 				  					<TouchableOpacity key={index} style={{flexDirection: 'row', marginBottom: 15}}>
@@ -145,7 +148,7 @@ class SearchResultPage extends Component {
 					  						style={{fontSize: 25, fontWeight: "500", letterSpacing: 2}}
 					  						dangerouslySetInnerHTML={{__html: newText}}
 					  					>
-					  						{result.text}
+					  						{newResultText}
 					  					</Text>
 					  					<Text 
 					  						style={{
