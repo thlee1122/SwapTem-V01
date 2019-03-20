@@ -39,6 +39,13 @@ class NewCategorySelectionPage extends React.Component {
     const tempElectronicsSubCategories = electronicsSubCategories[0].children;
     const tempHomeSubCategories = homeSubCategories[0].children;
 
+    console.log("@@@@@@ predictions", predictions);
+    console.log("@@@@@@ predictionCategory", predictionCategory);
+    console.log("@@@@@@ predictionTag", predictionTag);
+    console.log("@@@@@@ parentId", parentId);
+    console.log("@@@@@@ subId", subId);
+    console.log("@@@@@ tempMainCategories", tempMainCategories);
+
     this.predictionMainCategoryId = [parentId];
     this.predictionSubCategoryId = [subId];
     this.predictionTag = predictionTag;

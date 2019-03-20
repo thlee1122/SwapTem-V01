@@ -61,10 +61,10 @@ class SingleProduct extends React.Component {
 		const price = get(singleProduct, "price", 0);
 		const itemPrice = Number(price).toFixed(2);
 
-		const spec = get(singleProduct, "spec", {});
-		const sellFlag = get(spec, 'sell', "");
-		const swapFlag = get(spec, 'swap', "");
-		const description = get(spec, "description", "");
+		// const spec = get(singleProduct, "spec", {});
+		const sellFlag = get(singleProduct, 'sell', "");
+		const swapFlag = get(singleProduct, 'swap', "");
+		const description = get(singleProduct, "description", "");
 
 		const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${Files[0].thumbPath}`;
 		let itemHashTags = [];
@@ -91,6 +91,8 @@ class SingleProduct extends React.Component {
 				value: 8
 			},
 		];
+
+		console.log("@@@@@@ singleproduct", singleProduct);
 
 		for(let i = 0; i < HashTags.length; i++) {
       let text = `#${HashTags[i].text}`;

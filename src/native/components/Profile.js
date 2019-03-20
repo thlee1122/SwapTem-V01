@@ -402,7 +402,7 @@ class Profile extends React.Component {
                               
                               <View style={{flexDirection: 'row', padding: 5}}>
                                 {
-                                  item.spec.sell === true ?
+                                  item.sell === true ?
                                   <View style={{
                                     borderRadius: 5,
                                     borderWidth: 1,
@@ -420,7 +420,7 @@ class Profile extends React.Component {
                                 }
 
                                 {
-                                  item.spec.swap === true ?
+                                  item.swap === true ?
                                   <View style={{
                                     borderRadius: 5,
                                     borderWidth: 1,
