@@ -1,22 +1,17 @@
-import React from 'react';
+import React                                            from 'react';
 import get                                              from 'lodash.get';
 import { connect }                                      from 'react-redux';
-import { View, Image, TouchableOpacity } from 'react-native';
-import {
-  Container, Content, List, ListItem, Body, Left, Right, Text, Button, Tabs, Tab, TabHeading, Card, CardItem,
-} from 'native-base';
-import Header from './Header';
-import CheckCircle                    from '@material-ui/icons/CheckCircle';
-import Tooltip                        from '@material-ui/core/Tooltip';
-import { Actions } from 'react-native-router-flux';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import EvilIcon from 'react-native-vector-icons/EvilIcons';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import { View, Image, TouchableOpacity, Dimensions }    from 'react-native';
+import { Container, Content, List, ListItem, Body, 
+         Left, Right, Text, Button, Tabs, Tab, 
+         TabHeading, Card, CardItem, ScrollableTab }    from 'native-base';
+import { Actions }                                      from 'react-native-router-flux';
+import FeatherIcon                                      from 'react-native-vector-icons/Feather';
 import { getUserInfo }                                  from '../../actions/userInfoActions';
 import { getItem }                                      from '../../actions/registerItemActions';
 import StarRating                                       from 'react-native-star-rating';
-// import LikeComponent      from './LikeComponent';
+import { ProgressBar }                                  from 'react-native-paper';
+import styles                                           from '../styles/ProfileStyles';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -32,7 +27,6 @@ class Profile extends React.Component {
     this.props.getItem();
   }
 
-
   handleFollowButton = () => {
     if(this.state.following === false) {
       this.setState({
@@ -47,12 +41,12 @@ class Profile extends React.Component {
   }
 
   handleReportButton = () => {
-    // alert("Report button has been clicked");
     if(this.state.reportFlagColor === "white") {
       this.setState({
         reportFlagColor: "#1D60FD"
       });
       Actions.reportItem();
+
     } else {
       this.setState({
         reportFlagColor: "white"
@@ -61,398 +55,310 @@ class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log("~~~~~ profile", this.props);
-
     const { userInfo } = this.props.userInfo;
     const MyReviews = get(userInfo, "MyReviews", []);
     const name = get(userInfo, "name", "");
-
     const { registerItem } = this.props;
     const getItem = get(registerItem, "getItem", {});
     const data = get(getItem, "data", []);
-
-    console.log("!!!! profile", data);
+    const { height, width } = Dimensions.get('window');
 
     return (
       <Container>
         <Content style={{backgroundColor: 'white'}}>
           <List>
             <View>
-              <Content padder>
-                <View style={{flex: 1, flexDirection: 'row', marginTop: 10}}>
-                  <View 
-                    style={{
-                      borderBottomColor: 'black',
-                      borderBottomWidth: 1, 
-                      width: 80, 
-                      height: 80, 
-                      backgroundColor:'#959595',
-                      borderRadius: 50,
-                      // alignSelf: 'center',
-                      marginTop: 15,
-                      marginLeft: 10
-                    }}
-                  />
+              <Content>
+                <View style={{ flex: 1, backgroundColor: '#000000', height: height * 0.48 }}>
+                  <View style={styles.profileHeadShot} />
                 
-                  <View style={{flex: 1, flexDirection: 'column', marginLeft: 20}}>
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                      {name}
+                  <View style={styles.profileHeaderContent}>
+                    <Text style={styles.profileName}>
+                      {/* {name} */}
+                      Alexandria Zoltowski
                     </Text>
 
-                    <Text style={{marginTop: 10, fontSize: 15}}>
-                      Editor Director @Vogue.
+                    <Text style={styles.profileDesc}>
+                      Head of UX @Yelp
                     </Text>
 
-                    <Text style={{fontSize: 15}}>
-                      Fashion addict & notorious shoe connossieur.
-                    </Text>
+                    <View style={styles.profileRating}>
+                      <Text style={styles.profileRatingNum}>
+                        {/* {MyReviews.length} */}
+                        4.8
+                      </Text>
 
-                    <View style={{flex: 1, flexDirection: 'row', marginTop: 15}}>
                       <StarRating
                         disabled={true}
-                        maxStars={5}
-                        rating={5}
-                        fullStarColor="#FBDB0A"
+                        maxStars={1}
+                        rating={1}
+                        fullStarColor="#A3A3A2"
                         starSize={20}
                         containerStyle={{width: 120}}
                       />
-                      <Text style={{fontWeight: 'bold', color: '#00529b', fontSize: 15, textAlign: 'center', marginLeft: 10}}>
-                        {MyReviews.length}
-                      </Text>
                     </View>
                   </View>
-                  
-                  {/* <MaterialIcon name="settings" size={25} color="#959595" onPress={Actions.myaccount}/> */}
-                  <MaterialIcon 
-                    name="settings" 
-                    size={25} 
-                    color="#959595" 
-                    // onPress={Actions.accountSettings}
-                    onPress={ () => { Actions.accountSettings({ userInfo: userInfo }) }}
-                  />
+
+                  <View style={styles.profileStatSection}>
+                    <Text style={styles.profileStateOne}>
+                      10 products
+                    </Text>
+
+                    <Text style={styles.profileStateOne}>
+                      XX trades
+                    </Text>
+
+                    <View style={styles.profileReviewSection}>
+                      <Text style={styles.profileStateTwo}>
+                        XX reviews
+                      </Text>
+
+                      <FeatherIcon name="arrow-right" color="#ECEBEB" size={22} style={{marginLeft: 10, marginTop: -2}}/>
+                    </View>
+                  </View>
                 </View>
 
-                {/* <View
-                  style={{
-                    marginTop: 14,
-                    borderBottomColor: '#696969',
-                    borderBottomWidth: 1,
-                  }}
-                /> */}
-
-                <View
-                  style={{
-                    marginTop: 14,
-                    borderBottomColor: '#959595',
-                    borderBottomWidth: 1,
-                  }}
-                />
-
-                <Text
-                  style={{
-                    marginTop: 10,
-                    fontSize: 14,
-                    color:'#696969',
-                    alignSelf: 'center',
-                    textAlign: 'center',
-                    width: 380
-                  }}
-                >
-                  Boost your reputation by confirming your information
-                </Text>
-
-                <Text
-                  style={{
-                    fontSize: 15,
-                    color:'#00529b',
-                    alignSelf: 'center',
-                    marginTop: 10
-                  }}
-                  onPress={Actions.privacy}
-                  // onPress={this._goToURL}
-                >
-                  How we protect your privacy
-                </Text>
-
-                <View style={{marginBottom: 15}}>
-                  <View style={{flex: 1, flexDirection: 'row', marginTop: 15, alignSelf: 'center'}}>
-                    <View style={{borderBottomColor: '#00529b', width: 50, borderBottomWidth: 10}}/>
-                    <View style={{borderBottomColor: '#00529b', width: 50, borderBottomWidth: 10, marginLeft: 5}}/>
-                    <View style={{borderBottomColor: '#00529b', width: 50, borderBottomWidth: 10, marginLeft: 5}}/>
-                    <View style={{borderBottomColor: '#696969', width: 50, borderBottomWidth: 10, marginLeft: 5}}/>
-                    <View style={{borderBottomColor: '#696969', width: 50, borderBottomWidth: 10, marginLeft: 5}}/>
-                    
-                    <MaterialIcon name="check-circle" size={25} color="#696969" style={{marginLeft: 10}}/>
-                    
-                  </View>
+                <View>
+                  <Text style={styles.profileContentIntro}>
+                    Boost your reputation by confirming your information.
+                  </Text>
 
                   <Text
-                    style={{
-                      marginTop: 10,
-                      fontSize: 14,
-                      color:'#696969',
-                      alignSelf: 'center',
-                      textAlign: 'center',
-                      width: 380
-                    }}
+                    style={styles.privacyLink}
+                    onPress={Actions.privacy}
+                    // onPress={this._goToURL}
                   >
-                    60% complete
+                    How we protect your privacy
                   </Text>
+
+                  <View style={styles.progressSection}>
+                    <ProgressBar progress={0.65} color='black' style={{width: width*0.8, alignSelf: 'center'}}/>
+
+                    <Text style={styles.progressPercent}>
+                      65% completed
+                    </Text>
+                  </View>
                 </View>
-
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
-                  <Left>
-                    <MaterialIcon name="smartphone" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      Confirm phone
-                    </Text>
-                  </Body>
-                </ListItem>
-
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
-                  <Left>
-                    <MaterialIcon name="email" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      thlee1122@gmail.com
-                    </Text>
-                  </Body>
-
-                  <Right>
-                    <Text>
-                      Edit
-                    </Text>
-                  </Right>
-                </ListItem>
-
-
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
-                  <Left>
-                    <FontAwesomeIcon name="facebook-official" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      Connect Facebook
-                    </Text>
-                  </Body>
-                </ListItem>
-
-                <ListItem
-                  onPress={ () => { Actions.likedItems({ userInfo: userInfo }) }} 
-                  icon 
-                  style={{width: "90%"}}>
-                  <Left>
-                    <FontAwesomeIcon name="heart" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      View your liked items
-                    </Text>
-                  </Body>
-                </ListItem>
-
-                <ListItem onPress={Actions.forgotPassword} icon style={{width: "90%"}}>
-                  <Left>
-                    <FontAwesomeIcon name="share-alt" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      View your shared items
-                    </Text>
-                  </Body>
-                </ListItem>
-
-                {/* <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
-                  <Left>
-                    <FeatherIcon name="award" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      View your badges
-                    </Text>
-                  </Body>
-                </ListItem> */}
-
-                {/* <ListItem onPress={Actions.accountSettings} icon style={{width: 320}}>
-                  <Left>
-                    <MaterialIcon name="settings" size={22} color="#00529b" />
-                  </Left>
-                  <Body>
-                    <Text>
-                      Account Settings
-                    </Text>
-                  </Body>
-                </ListItem> */}
-
-                {/* Profile Product, Follower, Following Numbers START*/}
-                <View style={{flex: 1, flexDirection: 'row', marginTop: 20}}>
-                  <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderRightWidth: 1, borderColor: '#959595', width: "33%", height: 60}}>
-                    <Text style={{fontSize: 20, fontWeight: "bold", textAlign: 'center', marginTop: 8}}>
-                      10
+                
+                <View style={styles.contentMainBackground}>
+                  <View style={styles.verificationSection}>
+                    <Text style={styles.verificationTitle}>
+                      Verifications
                     </Text>
 
-                    <Text style={{fontSize: 15, textAlign: 'center'}}>
-                      Products
-                    </Text>
+                    <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+                      <Left>
+                        <FeatherIcon name="phone" size={22} color="black" />
+                      </Left>
+                      <Body style={{borderBottomWidth: 0}}>
+                        <Text>
+                          Phone verified
+                        </Text>
+                      </Body>
+                    </ListItem>
+
+                    <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+                      <Left>
+                        <FeatherIcon name="mail" size={22} color="black" />
+                      </Left>
+                      <Body style={{borderBottomWidth: 0}}>
+                        <Text>
+                          Email verified
+                        </Text>
+                      </Body>
+                    </ListItem>
+
+                    <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+                      <Left>
+                        <FeatherIcon name="facebook" size={22} color="#A3A3A2" />
+                      </Left>
+                      <Body style={{borderBottomWidth: 0}}>
+                        <Text style={{color: '#A3A3A2'}}>
+                          Facebook verification needed
+                        </Text>
+                      </Body>
+
+                      <Right style={{borderBottomWidth: 0}}>
+                        <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={styles.verificationArrow}/>
+                      </Right>
+                    </ListItem>
+
+                    {/* <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
+                      <Left>
+                        <FeatherIcon name="award" size={22} color="#00529b" />
+                      </Left>
+                      <Body>
+                        <Text>
+                          View your badges
+                        </Text>
+                      </Body>
+                    </ListItem> */}
                   </View>
 
-                  <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderColor: '#959595', width: "33%", height: 60}}>
-                    <Text style={{fontSize: 20, fontWeight: "bold", textAlign: 'center', marginTop: 8}}>
-                      Sample
-                    </Text>
+                  <View style={styles.likeShareSection}>
+                    <ListItem
+                      onPress={ () => { Actions.likedItems({ userInfo: userInfo }) }} 
+                      icon 
+                      style={styles.verificationListItem}>
+                      <Left>
+                        <FeatherIcon name="heart" size={22} color="#A3A3A2" />
+                      </Left>
+                      <Body style={{borderBottomWidth: 0}}>
+                        <Text style={{color: "#A3A3A2"}}>
+                          View your liked items
+                        </Text>
+                      </Body>
 
-                    <Text style={{fontSize: 15, textAlign: 'center'}}>
-                      Trades
-                    </Text>
+                      <Right style={{borderBottomWidth: 0}}>
+                        <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={{marginLeft: 10, marginTop: 14}}/>
+                      </Right>
+                    </ListItem>
+
+                    <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+                      <Left>
+                        <FeatherIcon name="share-2" size={22} color="#A3A3A2" />
+                      </Left>
+                      <Body style={{borderBottomWidth: 0}}>
+                        <Text style={{color: "#A3A3A2"}}>
+                          View your shared items
+                        </Text>
+                      </Body>
+
+                      <Right style={{borderBottomWidth: 0}}>
+                        <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={{marginLeft: 10, marginTop: 14}}/>
+                      </Right>
+                    </ListItem>
                   </View>
 
-                  <TouchableOpacity
-                    onPress={ () => { Actions.myReviews({ MyReviews: MyReviews, userInfo: userInfo }) }}
-                    style={{width: "33%"}}
-                  >
-                    <View style={{borderBottomWidth: 1, borderTopWidth: 1, borderLeftWidth: 1, borderColor: '#959595', width: "100%", height: 60}}>
-                      <Text style={{fontSize: 20, fontWeight: "bold", textAlign: 'center', marginTop: 8}}>
-                        {MyReviews.length}
+                  {/* Store Title and Heading Section START */}
+                  <View style={styles.storeSection}>
+                    <FeatherIcon 
+                      name="edit-2" 
+                      size={24} 
+                      color="#A3A3A2" 
+                      style={styles.storeEditIcon} 
+                      onPress={ () => { Actions.editStore({ userItems: data }) }} 
+                    />
+
+                    <View style={styles.storeContent}>
+                      <Text style={styles.storeTitle}>
+                        Welcome to Zoltowski Shop
                       </Text>
 
-                      <Text style={{fontSize: 15, textAlign: 'center'}}>
-                        Reviews
+                      <Text style={styles.storeDesc}>
+                        One-of-a-kind unique items for every kind of Men
                       </Text>
                     </View>
-                  </TouchableOpacity>
-                </View>
-                {/* Profile Product, Follower, Following Numbers END*/}
 
-                {/* Profile page product feed START */}
-                <View>
-                  <View style={{flex: 1, flexDirection: 'column', marginTop: 15}}>
-                    <View 
-                      style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        flexWrap: 'wrap',
-                        alignItems: 'flex-start',
-                      }}
+                    <TouchableOpacity style={styles.storeAnalyticsButton}>
+                      <Text style={styles.storeAnalyticsButtonText}>
+                        View Analytics
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  {/* Store Title and Heading Section END */}
+
+                  {/* Profile page product feed START */}
+                  <View>
+                    <Tabs 
+                      tabBarUnderlineStyle={{ backgroundColor: 'black' }} 
+                      locked={false}
+                      // renderTabBar={() => <ScrollableTab />}
+                      style={{backgroundColor: 'black'}}
                     >
-                      {
-                        data.map((item, index) => {
-                          const hashTags = item.HashTags;
-                          const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
-                          let itemPrice = Number(item.price).toFixed(2);
-                          let itemHashTags = [];
-                          let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
-                          let cartUserIdArray = [];
-                          const locationCoordinates = item.User.location.coordinates;
-                          
-                          for(let i = 0; i < hashTags.length; i++) {
-                            let text = `#${hashTags[i].text}`;
-                            itemHashTags.push(text);
-                          }
-
-                          console.log("#### profile", item, locationCoordinates);
-
-                          return (
-                            <TouchableOpacity
-                              style={{
-                                marginBottom: 10, 
-                                width: "49%", 
-                                marginRight: index === 0 || index % 2 === 0 ? 5 : 0
-                              }} 
-                              key={item.id}
-                              onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
-                            >
-                            <View 
-                              style={{
-                                width: '100%', 
-                                marginBottom: 5,
-                                backgroundColor: 'rgb(250,250,250)'
-                              }}
-                            >
-                              <Image 
-                                source={{uri: thumbnailUrl}}
-                                style={{width: "100%", height: 180, borderRadius: 5}}
-                              />
-
-                              {/* <LikeComponent 
-                                itemId={item.id}
-                                itemCartUser={item.CartUser}
-                                currentUserId={this.currentUserId}
-                              /> */}
-
-                              <View>
-                                <View style={{
-                                  backgroundColor: 'black', 
-                                  opacity: 0.7, 
-                                  position: 'absolute', 
-                                  marginTop: -30, 
-                                  width: "100%", 
-                                  height: 30,
-                                  flexDirection: 'row'
-                                }}>
-                                  <MaterialIcon name="location-on" size={18} color="white" style={{padding: 6}}/>
-                                  <Text style={{color: 'white', paddingTop: 7, fontSize: 13, fontWeight: '500'}}>
-                                    {`${itemDistance} mi.`}
-                                  </Text>
-                                </View>
-                              </View>
-                              
-                              <View style={{flexDirection: 'row', padding: 5}}>
-                                {
-                                  item.sell === true ?
-                                  <View style={{
-                                    borderRadius: 5,
-                                    borderWidth: 1,
-                                    borderColor: '#007aff',
-                                    width: 42, 
-                                    alignItems: 'center', 
-                                    marginRight: 5,
-                                    height: 20
-                                  }}>
-                                    <Text style={{color: '#007aff', alignSelf: 'center', fontSize: 13, paddingTop:1}}>
-                                      Sell
-                                    </Text>
-                                  </View>
-                                  : null
+                      <Tab
+                        activeTextStyle={{ color: 'black'}}
+                        heading={ 
+                          <TabHeading style={{backgroundColor: 'white'}}>
+                            <Text style={{color: 'black'}}>Fashion</Text>
+                          </TabHeading>
+                        } 
+                      >
+                        <View style={styles.itemFeedSection}>
+                          <View style={styles.itemRow}>
+                            {
+                              data.map((item, index) => {
+                                const hashTags = item.HashTags;
+                                const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
+                                let itemPrice = Number(item.price).toFixed(2);
+                                let itemHashTags = [];
+                                let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
+                                let cartUserIdArray = [];
+                                const locationCoordinates = item.User.location.coordinates;
+                                
+                                for(let i = 0; i < hashTags.length; i++) {
+                                  let text = `#${hashTags[i].text}`;
+                                  itemHashTags.push(text);
                                 }
 
-                                {
-                                  item.swap === true ?
-                                  <View style={{
-                                    borderRadius: 5,
-                                    borderWidth: 1,
-                                    borderColor: '#007aff',
-                                    width: 45, 
-                                    alignItems: 'center',
-                                    height: 20
-                                  }}>
-                                    <Text style={{color: '#007aff', alignSelf: 'center', fontSize: 13, paddingTop:1}}>
-                                      Swap
+                                return (
+                                  <TouchableOpacity
+                                    style={{
+                                      marginBottom: 10, 
+                                      width: "44%",
+                                      marginLeft: index === 0 || index % 2 === 0 ? 16 : 0,
+                                      marginRight: index === 0 || index % 2 === 0 ? 16 : 0
+                                    }} 
+                                    key={item.id}
+                                    onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
+                                  >
+                                  <View style={styles.itemCardTopSection}>
+                                    <Image 
+                                      source={{uri: thumbnailUrl}}
+                                      style={styles.itemImage}
+                                    />
+                                    
+                                    <View style={styles.itemPillSection}>
+                                      {
+                                        item.sell === true ?
+                                        <View style={styles.sellPill}>
+                                          <Text style={styles.sellPillText}>
+                                            Sell
+                                          </Text>
+                                        </View>
+                                        : null
+                                      }
+
+                                      {
+                                        item.swap === true ?
+                                        <View style={styles.swapPill}>
+                                          <Text style={styles.swapPillText}>
+                                            Swap
+                                          </Text>
+                                        </View>
+                                        : null
+                                      }
+                                    </View>
+
+                                    <Text style={styles.itemHashTag}>
+                                      {itemHashTags.join(" ")}
+                                    </Text>
+
+                                    <Text style={styles.itemPrice}>
+                                      {`$${itemPrice}`}
                                     </Text>
                                   </View>
-                                  : null
-                                }
-                              </View>
+                                  </TouchableOpacity>
+                                );
+                              })
+                            }
+                          </View>
+                        </View>
+                      </Tab>
 
-                              <Text style={{fontWeight: '500', marginLeft: 5, marginBottom: 5, width: 160}}>
-                                {itemHashTags.join(" ")}
-                              </Text>
-
-                              <Text style={{fontSize: 14, marginLeft: 5, marginBottom: 5, color: 'rgb(30,30,30)'}}>
-                                {`$${itemPrice}`}
-                              </Text>
-                            </View>
-                            </TouchableOpacity>
-                          );
-                        })
-                      }
-                    </View>
+                      <Tab
+                        activeTextStyle={{color: 'black'}}
+                         heading={ 
+                          <TabHeading style={{backgroundColor: 'white'}}>
+                            <Text style={{color: 'black'}}>Electronics</Text>
+                          </TabHeading>
+                        }
+                      >
+                      </Tab>
+                    </Tabs>
                   </View>
+                  {/* Profile page product feed END */}                  
                 </View>
-                {/* Profile page product feed END */}
               </Content>
             </View>
           </List>

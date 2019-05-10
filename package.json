@@ -102,6 +102,7 @@
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-modalbox": "^1.6.0",
     "react-native-multiple-select": "^0.4.4",
+    "react-native-paper": "^2.15.2",
     "react-native-router-flux": "4.0.1",
     "react-native-sectioned-multi-select": "^0.6.1",
     "react-native-snap-carousel": "^3.7.5",

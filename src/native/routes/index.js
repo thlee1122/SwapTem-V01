@@ -72,6 +72,12 @@ import ContactsPage from '../components/ChatRoomScreens/ContactsPage';
 import ShareMeetingReminder from '../components/ChatRoomScreens/ShareMeetingReminder';
 import TrustedContactConfirmPage from '../components/ChatRoomScreens/TrustedContactConfirmPage';
 
+import PaymentPage from '../components/paymentPage';
+
+import StoreEditPage from '../components/StoreEditPage';
+
+import StandoutSelectionPage from '../components/StandoutSelectionPage';
+
 
 const Index = (
 
@@ -116,7 +122,19 @@ const Index = (
           <Scene key="recipes" component={RecipesContainer} Layout={RecipesComponent} />
         </Stack> */}
 
-        <Stack
+        {/* <Stack
+          key="checkout"
+          title="Checkout"
+          icon={() => <MaterialCommunityIcons name="cards" size={25} color="white"/>}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="payment" component={PaymentPage} />
+        </Stack> */}
+
+
+
+
+        {/* <Stack
           key="offer"
           title="OFFER"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
@@ -127,9 +145,13 @@ const Index = (
 
           <Scene key="acceptedSwapProductPage" component={AcceptedSwapProductPage} />
           <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPage" component={ScheduleMeetupPage} />
-        </Stack>
+        </Stack> */}
 
-        <Stack
+
+
+
+
+        {/* <Stack
           key="registerItem"
           title="REGISTER ITEM"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
@@ -137,12 +159,16 @@ const Index = (
           icon={() => <FontAwesomeIcon name="camera" size={23} color="white"/>}
           {...DefaultProps.navbarProps}
         >
-          {/* <Scene key="registerItemSubmission" component={RegisterItemSubmissionPage} /> */}
-          {/* <Scene key="registerItem" component={LocaleContainer} Layout={RegisterItemComponent} /> */}
-          <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
-        </Stack>
 
-         <Stack
+          <!-- Comment out START -->
+          <Scene key="registerItemSubmission" component={RegisterItemSubmissionPage} />
+          <Scene key="registerItem" component={LocaleContainer} Layout={RegisterItemComponent} />
+          <!-- Comment out END -->
+
+          <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
+        </Stack> */}
+
+         {/* <Stack
           key="inbox"
           title="INBOX"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
@@ -178,7 +204,7 @@ const Index = (
             component={TrustedContactConfirmPage}
           />
           <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPageTwo" component={ScheduleMeetupPage} />
-        </Stack>        
+        </Stack> */}       
 
         <Stack
           key="profile"
@@ -187,6 +213,12 @@ const Index = (
           {...DefaultProps.navbarProps}
         >
           <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+
+          <Scene key="editStore" title="STORE EDIT" component={StoreEditPage} />
+
+          <Scene key="standOutSelection" title="" component={StandoutSelectionPage} />
+
+
           <Scene key="myReviews" title="MY REVIEWS" component={MyReview} />
           <Scene key="likedItems" title="LIKED ITEMS" component={LikedItems} />
           <Scene

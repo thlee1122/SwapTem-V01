@@ -18,6 +18,9 @@ import LikeComponent                                                from './Like
 import Login                                                        from './Login';
 import { searchTrendingKeywords, categories }                       from '../data/sampleTrendingKeywords';
 
+import { LoginManager } from 'react-native-fbsdk';
+
+
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
@@ -54,8 +57,22 @@ class MainPage extends React.Component {
     });
   }
 
-  handleLogin = (loginStatus) => { 
-  }
+  // handleLogin = (loginStatus) => { 
+  // }
+
+  // async loginFacebook() {
+  //   try {
+  //     let result = await LoginManager.logInWithReadPermissions(['public_profile']);
+  //     if(result.isCancelled) {
+  //       alert('Login was cancelled');
+  //     } else {
+  //       alert('Login was successful with permissions: ' 
+  //         + result.grantedPermissions.toString());
+  //     }
+  //   } catch(error) {
+  //     alert('Login failed with error' + error);
+  //   }
+  // }
 
   render() {
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
@@ -159,6 +176,16 @@ class MainPage extends React.Component {
                   }}
                 />
               </View>
+
+              {/* <View>
+                <Button
+                  onPress={this.loginFacebook}
+                >
+                  <Text>Login with Facebook</Text>
+                </Button>
+              </View> */}
+
+
 
 
 
