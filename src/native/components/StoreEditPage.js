@@ -183,6 +183,7 @@ class StoreEditPage extends React.Component {
                   onChangeText={(text) => this.setState({storeTitle: text})}
                   value={this.state.storeTitle}
                   maxLength={40}
+                  underlineColorAndroid="transparent"
                   style={{
                     paddingBottom: 0, 
                     fontSize: 18
@@ -211,6 +212,7 @@ class StoreEditPage extends React.Component {
                 value={this.state.welcomeMessage}
                 multiline={true}
                 maxLength={60}
+                underlineColorAndroid="transparent"
                 style={{
                   height: 128,
                   borderWidth: 1,
