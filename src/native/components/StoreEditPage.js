@@ -139,7 +139,10 @@ class StoreEditPage extends React.Component {
                     return (
                       <ListItem style={{marginLeft: 0}}>
                         <TouchableOpacity 
-                          style={{flex: 1, flexDirection: 'row'}}
+                          style={{
+                            flex: 1, 
+                            flexDirection: 'row'
+                          }}
                           onPress={(e) => this.handleSingleBackground(item)}
                         >
                           <View
