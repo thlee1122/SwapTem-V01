@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { Component }  from 'react';
+import { View, Image, TouchableOpacity, Dimensions, SafeAreaView, Text }                   from 'react-native';
+
+
+
+
+// import MaterialIcon                                                 from 'react-native-vector-icons/MaterialIcons';
+
+import Ionicons                                                     from 'react-native-vector-icons/Ionicons';
+
+
 import { Scene, Tabs, Stack } from 'react-native-router-flux';
-import { Icon } from 'native-base';
+import { Icon, Drawer } from 'native-base';
 
 import DefaultProps from '../constants/navigation';
 import AppConfig from '../../constants/config';
@@ -78,10 +88,92 @@ import StoreEditPage from '../components/StoreEditPage';
 
 import StandoutSelectionPage from '../components/StandoutSelectionPage';
 
+// import NavBar from '../components/NavBar';
+import SideBarMenu from '../components/SideBarMenu';
+
+
+class NavBar extends Component {
+
+
+  render() {
+
+    const { height, width } = Dimensions.get('window');
+
+    return (
+      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+        <View style={{paddingLeft: 10, paddingRight: 10, paddingTop: 15, height: 60}}>
+          <View 
+            style={{
+            flex: 1, 
+            flexDirection: 'row',
+          }}>
+            <TouchableOpacity 
+              style={{position: 'absolute', left: 0, marginLeft: 5, zIndex:10}}
+              onPress={()=> openDrawer()}
+            >
+              <MaterialIcon size={24} name="menu" />
+            </TouchableOpacity>
+            <Text 
+              style={{
+                fontWeight: '500', 
+                textAlign: 'center', 
+                fontSize: 20, 
+                lineHeight: 24,
+                flex: 1
+              }}
+            >
+              SwapTem
+            </Text>
+            
+            <View style={{flexDirection: 'row', position: 'absolute', right: 0, marginRight: 5}}>
+              <Ionicons size={24} name="ios-options" style={{marginRight: 24}}/>
+
+              <Ionicons size={24} name="ios-search" />
+
+            </View>
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
+
+function openDrawer() {
+    console.log("drawer clicked");
+
+    this.drawer._root.open()
+
+  }
+
+function closeDrawer() {
+  this.drawer._root.close();
+}
+
+console.log("~~~~ this", this.ref);
+// console.log("#####", document.getElementsByClassName("main-nav-drawer"));
 
 const Index = (
-
-  <Stack hideNavBar>
+  <Drawer
+    className="main-nav-drawer"
+    navBar={NavBar}
+    // hideNavBar
+    ref={(ref) => { this.drawer = ref; }}
+    content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
+    // content={<View style={{backgroundColor: 'black', zIndex: 10}}>Sample Page</View>}
+    side="left"
+    // openDrawerOffset={0.5}
+    openDrawerOffset={0}
+    // type="overlay"
+    // panCloseMask={0}
+    // closedDrawerOffset={-3}
+    // styles={drawerStyles}
+    // tapToClose={true}
+    elevation={1}
+  >
+  <Stack 
+    hideNavBar
+    // navBar={NavBar}
+  >
     <Scene hideNavBar>
       <Tabs
         key="tabbar"
@@ -91,13 +183,18 @@ const Index = (
         {...DefaultProps.tabProps}
       >
         <Stack
+          hideNavBar
+
+          
+
+
           key="home"
           title={AppConfig.appName.toUpperCase()}
           // icon={() => <Icon name="planet" {...DefaultProps.icons} />}
           icon={() => <MaterialIcon name="home" size={25} color="white" />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="home" component={MainPage} />
+          <Scene key="home" title="dsdsdsd" component={MainPage} />
           <Scene title="Item" key="singleProduct" component={SingleProductComponent} />
           <Scene title="Reviews" key="reviewPage" component={ReviewPage} />
           <Scene title="User Profile" key="userProfilePage" component={UserProfile} />
@@ -168,7 +265,8 @@ const Index = (
           <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
         </Stack> */}
 
-         {/* <Stack
+         <Stack
+          hideNavBar 
           key="inbox"
           title="INBOX"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
@@ -204,9 +302,10 @@ const Index = (
             component={TrustedContactConfirmPage}
           />
           <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPageTwo" component={ScheduleMeetupPage} />
-        </Stack> */}       
+        </Stack>      
 
         <Stack
+          hideNavBar
           key="profile"
           title="PROFILE"
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
@@ -330,6 +429,7 @@ const Index = (
       Layout={RecipeViewComponent}
     /> */}
   </Stack>
+  </Drawer>
 );
 
 export default Index;

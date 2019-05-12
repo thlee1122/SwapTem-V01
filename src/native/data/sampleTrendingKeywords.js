@@ -57,32 +57,32 @@ export const searchTrendingKeywords = [
 
 export const categories = [
   {
-    "categoryName": "Trending",
+    "categoryName": "Fashion",
     "categoryId": 111
   },
 
   {
-    "categoryName": "Fashion",
+    "categoryName": "Electronics",
     "categoryId": 222
   },
 
   {
-    "categoryName": "Electronics",
+    "categoryName": "Books",
     "categoryId": 333
   },
 
   {
-    "categoryName": "Books",
+    "categoryName": "Home & Kitchen",
     "categoryId": 444
   },
 
   {
-    "categoryName": "Gaming",
+    "categoryName": "Gaming & Entertainment",
     "categoryId": 555
   },
 
   {
-    "categoryName": "Home",
+    "categoryName": "Sports & Outdoors",
     "categoryId": 666
   },
 ];

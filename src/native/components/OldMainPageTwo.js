@@ -3,14 +3,11 @@ import get                                                          from 'lodash
 import { connect }                                                  from 'react-redux';
 import { TextInput, View, Image, Modal, Alert, Dimensions,
          TouchableHighlight, TouchableOpacity, ScrollView }         from 'react-native';
-import { Container, Content, Text, Button, Card, CardItem, Drawer }         from 'native-base';
-import { LinearGradient, Font }                                           from 'expo';
+import { Container, Content, Text, Button, Card, CardItem }         from 'native-base';
+import { LinearGradient }                                           from 'expo';
 import Spacer                                                       from './Spacer';
 import MaterialIcon                                                 from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcon                                        from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import Ionicons                                                     from 'react-native-vector-icons/Ionicons';
-
 import { Actions }                                                  from 'react-native-router-flux';
 // import Autocomplete                                                 from 'react-native-autocomplete-input';
 // import MentionsTextInput                                            from 'react-native-mentions';
@@ -21,13 +18,7 @@ import LikeComponent                                                from './Like
 import Login                                                        from './Login';
 import { searchTrendingKeywords, categories }                       from '../data/sampleTrendingKeywords';
 
-
-import SingleCard         from './SingleCard';
-
 import { LoginManager } from 'react-native-fbsdk';
-
-
-import SideBarMenu from './SideBarMenu';
 
 
 class MainPage extends React.Component {
@@ -37,9 +28,7 @@ class MainPage extends React.Component {
       text: 'Search keywords',
       modalVisible: false,
       loggedIn: false,
-      searchStart: false,
-
-      selectedCategoryIndx: 0
+      searchStart: false
     };
 
     this.currentUserId = "";
@@ -85,14 +74,6 @@ class MainPage extends React.Component {
   //   }
   // }
 
-  openDrawer = () => {
-    this.drawer._root.open()
-  }
-
-  closeDrawer = () => {
-    this.drawer._root.close();
-  }
-
   render() {
     const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
     const registerItem = get(this.props, "registerItem", {});
@@ -104,13 +85,10 @@ class MainPage extends React.Component {
     const metadata = get(registerItem, "metadata", {});
     const metaDatatags = get(metadata, "tags", []);
     // const tags = get(metadata, "tags", []);
+
+    // console.log("~~~~~~", this.props);
+    // console.log("@@@@@ userInfo", userInfo);
     const tags = ["textbook", "electronics", "data"];
-
-    const drawerStyles = {
-      drawer: {},
-    };
-
-    console.log("22222222 this.props", this.props);
 
     return (
       <React.Fragment>
@@ -118,22 +96,8 @@ class MainPage extends React.Component {
           this.state.loggedIn === true ?
           <Login handleLogin = {this.handleLogin} />
           :
-          <Drawer
-            ref={(ref) => { this.drawer = ref; }}
-            content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
-            // content={<View style={{backgroundColor: 'black', zIndex: 10}}>Sample Page</View>}
-            side="left"
-            // openDrawerOffset={0.5}
-            openDrawerOffset={0}
-            // type="overlay"
-            // panCloseMask={0}
-            // closedDrawerOffset={-3}
-            // styles={drawerStyles}
-            // tapToClose={true}
-            elevation={1}
-          >
           <Container style={{backgroundColor: 'white'}}>
-            <Content style={{backgroundColor: '#ECEBEB'}}>
+            <Content padder style={{backgroundColor: 'white'}}>
 
               {/* Trending This Week Modal START */}
               {/* <Modal
@@ -178,44 +142,59 @@ class MainPage extends React.Component {
               </Modal> */}
               {/* Trending This Week Modal END */}
 
-
               {/* Search Bar START */}
-              {/* <View style={{
+              <View style={{
                 flex: 1, 
                 flexDirection: 'row',
+                justifyContent: 'center', 
+                alignItems: 'center',
+                borderWidth: 1,
+                borderColor: 'black',
+                backgroundColor: '#EDEDED', 
+                borderRadius: 10, 
+                alignSelf: 'center',
+                width: 300,
+                zIndex: 10
               }}>
-                <TouchableOpacity 
-                  style={{position: 'absolute', left: 0, marginLeft: 5, zIndex:10}}
-                  onPress={()=> this.openDrawer()}
-                >
-                  <MaterialIcon size={24} name="menu" />
-                </TouchableOpacity>
-                <Text 
+                <MaterialIcon name="search" size={25} color="#00529b" style={{paddingLeft: 50}}/>
+                <TextInput
                   style={{
-                    fontWeight: '500', 
-                    textAlign: 'center', 
-                    fontSize: 20, 
-                    lineHeight: 24,
-                    flex: 1
+                    height: 40,
+                    color: "#00529b", 
+                    fontWeight: 'bold',
+                    width: 300, 
                   }}
+                  onChangeText={(text) => this.handleSearchTextChange({text})}
+                  value={this.state.text}
+                  paddingLeft={10}
+                  textAlignVertical='top'
+                  maxLength={40}
+                  onFocus={() => {
+                    Actions.searchResult({
+                      metaDatatags: metaDatatags
+                    });
+                  }}
+                />
+              </View>
+
+              {/* <View>
+                <Button
+                  onPress={this.loginFacebook}
                 >
-                  SwapTem
-                </Text>
-                
-                <View style={{flexDirection: 'row', position: 'absolute', right: 0, marginRight: 5}}>
-                  <Ionicons size={24} name="ios-options" style={{marginRight: 24}}/>
-
-                  <Ionicons size={24} name="ios-search" />
-
-                </View>
+                  <Text>Login with Facebook</Text>
+                </Button>
               </View> */}
+
+
+
+
 
               {/* Search Bar END */}
 
               {/* Main Page Category Section START */}
-              <View style={{backgroundColor: 'white'}}>
               <View
                 style={{
+                  marginTop: 10,
                   borderBottomColor: '#EDEBEB',
                   borderBottomWidth: 1,
                   width: '98%',
@@ -223,55 +202,49 @@ class MainPage extends React.Component {
                 }}
               />
 
-              <Spacer size={25} />
-
-              {/* Category Section START */}
+              <Spacer size={15} />
+              
               <ScrollView 
-                style={{
-                  flex: 1, 
-                  flexDirection: 'row', 
-                  marginLeft: 16, 
-                  marginRight: 16, 
-                  height: 32, 
-                  paddingTop: 4, 
-                  backgroundColor: 'white'
-                }}
+                style={{flex: 1, flexDirection: 'row', marginLeft: 5}}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
                 {
-                  categories.map((category, index) => {
+                  categories.map((category) => {
                     return (
                       <TouchableOpacity key={category.categoryId}>
-                        <Text 
-                          style={{
-                            fontSize: 16,
-                            fontWeight: '500', 
-                            textAlign: 'center', 
-                            lineHeight: 24,
-                            marginRight: 28,
-                            color: index === this.state.selectedCategoryIndx ? 'black' : '#A3A3A2'
-                          }}
-                        >
-                          {category.categoryName}
-                        </Text>
+                        <View style={{flex: 1, flexDirection: 'column', alignItems: 'center', marginRight: 20}}>
+                          <View 
+                            style={{ width: 50, 
+                                height: 50, 
+                                backgroundColor:'#959595',
+                                borderRadius: 50 }}
+                          />
+                          <Text style={{fontSize: 15, marginTop: 5, fontWeight: '500', textAlign: 'center'}}>
+                            {category.categoryName}
+                          </Text>
+                        </View>
                       </TouchableOpacity>
                     );
                   })
                 }
               </ScrollView>
-              {/* Category Section END */}
-
-              <Spacer size={25} />
-              </View>
-
+              <Spacer size={7} />
               {/* Main Page Category Section END */}
 
               {/* Main Page Trending Body START */}
-                    
-              
+              <View
+                style={{
+                  marginTop: 10,
+                  borderBottomColor: '#EDEBEB',
+                  borderBottomWidth: 1,
+                  width: '98%',
+                  marginLeft: 5
+                }}
+              />      
+              <Spacer size={15} />
 
-              <View style={{marginTop: 16}}>
+              <View>
                 <View style={{flex: 1, flexDirection: 'column', marginLeft: 10}}>                  
                   <View 
                     style={{
@@ -288,6 +261,8 @@ class MainPage extends React.Component {
                         let itemPrice = Number(item.price).toFixed(2);
                         let itemHashTags = [];
                         let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
+                        let cartUserIdArray = [];
+
                         const locationCoordinates = item.User.location.coordinates;
                         
                         for(let i = 0; i < hashTags.length; i++) {
@@ -296,16 +271,101 @@ class MainPage extends React.Component {
                         }
  
                         return (
-                          <SingleCard 
+                          <TouchableOpacity 
                             key={item.id}
-                            item={item}
-                            currentUserId={this.currentUserId}
-                            locationCoordinates={locationCoordinates}
-                            itemDistance={itemDistance}
-                            itemHashTags={itemHashTags}
-                            itemPrice={itemPrice}
-                            thumbnailUrl={thumbnailUrl}
-                          />
+                            onPress={ () => { Actions.singleProduct({ 
+                              singleProduct: item, 
+                              locationCoordinates: locationCoordinates,
+                              userInfo: userInfo
+                            }) }}
+                            style={{width: '47%', marginRight: 10}}
+                          >
+                          <View 
+                            style={{width: '100%', marginBottom: 5, marginRight: 5, backgroundColor: 'rgb(250,250,250)'}}
+                          >
+                            <Image 
+                              source={{uri: thumbnailUrl}}
+                              style={{width: '100%', height: 180, borderRadius: 5}}
+                            />
+
+                            <LikeComponent 
+                              itemId={item.id}
+                              itemCartUser={item.CartUser}
+                              currentUserId={this.currentUserId}
+                            />
+
+                            <View>
+                              <View style={{
+                                backgroundColor: 'black', 
+                                opacity: 0.7, 
+                                position: 'absolute', 
+                                marginTop: -30, 
+                                width: '100%', 
+                                height:30,
+                                flexDirection: 'row'
+                              }}>
+                                <MaterialIcon name="location-on" size={18} color="white" style={{padding: 6}}/>
+                                <Text style={{color: 'white', paddingTop: 7, fontSize: 13, fontWeight: '500'}}>
+                                  {`${itemDistance} mi.`}
+                                </Text>
+                              </View>
+                            </View>
+                            
+                            <View style={{flexDirection: 'row', padding: 5}}>
+                              {
+                                item.sell === true ?
+                                <View style={{
+                                  borderRadius: 5,
+                                  borderWidth: 1,
+                                  borderColor: '#007aff',
+                                  width: 42, 
+                                  alignItems: 'center', 
+                                  marginRight: 5,
+                                  height: 20
+                                }}>
+                                  <Text style={{color: '#007aff', alignSelf: 'center', fontSize: 13, paddingTop:1}}>
+                                    Sell
+                                  </Text>
+                                </View>
+                                : null
+                              }
+
+                              {
+                                item.swap === true ?
+                                <View style={{
+                                  borderRadius: 5,
+                                  borderWidth: 1,
+                                  borderColor: '#007aff',
+                                  width: 45, 
+                                  alignItems: 'center',
+                                  height: 20
+                                }}>
+                                  <Text style={{color: '#007aff', alignSelf: 'center', fontSize: 13, paddingTop:1}}>
+                                    Swap
+                                  </Text>
+                                </View>
+                                : null
+                              }
+                            </View>
+
+                            <Text style={{fontWeight: '500', marginLeft: 5, marginBottom: 5, width: 160}}>
+                              {itemHashTags.join(" ")}
+                            </Text>
+
+                            <View style={{flexDirection: 'row'}}>
+                              <Text style={{fontSize: 14, marginLeft: 5, marginBottom: 5, color: 'rgb(30,30,30)'}}>
+                                {`$${itemPrice}`}
+                              </Text>
+
+                              <View style={{flexDirection: 'row', marginLeft: 10}}>
+                                <MaterialCommunityIcon name="coin" size={20} color="#FBDB0A" style={{marginTop: -1}}/>
+                                <Text style={{fontSize: 14, marginLeft: 2, marginBottom: 5, color: 'rgb(30,30,30)'}}>
+                                  100.00
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
+                          </TouchableOpacity>
                         );
                       })
                     }
@@ -315,7 +375,6 @@ class MainPage extends React.Component {
               {/* Main Page Trending Body END */}
             </Content>
           </Container>
-          </Drawer>
         }
       </React.Fragment>
     );
