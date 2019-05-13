@@ -51,15 +51,31 @@ class LikeComponent extends Component {
 
   render() {
     return (
-      <View style={{position: 'absolute', zIndex: 10, marginLeft: '80%', marginTop: 10 }}>
+      <View 
+        style={{
+          position: 'absolute', 
+          zIndex: 10, 
+          right: '5%',
+          marginTop: 15 
+        }}
+      >
         <TouchableOpacity
           onPress={() => this.handleLike()}
         >
-          <FontAwesomeIcon 
-            name="heart" 
-            size={25} 
-            color={this.state.liked === false ? "#E6E6E6" : "#1D60FD"}
+          {
+            this.state.liked === false ?
+              <FontAwesomeIcon 
+                name="heart-o" 
+                size={25} 
+                color="white"
+              />
+            :
+              <FontAwesomeIcon 
+              name="heart" 
+              size={25} 
+              color="white"
             />
+          }
         </TouchableOpacity>
       </View>
     );

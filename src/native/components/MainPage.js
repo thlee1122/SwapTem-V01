@@ -271,7 +271,7 @@ class MainPage extends React.Component {
                     
               
 
-              <View style={{marginTop: 16}}>
+              <View style={{marginTop: 5}}>
                 <View style={{flex: 1, flexDirection: 'column', marginLeft: 10}}>                  
                   <View 
                     style={{
@@ -296,7 +296,8 @@ class MainPage extends React.Component {
                         }
  
                         return (
-                          <SingleCard 
+                          <SingleCard
+                            itemIndex={index}
                             key={item.id}
                             item={item}
                             currentUserId={this.currentUserId}
