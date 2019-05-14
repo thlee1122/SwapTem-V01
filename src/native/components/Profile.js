@@ -63,6 +63,8 @@ class Profile extends React.Component {
     const data = get(getItem, "data", []);
     const { height, width } = Dimensions.get('window');
 
+    console.log("@@@ this.props", this.props);
+
     return (
       <Container>
         <Content style={{backgroundColor: 'white'}}>

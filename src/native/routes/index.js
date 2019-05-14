@@ -91,12 +91,15 @@ import StandoutSelectionPage from '../components/StandoutSelectionPage';
 // import NavBar from '../components/NavBar';
 import SideBarMenu from '../components/SideBarMenu';
 
+import FilterPage from '../components/FilterPage';
+
+
+import { Actions }                                        from 'react-native-router-flux';
+
 
 class NavBar extends Component {
 
-
   render() {
-
     const { height, width } = Dimensions.get('window');
 
     return (
@@ -126,9 +129,18 @@ class NavBar extends Component {
             </Text>
             
             <View style={{flexDirection: 'row', position: 'absolute', right: 0, marginRight: 5}}>
-              <Ionicons size={24} name="ios-options" style={{marginRight: 24}}/>
+              <TouchableOpacity 
+                style={{marginRight: 24}}
+                onPress={(e) => Actions.filterPage()}
+              >
+                <Ionicons size={24} name="ios-options" />
+              </TouchableOpacity>
 
-              <Ionicons size={24} name="ios-search" />
+              <TouchableOpacity
+                onPress={(e) => Actions.searchResult()}
+              >
+                <Ionicons size={24} name="ios-search" />
+              </TouchableOpacity>
 
             </View>
           </View>
@@ -207,6 +219,13 @@ const Index = (
             back
             key="searchResult"
             component={SearchResultPageComponent}
+          />
+
+          <Scene
+            back
+            title="Filter Page"
+            key="filterPage"
+            component={FilterPage}
           />
         </Stack>
 

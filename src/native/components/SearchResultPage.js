@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, Image, TouchableOpacity, TextInput } from 'react-native';
-import {
-  Container, Content, List, ListItem, Body, Left, Right, Text, Button, Tabs, Tab, TabHeading, Card, CardItem,
-} from 'native-base';
-
-import { Switch }                                   from 'react-native-switch';
-import { Fumi } from 'react-native-textinput-effects';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-// import { connect } from 'react-redux';
+import React, { Component } 																	from 'react';
+import PropTypes 																							from 'prop-types';
+import get                                                    from 'lodash.get';
+import { connect }                                            from 'react-redux';
+import { View, Image, TouchableOpacity, TextInput } 					from 'react-native';
+import { Container, Content, Text } 													from 'native-base';
+import { getMetadata }                                     		from '../../actions/registerItemActions';
+import { Switch }                                   					from 'react-native-switch';
+import { Fumi } 																							from 'react-native-textinput-effects';
+import MaterialIcons 																					from 'react-native-vector-icons/MaterialIcons';
 
 class SearchResultPage extends Component {
-
 	constructor(props) {
     super(props);
     this.state = { 
@@ -20,6 +17,10 @@ class SearchResultPage extends Component {
     };
 
     this.currentUserId = "";
+  }
+
+  componentWillMount() {
+  	this.props.getMetadata();
   }
 
 	handleSwitch = (topicName, value) => {
@@ -36,43 +37,24 @@ class SearchResultPage extends Component {
     return newText;
   }
 
- // if(!!group && !!group['doclist'] && !!group['doclist']['docs'] && group['doclist']['docs'].length){
- //  if(group.groupValue == 'research'){
- //    suggestionsList = group['doclist']['docs'].map( (doc, idx) => {
- //      let text = self.hightLightText(doc.GGTITLE, query, idx);
-
- //      if(!text.length) text = doc.GGTITLE;
- //      return (
- //        <li 
- //          onClick={(e) => this.redirectUser(e, idx)}
- //          data-attr-group={group.groupValue} 
- //          data-attr-id={doc.RES_ID} 
- //          data-attr-qid={qid}
- //          key={group.groupValue+doc.RES_ID} 
- //          className="tt-suggestion tt-selectable" dangerouslySetInnerHTML={{__html: text}}></li>
- //      );
- //    });
-
-
 	render() {
-		const { metaDatatags } = this.props;
+		const registerItem = get(this.props, "registerItem", {});
+		const metadata = get(registerItem, "metadata", {});
+    const metaDatatags = get(metadata, "tags", []);
 
 		const sampleSearchAlertTopics = [
 			{
 				topicName: "MacBook",
 				toggleStatus: true
 			},
-
 			{
 				topicName: "Smartphone",
 				toggleStatus: true
 			},
-
 			{
 				topicName: "Smart Home",
 				toggleStatus: false
 			},
-
 			{
 				topicName: "Bike",
 				toggleStatus: false
@@ -84,30 +66,9 @@ class SearchResultPage extends Component {
 			return ((tag.text).toLowerCase()).startsWith(this.state.textValue.toLowerCase()) === true
 		});
 
-
-		console.log("@@@@ inside SearchResultPage this.props", this.props);
-		console.log("@@@@ inside SearchResultPage metaDatatags", metaDatatags);
-		console.log("@@@@ inside SearchResultPage searchResults", searchResults);
-
 		return (
 			<Container>
 		    <Content style={{backgroundColor: 'white'}}>
-
-	      	{/* <TextInput
-	      		style={{
-	      			borderWidth: 1, 
-	      			borderRadius: 5, 
-	      			borderColor: "#007aff", 
-	      			flex: 1,
-	      			marginRight: 10,
-	      			marginLeft: 10,
-	      			height: 50
-	      		}}
-      			onChangeText={(text) => this.setState({text})}
-      			value={this.state.text}
-      			placeholder="Search SwapTem"
-      			inlineImageLeft='search_icon'
-      		/> */}
       		<Fumi
 				    label={'Search SwapTem'}
 				    iconClass={MaterialIcons}
@@ -167,16 +128,13 @@ class SearchResultPage extends Component {
 				  				)
 				  			})
 				  		}
-				  	</View>
-				  	: null
+				  	</View> : null
 				  }
-
 
 	      	<View style={{flexDirection: 'column', marginRight: 10, marginLeft:10, marginTop: 30}}>
 	      		<Text style={{fontSize: 18, color: "#959595", marginBottom: 20}}>
 	      			Search Alerts
 	      		</Text>
-
 	      		
 	      		<View style={{flexDirection: 'column'}}>
 	      			{
@@ -217,5 +175,14 @@ class SearchResultPage extends Component {
 		);
 	}
 }
-	
-export default SearchResultPage;
+
+const mapStateToProps = state => ({
+	registerItem: state.registerItem || {},
+});
+
+const mapDispatchToProps = {
+  getMetadata: getMetadata
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResultPage);
+
