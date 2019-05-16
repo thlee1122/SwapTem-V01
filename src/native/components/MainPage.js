@@ -114,8 +114,8 @@ class MainPage extends React.Component {
 
     return (
       
-          <Container style={{backgroundColor: 'white'}}>
-            <Content style={{backgroundColor: '#ECEBEB'}}>
+          <Container style={{backgroundColor: 'black'}}>
+            <Content style={{backgroundColor: 'black'}}>
 
               {/* Trending This Week Modal START */}
               {/* <Modal
