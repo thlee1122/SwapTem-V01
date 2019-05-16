@@ -170,7 +170,7 @@ const Index = (
     navBar={NavBar}
     // hideNavBar
     ref={(ref) => { this.drawer = ref; }}
-    content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
+    // content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
     // content={<View style={{backgroundColor: 'black', zIndex: 10}}>Sample Page</View>}
     side="left"
     // openDrawerOffset={0.5}

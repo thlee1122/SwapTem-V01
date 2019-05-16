@@ -114,7 +114,7 @@ class MainPage extends React.Component {
 
     return (
       
-          
+          <Container style={{backgroundColor: 'black'}}>
             <Content style={{backgroundColor: '#ECEBEB'}}>
 
               {/* Trending This Week Modal START */}
@@ -297,7 +297,7 @@ class MainPage extends React.Component {
               </View>
               {/* Main Page Trending Body END */}
             </Content>
-          
+          </Container>
       
     );
   }
