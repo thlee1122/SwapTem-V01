@@ -165,23 +165,7 @@ console.log("~~~~ this", this.ref);
 // console.log("#####", document.getElementsByClassName("main-nav-drawer"));
 
 const Index = (
-  <Drawer
-    className="main-nav-drawer"
-    navBar={NavBar}
-    // hideNavBar
-    ref={(ref) => { this.drawer = ref; }}
-    // content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
-    // content={<View style={{backgroundColor: 'black', zIndex: 10}}>Sample Page</View>}
-    side="left"
-    // openDrawerOffset={0.5}
-    openDrawerOffset={0}
-    // type="overlay"
-    // panCloseMask={0}
-    // closedDrawerOffset={-3}
-    // styles={drawerStyles}
-    // tapToClose={true}
-    elevation={1}
-  >
+  
   <Stack 
     hideNavBar
     // navBar={NavBar}
@@ -206,6 +190,23 @@ const Index = (
           icon={() => <MaterialIcon name="home" size={25} color="white" />}
           {...DefaultProps.navbarProps}
         >
+          <Drawer
+            className="main-nav-drawer"
+            navBar={NavBar}
+            // hideNavBar
+            ref={(ref) => { this.drawer = ref; }}
+            // content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
+            // content={<View style={{backgroundColor: 'black', zIndex: 10}}>Sample Page</View>}
+            side="left"
+            // openDrawerOffset={0.5}
+            openDrawerOffset={0}
+            // type="overlay"
+            // panCloseMask={0}
+            // closedDrawerOffset={-3}
+            // styles={drawerStyles}
+            // tapToClose={true}
+            elevation={1}
+          >
           <Scene key="home" title="dsdsdsd" component={MainPage} />
           <Scene title="Item" key="singleProduct" component={SingleProductComponent} />
           <Scene title="Reviews" key="reviewPage" component={ReviewPage} />
@@ -227,6 +228,7 @@ const Index = (
             key="filterPage"
             component={FilterPage}
           />
+          </Drawer>
         </Stack>
 
         {/* <Stack
@@ -448,7 +450,7 @@ const Index = (
       Layout={RecipeViewComponent}
     /> */}
   </Stack>
-  </Drawer>
+  
 );
 
 export default Index;
