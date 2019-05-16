@@ -3,7 +3,6 @@ import { connect }                                      from 'react-redux';
 import { View, TouchableOpacity}                   from 'react-native';
 import { Container, Content, Text }                 from 'native-base';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { Actions }                                        from 'react-native-router-flux';
 import { postLike }                       from '../../actions/singleProductActions';
 
 

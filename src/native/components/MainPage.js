@@ -113,25 +113,7 @@ class MainPage extends React.Component {
     console.log("22222222 this.props", this.props);
 
     return (
-      <React.Fragment>
-        {
-          this.state.loggedIn === true ?
-          <Login handleLogin = {this.handleLogin} />
-          :
-          <Drawer
-            ref={(ref) => { this.drawer = ref; }}
-            content={<SideBarMenu closeDrawer={this.closeDrawer}/>}
-            // content={<View style={{backgroundColor: 'black', zIndex: 10}}>Sample Page</View>}
-            side="left"
-            // openDrawerOffset={0.5}
-            openDrawerOffset={0}
-            // type="overlay"
-            // panCloseMask={0}
-            // closedDrawerOffset={-3}
-            // styles={drawerStyles}
-            // tapToClose={true}
-            elevation={1}
-          >
+      
           <Container style={{backgroundColor: 'white'}}>
             <Content style={{backgroundColor: '#ECEBEB'}}>
 
@@ -316,9 +298,7 @@ class MainPage extends React.Component {
               {/* Main Page Trending Body END */}
             </Content>
           </Container>
-          </Drawer>
-        }
-      </React.Fragment>
+      
     );
   }
 }
