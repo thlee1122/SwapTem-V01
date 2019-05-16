@@ -103,7 +103,7 @@ class NavBar extends Component {
     const { height, width } = Dimensions.get('window');
 
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <SafeAreaView style={{backgroundColor: '#fff'}}>
         <View style={{paddingLeft: 10, paddingRight: 10, paddingTop: 15, height: 60}}>
           <View 
             style={{
