@@ -57,6 +57,8 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import FeatherIcon  from 'react-native-vector-icons/Feather';
+
 import SearchResultPageComponent from '../components/SearchResultPage';
 
 import OfferComponent from '../components/OfferComponent';
@@ -168,15 +170,17 @@ const Index = (
   
   <Stack 
     hideNavBar
+    hideTabBar
     // navBar={NavBar}
   >
     <Scene hideNavBar>
       <Tabs
-        key="tabbar"
+        // key="tabbar"
         swipeEnabled
         type="replace"
         showLabel={false}
         {...DefaultProps.tabProps}
+
       >
         <Stack
           hideNavBar
@@ -187,8 +191,8 @@ const Index = (
           key="home"
           title={AppConfig.appName.toUpperCase()}
           // icon={() => <Icon name="planet" {...DefaultProps.icons} />}
-          icon={() => <MaterialIcon name="home" size={25} color="white" />}
-          {...DefaultProps.navbarProps}
+          icon={() => <FeatherIcon name="home" size={25} color="black" />}
+          // {...DefaultProps.navbarProps}
         >
           <Drawer
             className="main-nav-drawer"
@@ -286,12 +290,12 @@ const Index = (
           <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
         </Stack> */}
 
-         <Stack
+         {/* <Stack
           hideNavBar 
           key="inbox"
           title="INBOX"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          icon={() => <FontAwesomeIcon name="inbox" size={25} color="white"/>}
+          icon={() => <FontAwesomeIcon name="inbox" size={25} color="black"/>}
           {...DefaultProps.navbarProps}
         >
           <Scene key="inbox" component={LocaleContainer} Layout={InboxComponent} />
@@ -323,7 +327,7 @@ const Index = (
             component={TrustedContactConfirmPage}
           />
           <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPageTwo" component={ScheduleMeetupPage} />
-        </Stack>      
+        </Stack> */}    
 
         <Stack
           hideNavBar
