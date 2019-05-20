@@ -267,8 +267,7 @@ export default StyleSheet.create({
 
   //Global CSS START
   offerMainTabText: {
-    fontSize: 18,
-    fontWeight: 'bold'
+    fontSize: 16,
   },
 
   offerCardHeaderMainText: {
@@ -436,7 +435,8 @@ export default StyleSheet.create({
     borderWidth: 1, 
     borderRadius: 5, 
     marginBottom: 10, 
-    width: 350,
+    // width: 350,
+    flex: 1,
     alignSelf: 'center',
     borderColor: '#D2D2D2'
   },
@@ -444,7 +444,8 @@ export default StyleSheet.create({
   singleOfferContent: {
     flexDirection: 'row', 
     marginLeft: 0, 
-    marginRight: 5
+    marginRight: 5,
+    flex: 1
   },
 
   singleOfferContentColumn: {
@@ -463,16 +464,16 @@ export default StyleSheet.create({
   singleOfferCountDown: {
     position: 'absolute',
     zIndex: 10,
-    right: 5,
-    top: 10
+    right: 0,
+    bottom: 0,
+    width: 100,
+    backgroundColor: 'black'
   },
 
   singleOfferImage: {
-    minHeight: 110,
-    minWidth: 125, 
+    height: 224,
+    width: 145,
     backgroundColor: '#E5E3E3', 
-    marginTop: 5, 
-    marginBottom: 5
   },
 
   done: {

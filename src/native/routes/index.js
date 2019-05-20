@@ -101,23 +101,42 @@ import { Actions }                                        from 'react-native-rou
 
 class NavBar extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     const { height, width } = Dimensions.get('window');
+    const { initialRouteName } = this.props;
+
+    console.log("@@@@ route.js", this.props);
 
     return (
-      <SafeAreaView style={{backgroundColor: '#fff'}}>
+      <SafeAreaView 
+        style={{
+          backgroundColor: initialRouteName === 'profileHome' ? '#000000' : '#fff'
+        }}
+      >
         <View style={{paddingLeft: 10, paddingRight: 10, paddingTop: 15, height: 60}}>
           <View 
             style={{
             flex: 1, 
             flexDirection: 'row',
           }}>
+
+
             <TouchableOpacity 
               style={{position: 'absolute', left: 0, marginLeft: 5, zIndex:10}}
               onPress={()=> openDrawer()}
             >
-              <MaterialIcon size={24} name="menu" />
+              <MaterialIcon 
+                size={24} 
+                name="menu" 
+                color={initialRouteName === 'profileHome' ? 'white' : 'black'}
+              />
             </TouchableOpacity>
+              
+            
             <Text 
               style={{
                 fontWeight: '500', 
@@ -131,19 +150,26 @@ class NavBar extends Component {
             </Text>
             
             <View style={{flexDirection: 'row', position: 'absolute', right: 0, marginRight: 5}}>
-              <TouchableOpacity 
-                style={{marginRight: 24}}
-                onPress={(e) => Actions.filterPage()}
-              >
-                <Ionicons size={24} name="ios-options" />
-              </TouchableOpacity>
+              {
+                initialRouteName === 'home' ?
+                <TouchableOpacity 
+                  style={{marginRight: 24}}
+                  onPress={(e) => Actions.filterPage()}
+                >
+                  <Ionicons size={24} name="ios-options" />
+                </TouchableOpacity>
+                : null
+              }
 
               <TouchableOpacity
                 onPress={(e) => Actions.searchResult()}
               >
-                <Ionicons size={24} name="ios-search" />
+                <Ionicons 
+                  size={24} 
+                  name="ios-search" 
+                  color={initialRouteName === 'profileHome' ? 'white' : 'black'}
+                />
               </TouchableOpacity>
-
             </View>
           </View>
         </View>
@@ -170,7 +196,6 @@ const Index = (
   
   <Stack 
     hideNavBar
-    hideTabBar
     // navBar={NavBar}
   >
     <Scene hideNavBar>
@@ -256,18 +281,19 @@ const Index = (
 
 
 
-        {/* <Stack
+        <Stack
+          navBar={NavBar}
           key="offer"
           title="OFFER"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          icon={() => <MaterialCommunityIcons name="cards" size={25} color="white"/>}
-          {...DefaultProps.navbarProps}
+          icon={() => <MaterialCommunityIcons name="cards-outline" size={30} color="black" style={{marginTop:3}}/>}
+          // {...DefaultProps.navbarProps}
         >
           <Scene key="inbox" component={LocaleContainer} Layout={OfferComponent} />
 
           <Scene key="acceptedSwapProductPage" component={AcceptedSwapProductPage} />
           <Scene title="SCHEDULE A MEETING" key="scheduleMeetupPage" component={ScheduleMeetupPage} />
-        </Stack> */}
+        </Stack>
 
 
 
@@ -330,7 +356,8 @@ const Index = (
         </Stack> */}    
 
         <Stack
-          hideNavBar
+          // hideNavBar
+          navBar={NavBar}
           key="profile"
           title="PROFILE"
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}

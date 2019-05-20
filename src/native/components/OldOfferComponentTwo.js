@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableOpacity, Text, 
-         FlatList, ListItem, Dimensions } from 'react-native';
+import { View, Image, TouchableOpacity, Text, FlatList, ListItem} from 'react-native';
 import { Container, Content, Tabs, Tab, TabHeading, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Modal from 'react-native-modalbox';
@@ -49,14 +48,14 @@ class OfferPage extends Component {
   }
 
   componentDidMount = () => {
-    // this.shuffleContainer = this.refs.myShuffleContainer;
+    this.shuffleContainer = this.refs.myShuffleContainer;
 
     // this.shuffle = new Shuffle(this.shuffleContainer, {
     //   itemSelector: this.refs.shuffleItem,
     // });
 
-    // console.log(this.shuffleContainer);
-    // console.log(this.refs.myShuffleContainer);
+    console.log(this.shuffleContainer);
+    console.log(this.refs.myShuffleContainer);
   }
 
   renderCard = item => {
@@ -196,71 +195,71 @@ class OfferPage extends Component {
     }
   }
 
-  // handleFilterButton = (filterType) => {
-  //   if(filterType === "Accepted") {
-  //     this.setState({
-  //       acceptedButtonClicked: !this.state.acceptedButtonClicked
-  //     });
+  handleFilterButton = (filterType) => {
+    if(filterType === "Accepted") {
+      this.setState({
+        acceptedButtonClicked: !this.state.acceptedButtonClicked
+      });
 
-  //     this.acceptedButtonClicked = !this.acceptedButtonClicked;
-  //     this.filterOfferList("accepted", this.acceptedButtonClicked)
+      this.acceptedButtonClicked = !this.acceptedButtonClicked;
+      this.filterOfferList("accepted", this.acceptedButtonClicked)
 
-  //   } else if(filterType === "Received") {
-  //     this.setState({
-  //       receivedButtonClicked: !this.state.receivedButtonClicked
-  //     });
+    } else if(filterType === "Received") {
+      this.setState({
+        receivedButtonClicked: !this.state.receivedButtonClicked
+      });
 
-  //     this.receivedButtonClicked = !this.receivedButtonClicked;
-  //     this.filterOfferList("received", this.receivedButtonClicked);
+      this.receivedButtonClicked = !this.receivedButtonClicked;
+      this.filterOfferList("received", this.receivedButtonClicked);
 
-  //   } else if(filterType === "Pending") {
-  //     this.setState({
-  //       pendingButtonClicked: !this.state.pendingButtonClicked
-  //     });
+    } else if(filterType === "Pending") {
+      this.setState({
+        pendingButtonClicked: !this.state.pendingButtonClicked
+      });
 
-  //     this.pendingButtonClicked = !this.pendingButtonClicked;
-  //     this.filterOfferList("pending", this.pendingButtonClicked);
-  //   }
-  // }
+      this.pendingButtonClicked = !this.pendingButtonClicked;
+      this.filterOfferList("pending", this.pendingButtonClicked);
+    }
+  }
 
-  // filterOfferList = (filterType, filterButtonClicked) => {
-  //   if(filterButtonClicked === false)  {
-  //     let newOfferList = this.state.fullOfferList.filter((child, index) => {
-  //       if(child.type !== filterType ) {
-  //         return child
-  //       }
-  //     })
+  filterOfferList = (filterType, filterButtonClicked) => {
+    if(filterButtonClicked === false)  {
+      let newOfferList = this.state.fullOfferList.filter((child, index) => {
+        if(child.type !== filterType ) {
+          return child
+        }
+      })
 
-  //     this.setState({
-  //       fullOfferList: newOfferList
-  //     });
+      this.setState({
+        fullOfferList: newOfferList
+      });
 
-  //   } else if(filterButtonClicked === true) {
-  //     let filters = [];
+    } else if(filterButtonClicked === true) {
+      let filters = [];
 
-  //     if(this.acceptedButtonClicked === false) {
-  //       filters.push("accepted");
-  //     }
+      if(this.acceptedButtonClicked === false) {
+        filters.push("accepted");
+      }
 
-  //     if(this.receivedButtonClicked === false) {
-  //       filters.push("received");
-  //     }
+      if(this.receivedButtonClicked === false) {
+        filters.push("received");
+      }
 
-  //     if(this.pendingButtonClicked === false) {
-  //       filters.push("pending");
-  //     }
+      if(this.pendingButtonClicked === false) {
+        filters.push("pending");
+      }
 
-  //     let newOfferList = allOffers.filter((child, index) => {
-  //       if(filters.indexOf(child.type) === -1) {
-  //         return child
-  //       }
-  //     })
+      let newOfferList = allOffers.filter((child, index) => {
+        if(filters.indexOf(child.type) === -1) {
+          return child
+        }
+      })
 
-  //     this.setState({
-  //       fullOfferList: newOfferList
-  //     });
-  //   }
-  // }
+      this.setState({
+        fullOfferList: newOfferList
+      });
+    }
+  }
 
 	render() {
     const filterButtonNames = [
@@ -269,30 +268,19 @@ class OfferPage extends Component {
       {name: "Pending", state: this.state.pendingButtonClicked}, 
     ];
 
-    const { height, width } = Dimensions.get('window');
-
 		return (
 			<Container>
         <Content style={styles.mainContent}>
-          <Tabs 
-            style={{height: 725}} 
-            locked={true} 
-            tabBarUnderlineStyle={{height:1, backgroundColor: 'black'}}
-            tabContainerStyle={{ height: 65 }}
-          >
+          <Tabs style={{height: 725}} locked={true}>
             <Tab
               heading={ 
-                <TabHeading style={{backgroundColor: 'white'}} >
-                  {/* <Text style={styles.offerMainTabText}>Offers</Text> */}
-                  <Text style={styles.offerMainTabText}>All</Text>
-
+                <TabHeading>
+                  <Text style={styles.offerMainTabText}>Offers</Text>
                 </TabHeading>
               }
             >
-
-
-              <Content style={{backgroundColor: 'rgba(236, 235, 235, 0.5)', padding: 16}}>
-                {/* <View style={styles.offerButtonSection}>
+              <Content>
+                <View style={styles.offerButtonSection}>
                   {
                     filterButtonNames.map((item, index) => {
                       return (
@@ -314,88 +302,43 @@ class OfferPage extends Component {
                       );
                     })
                   }
-                </View> */}
+                </View>
 
                 {
                   <FlatList 
                     data={this.state.fullOfferList}
-                    // style={{flex: 1}}
-                    // ref="myShuffleContainer"
+                    style={{flex: 1}}
+                    ref="myShuffleContainer"
                     keyExtractor={(item, index) => (item.id).toString()}
                     renderItem={({item}) =>
-                      
- 
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        // ref="shuffleItem"
-                        style={{backgroundColor: 'white', height: height * 0.25, marginBottom: 16}}
+                        ref="shuffleItem"
                       >
-                        <View 
-                          // style={styles.singleOffer}
-                          
-                        >
-                          <View 
-                            // style={styles.singleOfferContent}
-                            style={{flexDirection: 'row'}}
-                          >
-                            <View 
-                              // style={styles.singleOfferContentColumn}
-                              style={{padding: 16, width: '62%'}}
-                            >
-                              <View
-                                style={{
-                                  borderRadius: 50,
-                                  width: 80,
-                                  height: 25,
-                                  backgroundColor: item.type === "received" ? "#44D7B6" : "#FFA361"
-                                }}
-                              >
-                                <Text style={{color: '#FFFFFF', fontSize: 12, lineHeight: 16, flex: 1, textAlign: 'center', marginTop: 4}}>
-                                  {item.type === "received" ? "Received" : "Pending"}
-                                </Text>
-                              </View>
-                              {/* <Text 
+                        <View style={styles.singleOffer}>
+                          <View style={styles.singleOfferContent}>
+                            <View style={styles.singleOfferContentColumn}>
+                              <Text 
                                 style={[styles.singleOfferType,
                                   {color: item.type === "accepted" ? "#007aff" : item.type === "received" ? "#FF9B00" : "#AEABAB"}]}>
                                 {(item.type).toUpperCase()}
-                              </Text> */}
-                              <Text 
-                                // style={styles.offerCardName}
-                                style={{fontWeight: 'bold', fontSize: 26, lineHeight: 32, color: 'black', marginTop: 30}}
-                              >
-                                {`${(item.name).substring(0, 27)} ${(item.name).length > 27 ? "..." : ""}`}
                               </Text>
+                              <Text style={styles.offerCardName}>{item.name}</Text>
 
-                              {/* {
+                              {
                                 item.matchingProduct === true ?
                                 <Text style={styles.offerCardMessage}>
                                   Great, you have matching items!
                                 </Text>
                                 : null
-                              } */}
+                              }
 
-                              <Text 
-                                // style={styles.offerCardValueText}
-                                style={{fontSize: 16, lineHeight: 20, color: 'black', marginTop: 6}}
-                              >
-                                ${(item.value).toFixed(2)} USD
+                              <Text style={styles.offerCardValueText}>
+                                <Text style={{fontWeight: 'bold'}}>Value:</Text> ${(item.value).toFixed(2)} USD
                               </Text>
 
-                              <View style={{flexDirection: 'row', marginTop: 28, flex: 1}}>
-                                <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2', position: 'absolute', left: 0}}>
-                                  New York, NY
-                                </Text>
-
-                                <View style={{flexDirection: 'row', position: 'absolute', right: 0}}>
-                                  <FeatherIcon name="box" size={20} color="#A3A3A2" style={{marginRight: 8, marginTop: -2}}/>
-                                  <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2'}}>
-                                    Available
-                                  </Text>
-                                </View>
-                              </View>
-
-                              {/* <View style={styles.offerCardSubSection}>
+                              <View style={styles.offerCardSubSection}>
                                 <View style={styles.offerCardLocationSection}>
                                   <MaterialIcon name="location-on" size={15} color="#00529b"/>
                                   <Text style={styles.offerCardLocationText}>
@@ -413,33 +356,18 @@ class OfferPage extends Component {
                                   </View>
                                   : null
                                 }
-                              </View> */}
+                              </View>
                             </View>
 
-                            <View>
-                              <CountDown
-                                until={item.countDown}
-                                size={10}
-                                timeToShow={['H', 'M', 'S']}
-                                // digitBgColor="#000"
-                                // digitTxtColor="white"
-
-                                digitStyle={{backgroundColor: '#000', paddingTop: 10}}
-                                digitTxtStyle={{color: 'white', fontSize:12}}
-                                // timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
-                                
-
-
-
-                                separatorStyle={{color: 'white'}}
-
-
-
-                                style={styles.singleOfferCountDown}
-                                showSeparator
-                              />
-                              <Image style={styles.singleOfferImage} />
-                            </View>
+                            <CountDown
+                              until={item.countDown}
+                              size={10}
+                              timeToShow={['H', 'M', 'S']}
+                              digitBgColor="#007aff"
+                              digitTxtColor="white"
+                              style={styles.singleOfferCountDown}
+                            />
+                            <Image style={styles.singleOfferImage} />
                           </View>
                         </View>
                       </TouchableOpacity>
@@ -449,29 +377,7 @@ class OfferPage extends Component {
               </Content>
             </Tab>
 
-            <Tab
-              heading={ 
-                <TabHeading style={{backgroundColor: 'white'}}>
-                  {/* <Text style={styles.offerMainTabText}>Offers</Text> */}
-                  <Text style={styles.offerMainTabText}>Received</Text>
-
-                </TabHeading>
-              }
-            >
-            </Tab>
-
-            <Tab
-              heading={ 
-                <TabHeading style={{backgroundColor: 'white'}}>
-                  {/* <Text style={styles.offerMainTabText}>Offers</Text> */}
-                  <Text style={styles.offerMainTabText}>Pending</Text>
-
-                </TabHeading>
-              }
-            >
-            </Tab>
-
-            {/* <Tab 
+            <Tab 
               heading={ 
                 <TabHeading>
                   <View style={{flexDirection: 'row'}}>
@@ -649,7 +555,7 @@ class OfferPage extends Component {
                   />
                 </Modal>
               </Content>
-            </Tab> */}
+            </Tab>
           </Tabs>
         </Content>
      	</Container>

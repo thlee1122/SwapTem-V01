@@ -111,7 +111,7 @@ export default StyleSheet.create({
 
   verificationSection: {
     backgroundColor:"white", 
-    margin: 16
+    margin: 16,
   },
 
   verificationTitle: {
@@ -226,43 +226,40 @@ export default StyleSheet.create({
 
   itemPillSection: {
     flexDirection: 'row', 
-    height: 20, 
-    marginLeft: 5, 
-    marginRight: 5, 
-    marginTop: 10
+    marginTop: 10, 
+    marginLeft: 5
   },
 
   sellPill: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#007aff',
-    width: 42, 
+    borderRadius: 50,
+    backgroundColor: '#ECEBEB',
+    width: width * 0.16, 
     alignItems: 'center', 
     marginRight: 5,
-    height: 20
+    height: height * 0.03
   },
 
   sellPillText: {
-    color: '#007aff', 
+    color: 'black', 
     alignSelf: 'center', 
-    fontSize: 13, 
-    paddingTop:1
+    fontSize: 14, 
+    paddingTop:4
   },
 
   swapPill: {
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#007aff',
-    width: 45, 
+    borderRadius: 50,
+    backgroundColor: '#ECEBEB',
+    width: width * 0.16, 
     alignItems: 'center',
-    height: 20
+    height: height * 0.03,
+    marginRight: 8
   },
 
   swapPillText: {
-    color: '#007aff', 
+    color: 'black', 
     alignSelf: 'center', 
-    fontSize: 13, 
-    paddingTop:1
+    fontSize: 14, 
+    paddingTop:4
   },
 
   itemHashTag: {
