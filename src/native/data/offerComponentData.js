@@ -112,7 +112,7 @@ export const allOffers = [
     countDown: 31000,
     accepted: true,
     pending: false,
-    type: "accepted",
+    type: "received",
     meetupScheduled: false  
   },
   {
@@ -142,7 +142,7 @@ export const allOffers = [
     showCountDown: true,
     accepted: true,
     pending: false,
-    type: "accepted",
+    type: "pending",
     meetupScheduled: true
   },
   {
