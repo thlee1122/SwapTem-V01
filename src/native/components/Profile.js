@@ -145,47 +145,7 @@ class Profile extends React.Component {
               Verifications
             </Text>
 
-            <View style={{flexDirection: 'row', marginLeft: 16, marginRight: 16, marginBottom: 20, display: 'flex', padding: "0 1%"}}>
-              <TouchableOpacity style={{flexDirection: 'column', flex: 1, margin: '0 1%'}}>
-                <View style={{backgroundColor: 'black', width: 64, height: 64, borderRadius: 50, alignSelf: 'center'}}>
-                  <FeatherIcon name="phone" size={25} color="white" style={{alignSelf: 'center', marginTop: 18}}/>
-                </View>
-
-                <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
-                  Verified
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={{flexDirection: 'column', flex: 1, margin: '0 1%'}}>
-                <View style={{backgroundColor: 'black', width: 64, height: 64, borderRadius: 50, alignSelf: 'center'}}>
-                  <FeatherIcon name="mail" size={25} color="white" style={{alignSelf: 'center', marginTop: 18}}/>
-                </View>
-
-                <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
-                  Verified
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={{flexDirection: 'column', flex: 1, margin: '0 1%'}}>
-                <View 
-                  style={{
-                    backgroundColor: 'white', 
-                    width: 64, 
-                    height: 64, 
-                    borderRadius: 50,
-                    borderColor: 'black',
-                    borderWidth: 1, 
-                    alignSelf: 'center'
-                  }}
-                >
-                  <FeatherIcon name="facebook" size={25} color="black" style={{alignSelf: 'center', marginTop: 18}}/>
-                </View>
-
-                <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
-                  Not verified
-                </Text>
-              </TouchableOpacity>
-            </View>
+            
           </View>
         </View>
         
