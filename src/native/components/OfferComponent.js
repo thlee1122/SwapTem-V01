@@ -253,7 +253,7 @@ class OfferPage extends Component {
                             <Text 
                               style={{fontWeight: 'bold', fontSize: 26, lineHeight: 32, color: 'black', marginTop: 30}}
                             >
-                              {`${(item.name).substring(0, 27)} ${(item.name).length > 27 ? "..." : ""}`}
+                              {`${(item.name).substring(0, 24)} ${(item.name).length > 24 ? "..." : ""}`}
                             </Text>
 
                             <Text 
