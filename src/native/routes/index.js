@@ -357,7 +357,7 @@ const Index = (
 
         <Stack
           // hideNavBar
-          // navBar={NavBar}
+          navBar={NavBar}
           key="profile"
           title="PROFILE"
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
