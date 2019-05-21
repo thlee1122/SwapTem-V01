@@ -188,7 +188,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View>
+                          <View style={{position: 'absolute', right: 0}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -199,7 +199,14 @@ class OfferPage extends Component {
                               style={styles.singleOfferCountDown}
                               showSeparator
                             />
-                            <Image style={styles.singleOfferImage} />
+                            <Image 
+                              // style={styles.singleOfferImage} 
+                              style={{
+                                height: 224,
+                                width: width * 0.343,
+                                backgroundColor: '#E5E3E3', 
+                              }}
+                            />
                           </View>
                         </View>
                       </TouchableOpacity>
