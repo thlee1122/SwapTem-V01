@@ -106,16 +106,7 @@ class OfferPage extends Component {
                           </View>
 
                           <View>
-                            <CountDown
-                              until={item.countDown}
-                              size={10}
-                              timeToShow={['H', 'M', 'S']}
-                              digitStyle={{backgroundColor: '#000', paddingTop: 10}}
-                              digitTxtStyle={{color: 'white', fontSize:12}}
-                              separatorStyle={{color: 'white'}}
-                              style={styles.singleOfferCountDown}
-                              showSeparator
-                            />
+                            
                             <Image style={styles.singleOfferImage} />
                           </View>
                         </View>
