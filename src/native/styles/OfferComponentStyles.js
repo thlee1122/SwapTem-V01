@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   mainContent: {
@@ -472,7 +474,10 @@ export default StyleSheet.create({
 
   singleOfferImage: {
     height: 224,
-    width: 145,
+    width: width * 0.343,
+    borderWidth: 1, 
+    borderColor: 'black',
+    // flex: 1,
     backgroundColor: '#E5E3E3', 
   },
 
