@@ -290,11 +290,12 @@ class OfferPage extends Component {
                             <Image 
                               // style={styles.singleOfferImage} 
                               style={{
-                                // height: 224,
-                                // width: width * 0.343,
-                                // borderWidth: 1, 
-                                // borderColor: 'black',
-                                flex: 1,
+                                height: 224,
+                                width: width * 0.343,
+                                borderWidth: 1, 
+                                borderColor: 'black',
+                                // flex: 1,
+                                zIndex: 10,
                                 backgroundColor: '#E5E3E3', 
                               }}
                             />
