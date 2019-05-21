@@ -36,6 +36,8 @@ class OfferPage extends Component {
 	render() {
     const { height, width } = Dimensions.get('window');
 
+    console.log("~~~ height", height * 0.25);
+
 		return (
 			<Container>
         <Content style={styles.mainContent}>
@@ -62,10 +64,10 @@ class OfferPage extends Component {
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        style={{backgroundColor: 'white', height: height * 0.25, marginBottom: 16}}
+                        style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
                         <View style={{flexDirection: 'row'}}>
-                          <View style={{padding: 16, width: '62%'}}>
+                          <View style={{padding: 16, width: width * 0.58}}>
                             <View
                               style={{
                                 borderRadius: 50,
@@ -106,7 +108,16 @@ class OfferPage extends Component {
                           </View>
 
                           <View>
-                            
+                            <CountDown
+                              until={item.countDown}
+                              size={10}
+                              timeToShow={['H', 'M', 'S']}
+                              digitStyle={{backgroundColor: '#000', paddingTop: 10}}
+                              digitTxtStyle={{color: 'white', fontSize:12}}
+                              separatorStyle={{color: 'white'}}
+                              style={styles.singleOfferCountDown}
+                              showSeparator
+                            />
                             <Image style={styles.singleOfferImage} />
                           </View>
                         </View>
