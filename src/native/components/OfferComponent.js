@@ -145,7 +145,7 @@ class OfferPage extends Component {
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        style={{backgroundColor: 'white', height: height * 0.25, marginBottom: 16}}
+                        style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
                         <View style={{flexDirection: 'row'}}>
                           <View style={{padding: 16, width: '62%'}}>
