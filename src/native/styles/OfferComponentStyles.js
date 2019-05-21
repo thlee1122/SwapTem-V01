@@ -475,8 +475,8 @@ export default StyleSheet.create({
   singleOfferImage: {
     height: 224,
     width: width * 0.343,
-    borderWidth: 1, 
-    borderColor: 'black',
+    // borderWidth: 1, 
+    // borderColor: 'black',
     // flex: 1,
     backgroundColor: '#E5E3E3', 
   },

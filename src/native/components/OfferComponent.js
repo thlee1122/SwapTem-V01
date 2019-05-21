@@ -228,8 +228,8 @@ class OfferPage extends Component {
                         data-groups={`["${item.type}"]`}
                         style={{backgroundColor: 'white', height: height * 0.25, marginBottom: 16}}
                       >
-                        <View style={{flexDirection: 'row'}}>
-                          <View style={{padding: 16, width: '62%'}}>
+                        <View style={{flexDirection: 'row', flex: 1}}>
+                          <View style={{padding: 16, width: width * 0.62}}>
                             <View
                               style={{
                                 borderRadius: 50,
