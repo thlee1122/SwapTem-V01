@@ -229,7 +229,7 @@ class OfferPage extends Component {
                         style={{backgroundColor: 'white', height: height * 0.25, marginBottom: 16}}
                       >
                         <View style={{flexDirection: 'row', flex: 1}}>
-                          <View style={{padding: 16, width: width * 0.62}}>
+                          <View style={{padding: 16, width: "62%"}}>
                             <View
                               style={{
                                 borderRadius: 50,
@@ -269,7 +269,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View>
+                          
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -280,9 +280,19 @@ class OfferPage extends Component {
                               style={styles.singleOfferCountDown}
                               showSeparator
                             />
-                            <Image style={styles.singleOfferImage} />
+                            <Image 
+                              // style={styles.singleOfferImage} 
+                              style={{
+                                // height: 224,
+                                // width: width * 0.343,
+                                // borderWidth: 1, 
+                                // borderColor: 'black',
+                                flex: 1,
+                                backgroundColor: '#E5E3E3', 
+                              }}
+                            />
                           </View>
-                        </View>
+                        
                       </TouchableOpacity>
                     }
                   />
