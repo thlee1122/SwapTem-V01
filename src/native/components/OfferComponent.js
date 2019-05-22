@@ -108,7 +108,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View style={{position: 'absolute', right: 0, backgroundColor: 'red'}}>
+                          <View style={{diplay: 'inline-block', backgroundColor: 'red', width: width * 0.343}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -116,7 +116,15 @@ class OfferPage extends Component {
                               digitStyle={{backgroundColor: '#000', paddingTop: 10}}
                               digitTxtStyle={{color: 'white', fontSize:12}}
                               separatorStyle={{color: 'white'}}
-                              style={styles.singleOfferCountDown}
+                              // style={styles.singleOfferCountDown}
+                              style={{
+                                position: 'absolute',
+                                zIndex: 100,
+                                right: 0,
+                                bottom: 0,
+                                width: 100,
+                                backgroundColor: 'black'
+                              }}
                               showSeparator
                             />
                             <Image 
