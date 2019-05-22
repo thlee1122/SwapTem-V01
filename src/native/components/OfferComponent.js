@@ -66,7 +66,7 @@ class OfferPage extends Component {
                         data-groups={`["${item.type}"]`}
                         style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
-                        <View >
+                        <View style={{flexDirection: 'row'}}>
 
                           <View style={{padding: 16, width: width * 0.58}}>
                             <View
@@ -119,7 +119,17 @@ class OfferPage extends Component {
                               style={styles.singleOfferCountDown}
                               showSeparator
                             />
-                            <Image style={styles.singleOfferImage} />
+                            <Image 
+                              style={{
+                                height: 224,
+                                width: width * 0.343,
+                                borderWidth: 1, 
+                                borderColor: 'black',
+                                // flex: 1,
+                                zIndex: 10,
+                                backgroundColor: '#E5E3E3', 
+                              }}
+                            />
                           </View>
 
 
