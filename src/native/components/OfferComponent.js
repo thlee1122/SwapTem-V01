@@ -108,7 +108,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View>
+                          <View style={{position: 'absolute', right: 0}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -202,7 +202,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View style={{position: 'absolute', right: 0}}>
+                          <View>
                             <CountDown
                               until={item.countDown}
                               size={10}
