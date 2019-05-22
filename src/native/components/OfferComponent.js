@@ -108,7 +108,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1}}>
+                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1, backgroundColor: '#E5E3E3'}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -169,8 +169,8 @@ class OfferPage extends Component {
                         data-groups={`["${item.type}"]`}
                         style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
-                        <View style={{flexDirection: 'row'}}>
-                          <View style={{padding: 16, width: '62%'}}>
+                        <View style={{flexDirection: 'row', flex: 1}}>
+                          <View style={{padding: 16, width: width * 0.58}}>
                             <View
                               style={{
                                 borderRadius: 50,
@@ -210,7 +210,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View>
+                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1, backgroundColor: '#E5E3E3'}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -218,7 +218,15 @@ class OfferPage extends Component {
                               digitStyle={{backgroundColor: '#000', paddingTop: 10}}
                               digitTxtStyle={{color: 'white', fontSize:12}}
                               separatorStyle={{color: 'white'}}
-                              style={styles.singleOfferCountDown}
+                              // style={styles.singleOfferCountDown}
+                              style={{
+                                position: 'absolute',
+                                zIndex: 100,
+                                right: 0,
+                                bottom: 0,
+                                width: 100,
+                                backgroundColor: 'black'
+                              }}
                               showSeparator
                             />
                             <Image 
@@ -226,6 +234,10 @@ class OfferPage extends Component {
                               style={{
                                 height: 224,
                                 width: width * 0.343,
+                                borderWidth: 1, 
+                                borderColor: 'black',
+                                // flex: 1,
+                                zIndex: 90,
                                 backgroundColor: '#E5E3E3', 
                               }}
                             />
@@ -255,10 +267,10 @@ class OfferPage extends Component {
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        style={{backgroundColor: 'white', height: height * 0.25, marginBottom: 16}}
+                        style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
                         <View style={{flexDirection: 'row', flex: 1}}>
-                          <View style={{padding: 16, width: "62%"}}>
+                          <View style={{padding: 16, width: width * 0.58}}>
                             <View
                               style={{
                                 borderRadius: 50,
@@ -298,7 +310,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          
+                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1, backgroundColor: '#E5E3E3'}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -306,7 +318,15 @@ class OfferPage extends Component {
                               digitStyle={{backgroundColor: '#000', paddingTop: 10}}
                               digitTxtStyle={{color: 'white', fontSize:12}}
                               separatorStyle={{color: 'white'}}
-                              style={styles.singleOfferCountDown}
+                              // style={styles.singleOfferCountDown}
+                              style={{
+                                position: 'absolute',
+                                zIndex: 100,
+                                right: 0,
+                                bottom: 0,
+                                width: 100,
+                                backgroundColor: 'black'
+                              }}
                               showSeparator
                             />
                             <Image 
@@ -317,12 +337,12 @@ class OfferPage extends Component {
                                 borderWidth: 1, 
                                 borderColor: 'black',
                                 // flex: 1,
-                                zIndex: 10,
+                                zIndex: 90,
                                 backgroundColor: '#E5E3E3', 
                               }}
                             />
                           </View>
-                        
+                        </View>
                       </TouchableOpacity>
                     }
                   />
