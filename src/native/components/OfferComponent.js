@@ -66,7 +66,7 @@ class OfferPage extends Component {
                         data-groups={`["${item.type}"]`}
                         style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'row', flex: 1}}>
 
                           <View style={{padding: 16, width: width * 0.58, backgroundColor: 'blue'}}>
                             <View
@@ -108,7 +108,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View style={{diplay: 'inline-block', backgroundColor: 'red', width: width * 0.343}}>
+                          <View style={{diplay: 'inline-block', backgroundColor: 'red', width: width * 0.343, zIndex: 1, flex: 1}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -134,7 +134,7 @@ class OfferPage extends Component {
                                 borderWidth: 1, 
                                 borderColor: 'black',
                                 // flex: 1,
-                                zIndex: 10,
+                                zIndex: 90,
                                 backgroundColor: '#E5E3E3', 
                               }}
                             />
