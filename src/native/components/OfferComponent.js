@@ -66,7 +66,8 @@ class OfferPage extends Component {
                         data-groups={`["${item.type}"]`}
                         style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
                       >
-                        <View style={{flexDirection: 'row'}}>
+                        <View >
+
                           <View style={{padding: 16, width: width * 0.58}}>
                             <View
                               style={{
@@ -120,6 +121,9 @@ class OfferPage extends Component {
                             />
                             <Image style={styles.singleOfferImage} />
                           </View>
+
+
+
                         </View>
                       </TouchableOpacity>
                     }
