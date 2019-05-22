@@ -68,7 +68,7 @@ class OfferPage extends Component {
                       >
                         <View style={{flexDirection: 'row', flex: 1}}>
 
-                          <View style={{padding: 16, width: width * 0.58, backgroundColor: 'blue'}}>
+                          <View style={{padding: 16, width: width * 0.58}}>
                             <View
                               style={{
                                 borderRadius: 50,
@@ -108,7 +108,7 @@ class OfferPage extends Component {
                             </View>
                           </View>
 
-                          <View style={{diplay: 'inline-block', backgroundColor: 'red', width: width * 0.343, zIndex: 1, flex: 1}}>
+                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1}}>
                             <CountDown
                               until={item.countDown}
                               size={10}
