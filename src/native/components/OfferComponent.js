@@ -4,11 +4,10 @@ import { View, Image, TouchableOpacity, Text,
 import { Container, Content, Tabs, Tab, 
          TabHeading, Button }                                   from 'native-base';
 import { Actions }                                              from 'react-native-router-flux';
-// import { connect } from 'react-redux';
 import FeatherIcon                                              from 'react-native-vector-icons/Feather';
 import CountDown                                                from 'react-native-countdown-component';
 import styles                                                   from '../styles/OfferComponentStyles';
-import {  allOffers }                                           from '../data/offerComponentData';
+import { allOffers }                                            from '../data/offerComponentData';
 
 class OfferPage extends Component {
 	constructor(props) {
@@ -36,14 +35,11 @@ class OfferPage extends Component {
 	render() {
     const { height, width } = Dimensions.get('window');
 
-    console.log("~~~ height", height * 0.25);
-
 		return (
 			<Container>
         <Content style={styles.mainContent}>
           <Tabs 
             style={{height: 725}} 
-            // locked={true} 
             tabBarUnderlineStyle={{height:1, backgroundColor: 'black'}}
             tabContainerStyle={{ height: 65 }}
           >
@@ -54,7 +50,7 @@ class OfferPage extends Component {
                 </TabHeading>
               }
             >
-              <Content style={{backgroundColor: 'rgba(236, 235, 235, 0.5)', padding: 16}}>
+              <Content style={styles.singleOfferContent}>
                 {
                   <FlatList 
                     data={this.fullOfferList}
@@ -64,7 +60,7 @@ class OfferPage extends Component {
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
+                        style={styles.offerSingleCard}
                       >
                         <View style={{flexDirection: 'row', flex: 1}}>
 
@@ -77,38 +73,34 @@ class OfferPage extends Component {
                                 backgroundColor: item.type === "received" ? "#44D7B6" : "#FFA361"
                               }}
                             >
-                              <Text style={{color: '#FFFFFF', fontSize: 12, lineHeight: 16, flex: 1, textAlign: 'center', marginTop: 4}}>
+                              <Text style={styles.pillText}>
                                 {item.type === "received" ? "Received" : "Pending"}
                               </Text>
                             </View>
                         
-                            <Text 
-                              style={{fontWeight: 'bold', fontSize: 26, lineHeight: 32, color: 'black', marginTop: 30}}
-                            >
+                            <Text style={styles.itemName}>
                               {`${(item.name).substring(0, 20)} ${(item.name).length > 20 ? "..." : ""}`}
                             </Text>
 
-                            <Text 
-                              style={{fontSize: 16, lineHeight: 20, color: 'black', marginTop: 6}}
-                            >
+                            <Text style={styles.valueText}>
                               ${(item.value).toFixed(2)} USD
                             </Text>
 
-                            <View style={{flexDirection: 'row', marginTop: 28, flex: 1}}>
-                              <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2', position: 'absolute', left: 0}}>
+                            <View style={styles.cardFooter}>
+                              <Text style={styles.locationText}>
                                 New York, NY
                               </Text>
 
-                              <View style={{flexDirection: 'row', position: 'absolute', right: 0}}>
+                              <View style={styles.shippingAvailability}>
                                 <FeatherIcon name="box" size={20} color="#A3A3A2" style={{marginRight: 8, marginTop: -2}}/>
-                                <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2'}}>
+                                <Text style={styles.shippingText}>
                                   Available
                                 </Text>
                               </View>
                             </View>
                           </View>
 
-                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1, backgroundColor: '#E5E3E3'}}>
+                          <View style={styles.cardRightSection}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -116,32 +108,11 @@ class OfferPage extends Component {
                               digitStyle={{backgroundColor: '#000', paddingTop: 10}}
                               digitTxtStyle={{color: 'white', fontSize:12}}
                               separatorStyle={{color: 'white'}}
-                              // style={styles.singleOfferCountDown}
-                              style={{
-                                position: 'absolute',
-                                zIndex: 100,
-                                right: 0,
-                                bottom: 0,
-                                width: 100,
-                                backgroundColor: 'black'
-                              }}
+                              style={styles.singleOfferCountDown}
                               showSeparator
                             />
-                            <Image 
-                              style={{
-                                height: 224,
-                                width: width * 0.343,
-                                borderWidth: 1, 
-                                borderColor: 'black',
-                                // flex: 1,
-                                zIndex: 90,
-                                backgroundColor: '#E5E3E3', 
-                              }}
-                            />
+                            <Image style={styles.singleOfferImage} />
                           </View>
-
-
-
                         </View>
                       </TouchableOpacity>
                     }
@@ -157,7 +128,7 @@ class OfferPage extends Component {
                 </TabHeading>
               }
             >
-              <Content style={{backgroundColor: 'rgba(236, 235, 235, 0.5)', padding: 16}}>
+              <Content style={styles.singleOfferContent}>
                 {
                   <FlatList 
                     data={this.receivedOfferList}
@@ -167,7 +138,7 @@ class OfferPage extends Component {
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
+                        style={styles.offerSingleCard}
                       >
                         <View style={{flexDirection: 'row', flex: 1}}>
                           <View style={{padding: 16, width: width * 0.58}}>
@@ -179,38 +150,34 @@ class OfferPage extends Component {
                                 backgroundColor: item.type === "received" ? "#44D7B6" : "#FFA361"
                               }}
                             >
-                              <Text style={{color: '#FFFFFF', fontSize: 12, lineHeight: 16, flex: 1, textAlign: 'center', marginTop: 4}}>
+                              <Text style={styles.pillText}>
                                 {item.type === "received" ? "Received" : "Pending"}
                               </Text>
                             </View>
                         
-                            <Text 
-                              style={{fontWeight: 'bold', fontSize: 26, lineHeight: 32, color: 'black', marginTop: 30}}
-                            >
+                            <Text style={styles.itemName}>
                               {`${(item.name).substring(0, 20)} ${(item.name).length > 20 ? "..." : ""}`}
                             </Text>
 
-                            <Text 
-                              style={{fontSize: 16, lineHeight: 20, color: 'black', marginTop: 6}}
-                            >
+                            <Text style={styles.valueText}>
                               ${(item.value).toFixed(2)} USD
                             </Text>
 
-                            <View style={{flexDirection: 'row', marginTop: 28, flex: 1}}>
-                              <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2', position: 'absolute', left: 0}}>
+                            <View style={styles.cardFooter}>
+                              <Text style={styles.locationText}>
                                 New York, NY
                               </Text>
 
-                              <View style={{flexDirection: 'row', position: 'absolute', right: 0}}>
+                              <View style={styles.shippingAvailability}>
                                 <FeatherIcon name="box" size={20} color="#A3A3A2" style={{marginRight: 8, marginTop: -2}}/>
-                                <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2'}}>
+                                <Text style={styles.shippingText}>
                                   Available
                                 </Text>
                               </View>
                             </View>
                           </View>
 
-                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1, backgroundColor: '#E5E3E3'}}>
+                          <View style={styles.cardRightSection}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -218,29 +185,10 @@ class OfferPage extends Component {
                               digitStyle={{backgroundColor: '#000', paddingTop: 10}}
                               digitTxtStyle={{color: 'white', fontSize:12}}
                               separatorStyle={{color: 'white'}}
-                              // style={styles.singleOfferCountDown}
-                              style={{
-                                position: 'absolute',
-                                zIndex: 100,
-                                right: 0,
-                                bottom: 0,
-                                width: 100,
-                                backgroundColor: 'black'
-                              }}
+                              style={styles.singleOfferCountDown}
                               showSeparator
                             />
-                            <Image 
-                              // style={styles.singleOfferImage} 
-                              style={{
-                                height: 224,
-                                width: width * 0.343,
-                                borderWidth: 1, 
-                                borderColor: 'black',
-                                // flex: 1,
-                                zIndex: 90,
-                                backgroundColor: '#E5E3E3', 
-                              }}
-                            />
+                            <Image style={styles.singleOfferImage} />
                           </View>
                         </View>
                       </TouchableOpacity>
@@ -257,7 +205,7 @@ class OfferPage extends Component {
                 </TabHeading>
               }
             >
-              <Content style={{backgroundColor: 'rgba(236, 235, 235, 0.5)', padding: 16}}>
+              <Content style={styles.singleOfferContent}>
                 {
                   <FlatList 
                     data={this.pendingOfferList}
@@ -267,7 +215,7 @@ class OfferPage extends Component {
                       <TouchableOpacity
                         onPress={ () => { Actions.acceptedSwapProductPage({ swapCard: item }) }}
                         data-groups={`["${item.type}"]`}
-                        style={{backgroundColor: 'white', height: 225, marginBottom: 16}}
+                        style={styles.offerSingleCard}
                       >
                         <View style={{flexDirection: 'row', flex: 1}}>
                           <View style={{padding: 16, width: width * 0.58}}>
@@ -279,38 +227,34 @@ class OfferPage extends Component {
                                 backgroundColor: item.type === "received" ? "#44D7B6" : "#FFA361"
                               }}
                             >
-                              <Text style={{color: '#FFFFFF', fontSize: 12, lineHeight: 16, flex: 1, textAlign: 'center', marginTop: 4}}>
+                              <Text style={styles.pillText}>
                                 {item.type === "received" ? "Received" : "Pending"}
                               </Text>
                             </View>
                         
-                            <Text 
-                              style={{fontWeight: 'bold', fontSize: 26, lineHeight: 32, color: 'black', marginTop: 30}}
-                            >
+                            <Text style={styles.itemName}>
                               {`${(item.name).substring(0, 20)} ${(item.name).length > 20 ? "..." : ""}`}
                             </Text>
 
-                            <Text 
-                              style={{fontSize: 16, lineHeight: 20, color: 'black', marginTop: 6}}
-                            >
+                            <Text style={styles.valueText}>
                               ${(item.value).toFixed(2)} USD
                             </Text>
 
-                            <View style={{flexDirection: 'row', marginTop: 28, flex: 1}}>
-                              <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2', position: 'absolute', left: 0}}>
+                            <View style={styles.cardFooter}>
+                              <Text style={styles.locationText}>
                                 New York, NY
                               </Text>
 
-                              <View style={{flexDirection: 'row', position: 'absolute', right: 0}}>
+                              <View style={styles.shippingAvailability}>
                                 <FeatherIcon name="box" size={20} color="#A3A3A2" style={{marginRight: 8, marginTop: -2}}/>
-                                <Text style={{fontSize: 12, lineHeight: 16, color: '#A3A3A2'}}>
+                                <Text style={styles.shippingText}>
                                   Available
                                 </Text>
                               </View>
                             </View>
                           </View>
 
-                          <View style={{diplay: 'inline-block', width: width * 0.343, zIndex: 1, flex: 1, backgroundColor: '#E5E3E3'}}>
+                          <View style={styles.cardRightSection}>
                             <CountDown
                               until={item.countDown}
                               size={10}
@@ -318,29 +262,10 @@ class OfferPage extends Component {
                               digitStyle={{backgroundColor: '#000', paddingTop: 10}}
                               digitTxtStyle={{color: 'white', fontSize:12}}
                               separatorStyle={{color: 'white'}}
-                              // style={styles.singleOfferCountDown}
-                              style={{
-                                position: 'absolute',
-                                zIndex: 100,
-                                right: 0,
-                                bottom: 0,
-                                width: 100,
-                                backgroundColor: 'black'
-                              }}
+                              style={styles.singleOfferCountDown}
                               showSeparator
                             />
-                            <Image 
-                              // style={styles.singleOfferImage} 
-                              style={{
-                                height: 224,
-                                width: width * 0.343,
-                                borderWidth: 1, 
-                                borderColor: 'black',
-                                // flex: 1,
-                                zIndex: 90,
-                                backgroundColor: '#E5E3E3', 
-                              }}
-                            />
+                            <Image style={styles.singleOfferImage} />
                           </View>
                         </View>
                       </TouchableOpacity>
