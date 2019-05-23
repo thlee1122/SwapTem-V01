@@ -1,7 +1,7 @@
 import React 																						from 'react';
 import { connect }                                      from 'react-redux';
 import get                                              from 'lodash.get';
-import { View, Image, TouchableOpacity, SafeAreaView, Dimensions } 								from 'react-native';
+import { View, Image, TouchableOpacity, SafeAreaView } 								from 'react-native';
 import { Container, Content, List, ListItem, 
 				 Text, Button, Card, CardItem } 								from 'native-base';
 import { Actions } 																			from 'react-native-router-flux';
@@ -77,9 +77,6 @@ class SingleProduct extends React.Component {
 		const MyItems = get(userInfo, "Items", []);
 		const offerSent = get(this.props, "offerSent", "");
 
-
-		const { height, width } = Dimensions.get('window');
-
 		console.log("1111 userInfo", userInfo);
 
 		const ratingTypes = [
@@ -117,75 +114,41 @@ class SingleProduct extends React.Component {
 			        />
 
 			        <View style={styles.cardContent}>
-			        	<View 
+			        	<Text 
+			        		// style={styles.cardHashTags}
 			        		style={{
-			        			marginTop: 16,
-									  marginLeft: 16
-									}}
-								>
-				        	<Text 
-				        		// style={styles.cardHashTags}
-				        		style={{
-				        			// textAlign: 'center', 
-									    fontWeight: 'bold', 
-									    fontSize: 24,
-									    lineHeight: 28, 
-									    
-				        		}}
-				        	>
-				          	{itemHashTags.join(" ")}
-				          </Text>
+			        			// textAlign: 'center', 
+								    fontWeight: 'bold', 
+								    fontSize: 24,
+								    lineHeight: 28, 
+								    marginTop: 16,
+								    marginLeft: 16
+			        		}}
+			        	>
+			          	{itemHashTags.join(" ")}
+			          </Text>
 
-				          <Text 
-				          	style={{
-				          		// textAlign: 'center', 
-				          		// fontWeight: 'bold', 
-				          		lineHeight: 24,
-				          		fontSize: 16, 
-				          		marginTop: 13,
-				          	}}
-				          >
+			          <View style={{flexDirection: 'row', alignSelf: 'center'}}>
+				          <Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 20, marginTop: 10, marginBottom: 10}}>
 				          	{`$${itemPrice}`}
 				          </Text>
+
+				          <View style={{flexDirection: 'row', marginLeft: 15}}>
+				          	<MaterialCommunityIcon name="coin" size={30} color="#FBDB0A" style={{marginTop: 7, marginRight: 3}}/>
+				          	<Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 20, marginTop: 10, marginBottom: 10}}>
+				          		100.00
+				          	</Text>
+				          </View>
 			          </View>
 
-			          <View>
-			          	{/* <Text 
-			          		style={{
-			          			textAlign: 'center', 
-			          			fontWeight: 'bold', 
-			          			fontSize: 18, 
-			          			// color: "#00529b",
-			          			marginTop: 32
-			          		}}
-			          	>
-			          		Great! You have matching product!
-			          	</Text> */}
-			          </View>
+		        		<React.Fragment>
+			        		<Text style={{textAlign: 'center', fontWeight: 'bold', fontSize: 18, color: "#00529b"}}>Great! You have matching product!</Text>
 
-			          <View style={{flexDirection: 'column'}}>
-					        <View 
-					        	style={{
-					        		flexDirection: 'row', 
-					        		alignSelf: 'center', 
-					        		height: 50, 
-					        		marginTop: height * 0.1
-					        	}}
-					        >
+					        <View style={{flexDirection: 'row', alignSelf: 'center', height: 50, marginTop: 20}}>
 					        	{
 					        		swapFlag === true ?
 				              <Button 
-				              	// style={styles.swapButton}
-				              	style={{
-				              		backgroundColor: 'white', 
-											    borderWidth: 1, 
-											    borderColor: 'black', 
-											    borderRadius: 50, 
-											    width: '42%', 
-											    alignSelf: 'center',
-											    height: 58,
-											    marginRight: 14
-				              	}}
+				              	style={styles.swapButton}
 				              	onPress={ () => { Actions.mySwapItemsPage({ 
 				              		MyItems: MyItems, 
 				              		singleProductDetail: singleProductDetail,
@@ -193,319 +156,79 @@ class SingleProduct extends React.Component {
 				              		thumbnailUrl: thumbnailUrl }) 
 				              	}}
 				              >
-				                <Text 
-				                	// style={styles.swapButtonText}
-				                	style={{
-				                		color: 'black', 
-												    fontSize: 14, 
-												    textAlign: 'center', 
-												    flex: 1
-				                	}}
-				                >
-				                	Swap
-				               	</Text>
+				                <Text style={styles.swapButtonText}>SWAP</Text>
 				              </Button>
 					        		:null
 					        	}
 
 					        	{
 					        		sellFlag === true ?
-				              <Button 
-				              	// style={styles.sellButton}
-				              	style={{
-				              		backgroundColor: 'white', 
-											    borderWidth: 1, 
-											    borderColor: 'black', 
-											    borderRadius: 50, 
-											    width: '42%', 
-											    alignSelf: 'center',
-											    height: 58
-				              	}}
-				              >
-				                <Text 
-				                	// style={styles.sellButtonText}
-				                	style={{
-				                		color: 'black', 
-												    fontSize: 14, 
-												    textAlign: 'center', 
-												    flex: 1
-				                	}}
-				                >
-				                	Buy
-				                </Text>
+				              <Button style={styles.sellButton}>
+				                <Text style={styles.sellButtonText}>BUY</Text>
 				              </Button>
 					        		: null
 					        	}
 			            </View>
+		            </React.Fragment>
 
-			            <View 
-			            	style={{
-			            		borderWidth: 2, 
-			            		borderColor: 'black', 
-			            		width: 100, 
-			            		marginTop: 24, 
-			            		borderRadius: 20,
-			            		alignSelf: 'center'
-			            	}}
-			            />
-			          </View>
+		            <Button style={styles.messageSellerButtonOne}>
+			            <Text style={styles.messageSellerButtonOneText}>MESSAGE SELLER</Text>
+			          </Button>
 			        </View>
 			    	</View>
 		    	</View>
 	    	</View>
 
-	    	<List style={{marginTop: 24, marginBottom: 20, marginLeft: 16}}>
-	    		<Text style={{fontSize: 16, lineHeight: 20, fontWeight: 'bold'}}>
-	    			Product Details
-	    		</Text>
+	    	<List style={{marginTop: 20, marginBottom: 20}}>
+        	<View style={{flex: 1, flexDirection: 'row', marginLeft: 40, marginBottom: 15, marginRight: 40}}>
+        		<Text style={{fontWeight: 'bold'}}>CONDITION</Text>
+        		<Text style={{position: 'absolute', right: '0%'}}>EXCELLENT</Text>
+        	</View>
 
-	    		<View style={{marginTop: 20}}>
-	    			<View 
-	        		style={{
-	        			flex: 1, 
-	        			flexDirection: 'row', 
-	        			// marginLeft: 40, 
-	        			marginBottom: 15, 
-	        			marginRight: 40
-	        		}}
-	        	>
-	        		<Text 
-	        			style={{
-	        				// fontWeight: 'bold'
-	        				fontSize: 14,
-	        				color: "#A3A3A2",
-	        				lineHeight: 16
-	        			}}
-	        		>
-	        			Condition
-	        		</Text>
-	        		<Text 
-	        			style={{
-	        				position: 'absolute', 
-	        				right: '40%',
-	        				fontSize: 14,
-	        				lineHeight: 20
-	        			}}
-	        		>
-	        			Excellent
-	        		</Text>
-	        	</View>
-
-	        	{
+        	{
         		Title === "Fashion" ?
-		        	<View 
-		        		style={{
-		        			flex: 1, 
-		        			flexDirection: 'row', 
-		        			// marginLeft: 40, 
-		        			marginBottom: 15, 
-		        			marginRight: 40
-		        		}}
-		        	>
-		        		<Text 
-		        			style={{
-		        				// fontWeight: 'bold'
-		        				fontSize: 14,
-		        				color: "#A3A3A2",
-		        				lineHeight: 16
-		        			}}
-		        		>
-		        			Size
-		        		</Text>
-		        		<Text 
-		        			style={{
-		        				position: 'absolute', 
-		        				right: '40%',
-		        				fontSize: 14,
-		        				lineHeight: 20
-		        			}}
-		        		>
-		        			9.5 US
-		        		</Text>
-		        	</View>
-	        		: null
-	        	}
-
-	        	<View 
-	        		style={{
-	        			flex: 1, 
-	        			flexDirection: 'row', 
-	        			// marginLeft: 40, 
-	        			marginBottom: 15, 
-	        			marginRight: 40
-	        		}}
-	        	>
-	        		<Text 
-	        			style={{
-	        				// fontWeight: 'bold'
-	        				fontSize: 14,
-	        				color: "#A3A3A2",
-	        				lineHeight: 16
-	        			}}
-	        		>
-	        			Location
-	        		</Text>
-	        		<Text 
-	        			style={{
-	        				position: 'absolute', 
-	        				right: '38%',
-	        				fontSize: 14,
-	        				lineHeight: 20
-	        			}}
-	        		>
-	        			{this.state.location}
-	        		</Text>
+	        	<View style={{flex: 1, flexDirection: 'row', marginLeft: 40, marginBottom: 15, marginRight: 40}}>
+	        		<Text style={{fontWeight: 'bold'}}>SIZE</Text>
+	        		<Text style={{position: 'absolute', right: '0%'}}>9.5 US</Text>
 	        	</View>
+        		: null
+        	}
 
-	        	<View 
-	        		style={{
-	        			flex: 1, 
-	        			flexDirection: 'row', 
-	        			// marginLeft: 40, 
-	        			marginBottom: 15, 
-	        			marginRight: 40
-	        		}}
-	        	>
-	        		<Text 
-	        			style={{
-	        				// fontWeight: 'bold'
-	        				fontSize: 14,
-	        				color: "#A3A3A2",
-	        				lineHeight: 16
-	        			}}
-	        		>
-	        			Category
-	        		</Text>
-
-	        		<Text 
-	        			style={{
-	        				position: 'absolute', 
-	        				right: '45.5%',
-	        				fontSize: 14,
-	        				lineHeight: 20
-	        			}}
-	        		>
-	        			{Title}
-	        		</Text>
-	        	</View>
-
-	        	<View 
-	        		style={{
-	        			flex: 1, 
-	        			flexDirection: 'row', 
-	        			// marginLeft: 40, 
-	        			marginBottom: 15, 
-	        			marginRight: 40
-	        		}}
-	        	>
-	        		<Text 
-	        			style={{
-	        				// fontWeight: 'bold'
-	        				fontSize: 14,
-	        				color: "#A3A3A2",
-	        				lineHeight: 16
-	        			}}
-	        		>
-	        			Looking For
-	        		</Text>
-	        		<Text 
-	        			style={{
-	        				position: 'absolute', 
-	        				fontSize: 14,
-	        				right: '15%',
-	        				// right: '0%', 
-	        				flexWrap: 'wrap', 
-	        				maxWidth: 150, 
-	        				height: 45, 
-	        				textAlign: 'left', 
-	        				lineHeight: 20
-	        			}}
-	        		>
-	        			Shoes, Sneakers, Jackets, Jeans
-	        		</Text>
-	        	</View>
-	    		</View>
-        	
-
-        	
-
-        	{/* <View style={{flex: 1, flexDirection: 'row', marginLeft: 40, marginBottom: 15, marginRight: 40}}>
+        	<View style={{flex: 1, flexDirection: 'row', marginLeft: 40, marginBottom: 15, marginRight: 40}}>
         		<Text style={{fontWeight: 'bold'}}>LOCATION</Text>
         		<Text style={{position: 'absolute', right: '0%'}}>{this.state.location}</Text>
-        	</View> */}
+        	</View>
 
-        	{/* <View style={{flex: 1, flexDirection: 'row', marginLeft: 40, marginBottom: 15, marginRight: 40}}>
+        	<View style={{flex: 1, flexDirection: 'row', marginLeft: 40, marginBottom: 15, marginRight: 40}}>
         		<Text style={{fontWeight: 'bold'}}>CATEGORY</Text>
         		<Text style={{position: 'absolute', right: '0%'}}>{Title}</Text>
-        	</View> */}
+        	</View>
 
-        	{/* <View style={{flex: 1, marginLeft: 40, marginBottom: 15, marginRight: 40}}>
+        	<View style={{flex: 1, marginLeft: 40, marginBottom: 15, marginRight: 40}}>
         		<Text style={{fontWeight: 'bold'}}>LOOKING FOR</Text>
         		<Text style={{position: 'absolute', right: '0%', flexWrap: 'wrap', maxWidth: 150, height: 45, textAlign: 'right', lineHeight: 22}}>
         			Shoes, Sneakers, Jackets, Jeans
         		</Text>
-        	</View> */}
+        	</View>
         </List>
 
-        <View 
-        	// style={styles.blankLineOne} 
-        	style={{
-        		marginTop: 64,
-				    borderBottomColor: '#EDEBEB',
-				    borderBottomWidth: 1,
-				    // width: '90%',
-				    marginLeft: 16,
-				    marginRight: 16
-        	}}
-        />
+        <View style={styles.blankLineOne} />
 
-        <View 
-        	style={{
-        		flex: 1, 
-        		// alignSelf: 'center', 
-        		marginTop: 24, 
-        		// marginBottom: 10
-        		marginLeft: 16,
-        		marginRight: 16,
-        		marginBottom: 32
-        	}}
-        >
-        	<Text 
-        		style={{
-        			fontWeight: 'bold', 
-        			// textAlign: 'center', 
-        			marginBottom: 10,
-        			fontSize: 16,
-        			lineHeight: 20
-        		}}
-        	>
-        		Description
-        	</Text>
-        	<Text style={{lineHeight: 20, width: 330, fontSize: 16}}>
+        <View style={{flex: 1, alignSelf: 'center', marginTop: 15, marginBottom: 10}}>
+        	<Text style={{fontWeight: 'bold', textAlign: 'center', marginBottom: 15}}>DESCRIPTION</Text>
+        	<Text style={{lineHeight: 22, width: 330}}>
         		{description}
         	</Text>
         </View>
 
-        <View 
-        	style={{
-        		backgroundColor: "black", 
-        		paddingBottom: 27, 
-        		paddingTop: 27,
-        		paddingLeft: 47,
-        		marginTop: 15
-        		// height: 93
-        	}}
-       	>
-	        
-        	<View style={{flex: 1, flexDirection: 'column'}}>
-        		<Text button style={{color: 'white', fontWeight: 'bold', fontSize: 16}}>
-        			Buyer Protection Guarantee
-        		</Text>
-        		<Text style={{color: 'white', fontSize: 14, marginTop: 5}}>
-        			Receive your item as listed, or we'll reimburse you.
-        		</Text>
-        	</View>
-	        
+        <View style={{backgroundColor: "#ADB1B3", paddingBottom: 5, paddingTop: 5, marginTop: 15}}>
+	        <View style={{flex: 1, flexDirection: 'row', backgroundColor: "#2DAADF", height: 58, alignSelf: 'center'}}>
+	        	<FeatherIcon name="shield" size={25} color="white" style={{alignSelf: 'center', marginLeft: 15, marginTop: -5}}/>
+	        	<View style={{flex: 1, flexDirection: 'column', marginLeft: 15, alignSelf: 'center'}}>
+	        		<Text button style={{color: 'white', fontWeight: 'bold'}}>BUYER PROTECTION GUARANTEE</Text>
+	        		<Text style={{color: 'white', fontSize: 12}}>Receive your item as listed, or we'll reimburse you.</Text>
+	        	</View>
+	        </View>
 	      </View>
 
 	      <View style={{marginTop: 15}}>

@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   singleProductCard: {
@@ -6,8 +8,8 @@ export default StyleSheet.create({
     flex: 1,
     // width: 370, 
     width: '100%',
-    paddingLeft: 5,
-    paddingRight: 5,
+    // paddingLeft: 5,
+    // paddingRight: 5,
     paddingBottom: 20
     // flex: 1
   },
@@ -18,7 +20,7 @@ export default StyleSheet.create({
   },
 
   cardImage: {
-    height: 280, 
+    height: height * 0.55, 
     width: '100%', 
     // flex: 1
   },

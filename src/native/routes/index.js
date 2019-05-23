@@ -109,7 +109,7 @@ class NavBar extends Component {
     const { height, width } = Dimensions.get('window');
     const { initialRouteName } = this.props;
 
-    console.log("@@@@ route.js", this.props);
+    // console.log("@@@@ route.js", this.props);
 
     return (
       <SafeAreaView 
@@ -237,7 +237,7 @@ const Index = (
             elevation={1}
           >
           <Scene key="home" title="dsdsdsd" component={MainPage} />
-          <Scene title="Item" key="singleProduct" component={SingleProductComponent} />
+          <Scene hideNavBar back title="Item" key="singleProduct" component={SingleProductComponent} />
           <Scene title="Reviews" key="reviewPage" component={ReviewPage} />
           <Scene title="User Profile" key="userProfilePage" component={UserProfile} />
           <Scene title="My Swap Items" key="mySwapItemsPage" component={MySwapItems} />
@@ -259,7 +259,7 @@ const Index = (
           />
           </Drawer>
         </Stack>
-
+        
         {/* <Stack
           key="recipes"
           title="RECIPES"

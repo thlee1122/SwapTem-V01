@@ -6,7 +6,7 @@ import styles                                                       from '../sty
 
 class SingleCard extends Component {
   render() {
-    const { item, currentUserId, locationCoordinates,
+    const { item, currentUserId, locationCoordinates, userInfo,
             itemHashTags, itemPrice, thumbnailUrl, itemIndex } = this.props; 
     const { height, width } = Dimensions.get('window');
   

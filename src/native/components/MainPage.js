@@ -110,7 +110,7 @@ class MainPage extends React.Component {
       drawer: {},
     };
 
-    console.log("22222222 this.props", this.props);
+    // console.log("22222222 this.props", this.props);
 
     return (
       
@@ -288,6 +288,7 @@ class MainPage extends React.Component {
                             itemHashTags={itemHashTags}
                             itemPrice={itemPrice}
                             thumbnailUrl={thumbnailUrl}
+                            userInfo={userInfo}
                           />
                         );
                       })
