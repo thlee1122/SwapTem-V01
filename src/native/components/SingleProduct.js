@@ -412,7 +412,7 @@ class SingleProduct extends React.Component {
 	        			style={{
 	        				position: 'absolute', 
 	        				fontSize: 14,
-	        				right: '15%',
+	        				right: '15.5%',
 	        				// right: '0%', 
 	        				flexWrap: 'wrap', 
 	        				maxWidth: 150, 
