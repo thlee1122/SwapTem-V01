@@ -214,8 +214,8 @@ class MainPage extends React.Component {
                   flexDirection: 'row', 
                   marginLeft: 16, 
                   marginRight: 16, 
-                  height: 40, 
-                  paddingTop: 8, 
+                  height: 50, 
+                  paddingTop: 14, 
                   backgroundColor: 'white'
                 }}
                 horizontal={true}

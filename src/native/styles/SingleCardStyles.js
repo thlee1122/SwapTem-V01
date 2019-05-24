@@ -1,5 +1,4 @@
-import { StyleSheet }          from 'react-native';
-import { Dimensions }          from 'react-native';
+import { StyleSheet, Dimensions, Platform }          from 'react-native';
 
 const { height, width } = Dimensions.get('window');
 
@@ -46,8 +45,8 @@ export default StyleSheet.create({
   bigPillText: {
     color: 'black', 
     alignSelf: 'center', 
-    fontSize: 16, 
-    paddingTop:6
+    fontSize: 14, 
+    paddingTop: Platform.OS === "ios" ? 6 : 3
   },
 
   bigHashTagText: {
