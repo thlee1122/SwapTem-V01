@@ -1,5 +1,5 @@
-import { StyleSheet }             from 'react-native';
-import { Dimensions }             from 'react-native';
+import { StyleSheet, Dimensions, Platform }             from 'react-native';
+
 const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
@@ -241,8 +241,8 @@ export default StyleSheet.create({
   sellPillText: {
     color: 'black', 
     alignSelf: 'center', 
-    fontSize: 14, 
-    paddingTop:4
+    fontSize: 12, 
+    paddingTop: Platform.OS === "ios" ? 4 : 2
   },
 
   swapPill: {
@@ -257,8 +257,8 @@ export default StyleSheet.create({
   swapPillText: {
     color: 'black', 
     alignSelf: 'center', 
-    fontSize: 14, 
-    paddingTop:4
+    fontSize: 12, 
+    paddingTop: Platform.OS === "ios" ? 4 : 2
   },
 
   itemHashTag: {
