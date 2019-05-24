@@ -1,5 +1,6 @@
 import React, { Component }  from 'react';
-import { View, Image, TouchableOpacity, Dimensions, SafeAreaView, Text }                   from 'react-native';
+import { View, Image, TouchableOpacity, Dimensions, 
+         SafeAreaView, Text, Platform }                   from 'react-native';
 
 
 
@@ -111,13 +112,22 @@ class NavBar extends Component {
 
     // console.log("@@@@ route.js", this.props);
 
+    console.log("1111111", Platform.OS);
+
     return (
       <SafeAreaView 
         style={{
           backgroundColor: initialRouteName === 'profileHome' ? '#000000' : '#fff'
         }}
       >
-        <View style={{paddingLeft: 10, paddingRight: 10, paddingTop: 15, height: 60}}>
+        <View 
+          style={{
+            paddingLeft: 10, 
+            paddingRight: 10, 
+            paddingTop: Platform.OS === "ios" ? 15 : 25, 
+            height: Platform.OS === "ios" ? 60 : 70
+          }}
+        >
           <View 
             style={{
             flex: 1, 
@@ -259,7 +269,7 @@ const Index = (
           />
           </Drawer>
         </Stack>
-        
+
         {/* <Stack
           key="recipes"
           title="RECIPES"
