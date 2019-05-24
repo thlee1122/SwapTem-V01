@@ -124,8 +124,8 @@ class NavBar extends Component {
           style={{
             paddingLeft: 10, 
             paddingRight: 10, 
-            paddingTop: Platform.OS === "ios" ? 15 : 25, 
-            height: Platform.OS === "ios" ? 60 : 100
+            paddingTop: Platform.OS === "ios" ? 15 : 35, 
+            height: Platform.OS === "ios" ? 60 : 80
           }}
         >
           <View 
