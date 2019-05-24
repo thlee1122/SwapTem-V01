@@ -12,7 +12,7 @@ export default StyleSheet.create({
 
   bigImage: {
     width: '100%', 
-    height: height * 0.28
+    height: height * 0.3
   },
 
   smallImage: {

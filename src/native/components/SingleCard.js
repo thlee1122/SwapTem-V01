@@ -28,7 +28,7 @@ class SingleCard extends Component {
                   width: '100%', 
                   marginBottom: 10, 
                   marginRight: itemIndex % 2 === 1 ? 10 : 0, 
-                  backgroundColor: 'white'
+                  backgroundColor: 'white',
                 }}
               >
                 <Image source={{uri: thumbnailUrl}} style={styles.bigImage} />
