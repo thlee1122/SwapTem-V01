@@ -214,8 +214,8 @@ class MainPage extends React.Component {
                   flexDirection: 'row', 
                   marginLeft: 16, 
                   marginRight: 16, 
-                  height: 32, 
-                  paddingTop: 4, 
+                  height: 40, 
+                  paddingTop: 8, 
                   backgroundColor: 'white'
                 }}
                 horizontal={true}
@@ -253,7 +253,7 @@ class MainPage extends React.Component {
                     
               
 
-              <View style={{marginTop: 5}}>
+              <View>
                 <View style={{flex: 1, flexDirection: 'column', marginLeft: 10}}>                  
                   <View 
                     style={{
