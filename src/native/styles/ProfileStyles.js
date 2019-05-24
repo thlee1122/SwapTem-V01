@@ -201,8 +201,7 @@ export default StyleSheet.create({
 
   itemFeedSection: {
     flex: 1, 
-    flexDirection: 'column', 
-    paddingTop: 16, 
+    flexDirection: 'column',
     backgroundColor: '#ECEBEB'
   },
 

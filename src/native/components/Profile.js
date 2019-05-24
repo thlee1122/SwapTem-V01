@@ -117,7 +117,7 @@ class Profile extends React.Component {
           </View>
         </View>
 
-        <View>
+        {/* <View>
           <Text style={styles.profileContentIntro}>
             Boost your reputation by confirming your information.
           </Text>
@@ -137,12 +137,12 @@ class Profile extends React.Component {
               65% completed
             </Text>
           </View>
-        </View>
+        </View> */}
 
         <View style={styles.contentMainBackground}>
           <View style={styles.verificationSection}>
             <Text style={styles.verificationTitle}>
-              Verifications
+              Badges
             </Text>
 
             <View style={{flexDirection: 'row', marginLeft: 16, marginRight: 16, marginBottom: 20, display: 'flex'}}>
@@ -152,7 +152,7 @@ class Profile extends React.Component {
                 </View>
 
                 <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
-                  Verified
+                  Phone
                 </Text>
               </TouchableOpacity>
 
@@ -162,7 +162,7 @@ class Profile extends React.Component {
                 </View>
 
                 <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
-                  Verified
+                  Email
                 </Text>
               </TouchableOpacity>
 
@@ -182,7 +182,7 @@ class Profile extends React.Component {
                 </View>
 
                 <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
-                  Not verified
+                  Facebook
                 </Text>
               </TouchableOpacity>
             </View>
@@ -190,7 +190,7 @@ class Profile extends React.Component {
         </View>
         
         <View style={styles.contentMainBackground}>
-          <View style={styles.verificationSection}>
+          {/* <View style={styles.verificationSection}>
             <Text style={styles.verificationTitle}>
               Verifications
             </Text>
@@ -231,20 +231,9 @@ class Profile extends React.Component {
                 <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={styles.verificationArrow}/>
               </Right>
             </ListItem>
+          </View> */}
 
-            {/* <ListItem onPress={Actions.forgotPassword} icon style={{width: 320}}>
-              <Left>
-                <FeatherIcon name="award" size={22} color="#00529b" />
-              </Left>
-              <Body>
-                <Text>
-                  View your badges
-                </Text>
-              </Body>
-            </ListItem> */}
-          </View>
-
-          <View style={styles.likeShareSection}>
+          {/* <View style={styles.likeShareSection}>
             <ListItem
               onPress={ () => { Actions.likedItems({ userInfo: userInfo }) }} 
               icon 
@@ -277,10 +266,10 @@ class Profile extends React.Component {
                 <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={{marginLeft: 10, marginTop: 14}}/>
               </Right>
             </ListItem>
-          </View>
+          </View> */}
 
           {/* Store Title and Heading Section START */}
-          <View style={styles.storeSection}>
+          {/* <View style={styles.storeSection}>
             <FeatherIcon 
               name="edit-2" 
               size={24} 
@@ -304,108 +293,81 @@ class Profile extends React.Component {
                 View Analytics
               </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           {/* Store Title and Heading Section END */}
 
           {/* Profile page product feed START */}
-          <View>
-            <Tabs 
-              tabBarUnderlineStyle={{ backgroundColor: 'black' }} 
-              locked={false}
-              // renderTabBar={() => <ScrollableTab />}
-              style={{backgroundColor: 'black'}}
-            >
-              <Tab
-                activeTextStyle={{ color: 'black'}}
-                heading={ 
-                  <TabHeading style={{backgroundColor: 'white'}}>
-                    <Text style={{color: 'black'}}>Fashion</Text>
-                  </TabHeading>
-                } 
-              >
-                <View style={styles.itemFeedSection}>
-                  <View style={styles.itemRow}>
-                    {
-                      data.map((item, index) => {
-                        const hashTags = item.HashTags;
-                        const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
-                        let itemPrice = Number(item.price).toFixed(2);
-                        let itemHashTags = [];
-                        let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
-                        let cartUserIdArray = [];
-                        const locationCoordinates = item.User.location.coordinates;
-                        
-                        for(let i = 0; i < hashTags.length; i++) {
-                          let text = `#${hashTags[i].text}`;
-                          itemHashTags.push(text);
-                        }
+          <View style={styles.itemFeedSection}>
+            <View style={styles.itemRow}>
+              {
+                data.map((item, index) => {
+                  const hashTags = item.HashTags;
+                  const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
+                  let itemPrice = Number(item.price).toFixed(2);
+                  let itemHashTags = [];
+                  let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
+                  let cartUserIdArray = [];
+                  const locationCoordinates = item.User.location.coordinates;
+                  
+                  for(let i = 0; i < hashTags.length; i++) {
+                    let text = `#${hashTags[i].text}`;
+                    itemHashTags.push(text);
+                  }
 
-                        return (
-                          <TouchableOpacity
-                            style={{
-                              marginBottom: 10, 
-                              width: "44%",
-                              marginLeft: index === 0 || index % 2 === 0 ? 16 : 0,
-                              marginRight: index === 0 || index % 2 === 0 ? 16 : 0
-                            }} 
-                            key={item.id}
-                            onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
-                          >
-                          <View style={styles.itemCardTopSection}>
-                            <Image 
-                              source={{uri: thumbnailUrl}}
-                              style={styles.itemImage}
-                            />
-                            
-                            <View style={styles.itemPillSection}>
-                              {
-                                item.sell === true ?
-                                <View style={styles.sellPill}>
-                                  <Text style={styles.sellPillText}>
-                                    Sell
-                                  </Text>
-                                </View>
-                                : null
-                              }
-
-                              {
-                                item.swap === true ?
-                                <View style={styles.swapPill}>
-                                  <Text style={styles.swapPillText}>
-                                    Swap
-                                  </Text>
-                                </View>
-                                : null
-                              }
-                            </View>
-
-                            <Text style={styles.itemHashTag}>
-                              {itemHashTags.join(" ")}
-                            </Text>
-
-                            <Text style={styles.itemPrice}>
-                              {`$${itemPrice}`}
+                  return (
+                    <TouchableOpacity
+                      style={{
+                        marginBottom: 10, 
+                        width: "44%",
+                        marginLeft: index === 0 || index % 2 === 0 ? 16 : 0,
+                        marginRight: index === 0 || index % 2 === 0 ? 16 : 0
+                      }} 
+                      key={item.id}
+                      onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
+                    >
+                    <View style={styles.itemCardTopSection}>
+                      <Image 
+                        source={{uri: thumbnailUrl}}
+                        style={styles.itemImage}
+                      />
+                      
+                      <View style={styles.itemPillSection}>
+                        {
+                          item.sell === true ?
+                          <View style={styles.sellPill}>
+                            <Text style={styles.sellPillText}>
+                              Sell
                             </Text>
                           </View>
-                          </TouchableOpacity>
-                        );
-                      })
-                    }
-                  </View>
-                </View>
-              </Tab>
+                          : null
+                        }
 
-              <Tab
-                activeTextStyle={{color: 'black'}}
-                 heading={ 
-                  <TabHeading style={{backgroundColor: 'white'}}>
-                    <Text style={{color: 'black'}}>Electronics</Text>
-                  </TabHeading>
-                }
-              >
-              </Tab>
-            </Tabs>
+                        {
+                          item.swap === true ?
+                          <View style={styles.swapPill}>
+                            <Text style={styles.swapPillText}>
+                              Swap
+                            </Text>
+                          </View>
+                          : null
+                        }
+                      </View>
+
+                      <Text style={styles.itemHashTag}>
+                        {itemHashTags.join(" ")}
+                      </Text>
+
+                      <Text style={styles.itemPrice}>
+                        {`$${itemPrice}`}
+                      </Text>
+                    </View>
+                    </TouchableOpacity>
+                  );
+                })
+              }
+            </View>
           </View>
+              
           {/* Profile page product feed END */}                  
         </View>
       </Content>

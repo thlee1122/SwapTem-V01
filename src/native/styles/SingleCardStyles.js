@@ -94,8 +94,8 @@ export default StyleSheet.create({
   smallPillText: {
     color: 'black', 
     alignSelf: 'center', 
-    fontSize: 14, 
-    paddingTop:4
+    fontSize: 12, 
+    paddingTop: Platform.OS === "ios" ? 4 : 2
   },
 
   smallHashTagText: {
