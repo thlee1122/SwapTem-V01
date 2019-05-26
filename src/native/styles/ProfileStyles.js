@@ -36,7 +36,7 @@ export default StyleSheet.create({
   profileRating: {
     flex: 1, 
     flexDirection: 'row', 
-    marginTop: 5
+    marginTop: 10
   },
 
   profileRatingNum: {
@@ -56,10 +56,12 @@ export default StyleSheet.create({
 
   profileStateOne: {
     color: '#ECEBEB', 
-    fontSize: 16, 
+    fontSize: 20, 
     fontWeight: 'bold', 
-    lineHeight: 20, 
-    marginRight: '11%'
+    lineHeight: 24, 
+    marginRight: '8%',
+    width: '18%',
+    textAlign: 'center'
   },
 
   profileReviewSection: {
@@ -69,9 +71,11 @@ export default StyleSheet.create({
 
   profileStateTwo: {
     color: '#ECEBEB', 
-    fontSize: 16, 
+    fontSize: 20, 
     fontWeight: 'bold', 
-    lineHeight: 20
+    lineHeight: 24,
+    textAlign: 'center',
+    width: '45%'
   },
 
   profileContentIntro: {

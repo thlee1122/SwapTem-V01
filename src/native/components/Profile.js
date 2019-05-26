@@ -7,6 +7,7 @@ import { Container, Content, List, ListItem, Body,
          TabHeading, Card, CardItem, ScrollableTab }    from 'native-base';
 import { Actions }                                      from 'react-native-router-flux';
 import FeatherIcon                                      from 'react-native-vector-icons/Feather';
+import Ionicons                                         from 'react-native-vector-icons/Ionicons';
 import { getUserInfo }                                  from '../../actions/userInfoActions';
 import { getItem }                                      from '../../actions/registerItemActions';
 import StarRating                                       from 'react-native-star-rating';
@@ -77,9 +78,9 @@ class Profile extends React.Component {
               Alexandria Zoltowski
             </Text>
 
-            <Text style={styles.profileDesc}>
+            {/* <Text style={styles.profileDesc}>
               Head of UX @Yelp
-            </Text>
+            </Text> */}
 
             <View style={styles.profileRating}>
               <Text style={styles.profileRatingNum}>
@@ -100,19 +101,19 @@ class Profile extends React.Component {
 
           <View style={styles.profileStatSection}>
             <Text style={styles.profileStateOne}>
-              10 products
+              10 Products
             </Text>
 
             <Text style={styles.profileStateOne}>
-              XX trades
+              XX Trades
             </Text>
 
             <View style={styles.profileReviewSection}>
-              <Text style={styles.profileStateTwo}>
-                XX reviews
-              </Text>
+              <Ionicons name="ios-arrow-forward" color="#ECEBEB" size={22} style={{marginTop: 25, marginRight: 10}}/>
 
-              <FeatherIcon name="arrow-right" color="#ECEBEB" size={22} style={{marginLeft: 10, marginTop: -2}}/>
+              <Text style={styles.profileStateTwo}>
+                XX Reviews
+              </Text>
             </View>
           </View>
         </View>
