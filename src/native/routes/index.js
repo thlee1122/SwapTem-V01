@@ -115,75 +115,81 @@ class NavBar extends Component {
     console.log("1111111", Platform.OS);
 
     return (
-      <SafeAreaView 
-        style={{
-          backgroundColor: initialRouteName === 'profileHome' ? '#000000' : '#fff'
-        }}
-      >
-        <View 
+      <React.Fragment>
+      {
+        initialRouteName !== 'profileHome' ?
+        <SafeAreaView 
           style={{
-            paddingLeft: 10, 
-            paddingRight: 10, 
-            paddingTop: Platform.OS === "ios" ? 15 : 35, 
-            height: Platform.OS === "ios" ? 60 : 85
+            backgroundColor: initialRouteName === 'profileHome' ? '#000000' : '#fff'
           }}
         >
           <View 
             style={{
-            flex: 1, 
-            flexDirection: 'row',
-          }}>
-
-
-            <TouchableOpacity 
-              style={{position: 'absolute', left: 0, marginLeft: 5, zIndex:10}}
-              onPress={()=> openDrawer()}
-            >
-              <MaterialIcon 
-                size={24} 
-                name="menu" 
-                color={initialRouteName === 'profileHome' ? 'white' : 'black'}
-              />
-            </TouchableOpacity>
-              
-            
-            <Text 
+              paddingLeft: 10, 
+              paddingRight: 10, 
+              paddingTop: Platform.OS === "ios" ? 15 : 35, 
+              height: Platform.OS === "ios" ? 60 : 85
+            }}
+          >
+            <View 
               style={{
-                fontWeight: '500', 
-                textAlign: 'center', 
-                fontSize: 20, 
-                lineHeight: 24,
-                flex: 1
-              }}
-            >
-              SwapTem
-            </Text>
-            
-            <View style={{flexDirection: 'row', position: 'absolute', right: 0, marginRight: 5}}>
-              {
-                initialRouteName === 'home' ?
-                <TouchableOpacity 
-                  style={{marginRight: 24}}
-                  onPress={(e) => Actions.filterPage()}
-                >
-                  <Ionicons size={24} name="ios-options" />
-                </TouchableOpacity>
-                : null
-              }
+              flex: 1, 
+              flexDirection: 'row',
+            }}>
 
-              <TouchableOpacity
-                onPress={(e) => Actions.searchResult()}
+
+              <TouchableOpacity 
+                style={{position: 'absolute', left: 0, marginLeft: 5, zIndex:10}}
+                onPress={()=> openDrawer()}
               >
-                <Ionicons 
+                <MaterialIcon 
                   size={24} 
-                  name="ios-search" 
+                  name="menu" 
                   color={initialRouteName === 'profileHome' ? 'white' : 'black'}
                 />
               </TouchableOpacity>
+                
+              
+              <Text 
+                style={{
+                  fontWeight: '500', 
+                  textAlign: 'center', 
+                  fontSize: 20, 
+                  lineHeight: 24,
+                  flex: 1
+                }}
+              >
+                SwapTem
+              </Text>
+              
+              <View style={{flexDirection: 'row', position: 'absolute', right: 0, marginRight: 5}}>
+                {
+                  initialRouteName === 'home' ?
+                  <TouchableOpacity 
+                    style={{marginRight: 24}}
+                    onPress={(e) => Actions.filterPage()}
+                  >
+                    <Ionicons size={24} name="ios-options" />
+                  </TouchableOpacity>
+                  : null
+                }
+
+                <TouchableOpacity
+                  onPress={(e) => Actions.searchResult()}
+                >
+                  <Ionicons 
+                    size={24} 
+                    name="ios-search" 
+                    color={initialRouteName === 'profileHome' ? 'white' : 'black'}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
+        : null
+      }
+      </React.Fragment>
     );
   }
 }
@@ -249,7 +255,7 @@ const Index = (
           <Scene key="home" title="dsdsdsd" component={MainPage} />
           <Scene hideNavBar back title="Item" key="singleProduct" component={SingleProductComponent} />
           <Scene title="Reviews" key="reviewPage" component={ReviewPage} />
-          <Scene title="User Profile" key="userProfilePage" component={UserProfile} />
+          <Scene hideNavBar={true} title="User Profile" key="userProfilePage" component={UserProfile} />
           <Scene title="My Swap Items" key="mySwapItemsPage" component={MySwapItems} />
           <Scene title="My Items" key="myItemListPage" component={MyItemList} />
           <Scene title="Swap Requested" key="offerSubmissionPage" component={OfferSubmissionPage} />

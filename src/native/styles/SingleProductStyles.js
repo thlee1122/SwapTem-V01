@@ -97,20 +97,21 @@ export default StyleSheet.create({
   },
 
   sellerSectionContent: {
-    flex: 1, 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    alignSelf: 'center', 
-    marginLeft: 10, 
+    // flex: 1, 
+    // flexDirection: 'row', 
+    // alignItems: 'center', 
+    // alignSelf: 'center', 
+    marginLeft: 16, 
+    marginTop: 24,
     marginBottom: 10
   },
 
   sellerSectionHeadshot: {
-    width: 60, 
-    height: 60, 
+    width: 76, 
+    height: 76, 
     backgroundColor:'#959595',
     borderRadius: 50,
-    marginRight: 10
+    marginRight: 16
   },
 
   sellerSectionContentTwo: {
@@ -169,18 +170,22 @@ export default StyleSheet.create({
   },
 
   messageSellerButton: {
-    backgroundColor: '#00529b', 
+    backgroundColor: 'white', 
     borderWidth: 1, 
-    borderColor: '#00529b', 
-    borderRadius: 10, 
-    width: '90%', 
+    borderColor: 'black', 
+    borderRadius: 30, 
+    width: '70%', 
     alignSelf: 'center', 
-    marginTop: 20
+    marginTop: 32,
+    height: 58,
+    marginBottom: 20
   },
 
   messageSellerButtonText: {
-    color: 'white', 
-    fontSize: 15, 
+    color: 'black',
+    fontWeight: 'bold',
+    lineHeight: 16,
+    fontSize: 16, 
     flex: 1, 
     textAlign: 'center'
   },
@@ -194,7 +199,7 @@ export default StyleSheet.create({
   },
 
   reviewSection: {
-    marginTop: 15, 
+    // marginTop: 15, 
     marginBottom: 20
   },
 
@@ -225,11 +230,11 @@ export default StyleSheet.create({
   },
 
   singleReviewHeadshot: {
-    width: 50, 
-    height: 50, 
+    width: 64, 
+    height: 64, 
     backgroundColor:'#959595',
     borderRadius: 50,
-    marginTop: 10
+    // marginTop: 10
   },
 
   singleReviewContent: {

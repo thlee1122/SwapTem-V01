@@ -46,7 +46,7 @@ export default StyleSheet.create({
     color: 'black', 
     alignSelf: 'center', 
     fontSize: 14, 
-    paddingTop: Platform.OS === "ios" ? 6 : 3
+    paddingTop: Platform.OS === "ios" ? 7 : 3
   },
 
   bigHashTagText: {

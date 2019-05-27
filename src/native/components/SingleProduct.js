@@ -8,6 +8,7 @@ import { Actions } 																			from 'react-native-router-flux';
 import FontAwesomeIcon 																	from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon 																			from 'react-native-vector-icons/Feather';
 import MaterialIcon 																		from 'react-native-vector-icons/MaterialIcons';
+import Ionicons                                         from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcon                            from 'react-native-vector-icons/MaterialCommunityIcons';
 import StarRating 																			from 'react-native-star-rating';
 import Geocoder 																				from 'react-native-geocoding';
@@ -104,6 +105,8 @@ class SingleProduct extends React.Component {
       let text = `${HashTags[i].text}`;
       itemHashTags.push(text);
     }
+
+    console.log("OthersReviews", OthersReviews);
 
     return (
     	<React.Fragment>
@@ -509,9 +512,77 @@ class SingleProduct extends React.Component {
 	      </View>
 
 	      <View style={{marginTop: 15}}>
-        	<Text style={styles.sellerSectionTitle}>SELLER</Text>
+	      	<View style={styles.sellerSectionContent}>
+	      		<View style={{flexDirection: 'row', flex: 1}}>
+	      			<View style={styles.sellerSectionHeadshot} />
+	      			<Text style={{fontSize: 20, lineHeight: 24, fontWeight: 'bold', marginTop: 24}}>
+	      				{name}
+	      			</Text>
+	      		</View>
 
-        	<View style={styles.sellerSectionContent}>
+	      		<View style={{marginTop: 24}}>
+	      			<View style={{flexDirection: 'row'}}>
+	      				<Text style={{fontSize: 14, lineHeight: 16, color: "#A3A3A2", marginRight: 70}}>
+	      					Verified:
+	      				</Text>
+
+	      				<View style={{flexDirection: 'row'}}>
+	      					<View style={{backgroundColor: 'black', width: 32, height: 32, borderRadius: 50, alignSelf: 'center', marginRight: 8}}>
+	                  <FeatherIcon name="phone" size={15} color="white" style={{alignSelf: 'center', marginTop: 8}}/>
+	                </View>
+
+	                <View style={{backgroundColor: 'black', width: 32, height: 32, borderRadius: 50, alignSelf: 'center', marginRight: 8}}>
+	                  <FeatherIcon name="mail" size={15} color="white" style={{alignSelf: 'center', marginTop: 8}}/>
+	                </View>
+
+	                <View 
+	                  style={{
+	                    backgroundColor: 'white', 
+	                    width: 32, 
+	                    height: 32, 
+	                    borderRadius: 50,
+	                    borderColor: 'black',
+	                    borderWidth: 1, 
+	                    alignSelf: 'center'
+	                  }}
+	                >
+	                  <FeatherIcon name="facebook" size={15} color="black" style={{alignSelf: 'center', marginTop: 7}}/>
+	                </View>
+	      				</View>
+	      			</View>
+
+	      			<View style={{flexDirection: 'row', marginTop: 16}}>
+	      				<Text style={{fontSize: 14, lineHeight: 16, color: "#A3A3A2", marginRight: 22}}>
+	      					Response Rate:
+	      				</Text>
+
+	      				<Text style={{fontSize: 14, lineHeight: 20}}>
+	      					100%
+	      				</Text>
+	      			</View>
+
+	      			<View style={{flexDirection: 'row', marginTop: 16}}>
+	      				<Text style={{fontSize: 14, lineHeight: 16, color: "#A3A3A2", marginRight: 20}}>
+	      					Response Time:
+	      				</Text>
+
+	      				<Text style={{fontSize: 14, lineHeight: 20}}>
+	      					Within an hour
+	      				</Text>
+	      			</View>
+
+	      			<View style={{flexDirection: 'row', marginTop: 16}}>
+	      				<Text style={{fontSize: 14, lineHeight: 16, color: "#A3A3A2", marginRight: 22, width: 102}}>
+	      					Total Transactions
+	      				</Text>
+
+	      				<Text style={{fontSize: 14, lineHeight: 20}}>
+	      					8
+	      				</Text>
+	      			</View>
+	      		</View>
+	      	</View>
+        	{/* <View style={styles.sellerSectionContent}>
           	<TouchableOpacity onPress={ () => { Actions.userProfilePage({ User: User }) }}>
 	        		<View style={styles.sellerSectionHeadshot} />
         		</TouchableOpacity>
@@ -528,9 +599,9 @@ class SingleProduct extends React.Component {
         				<MaterialIcon name="smartphone" size={20} color='#656464' style={{marginTop: 2}}/>
         			</View>
         		</View>
-        	</View>
+        	</View> */}
 
-        	<View style={styles.ratingSection}>
+        	{/* <View style={styles.ratingSection}>
           	{
 	        		ratingTypes.map((rating, index) => {
 	        			return (
@@ -546,10 +617,10 @@ class SingleProduct extends React.Component {
 	        			);
 	        		})
 	        	}
-          </View>
+          </View> */}
 
         	<Button style={styles.messageSellerButton}>
-            <Text style={styles.messageSellerButtonText}>MESSAGE SELLER</Text>
+            <Text style={styles.messageSellerButtonText}>Message Seller</Text>
           </Button>
         </View>
 
@@ -557,7 +628,54 @@ class SingleProduct extends React.Component {
 
         <View>
 	        <View style={styles.reviewSection}>
-	        	<Text style={styles.reviewSectionTitle}>REVIEWS</Text>
+	        	<View 
+	        		style={{
+	        			flexDirection: 'column',
+	        			marginLeft: 16, 
+	        			marginRight: 16,
+	        			paddingTop: 32, 
+	        			paddingBottom: 32, 
+	        			borderBottomWidth: 1,
+	        			borderBottomColor: "#ECEBEB"
+	        		}}
+	        	>
+	        		<View style={{flexDirection: 'row'}}>
+	        			<Text style={{fontWeight: 'bold', fontSize: 16}}>
+	        				Reviews
+	        			</Text>
+
+	        			<TouchableOpacity 
+	        				style={{flexDirection: 'row', position: 'absolute', right: 0}}
+	        				onPress={ () => { Actions.reviewPage({ OthersReviews: OthersReviews, User: User }) }}
+	        			>
+	        				<Ionicons name="ios-arrow-forward" color="#A3A3A2" size={22} style={{marginRight: 10}}/>
+	        				<Text style={{fontWeight: 'bold', fontSize: 16}}>
+	        					Read all
+	        				</Text>
+	        			</TouchableOpacity>
+	        		</View>
+
+	        		<View style={{flexDirection: 'row', marginTop: 16}}>
+	        			<Text style={{fontSize: 14, marginRight: 10}}>
+	        				4.8
+	        			</Text>
+
+	        			<StarRating
+	                disabled={true}
+	                maxStars={1}
+	                rating={1}
+	                fullStarColor="black"
+	                starSize={16}
+	                containerStyle={{width: 100}}
+	              />
+	        		</View>
+
+	        		<Text style={{fontSize: 14, marginTop: 8}}>
+	        			{OthersReviews.length} Reviews
+	        		</Text>
+	        	</View>
+
+	        	{/* <Text style={styles.reviewSectionTitle}>REVIEWS</Text>
 	        	<View style={styles.singleReviewStars}>
 	        		<StarRating
         				disabled={true}
@@ -570,59 +688,90 @@ class SingleProduct extends React.Component {
 	        		<Text style={styles.numbeOfReviews}>
 	        			{OthersReviews.length}
 	        		</Text>
-	        	</View>
+	        	</View> */}
 
 	        	{
-	        		OthersReviews.slice(0, 2).map((review) => {
+	        		OthersReviews.slice(0, 2).map((review, index) => {
 	        			const singleReview = review.Writer;
 	        			const reviewContext = review.text;
 	        			const rating = (review.rating / 10);
 	        			const date = singleReview.createdAt.split("T")[0];
 	        			const tempTime = (singleReview.createdAt.split("T")[1]).substring(0,5);
 	        			const tempHour = tempTime.substring(0,2);
-	        			const minute = tempTime.substring(3);
-	        			const hour = tempHour > 12 ? tempHour - 12 : tempHour;
-	        			const amPM = tempHour > 12 ? "PM" : "AM";
-	        			const newDate = `${date} ${hour}:${minute} ${amPM}`;
+	        			// const minute = tempTime.substring(3);
+	        			// const hour = tempHour > 12 ? tempHour - 12 : tempHour;
+	        			// const amPM = tempHour > 12 ? "PM" : "AM";
+	        			// const newDate = `${date} ${hour}:${minute} ${amPM}`;
+	        			const newDate = date;
 
 	        			return (
-									<View 
-										key={review.id}
-										style={{marginTop: 10}}
-									>
-		        				<View style={styles.singleReviewSection}>
-		        					<View style={styles.singleReviewHeadshot} />
+	        				<View
+	        					key={review.id}
+	        					style={{
+	        						paddingTop: 32,
+	        						marginRight: 16,
+	        						marginLeft: 16,
+	        						paddingBottom: 32,
+	        						flexDirection: 'row',
+	        						borderBottomWidth: index === OthersReviews.length-1 ? 0 : 1,
+	        						borderBottomColor: "#ECEBEB"
+	        					}}
+	        				>
+	        					<View style={styles.singleReviewHeadshot} />
 
-				          		<View style={styles.singleReviewContent}>
-				          			<Text style={styles.singleReviewName}>{singleReview.name}</Text>
-				          			<Text style={styles.singleReviewDate}>
-				          				{newDate}
-				          			</Text>
+	        					<View style={{flexDirection: 'column', marginLeft: 28}}>
+	        						<Text 
+	        							// style={styles.singleReviewName}
+	        							style={{fontSize: 16, fontWeight: 'bold', lineHeight: 20}}
+	        						>
+	        							{singleReview.name}
+	        						</Text>
 
-				          			<StarRating
-				          				disabled={true}
-				          				maxStars={5}
-				          				rating={rating}
-				          				fullStarColor="#FBDB0A"
-				          				starSize={20}
-				          				containerStyle={{
-				          					width: 120,
-				          					marginTop: 10
-				          				}}
-				          			/>
-				          		</View>
-		        				</View>
+	        						<Text 
+	        							// style={styles.singleReviewDate}
+	        							style={{
+	        								fontSize: 14, 
+	        								color: "#A3A3A2", 
+	        								lineHeight: 16,
+	        								marginTop: 10
+	        							}}
+	        						>
+			          				{newDate}
+			          			</Text>
 
-		        				<Text style={styles.singleReviewContext}>
-		        					{reviewContext}
-		        				</Text>
-									</View>
+			          			<StarRating
+			          				disabled={true}
+			          				maxStars={5}
+			          				rating={rating}
+			          				fullStarColor="black"
+			          				starSize={16}
+			          				containerStyle={{
+			          					width: 90,
+			          					marginTop: 10
+			          				}}
+			          			/>
+
+			          			<Text 
+			          				// style={styles.singleReviewContext}
+			          				style={{
+			          					fontSize: 14,
+			          					lineHeight: 22,
+			          					color: '#A3A3A2',
+			          					marginTop: 12,
+			          					width: '70%'
+			          				}}
+			          			>
+			        					{reviewContext}
+			        				</Text>
+	        					</View>
+
+	        				</View>
 	        			);
 	        		})
 	        	}
 	        </View>
 
-	        {
+	        {/* {
 	        	OthersReviews.length > 1 ?
 	        	<TouchableOpacity
 	        		onPress={ () => { Actions.reviewPage({ OthersReviews: OthersReviews, User: User }) }}
@@ -633,7 +782,7 @@ class SingleProduct extends React.Component {
 			      	</Text>
 		      	</TouchableOpacity>
 	        	: null
-	        }
+	        } */}
       	</View>
       	</SafeAreaView>
     	</React.Fragment>

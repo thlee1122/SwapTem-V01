@@ -69,7 +69,7 @@ class Profile extends React.Component {
     return (
       <Content style={{backgroundColor: 'white'}}>
         
-        <View style={{ flex: 1, backgroundColor: '#000000', height: height * 0.48 }}>
+        <View style={{ flex: 1, backgroundColor: '#000000', height: height * 0.5 }}>
           <View style={styles.profileHeadShot} />
         
           <View style={styles.profileHeaderContent}>
