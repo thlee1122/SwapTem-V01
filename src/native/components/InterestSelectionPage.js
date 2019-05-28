@@ -97,7 +97,8 @@ class InterestSelectionPage extends Component {
                 width: '70%',
                 height: 58,
                 alignSelf: 'center',
-                marginTop: 30
+                marginTop: 30,
+                marginBottom: 30
               }}
               onPress={ () => { Actions.home() }}
             >
