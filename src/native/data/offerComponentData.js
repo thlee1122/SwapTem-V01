@@ -101,7 +101,7 @@ export const matchItemList = [
 
 export const allOffers = [
   {
-    name: "PlayStation 4 Console Call of Duty Game CD",
+    name: "PlayStation 4 Call of Duty Game CD",
     id: 1009,
     imageURL: "",
     value: 35.00,
@@ -113,7 +113,28 @@ export const allOffers = [
     accepted: true,
     pending: false,
     type: "received",
-    meetupScheduled: false  
+    meetupScheduled: false,
+
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'Call of Duty'},
+      {id: '33333', text: 'Game CD'}
+    ],
+    condition: 'Like New',
+    description: 'Amazing PlayStation 4 Call of Duty Game CD',
+    swap: true,
+    sell: true,
+    ItemFiles: [
+      {
+        id: "de3b6ed2-b733-408d-9599-22e25721e3e9", 
+        ItemId: "9e219a08-0e82-4172-bbed-d219f4ffa24e", 
+        path: "product/sample/book2.jpeg", 
+        thumbPath: "product/sample/book2.jpeg", 
+        ext: "jpeg",
+        size: "1000"
+      }
+    ]
+    
   },
   {
     name: "PlayStation 4 FIFA 19 Game CD",
@@ -128,7 +149,12 @@ export const allOffers = [
     accepted: false,
     pending: false,
     type: "received",
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'FIFA 19'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
   {
     name: "PlayStation 4 God of Wars Game CD",
@@ -143,10 +169,15 @@ export const allOffers = [
     accepted: true,
     pending: false,
     type: "pending",
-    meetupScheduled: true
+    meetupScheduled: true,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'God of Wars'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
   {
-    name: "PlayStation 4 Grand Teft Auto V Game CD",
+    name: "PlayStation 4 Grand Theft Auto V Game CD",
     id: 1001,
     imageURL: "",
     value: 20.00,
@@ -158,7 +189,12 @@ export const allOffers = [
     accepted: false,
     pending: false,
     type: "received",
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'Grand Theft Auto V'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
   {
     name: "PlayStation 4 God of Wars Game CD",
@@ -173,10 +209,15 @@ export const allOffers = [
     accepted: false,
     pending: false,
     type: "received",
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'God of Wars'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
   {
-    name: "PlayStation 4 Game CD Fortnite",
+    name: "PlayStation 4 Fortnite",
     id: 1004,
     imageURL: "",
     value: 25.00,
@@ -187,7 +228,11 @@ export const allOffers = [
     accepted: false,
     pending: true,
     type: 'pending',
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'Fornite'},
+    ]
   },
   {
     name: "PlayStation 4 New Spider Man Game CD",
@@ -201,10 +246,15 @@ export const allOffers = [
     accepted: false,
     pending: true,
     type: 'pending',
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'New Spider Man'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
   {
-    name: "PlayStation 4 Console Call of Duty Game CD",
+    name: "PlayStation 4 Call of Duty Game CD",
     id: 1003,
     imageURL: "",
     value: 35.00,
@@ -216,7 +266,12 @@ export const allOffers = [
     accepted: false,
     pending: false,
     type: "received",
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'Call of Duty'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
   {
     name: "PlayStation 4 Brand New NBA 2K19 Game CD",
@@ -230,7 +285,13 @@ export const allOffers = [
     accepted: false,
     pending: true,
     type: 'pending',
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'Brand New'},
+      {id: '33333', text: 'NBA 2K19'},
+      {id: '44444', text: 'Game CD'}
+    ]
   },
   {
     name: "PlayStation 4 Overwatch Game CD",
@@ -244,141 +305,146 @@ export const allOffers = [
     accepted: false,
     pending: true,
     type: 'pending',
-    meetupScheduled: false
+    meetupScheduled: false,
+    HashTags: [
+      {id: '11111', text: 'PlayStation 4'},
+      {id: '22222', text: 'Overwatch'},
+      {id: '33333', text: 'Game CD'}
+    ]
   },
 ];
 
-export const receivedOffers = [
-  {
-    name: "PlayStation 4 FIFA 19 Game CD",
-    imageURL: "",
-    value: 20.00,
-    location: "New York, NY",
-    matchingProduct: true,
-    shipping: true,
-    showCountDown: true,
-    countDown: 43200,
-    accepted: false,
-    pending: false,
-    type: "received"
-  },
-  {
-    name: "PlayStation 4 Grand Teft Auto V Game CD",
-    imageURL: "",
-    value: 20.00,
-    location: "New York, NY",
-    matchingProduct: true,
-    shipping: false,
-    showCountDown: true,
-    countDown: 40200,
-    accepted: false,
-    pending: false,
-    type: "received"
-  },
-  {
-    name: "PlayStation 4 God of Wars Game CD",
-    imageURL: "",
-    value: 30.00,
-    location: "New York, NY",
-    matchingProduct: false,
-    shipping: true,
-    showCountDown: true,
-    countDown: 32220,
-    accepted: false,
-    pending: false,
-    type: "received"
-  },
-  {
-    name: "PlayStation 4 Console Call of Duty Game CD",
-    imageURL: "",
-    value: 35.00,
-    location: "New York, NY",
-    matchingProduct: true,
-    shipping: true,
-    showCountDown: true,
-    countDown: 31000,
-    accepted: false,
-    pending: false,
-    type: "received"
-  },
-];
+// export const receivedOffers = [
+//   {
+//     name: "PlayStation 4 FIFA 19 Game CD",
+//     imageURL: "",
+//     value: 20.00,
+//     location: "New York, NY",
+//     matchingProduct: true,
+//     shipping: true,
+//     showCountDown: true,
+//     countDown: 43200,
+//     accepted: false,
+//     pending: false,
+//     type: "received"
+//   },
+//   {
+//     name: "PlayStation 4 Grand Teft Auto V Game CD",
+//     imageURL: "",
+//     value: 20.00,
+//     location: "New York, NY",
+//     matchingProduct: true,
+//     shipping: false,
+//     showCountDown: true,
+//     countDown: 40200,
+//     accepted: false,
+//     pending: false,
+//     type: "received"
+//   },
+//   {
+//     name: "PlayStation 4 God of Wars Game CD",
+//     imageURL: "",
+//     value: 30.00,
+//     location: "New York, NY",
+//     matchingProduct: false,
+//     shipping: true,
+//     showCountDown: true,
+//     countDown: 32220,
+//     accepted: false,
+//     pending: false,
+//     type: "received"
+//   },
+//   {
+//     name: "PlayStation 4 Console Call of Duty Game CD",
+//     imageURL: "",
+//     value: 35.00,
+//     location: "New York, NY",
+//     matchingProduct: true,
+//     shipping: true,
+//     showCountDown: true,
+//     countDown: 31000,
+//     accepted: false,
+//     pending: false,
+//     type: "received"
+//   },
+// ];
 
-export const pendingOffers = [
-  {
-    name: "PlayStation 4 Game CD Fortnite",
-    imageURL: "",
-    value: 25.00,
-    location: "New York, NY",
-    matchingProduct: false,
-    showCountDown: false,
-    shipping: false,
-    accepted: false,
-    pending: true,
-    type: 'pending'
-  },
-  {
-    name: "PlayStation 4 New Spider Man Game CD",
-    imageURL: "",
-    value: 30.00,
-    location: "New York, NY",
-    matchingProduct: false,
-    showCountDown: false,
-    shipping: false,
-    accepted: false,
-    pending: true,
-    type: 'pending'
-  },
-  {
-    name: "PlayStation 4 Brand New NBA 2K19 Game CD",
-    imageURL: "",
-    value: 35.00,
-    location: "New York, NY",
-    matchingProduct: true,
-    showCountDown: false,
-    shipping: true,
-    accepted: false,
-    pending: true,
-    type: 'pending'
-  },
-  {
-    name: "PlayStation 4 Overwatch Game CD",
-    imageURL: "",
-    value: 15.00,
-    location: "New York, NY",
-    matchingProduct: false,
-    showCountDown: false,
-    shipping: true,
-    accepted: false,
-    pending: true,
-    type: 'pending'
-  },
-];
+// export const pendingOffers = [
+//   {
+//     name: "PlayStation 4 Game CD Fortnite",
+//     imageURL: "",
+//     value: 25.00,
+//     location: "New York, NY",
+//     matchingProduct: false,
+//     showCountDown: false,
+//     shipping: false,
+//     accepted: false,
+//     pending: true,
+//     type: 'pending'
+//   },
+//   {
+//     name: "PlayStation 4 New Spider Man Game CD",
+//     imageURL: "",
+//     value: 30.00,
+//     location: "New York, NY",
+//     matchingProduct: false,
+//     showCountDown: false,
+//     shipping: false,
+//     accepted: false,
+//     pending: true,
+//     type: 'pending'
+//   },
+//   {
+//     name: "PlayStation 4 Brand New NBA 2K19 Game CD",
+//     imageURL: "",
+//     value: 35.00,
+//     location: "New York, NY",
+//     matchingProduct: true,
+//     showCountDown: false,
+//     shipping: true,
+//     accepted: false,
+//     pending: true,
+//     type: 'pending'
+//   },
+//   {
+//     name: "PlayStation 4 Overwatch Game CD",
+//     imageURL: "",
+//     value: 15.00,
+//     location: "New York, NY",
+//     matchingProduct: false,
+//     showCountDown: false,
+//     shipping: true,
+//     accepted: false,
+//     pending: true,
+//     type: 'pending'
+//   },
+// ];
 
-export const acceptedOffers = [
-  {
-    name: "PlayStation 4 God of Wars Game CD",
-    imageURL: "",
-    value: 30.00,
-    location: "New York, NY",
-    matchingProduct: false,
-    shipping: true,
-    countDown: 32220,
-    showCountDown: true,
-    accepted: true,
-    pending: false,
-    type: "accepted"
-  },
-  {
-    name: "PlayStation 4 Console Call of Duty Game CD",
-    imageURL: "",
-    value: 35.00,
-    location: "New York, NY",
-    matchingProduct: true,
-    shipping: true,
-    showCountDown: true,
-    countDown: 31000,
-    accepted: true,
-    pending: false,
-    type: "accepted"
-  },
-];
+// export const acceptedOffers = [
+//   {
+//     name: "PlayStation 4 God of Wars Game CD",
+//     imageURL: "",
+//     value: 30.00,
+//     location: "New York, NY",
+//     matchingProduct: false,
+//     shipping: true,
+//     countDown: 32220,
+//     showCountDown: true,
+//     accepted: true,
+//     pending: false,
+//     type: "accepted"
+//   },
+//   {
+//     name: "PlayStation 4 Console Call of Duty Game CD",
+//     imageURL: "",
+//     value: 35.00,
+//     location: "New York, NY",
+//     matchingProduct: true,
+//     shipping: true,
+//     showCountDown: true,
+//     countDown: 31000,
+//     accepted: true,
+//     pending: false,
+//     type: "accepted"
+//   },
+// ];

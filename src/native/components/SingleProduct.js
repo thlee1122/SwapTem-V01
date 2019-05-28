@@ -106,7 +106,9 @@ class SingleProduct extends React.Component {
       itemHashTags.push(text);
     }
 
-    console.log("OthersReviews", OthersReviews);
+    // console.log("OthersReviews", OthersReviews);
+
+    // console.log("3333 this.props", this.props);
 
     return (
     	<React.Fragment>
@@ -644,35 +646,49 @@ class SingleProduct extends React.Component {
 	        				Reviews
 	        			</Text>
 
-	        			<TouchableOpacity 
-	        				style={{flexDirection: 'row', position: 'absolute', right: 0}}
-	        				onPress={ () => { Actions.reviewPage({ OthersReviews: OthersReviews, User: User }) }}
-	        			>
-	        				<Ionicons name="ios-arrow-forward" color="#A3A3A2" size={22} style={{marginRight: 10}}/>
-	        				<Text style={{fontWeight: 'bold', fontSize: 16}}>
-	        					Read all
-	        				</Text>
-	        			</TouchableOpacity>
+	        			{
+	        				OthersReviews.length >= 2 ?	
+		        			<TouchableOpacity 
+		        				style={{flexDirection: 'row', position: 'absolute', right: 0}}
+		        				onPress={ () => { Actions.reviewPage({ OthersReviews: OthersReviews, User: User }) }}
+		        			>
+		        				<Ionicons name="ios-arrow-forward" color="#A3A3A2" size={22} style={{marginRight: 10}}/>
+		        				<Text style={{fontWeight: 'bold', fontSize: 16}}>
+		        					Read all
+		        				</Text>
+		        			</TouchableOpacity>
+		        			: null
+	        			}
 	        		</View>
 
-	        		<View style={{flexDirection: 'row', marginTop: 16}}>
-	        			<Text style={{fontSize: 14, marginRight: 10}}>
-	        				4.8
-	        			</Text>
+	        		{
+	        			OthersReviews.length > 0 ?
+	        			<React.Fragment>
+		        			<View style={{flexDirection: 'row', marginTop: 16}}>
+			        			<Text style={{fontSize: 14, marginRight: 10}}>
+			        				4.8
+			        			</Text>
 
-	        			<StarRating
-	                disabled={true}
-	                maxStars={1}
-	                rating={1}
-	                fullStarColor="black"
-	                starSize={16}
-	                containerStyle={{width: 100}}
-	              />
-	        		</View>
+			        			<StarRating
+			                disabled={true}
+			                maxStars={1}
+			                rating={1}
+			                fullStarColor="black"
+			                starSize={16}
+			                containerStyle={{width: 100}}
+			              />
+			        		</View>
 
-	        		<Text style={{fontSize: 14, marginTop: 8}}>
-	        			{OthersReviews.length} Reviews
-	        		</Text>
+			        		<Text style={{fontSize: 14, marginTop: 10}}>
+			        			{OthersReviews.length} Reviews
+			        		</Text>	
+		        		</React.Fragment>
+		        		:
+		        		<Text style={{fontSize: 14, marginTop: 10}}>
+		        			This user currently do not have any reviews.
+		        		</Text>
+	        		}
+	        		
 	        	</View>
 
 	        	{/* <Text style={styles.reviewSectionTitle}>REVIEWS</Text>

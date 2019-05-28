@@ -11,28 +11,28 @@ const singleProduct = (state = initialState, action) => {
   
   switch (action.type) {
     case types.GET_PRODUCT_DETAIL_LOADING:
-      debugger;      
+      // debugger;      
       return { ...state, loading: true, data: null};
 
     case types.GET_PRODUCT_DETAIL_SUCCESS:
-      debugger;
+      // debugger;
       return { ...state, loading: false, singleProductDetail: action.data };
 
     case types.GET_PRODUCT_DETAIL_ERROR:
-      debugger;
+      // debugger;
       return { ...state, loading: false, error: action.data };
 
 
     case types.POST_LIKE_LOADING:
-      debugger;
+      // debugger;
       return { ...state, loading: true, data: null};
 
     case types.POST_LIKE_SUCCESS:
-      debugger;
+      // debugger;
       return { ...state, loading: false, likedItem: action.data };
 
     case types.POST_LIKE_ERROR:
-      debugger;
+      // debugger;
       return { ...state, loading: false, error: action.data};
 
     default: {

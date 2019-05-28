@@ -2,7 +2,7 @@ import * as types from './singleProductTypes';
 
 export const getSingleProductDetail = (itemID) => {
   return (dispatch, getState) => {
-    debugger;
+    // debugger;
     dispatch({
       type: 'API_REQUEST',
       options: {
@@ -35,7 +35,7 @@ export const getSingleProductDetail = (itemID) => {
 // });
 
 export const postLike = (itemId) => {
-  debugger;
+  // debugger;
   return (dispatch, getState) => {
     dispatch({
       type: 'API_REQUEST',

@@ -66,7 +66,7 @@ class SingleCard extends Component {
                 </Text>
 
                 <Text style={styles.bigItemPriceText}>
-                  {`$${Number(itemPrice).toFixed(2)}`}
+                  {`$${(Number(itemPrice)/100).toFixed(2)}`}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -124,7 +124,7 @@ class SingleCard extends Component {
 
               <View style={{flexDirection: 'row'}}>
                 <Text style={styles.smallItemPriceText}>
-                  {`$${itemPrice}`}
+                  {`$${(Number(itemPrice)/100).toFixed(2)}`}
                 </Text>
               </View>
             </View>

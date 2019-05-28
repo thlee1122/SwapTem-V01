@@ -97,6 +97,9 @@ import SideBarMenu from '../components/SideBarMenu';
 import FilterPage from '../components/FilterPage';
 
 
+import InterestSelectionPage from '../components/InterestSelectionPage';
+
+
 import { Actions }                                        from 'react-native-router-flux';
 
 
@@ -110,14 +113,15 @@ class NavBar extends Component {
     const { height, width } = Dimensions.get('window');
     const { initialRouteName } = this.props;
 
-    // console.log("@@@@ route.js", this.props);
+    console.log("###### route.js", this.props);
 
     console.log("1111111", Platform.OS);
+    console.log("2222222 initialRouteName", initialRouteName);
 
     return (
       <React.Fragment>
       {
-        initialRouteName !== 'profileHome' ?
+        initialRouteName !== 'profileHome' && this.props.routeName !== "reviewPage" ?
         <SafeAreaView 
           style={{
             backgroundColor: initialRouteName === 'profileHome' ? '#000000' : '#fff'
@@ -214,6 +218,14 @@ const Index = (
     hideNavBar
     // navBar={NavBar}
   >
+    <Stack
+      key="intro-pages"
+    >
+      <Scene key="interest-page" title="Select your interests" component={InterestSelectionPage} />
+
+
+    </Stack>
+    
     <Scene hideNavBar>
       <Tabs
         // key="tabbar"
