@@ -241,7 +241,7 @@ const Index = (
           
 
 
-          key="home"
+          key="home-main"
           title={AppConfig.appName.toUpperCase()}
           // icon={() => <Icon name="planet" {...DefaultProps.icons} />}
           icon={() => <FeatherIcon name="home" size={25} color="black" />}
