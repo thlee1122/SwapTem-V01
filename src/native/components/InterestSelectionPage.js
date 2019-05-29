@@ -1,14 +1,26 @@
 import React, { Component }                               from 'react';
-import { View, Image, TouchableOpacity, ScrollView}                   from 'react-native';
-import { Container, Content, List, Text }                 from 'native-base';
+import { View, TouchableOpacity, ScrollView}              from 'react-native';
+import { Container, Content, Text }                       from 'native-base';
 import { Actions }                                        from 'react-native-router-flux';
-// import { connect }                                     from 'react-redux';
-// import { inboxItem }                                      from '../data/sampleInboxData';
-// import styles                                             from '../styles/InboxStyles';
+import SingleInterestSelection                            from './SingleInterestSelection';
 
 class InterestSelectionPage extends Component {
+  constructor(props) {
+    super(props);
+    this.selectedSelections = [];
+  }
+
+  addSelection = (item) => {
+    this.selectedSelections.push(item.title);
+  }
+
+  deleteSelection = (item) => {
+    this.selectedSelections = this.selectedSelections.filter((selectedItem) => {
+      return selectedItem !== item.title;
+    });
+  }
+
   render() {
-    
     const interestedCategories = [
       {
         imageFile: require("../../images/fashion_48px.png"),
@@ -63,31 +75,18 @@ class InterestSelectionPage extends Component {
                 alignItems: 'flex-start'
               }}
             >
-
               {
                 interestedCategories.map((item, index) => {
                   return (
-                    <TouchableOpacity 
+                    <SingleInterestSelection 
                       key={index}
-                      style={{flexDirection: 'column', width: '50%', borderWidth: 1, height: 187}}
-                    >
-                      <Image 
-                        source={item.imageFile}
-                        style={{
-                          width: 100, 
-                          height: 100,
-                          alignSelf: 'center',
-                          marginTop: 20,
-                        }}
-                      />
-                      <Text style={{textAlign: 'center', marginTop: 10}}>
-                        {item.title}
-                      </Text>
-                    </TouchableOpacity>
+                      item={item}
+                      addSelection={this.addSelection}
+                      deleteSelection={this.deleteSelection}
+                    />
                   );
                 })
-              }
-              
+              } 
             </View>
 
             <TouchableOpacity
