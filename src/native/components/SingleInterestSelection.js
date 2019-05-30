@@ -28,7 +28,7 @@ class SingleInterestSelection extends Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, selectedSelections } = this.props;
 
     return (
       <TouchableOpacity 
@@ -37,8 +37,13 @@ class SingleInterestSelection extends Component {
           width: '50%', 
           borderWidth: 1, 
           height: 187,
-          backgroundColor: this.state.selectionSelected === false ? 'white' : 'black'
+          backgroundColor: 
+            this.state.selectionSelected === false && selectedSelections.length < 3? 'white' 
+            : this.state.selectionSelected === true ? 'black'
+            : selectedSelections.length >= 3 && selectedSelections.indexOf(item.title) === -1 ? "#A3A3A2"
+            : null
         }}
+        disabled={selectedSelections.length >= 3 && selectedSelections.indexOf(item.title) === -1 ? true : false}
         onPress={() => { this.handleSingleSelectionClick(item); }}
       >
         <Image 

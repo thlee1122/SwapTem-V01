@@ -99,6 +99,8 @@ import FilterPage from '../components/FilterPage';
 
 import InterestSelectionPage from '../components/InterestSelectionPage';
 
+import LoginPageOne from '../components/LoginPageOne';
+
 
 import { Actions }                                        from 'react-native-router-flux';
 
@@ -219,12 +221,21 @@ const Index = (
     // navBar={NavBar}
   >
     <Stack
-      key="intro-pages"
+      key="loginPages"
+      hideNavBar
     >
-      <Scene key="interest-page" title="Select your interests" component={InterestSelectionPage} />
+      <Scene key="loginPageOne" component={LoginPageOne} />
+    </Stack>
+
+    <Stack
+      key="introPages"
+    >
+      <Scene key="interestPage" title="Select your interests" component={InterestSelectionPage} />
 
 
     </Stack>
+
+    
     
     <Scene hideNavBar>
       <Tabs

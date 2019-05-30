@@ -8,15 +8,27 @@ class InterestSelectionPage extends Component {
   constructor(props) {
     super(props);
     this.selectedSelections = [];
+
+    this.state = { 
+      selectedSelections: []
+    };
   }
 
   addSelection = (item) => {
     this.selectedSelections.push(item.title);
+
+    this.setState({
+      selectedSelections: this.selectedSelections
+    });
   }
 
   deleteSelection = (item) => {
     this.selectedSelections = this.selectedSelections.filter((selectedItem) => {
       return selectedItem !== item.title;
+    });
+
+    this.setState({
+      selectedSelections: this.selectedSelections
     });
   }
 
@@ -83,6 +95,7 @@ class InterestSelectionPage extends Component {
                       item={item}
                       addSelection={this.addSelection}
                       deleteSelection={this.deleteSelection}
+                      selectedSelections={this.state.selectedSelections}
                     />
                   );
                 })
