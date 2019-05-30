@@ -62,6 +62,7 @@ class LoginPageOne extends Component {
                   alignSelf: 'center',
                   flexDirection: 'row'
                 }}
+                onPress={ () => { Actions.loginPageTwo() }}
               >
                 <MaterialCommunityIcons 
                   name="email-outline" 
@@ -146,11 +147,9 @@ class LoginPageOne extends Component {
             </View>
 
             <View style={{flexDirection: 'row', marginLeft: 24, marginRight: 24, marginTop: height * 0.1}}>
-              <TouchableOpacity>
-                <Text style={{fontSize: 14, color: "rgba(0, 0, 0, 0.87)", lineHeight: 20}}>
-                  Don't have an account yet?
-                </Text>
-              </TouchableOpacity>
+              <Text style={{fontSize: 14, color: "rgba(0, 0, 0, 0.87)", lineHeight: 20}}>
+                Don't have an account yet?
+              </Text>
 
               <TouchableOpacity style={{flexDirection: 'row', position: 'absolute', right: 0}}>
                 <Ionicons 
