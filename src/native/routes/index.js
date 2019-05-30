@@ -102,6 +102,8 @@ import InterestSelectionPage from '../components/InterestSelectionPage';
 import LoginPageOne from '../components/LoginPageOne';
 import LoginPageTwo from '../components/LoginPageTwo';
 
+import ConfirmNumberPageOne from '../components/ConfirmNumberPageOne';
+
 
 import { Actions }                                        from 'react-native-router-flux';
 
@@ -227,6 +229,13 @@ const Index = (
     >
       <Scene key="loginPageOne" component={LoginPageOne} />
       <Scene key="loginPageTwo" component={LoginPageTwo} />
+    </Stack>
+
+    <Stack
+      key="ConfirmNumberPages"
+      {...DefaultProps.navbarProps}
+    >
+      <Scene back title="Enter Number" key="confirmNumberPageOne" component={ConfirmNumberPageOne} />
     </Stack>
 
     <Stack

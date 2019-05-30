@@ -7,15 +7,6 @@ import MaterialCommunityIcons                       from 'react-native-vector-ic
 import Ionicons      from 'react-native-vector-icons/Ionicons';
 
 class LoginPageOne extends Component {
-  constructor(props) {
-    super(props);
-    this.selectedSelections = [];
-
-    this.state = { 
-      selectedSelections: []
-    };
-  }
-
   render() {
     const { height, width } = Dimensions.get('window');
 
@@ -151,7 +142,10 @@ class LoginPageOne extends Component {
                 Don't have an account yet?
               </Text>
 
-              <TouchableOpacity style={{flexDirection: 'row', position: 'absolute', right: 0}}>
+              <TouchableOpacity 
+                style={{flexDirection: 'row', position: 'absolute', right: 0}}
+                onPress={ () => { Actions.confirmNumberPageOne() }}
+              >
                 <Ionicons 
                   name="ios-arrow-forward" 
                   size={20} 
