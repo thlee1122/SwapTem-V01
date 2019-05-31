@@ -7,15 +7,6 @@ import MaterialCommunityIcons                       from 'react-native-vector-ic
 import Ionicons      from 'react-native-vector-icons/Ionicons';
 
 class ConfirmNumberPageTwo extends Component {
-  constructor(props) {
-    super(props);
-    this.selectedSelections = [];
-
-    this.state = { 
-      selectedSelections: []
-    };
-  }
-
   render() {
     const { height, width } = Dimensions.get('window');
     const verificationNumbers = [];
@@ -107,10 +98,10 @@ class ConfirmNumberPageTwo extends Component {
 
             <TouchableOpacity 
               style={{marginTop: 32, alignSelf: 'center'}}
-              onPress={ () => { Actions.interestPage() }}
+              onPress={ () => { Actions.signUpPage() }}
             >
               <Text>
-                Skip
+                Continue
               </Text>
             </TouchableOpacity>
           </SafeAreaView>

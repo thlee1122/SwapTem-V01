@@ -104,7 +104,7 @@ import LoginPageTwo from '../components/LoginPageTwo';
 
 import ConfirmNumberPageOne from '../components/ConfirmNumberPageOne';
 import ConfirmNumberPageTwo from '../components/ConfirmNumberPageTwo';
-
+import SignUpPage from '../components/SignUpPage';
 
 import { Actions }                                        from 'react-native-router-flux';
 
@@ -238,6 +238,7 @@ const Index = (
     >
       <Scene back title="Enter Number" key="confirmNumberPageOne" component={ConfirmNumberPageOne} />
       <Scene back title="Verify" key="confirmNumberPageTwo" component={ConfirmNumberPageTwo} />
+      <Scene back title="Confirm Info" key="signUpPage" component={SignUpPage} />
     </Stack>
 
     <Stack
