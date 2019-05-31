@@ -81,6 +81,7 @@ class ConfirmNumberPageOne extends Component {
                   height: 58,
                   marginTop: 150
                 }}
+                onPress={ () => { Actions.confirmNumberPageTwo() }}
               >
                 <Text 
                   style={{
