@@ -241,13 +241,13 @@ const Index = (
       <Scene back title="Confirm Info" key="signUpPage" component={SignUpPage} />
     </Stack> */}
 
-    {/* <Stack
+    <Stack
       key="introPages"
     >
       <Scene key="interestPage" title="Select your interests" component={InterestSelectionPage} />
 
 
-    </Stack> */}
+    </Stack>
 
     
     
