@@ -4,7 +4,7 @@
     "icon": "src/images/app-icon.png",
     // "version": "1.0.0",
     "slug": "SwapTem",
-    "sdkVersion": "29.0.0",
+    "sdkVersion": "31.0.0",
     "ios": {
       "bundleIdentifier": "com.SwapTem.SwapTem"
     },
