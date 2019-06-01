@@ -159,7 +159,7 @@ class SignUpPage extends Component {
                 height: 58,
                 marginTop: 100
               }}
-              // onPress={ () => { Actions.confirmNumberPageTwo() }}
+              onPress={ () => { Actions.interestPage() }}
             >
               <Text 
                 style={{

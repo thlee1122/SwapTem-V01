@@ -224,7 +224,7 @@ const Index = (
     hideNavBar
     // navBar={NavBar}
   >
-    <Stack
+    {/* <Stack
       key="loginPages"
       hideNavBar
     >
@@ -239,7 +239,7 @@ const Index = (
       <Scene back title="Enter Number" key="confirmNumberPageOne" component={ConfirmNumberPageOne} />
       <Scene back title="Verify" key="confirmNumberPageTwo" component={ConfirmNumberPageTwo} />
       <Scene back title="Confirm Info" key="signUpPage" component={SignUpPage} />
-    </Stack>
+    </Stack> */}
 
     <Stack
       key="introPages"
