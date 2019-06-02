@@ -27,7 +27,6 @@ class SignUpPage extends Component {
               borderColor={'black'}
               inputPadding={0}
               borderHeight={3}
-              backgroundColor={'white'}
               autoCapitalize={'none'}
               autoCorrect={false}
               labelStyle={{
@@ -43,6 +42,7 @@ class SignUpPage extends Component {
               style={{
                 position: "relative",
                 marginTop: 25,
+                borderBottomWidth: 0
               }}
             />
 
@@ -52,7 +52,6 @@ class SignUpPage extends Component {
               borderColor={'black'}
               inputPadding={0}
               borderHeight={3}
-              backgroundColor={'white'}
               autoCapitalize={'none'}
               autoCorrect={false}
               labelStyle={{
@@ -68,6 +67,7 @@ class SignUpPage extends Component {
               style={{
                 position: "relative",
                 marginTop: 25,
+                borderBottomWidth: 0
               }}
             />
 
@@ -77,7 +77,6 @@ class SignUpPage extends Component {
               borderColor={'black'}
               inputPadding={0}
               borderHeight={3}
-              backgroundColor={'white'}
               autoCapitalize={'none'}
               autoCorrect={false}
               labelStyle={{
@@ -93,6 +92,7 @@ class SignUpPage extends Component {
               style={{
                 position: "relative",
                 marginTop: 25,
+                borderBottomWidth: 0
               }}
             />
 
@@ -102,7 +102,6 @@ class SignUpPage extends Component {
               borderColor={'black'}
               inputPadding={0}
               borderHeight={3}
-              backgroundColor={'white'}
               autoCapitalize={'none'}
               autoCorrect={false}
               labelStyle={{
@@ -118,6 +117,7 @@ class SignUpPage extends Component {
               style={{
                 position: "relative",
                 marginTop: 25,
+                borderBottomWidth: 0
               }}
             />
 
@@ -127,7 +127,6 @@ class SignUpPage extends Component {
               borderColor={'black'}
               inputPadding={0}
               borderHeight={3}
-              backgroundColor={'white'}
               autoCapitalize={'none'}
               autoCorrect={false}
               labelStyle={{
@@ -143,6 +142,7 @@ class SignUpPage extends Component {
               style={{
                 position: "relative",
                 marginTop: 25,
+                borderBottomWidth: 0
               }}
             />
           </View>
