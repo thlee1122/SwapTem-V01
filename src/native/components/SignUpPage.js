@@ -19,7 +19,7 @@ class SignUpPage extends Component {
    
     return (
       <Content style={{backgroundColor: 'white'}}>
-        <SafeAreaView style={{height: height * 0.68}}>
+        <SafeAreaView style={{height: height * 0.73}}>
           <View style={{flexDirection: 'column', marginLeft: 16, marginRight: 16, justifyContent: "space-between", flex: 1}}>
             <Hoshi
               label={'First Name'}
@@ -41,7 +41,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 35,
+                marginTop: 25,
                 borderBottomWidth: 0
               }}
             />
@@ -66,7 +66,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 35,
+                marginTop: 25,
                 borderBottomWidth: 0
               }}
             />
@@ -91,7 +91,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 35,
+                marginTop: 25,
                 borderBottomWidth: 0
               }}
             />
@@ -116,7 +116,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 35,
+                marginTop: 25,
                 borderBottomWidth: 0
               }}
             />
@@ -141,7 +141,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 35,
+                marginTop: 25,
                 borderBottomWidth: 0
               }}
             />
