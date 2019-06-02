@@ -41,7 +41,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 25,
+                marginTop: 35,
                 borderBottomWidth: 0
               }}
             />
@@ -66,7 +66,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 25,
+                marginTop: 35,
                 borderBottomWidth: 0
               }}
             />
@@ -91,7 +91,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 25,
+                marginTop: 35,
                 borderBottomWidth: 0
               }}
             />
@@ -116,7 +116,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 25,
+                marginTop: 35,
                 borderBottomWidth: 0
               }}
             />
@@ -141,7 +141,7 @@ class SignUpPage extends Component {
               }}
               style={{
                 position: "relative",
-                marginTop: 25,
+                marginTop: 35,
                 borderBottomWidth: 0
               }}
             />
