@@ -4,7 +4,8 @@ const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   mainContent: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    // flex: 1
   },
 
   itemName: {
