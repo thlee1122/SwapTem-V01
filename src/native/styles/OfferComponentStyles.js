@@ -43,7 +43,7 @@ export default StyleSheet.create({
   singleOfferContent: {
     backgroundColor: 'rgba(236, 235, 235, 0.5)', 
     padding: 16,
-    flex: 1
+    // flex: 1
   },
 
   singleOfferCountDown: {
