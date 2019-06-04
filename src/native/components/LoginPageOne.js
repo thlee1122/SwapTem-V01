@@ -143,7 +143,7 @@ class LoginPageOne extends Component {
               </Text>
 
               <TouchableOpacity 
-                style={{flexDirection: 'row', position: 'absolute', right: 0}}
+                style={{flexDirection: 'row', position: 'absolute', right: 0, height: 30}}
                 onPress={ () => { Actions.confirmNumberPageOne() }}
               >
                 <Ionicons 

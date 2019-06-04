@@ -53,6 +53,7 @@ class OfferPage extends Component {
               <Content style={styles.singleOfferContent}>
                 {
                   <FlatList 
+                    vertical={true}
                     data={this.fullOfferList}
                     keyExtractor={(item, index) => (item.id).toString()}
                     renderItem={({item}) =>
