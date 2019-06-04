@@ -39,7 +39,7 @@ class OfferPage extends Component {
 			<Container>
         <Content style={styles.mainContent}>
           <Tabs 
-            style={{height: height * 8}} 
+            style={{height: height * 5}} 
             tabBarUnderlineStyle={{height:1, backgroundColor: 'black'}}
             tabContainerStyle={{ height: 65 }}
           >
