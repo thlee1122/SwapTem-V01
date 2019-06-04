@@ -130,7 +130,7 @@ class OfferPage extends Component {
                 </TabHeading>
               }
             >
-              <Content style={styles.singleOfferContent}>
+              <ScrollView style={styles.singleOfferContent}>
                 {
                   <FlatList 
                     data={this.receivedOfferList}
@@ -197,7 +197,7 @@ class OfferPage extends Component {
                     }
                   />
                 }
-              </Content>
+              </ScrollView>
             </Tab>
 
             <Tab
@@ -207,7 +207,7 @@ class OfferPage extends Component {
                 </TabHeading>
               }
             >
-              <Content style={styles.singleOfferContent}>
+              <ScrollView style={styles.singleOfferContent}>
                 {
                   <FlatList 
                     data={this.pendingOfferList}
@@ -274,7 +274,7 @@ class OfferPage extends Component {
                     }
                   />
                 }
-              </Content>
+              </ScrollView>
             </Tab>
           </Tabs>
         </Content>
