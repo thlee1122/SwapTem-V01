@@ -1,6 +1,6 @@
 import React, { Component }                                     from 'react';
 import { View, Image, TouchableOpacity, Text, 
-         FlatList, Dimensions }                                 from 'react-native';
+         FlatList, Dimensions, ScrollView }                                 from 'react-native';
 import { Container, Content, Tabs, Tab, 
          TabHeading, Button }                                   from 'native-base';
 import { Actions }                                              from 'react-native-router-flux';
@@ -39,7 +39,8 @@ class OfferPage extends Component {
 			<Container>
         <Content style={styles.mainContent}>
           <Tabs 
-            style={{height: 725}} 
+            style={{height: height * 0.79}} 
+            // style={{flex: 1}}
             tabBarUnderlineStyle={{height:1, backgroundColor: 'black'}}
             tabContainerStyle={{ height: 65 }}
           >
@@ -50,7 +51,7 @@ class OfferPage extends Component {
                 </TabHeading>
               }
             >
-              <Content style={styles.singleOfferContent}>
+              <ScrollView style={styles.singleOfferContent}>
                 {
                   <FlatList 
                     vertical={true}
@@ -119,7 +120,7 @@ class OfferPage extends Component {
                     }
                   />
                 }
-              </Content>
+              </ScrollView>
             </Tab>
 
             <Tab
