@@ -6,7 +6,7 @@ export default {
     titleStyle: {
       color: Colors.textColor,
       // flex: 1,
-      textAlignVertical: "center",
+      // textAlignVertical: "center",
       textAlign: 'center',
       width: '80%',
       alignSelf: 'center',
@@ -23,7 +23,7 @@ export default {
     // activeBackgroundColor: 'rgba(255,255,255,0.1)',
     activeBackgroundColor: 'white',
     inactiveBackgroundColor: 'white',
-    tabBarStyle: { backgroundColor: 'white', borderTopWidth: 1, borderTopColor: 'rgba(0, 0, 0, 0.87)', flex: 1 }
+    tabBarStyle: { backgroundColor: 'white', borderTopWidth: 1, borderTopColor: 'rgba(0, 0, 0, 0.87)' }
     // inactiveBackgroundColor: Colors.brandPrimary,
     // tabBarStyle: { backgroundColor: Colors.brandPrimary },
   },
