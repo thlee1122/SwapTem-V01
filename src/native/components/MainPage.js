@@ -110,6 +110,8 @@ class MainPage extends React.Component {
       drawer: {},
     };
 
+    console.log("2222 mainPage", this.props);
+
     // console.log("22222222 this.props", this.props);
 
     return (

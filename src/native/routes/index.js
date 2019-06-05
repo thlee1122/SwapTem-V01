@@ -106,6 +106,9 @@ import ConfirmNumberPageOne from '../components/ConfirmNumberPageOne';
 import ConfirmNumberPageTwo from '../components/ConfirmNumberPageTwo';
 import SignUpPage from '../components/SignUpPage';
 
+import TermsPage from '../components/TermsPage';
+
+
 import { Actions }                                        from 'react-native-router-flux';
 
 
@@ -228,7 +231,7 @@ const Index = (
       key="loginPages"
       hideNavBar
     >
-      <Scene key="loginPageOne" component={LoginPageOne} />
+      <Scene key="loginPageOne" back component={LoginPageOne} />
       <Scene key="loginPageTwo" component={LoginPageTwo} />
     </Stack>
 
