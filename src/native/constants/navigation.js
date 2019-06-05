@@ -6,6 +6,7 @@ export default {
     titleStyle: {
       color: Colors.textColor,
       flex: 1,
+      textAlign: 'center',
       alignSelf: 'center',
       letterSpacing: 2,
       // fontSize: Colors.fontSizeBase,
