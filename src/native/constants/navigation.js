@@ -7,7 +7,7 @@ export default {
       color: Colors.textColor,
       flex: 1,
       textAlign: 'center',
-      alignSelf: 'center',
+      // alignSelf: 'center',
       letterSpacing: 2,
       // fontSize: Colors.fontSizeBase,
       fontSize: 20,
