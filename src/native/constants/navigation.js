@@ -5,7 +5,8 @@ export default {
     navigationBarStyle: { backgroundColor: 'white', height: 72},
     titleStyle: {
       color: Colors.textColor,
-      flex: 1,
+      // flex: 1,
+      textAlignVertical: "center",
       textAlign: 'center',
       // alignSelf: 'center',
       letterSpacing: 2,

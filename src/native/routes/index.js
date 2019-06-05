@@ -246,8 +246,9 @@ const Index = (
 
     <Stack
       key="introPages"
+      {...DefaultProps.navbarProps}
     >
-      <Scene key="interestPage" title="Select your interests" component={InterestSelectionPage} />
+      <Scene key="interestPage" back title="Select your interests" component={InterestSelectionPage} />
 
 
     </Stack>
