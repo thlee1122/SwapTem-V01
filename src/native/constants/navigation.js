@@ -8,6 +8,7 @@ export default {
       // flex: 1,
       textAlignVertical: "center",
       textAlign: 'center',
+      width: '90%',
       alignSelf: 'center',
       letterSpacing: 2,
       // fontSize: Colors.fontSizeBase,
