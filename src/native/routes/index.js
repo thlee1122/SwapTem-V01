@@ -250,7 +250,7 @@ const Index = (
     >
       <Scene key="interestPage" back title="Select your interests" component={InterestSelectionPage} />
 
-
+      <Scene key="termsPage" back title="SwapTem Terms" component={TermsPage} />
     </Stack>
 
     
@@ -356,22 +356,23 @@ const Index = (
 
 
 
-        {/* <Stack
+        <Stack
           key="registerItem"
+          hideNavBar
           title="REGISTER ITEM"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
           onPress={() => { alert("sdsdsds")}}
-          icon={() => <FontAwesomeIcon name="camera" size={23} color="white"/>}
-          {...DefaultProps.navbarProps}
+          icon={() => <FeatherIcon name="camera" size={30} color="black"/>}
+          // {...DefaultProps.navbarProps}
         >
 
-          <!-- Comment out START -->
-          <Scene key="registerItemSubmission" component={RegisterItemSubmissionPage} />
-          <Scene key="registerItem" component={LocaleContainer} Layout={RegisterItemComponent} />
-          <!-- Comment out END -->
+          
+          {/* <Scene key="registerItemSubmission" component={RegisterItemSubmissionPage} />
+          <Scene key="registerItem" component={LocaleContainer} Layout={RegisterItemComponent} /> */}
+          
 
           <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
-        </Stack> */}
+        </Stack>
 
          {/* <Stack
           hideNavBar 

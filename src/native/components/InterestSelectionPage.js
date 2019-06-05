@@ -112,7 +112,8 @@ class InterestSelectionPage extends Component {
                 marginTop: 30,
                 marginBottom: 30
               }}
-              onPress={ () => { Actions.home() }}
+              // onPress={ () => { Actions.home() }}
+              onPress={ () => { Actions.termsPage() }}
             >
               <Text style={{fontSize: 14, fontWeight: 'bold', textAlign: 'center', marginTop: 18}}>
               Continue

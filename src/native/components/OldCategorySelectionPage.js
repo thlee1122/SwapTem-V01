@@ -1,7 +1,6 @@
 import React                                              from "react";
 import get                                                from 'lodash.get';
-import { View, TextInput, TouchableOpacity, 
-         SafeAreaView, Dimensions, Image }              from 'react-native';
+import { View, TextInput, TouchableOpacity }              from 'react-native';
 import { Text, Button }                                   from 'native-base';
 import SectionedMultiSelect                               from 'react-native-sectioned-multi-select';
 import FeatherIcon                                        from 'react-native-vector-icons/Feather';
@@ -100,33 +99,8 @@ class NewCategorySelectionPage extends React.Component {
             newMainCategorySelected, newMainCategory, newSubCategorySelected, 
             newSubCategory, handleInputSubmit, handleRecommendCategoryButton } = this.props;
 
-    const { height, width } = Dimensions.get('window');
-
-    const imageFile = require("../../../images/02.png")
-
     return (
-      <SafeAreaView>
-        <View
-          style={{backgroundColor: 'black', height: height * 0.35}}
-        >
-          <View style={{flexDirection: 'row'}}>
-            <Image 
-              source={imageFile}
-              style={{
-                width: 60, 
-                height: 60,
-                alignSelf: 'center',
-                marginRight: 20,
-                borderWidth: 1,
-                borderColor: 'white',
-                padding: 10
-              }}
-            />
-            <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold', lineHeight: 24}}>
-              Please select your categories
-            </Text>
-          </View>
-        </View>
+      <React.Fragment>
         <View style={{
           marginTop: 100,
           width: 330, 
@@ -403,7 +377,7 @@ class NewCategorySelectionPage extends React.Component {
             <Text style={styles.hashTagePageButtonText}>Next</Text>
           </Button>
         </View>
-      </SafeAreaView>
+      </React.Fragment>
     );
   }
 }
