@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window');
 export default StyleSheet.create({
   profileHeadShot: {
     marginLeft: "4.27%",
-    marginTop: height * 0.15,
+    marginTop: 134,
     width: 94, 
     height: 94, 
     backgroundColor:'#959595',

@@ -64,13 +64,14 @@ class Profile extends React.Component {
     const data = get(getItem, "data", []);
     const { height, width } = Dimensions.get('window');
 
-
+    console.log("profile height", height * 0.5);
     console.log("@@@ this.props", this.props);
+    console.log("#######", height * 0.15);
 
     return (
       <Content style={{backgroundColor: 'white'}}>
         
-        <View style={{ flex: 1, backgroundColor: '#000000', height: height * 0.5 }}>
+        <View style={{ flex: 1, backgroundColor: '#000000', height: 448 }}>
           <View style={styles.profileHeadShot} />
         
           <View style={styles.profileHeaderContent}>
