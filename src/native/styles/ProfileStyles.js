@@ -5,7 +5,7 @@ const { height, width } = Dimensions.get('window');
 export default StyleSheet.create({
   profileHeadShot: {
     marginLeft: "4.27%",
-    marginTop: "19.83%",
+    marginTop: height * 0.15,
     width: 94, 
     height: 94, 
     backgroundColor:'#959595',
@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
 
   profileHeaderContent: {
-    flex: 1, 
+    // flex: 1, 
     flexDirection: 'column', 
     marginLeft: 20, 
     marginTop: 35
@@ -34,7 +34,7 @@ export default StyleSheet.create({
   },
 
   profileRating: {
-    flex: 1, 
+    // flex: 1, 
     flexDirection: 'row', 
     marginTop: 10
   },
