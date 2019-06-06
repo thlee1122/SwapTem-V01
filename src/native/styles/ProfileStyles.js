@@ -72,7 +72,7 @@ export default StyleSheet.create({
     marginRight: '8%',
     width: '16%',
     textAlign: 'center'
-  }
+  },
 
   profileReviewSection: {
     flex: 1, 
