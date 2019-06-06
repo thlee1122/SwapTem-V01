@@ -8,7 +8,7 @@ import { Container, Content, List, ListItem, Body,
 import { Actions }                                      from 'react-native-router-flux';
 import FeatherIcon                                      from 'react-native-vector-icons/Feather';
 import Ionicons                                         from 'react-native-vector-icons/Ionicons';
-import { getUserInfo }                                  from '../../actions/userInfoActions';
+import { getUserInfo, getUserProfileInfo}               from '../../actions/userInfoActions';
 import { getItem }                                      from '../../actions/registerItemActions';
 import StarRating                                       from 'react-native-star-rating';
 import { ProgressBar }                                  from 'react-native-paper';
@@ -26,6 +26,7 @@ class Profile extends React.Component {
 
   componentWillMount() {
     this.props.getItem();
+    this.props.getUserProfileInfo("banner");
   }
 
   handleFollowButton = () => {
@@ -57,16 +58,23 @@ class Profile extends React.Component {
 
   render() {
     const { userInfo } = this.props.userInfo;
+    const { userProfileInfo } = this.props.userInfo;
+
     const MyReviews = get(userInfo, "MyReviews", []);
-    const name = get(userInfo, "name", "");
+    // const name = get(userInfo, "name", "");
+    const name = get(userProfileInfo, "name", "");
+
     const { registerItem } = this.props;
     const getItem = get(registerItem, "getItem", {});
     const data = get(getItem, "data", []);
     const { height, width } = Dimensions.get('window');
 
-    console.log("profile height", height * 0.5);
-    console.log("@@@ this.props", this.props);
-    console.log("#######", height * 0.15);
+    // console.log("11111 profile", height);
+    // console.log("profile height", height * 0.5);
+    // console.log("@@@ this.props", this.props);
+    // console.log("#######", height * 0.15);
+
+    console.log("11111 profile this.props", this.props);
 
     return (
       <Content style={{backgroundColor: 'white'}}>
@@ -76,8 +84,8 @@ class Profile extends React.Component {
         
           <View style={styles.profileHeaderContent}>
             <Text style={styles.profileName}>
-              {/* {name} */}
-              Alexandria Zoltowski
+              {name}
+              {/* Alexandria Zoltowski */}
             </Text>
 
             {/* <Text style={styles.profileDesc}>
@@ -385,7 +393,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getItem: getItem,
-  getUserInfo: getUserInfo
+  getUserInfo: getUserInfo,
+  getUserProfileInfo: getUserProfileInfo
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
