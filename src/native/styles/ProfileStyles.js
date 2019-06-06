@@ -64,6 +64,16 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
 
+  profileStateThree: {
+    color: '#ECEBEB', 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    lineHeight: 24, 
+    marginRight: '8%',
+    width: '16%',
+    textAlign: 'center'
+  }
+
   profileReviewSection: {
     flex: 1, 
     flexDirection: 'row'

@@ -103,18 +103,18 @@ class Profile extends React.Component {
 
           <View style={styles.profileStatSection}>
             <Text style={styles.profileStateOne}>
-              10 Products
+              10 {"\n"}Products
             </Text>
 
             <Text style={styles.profileStateOne}>
-              XX Trades
+              XX {"\n"}Trades
             </Text>
 
             <View style={styles.profileReviewSection}>
               <Ionicons name="ios-arrow-forward" color="#ECEBEB" size={22} style={{marginTop: 25, marginRight: 10}}/>
 
               <Text style={styles.profileStateTwo}>
-                XX Reviews
+                XX {"\n"}Reviews
               </Text>
             </View>
           </View>
