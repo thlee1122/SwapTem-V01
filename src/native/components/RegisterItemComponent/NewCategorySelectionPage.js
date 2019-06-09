@@ -116,6 +116,10 @@ class NewCategorySelectionPage extends React.Component {
           // backgroundColor="blue"
           barStyle="light-content"
           translucent={true}
+          style={{
+            color: 'white',
+            zIndex: 10
+          }}
         />
         <View
           style={{backgroundColor: 'black', height: 300}}
