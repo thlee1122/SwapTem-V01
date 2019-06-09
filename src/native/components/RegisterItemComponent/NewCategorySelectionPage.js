@@ -111,7 +111,7 @@ class NewCategorySelectionPage extends React.Component {
     const imageFile = require("../../../images/02.png")
 
     return (
-      <SafeAreaView style={{backgroundColor: 'black'}}>
+      <SafeAreaView style={{marginTop: -20, backgroundColor: 'black'}}>
         <StatusBar
           // backgroundColor="blue"
           barStyle="light-content"
