@@ -1,6 +1,6 @@
 import React, { Component }  from 'react';
 import { View, Image, TouchableOpacity, Dimensions, 
-         SafeAreaView, Text, Platform }                   from 'react-native';
+         SafeAreaView, Text, Platform, StatusBar }                   from 'react-native';
 
 
 
@@ -112,6 +112,38 @@ import TermsPage from '../components/TermsPage';
 import { Actions }                                        from 'react-native-router-flux';
 
 
+// const MyStatusBar = ({backgroundColor, ...props}) => (
+//   <View style={[styles.statusBar, { backgroundColor }]}>
+//     <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+//   </View>
+// );
+
+// class DarkTheme extends Component {
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <MyStatusBar backgroundColor="#5E8D48" barStyle="light-content" />
+//         <View style={styles.appBar} />
+//         <View style={styles.content} />
+//       </View>
+//     );
+//   }
+// }
+
+// class BlackStatusBar extends Component {
+//   render() {
+//     return (
+//       <View style={{backgroundColor: 'black'}}>
+//         <StatusBar 
+//           // translucent 
+//           backgroundColor='black' 
+//           // barStyle="light-content" 
+//         />
+//       </View>
+//     );
+//   }
+// }
+
 class NavBar extends Component {
 
   constructor(props) {
@@ -133,7 +165,8 @@ class NavBar extends Component {
         initialRouteName !== 'profileHome' && this.props.routeName !== "reviewPage" ?
         <SafeAreaView 
           style={{
-            backgroundColor: initialRouteName === 'profileHome' ? '#000000' : '#fff'
+            backgroundColor: initialRouteName === 'profileHome' || initialRouteName === 'registerItem' ? 
+            '#000000' : '#fff'
           }}
         >
           <View 
@@ -357,11 +390,13 @@ const Index = (
 
 
         <Stack
-          key="registerItem"
+          key="mainRegisterItem"
+          // navBar={NavBar}
+          // navBar={BlackStatusBar}
           hideNavBar
           title="REGISTER ITEM"
           // icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          onPress={() => { alert("sdsdsds")}}
+          // onPress={() => { alert("sdsdsds")}}
           icon={() => <FeatherIcon name="camera" size={30} color="black"/>}
           // {...DefaultProps.navbarProps}
         >

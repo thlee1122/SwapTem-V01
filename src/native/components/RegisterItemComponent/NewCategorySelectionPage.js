@@ -1,11 +1,15 @@
 import React                                              from "react";
 import get                                                from 'lodash.get';
 import { View, TextInput, TouchableOpacity, 
-         SafeAreaView, Dimensions, Image }              from 'react-native';
+         SafeAreaView, Dimensions, Image, StatusBar }              from 'react-native';
 import { Text, Button }                                   from 'native-base';
 import SectionedMultiSelect                               from 'react-native-sectioned-multi-select';
 import FeatherIcon                                        from 'react-native-vector-icons/Feather';
 import MaterialIcon                                       from 'react-native-vector-icons/MaterialIcons';
+
+import MaterialCommunityIcons                       from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
 import styles                                             from '../../styles/RegisterItemStyles';
 import { mainCategories, FashionSubCategories,
          ElectronicsSubCategories, BooksSubCategories, 
@@ -102,32 +106,156 @@ class NewCategorySelectionPage extends React.Component {
 
     const { height, width } = Dimensions.get('window');
 
+    // StatusBar.setBackgroundColor('red', true);
+
     const imageFile = require("../../../images/02.png")
 
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{marginTop: -20, backgroundColor: 'black'}}>
+        <StatusBar
+          // backgroundColor="blue"
+          barStyle="light-content"
+          translucent={true}
+        />
         <View
-          style={{backgroundColor: 'black', height: height * 0.35}}
+          style={{backgroundColor: 'black', height: 300}}
         >
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row', marginLeft: 16, marginTop: 180, marginRight: 16}}>
             <Image 
               source={imageFile}
               style={{
-                width: 60, 
-                height: 60,
+                width: 70,
+                height: 50,
                 alignSelf: 'center',
                 marginRight: 20,
-                borderWidth: 1,
-                borderColor: 'white',
-                padding: 10
+                // borderWidth: 1,
+                // borderColor: 'white',
+                // padding: 10,
               }}
             />
-            <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold', lineHeight: 24}}>
+            <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 24, width: 260}}>
               Please select your categories
             </Text>
           </View>
         </View>
-        <View style={{
+
+        <View style={{paddingTop: 31, paddingLeft: 16, paddingRight: 16, backgroundColor: 'white'}}>
+          <View style={{flexDirection: 'column'}}>
+            <Text style={{fontSize: 16, lineHeight: 24}}>
+              {`You have uploaded `}
+              <Text style={{fontWeight: 'bold', fontSize: 16, lineHeight: 24}}>
+                {`${this.predictionTag}.`}
+              </Text>
+            </Text>
+
+            <Text style={{fontSize: 16, lineHeight: 24}}>
+              Here are recommended categories.
+            </Text>
+          </View>
+
+          <View style={{marginTop: 58}}>
+            <View>
+              <Text style={{fontSize: 12, color: "#A3A3A2", lineHeight: 16}}>
+                Main Category
+              </Text>
+
+              <TouchableOpacity 
+                style={{
+                  borderBottomWidth: 1, 
+                  borderBottomColor: "#A3A3A2", 
+                  height: 56, 
+                  width: '100%',
+                  flexDirection: 'row'
+                }}
+              >
+                <Text style={{fontSize: 16, lineHeight: 24, paddingTop: 14}}>
+                  {this.predictionMainCategoryName}
+                </Text>
+
+                <MaterialCommunityIcons 
+                  name="arrow-right" 
+                  size={30} 
+                  color="black"
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    marginTop: 12
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+
+
+            <View style={{marginTop: 33}}>
+              <Text style={{fontSize: 12, color: "#A3A3A2", lineHeight: 16}}>
+                Sub Category
+              </Text>
+
+              <TouchableOpacity 
+                style={{
+                  borderBottomWidth: 1, 
+                  borderBottomColor: "#A3A3A2", 
+                  height: 56, 
+                  width: '100%',
+                  flexDirection: 'row'
+                }}
+              >
+                <Text style={{fontSize: 16, lineHeight: 24, paddingTop: 14}}>
+                  {this.predictionSubCategoryName}
+                </Text>
+
+                <MaterialCommunityIcons 
+                  name="arrow-right" 
+                  size={30} 
+                  color="black"
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                    marginTop: 12
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={{alignSelf: 'center'}}>
+            <TouchableOpacity 
+              style={{
+                flexDirection: 'row', 
+                
+                // right: 0,
+                borderWidth: 1,
+                borderRadius: 30,
+                width: 278,
+                height: 58,
+                marginTop: 50
+              }}
+              // onPress={ () => { Actions.confirmNumberPageTwo() }}
+            >
+              <Text 
+                style={{
+                  fontSize: 14, 
+                  fontWeight: 'bold', 
+                  lineHeight: 20,
+                  flex: 1,
+                  textAlign: 'center',
+                  marginTop: 18,
+                }}
+              >
+                Continue
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        
+
+
+
+
+
+
+
+        {/* <View style={{
           marginTop: 100,
           width: 330, 
           alignSelf: 'center'
@@ -402,7 +530,7 @@ class NewCategorySelectionPage extends React.Component {
           >
             <Text style={styles.hashTagePageButtonText}>Next</Text>
           </Button>
-        </View>
+        </View> */}
       </SafeAreaView>
     );
   }
