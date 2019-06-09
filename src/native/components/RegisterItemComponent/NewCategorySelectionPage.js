@@ -111,16 +111,17 @@ class NewCategorySelectionPage extends React.Component {
     const imageFile = require("../../../images/02.png")
 
     return (
+      <React.Fragment>
+      <StatusBar
+        // backgroundColor="blue"
+        barStyle="light-content"
+        translucent={true}
+        style={{
+          color: 'white',
+          zIndex: 10
+        }}
+      />
       <SafeAreaView style={{marginTop: -20, backgroundColor: 'black'}}>
-        <StatusBar
-          // backgroundColor="blue"
-          barStyle="light-content"
-          translucent={true}
-          style={{
-            color: 'white',
-            zIndex: 10
-          }}
-        />
         <View
           style={{backgroundColor: 'black', height: 300}}
         >
@@ -536,6 +537,7 @@ class NewCategorySelectionPage extends React.Component {
           </Button>
         </View> */}
       </SafeAreaView>
+      </React.Fragment>
     );
   }
 }
