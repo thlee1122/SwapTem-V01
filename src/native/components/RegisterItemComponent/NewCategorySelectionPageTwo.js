@@ -1,6 +1,5 @@
 import React                                              from "react";
 import get                                                from 'lodash.get';
-import { Actions }                                        from 'react-native-router-flux';
 import { View, TextInput, TouchableOpacity, 
          SafeAreaView, Dimensions, Image, StatusBar }              from 'react-native';
 import { Text, Button }                                   from 'native-base';
@@ -12,7 +11,7 @@ import MaterialCommunityIcons                       from 'react-native-vector-ic
 
 
 import styles                                             from '../../styles/RegisterItemStyles';
-import { mainCategoriesData, FashionSubCategories,
+import { mainCategories, FashionSubCategories,
          ElectronicsSubCategories, BooksSubCategories, 
          HomeSubCategories, GamingSubCategories }         from '../../data/sampleRegisterItemData';
 
@@ -21,9 +20,7 @@ class NewCategorySelectionPage extends React.Component {
     super(props);
 
     this.state = {
-      showCategoryDropdowns: false,
-
-      selectedMainCategory: ""
+      showCategoryDropdowns: false
     };
 
     this.predictionMainCategoryName = "";
@@ -32,8 +29,6 @@ class NewCategorySelectionPage extends React.Component {
     this.predictionSubCategoryId = "";
     this.newMainCategorySelected = false;
     this.predictionTag = "";
-
-    this.tempMainCategories = [];
   }
 
   componentWillMount() {
@@ -60,15 +55,9 @@ class NewCategorySelectionPage extends React.Component {
     this.predictionSubCategoryId = [subId];
     this.predictionTag = predictionTag;
 
-    this.tempMainCategories = tempMainCategories.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
-
     tempMainCategories.map((item, index) => {
       if(item.id === parentId) {
         this.predictionMainCategoryName = item.name;
-
-        this.setState({
-          selectedMainCategory: item.name
-        });
       }
     });
 
@@ -115,18 +104,11 @@ class NewCategorySelectionPage extends React.Component {
             newMainCategorySelected, newMainCategory, newSubCategorySelected, 
             newSubCategory, handleInputSubmit, handleRecommendCategoryButton } = this.props;
 
-    // const tempMainCategories = mainCategories[0].children;
-
-
-
     const { height, width } = Dimensions.get('window');
 
     // StatusBar.setBackgroundColor('red', true);
 
     const imageFile = require("../../../images/02.png")
-
-    // console.log("111111 mainCategoriesData", mainCategoriesData);
-    // console.log("222222 this.tempMainCategories", this.tempMainCategories);
 
     return (
       <React.Fragment>
@@ -156,7 +138,7 @@ class NewCategorySelectionPage extends React.Component {
                 // padding: 10,
               }}
             />
-            <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 26, width: 260}}>
+            <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 24, width: 260}}>
               Please select your categories
             </Text>
           </View>
@@ -190,16 +172,9 @@ class NewCategorySelectionPage extends React.Component {
                   width: '100%',
                   flexDirection: 'row'
                 }}
-
-                onPress={ () => { Actions.mainCategorySelection({ 
-                  mainCategoriesData: this.tempMainCategories, 
-                  selectedMainCategory: this.state.selectedMainCategory
-                  // locationCoordinates: locationCoordinates 
-                }) }}
               >
                 <Text style={{fontSize: 16, lineHeight: 24, paddingTop: 14}}>
-                  {/* {this.predictionMainCategoryName} */}
-                  {this.state.selectedMainCategory}
+                  {this.predictionMainCategoryName}
                 </Text>
 
                 <MaterialCommunityIcons 
@@ -260,11 +235,7 @@ class NewCategorySelectionPage extends React.Component {
                 height: 58,
                 marginTop: 50
               }}
-              // onPress={ () => { Actions.mainCategorySelection({ 
-              //   mainCategoryData: mainCategories, 
-              //   selectedMainCategory: this.state.selectedMainCategory
-              //   // locationCoordinates: locationCoordinates 
-              // }) }}
+              // onPress={ () => { Actions.confirmNumberPageTwo() }}
             >
               <Text 
                 style={{

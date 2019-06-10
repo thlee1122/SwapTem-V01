@@ -2,7 +2,12 @@ import * as types from '../actions/userInfoTypes';
 
 export const initialState = {
   userInfo: {},
-  userProfileInfo: {}
+  // userProfileInfo: {}
+  bannerInfo: {},
+
+  badgeInfo: [],
+
+  itemInfo: []
 };
 
 const userInfo = (state = initialState, action) => {
@@ -25,12 +30,33 @@ const userInfo = (state = initialState, action) => {
       return { ...state, loading: true, data: null };
 
     case types.GET_USER_PROFILE_INFO_BANNER_SUCCESS:
-      return { ...state, loading: false, userProfileInfo: action.data };
+      return { ...state, loading: false, bannerInfo: action.data };
 
     case types.GET_USER_PROFILE_INFO_BANNER_ERROR:
       return { ...state, loading: false, error: action.data };
 
+
+
+    case types.GET_USER_PROFILE_INFO_BADGE_LOADING:
+      return { ...state, loading: true, data: null };
+
+    case types.GET_USER_PROFILE_INFO_BADGE_SUCCESS:
+      return { ...state, loading: false, badgeInfo: action.data }; 
+
+    case types.GET_USER_PROFILE_INFO_BADGE_ERROR:
+      return { ...state, loading: false, error: action.data };
+
       
+
+    case types.GET_USER_PROFILE_INFO_ITEM_LOADING: 
+      return { ...state, loading: true, data: null };
+
+    case types.GET_USER_PROFILE_INFO_ITEM_SUCCESS:
+      return { ...state, loading: false, itemInfo: action.data }; 
+
+    case types.GET_USER_PROFILE_INFO_ITEM_ERROR: 
+      return { ...state, loading: false, error: action.data };
+
     default: {
       return state;
     }

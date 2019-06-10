@@ -108,6 +108,8 @@ import SignUpPage from '../components/SignUpPage';
 
 import TermsPage from '../components/TermsPage';
 
+import MainCategorySelectionPage  from '../components/MainCategorySelectionPage';
+
 
 import { Actions }                                        from 'react-native-router-flux';
 
@@ -407,6 +409,8 @@ const Index = (
           
 
           <Scene key="registerItem" component={LocaleContainer} Layout={NewRegisterItemComponent} />
+
+          <Scene back key="mainCategorySelection" component={MainCategorySelectionPage} />
         </Stack>
 
          {/* <Stack

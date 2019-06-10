@@ -1,23 +1,26 @@
+
+
 export const mainCategories = [
-  {  
-    name: "Main Categories",
-    children: [{
-        name: "Fashion",
-        id: 0,
-      },{
-        name: "Electronics",
-        id: 1,
-      },{
-        name: "Books",
-        id: 2,
-      },{
-        name: "Gaming",
-        id: 3,
-      },{
-        name: "Home",
-        id: 4,
-      }]
+  {
+    name: "Fashion",
+    id: 0
   },
+  {
+    name: "Electronics",
+    id: 1
+  },
+  {
+    name: "Books",
+    id: 2
+  },
+  {
+    name: "Gaming",
+    id: 3
+  },
+  {
+    name: "Home",
+    id: 4
+  }
 ];
 
 export const FashionSubCategories = [

@@ -34,16 +34,16 @@ export const getUserProfileInfo = (profileSection) => {
         endpoint: `http://3.17.41.182:3000/v1/user/my-profile?type=${profileSection}`,
         actionTypes: {
           success: profileSection === "banner" ? types.GET_USER_PROFILE_INFO_BANNER_SUCCESS : 
-          profileSection === "badge" ? GET_USER_PROFILE_INFO_BADGE_SUCCESS : 
-          profileSection === "item" ? GET_USER_PROFILE_INFO_ITEM_SUCCESS : null,
+          profileSection === "badge" ? types.GET_USER_PROFILE_INFO_BADGE_SUCCESS : 
+          profileSection === "item" ? types.GET_USER_PROFILE_INFO_ITEM_SUCCESS : null,
 
           loading: profileSection === "banner" ? types.GET_USER_PROFILE_INFO_BANNER_LOADING : 
-          profileSection === "badge" ? GET_USER_PROFILE_INFO_BADGE_LOADING : 
-          profileSection === "item" ? GET_USER_PROFILE_INFO_ITEM_LOADING : null,
+          profileSection === "badge" ? types.GET_USER_PROFILE_INFO_BADGE_LOADING : 
+          profileSection === "item" ? types.GET_USER_PROFILE_INFO_ITEM_LOADING : null,
 
           error: profileSection === "banner" ? types.GET_USER_PROFILE_INFO_BANNER_ERROR : 
-          profileSection === "badge" ? GET_USER_PROFILE_INFO_BADGE_ERROR : 
-          profileSection === "item" ? GET_USER_PROFILE_INFO_ITEM_ERROR : null,
+          profileSection === "badge" ? types.GET_USER_PROFILE_INFO_BADGE_ERROR : 
+          profileSection === "item" ? types.GET_USER_PROFILE_INFO_ITEM_ERROR : null,
 
           // success: types.GET_USER_PROFILE_INFO_BANNER_SUCCESS,
           // loading: types.GET_USER_PROFILE_INFO_BANNER_LOADING,

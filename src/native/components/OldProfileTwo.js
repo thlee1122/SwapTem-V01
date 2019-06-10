@@ -28,6 +28,7 @@ class Profile extends React.Component {
     this.props.getItem();
     this.props.getUserProfileInfo("banner");
     this.props.getUserProfileInfo("badge");
+
     this.props.getUserProfileInfo("item");
   }
 
@@ -59,16 +60,38 @@ class Profile extends React.Component {
   }
 
   render() {
-    const { userInfo, bannerInfo, badgeInfo, itemInfo } = this.props.userInfo;
+    const { userInfo } = this.props.userInfo;
+    
+    const { bannerInfo, badgeInfo, itemInfo } = this.props.userInfo;
+    // const badgeInfo = get(this.props.userInfo, "badgeInfo", []);
+
+    const MyReviews = get(userInfo, "MyReviews", []);
+    // const name = get(userInfo, "name", "");
+
+
     const name = get(bannerInfo, "name", "");
     const itemCount = get(bannerInfo, "item_count", 0);
     const rating = get(bannerInfo, "rating", 0);
     const reviewCount = get(bannerInfo, "review_count", 0);
     const tradeCount = get(bannerInfo, "tradeCount", 0);
+
+
+
     const { registerItem } = this.props;
     const getItem = get(registerItem, "getItem", {});
     const data = get(getItem, "data", []);
     const { height, width } = Dimensions.get('window');
+
+    // console.log("11111 profile", height);
+    // console.log("profile height", height * 0.5);
+    // console.log("@@@ this.props", this.props);
+    // console.log("#######", height * 0.15);
+
+    console.log("11111 profile this.props", this.props);
+
+    console.log("33333 profile badgeInfo", badgeInfo);
+
+    console.log("44444 profile data", data);
 
     return (
       <Content style={{backgroundColor: 'white'}}>
@@ -79,10 +102,16 @@ class Profile extends React.Component {
           <View style={styles.profileHeaderContent}>
             <Text style={styles.profileName}>
               {name}
+              {/* Alexandria Zoltowski */}
             </Text>
+
+            {/* <Text style={styles.profileDesc}>
+              Head of UX @Yelp
+            </Text> */}
 
             <View style={styles.profileRating}>
               <Text style={styles.profileRatingNum}>
+                {/* {MyReviews.length} */}
                 {rating === null ? 0 : rating}
               </Text>
 
@@ -115,6 +144,28 @@ class Profile extends React.Component {
             </View>
           </View>
         </View>
+
+        {/* <View>
+          <Text style={styles.profileContentIntro}>
+            Boost your reputation by confirming your information.
+          </Text>
+
+          <Text
+            style={styles.privacyLink}
+            onPress={Actions.privacy}
+            // onPress={this._goToURL}
+          >
+            How we protect your privacy
+          </Text>
+
+          <View style={styles.progressSection}>
+            <ProgressBar progress={0.65} color='black' style={{width: width*0.8, alignSelf: 'center'}}/>
+
+            <Text style={styles.progressPercent}>
+              65% completed
+            </Text>
+          </View>
+        </View> */}
 
         <View style={styles.contentMainBackground}>
           <View style={styles.verificationSection}>
@@ -149,6 +200,26 @@ class Profile extends React.Component {
                 })
               }
               {/* <TouchableOpacity style={{flexDirection: 'column', flex: 1}}>
+                <View style={{backgroundColor: 'black', width: 64, height: 64, borderRadius: 50, alignSelf: 'center'}}>
+                  <FeatherIcon name="phone" size={25} color="white" style={{alignSelf: 'center', marginTop: 18}}/>
+                </View>
+
+                <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
+                  Phone
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{flexDirection: 'column', flex: 1}}>
+                <View style={{backgroundColor: 'black', width: 64, height: 64, borderRadius: 50, alignSelf: 'center'}}>
+                  <FeatherIcon name="mail" size={25} color="white" style={{alignSelf: 'center', marginTop: 18}}/>
+                </View>
+
+                <Text style={{fontSize: 14, lineHeight: 20, textAlign: 'center', flex: 1, marginTop: 16}}>
+                  Email
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={{flexDirection: 'column', flex: 1}}>
                 <View 
                   style={{
                     backgroundColor: 'white', 
@@ -172,6 +243,112 @@ class Profile extends React.Component {
         </View>
         
         <View style={styles.contentMainBackground}>
+          {/* <View style={styles.verificationSection}>
+            <Text style={styles.verificationTitle}>
+              Verifications
+            </Text>
+
+            <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+              <Left>
+                <FeatherIcon name="phone" size={22} color="black" />
+              </Left>
+              <Body style={{borderBottomWidth: 0}}>
+                <Text>
+                  Phone verified
+                </Text>
+              </Body>
+            </ListItem>
+
+            <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+              <Left>
+                <FeatherIcon name="mail" size={22} color="black" />
+              </Left>
+              <Body style={{borderBottomWidth: 0}}>
+                <Text>
+                  Email verified
+                </Text>
+              </Body>
+            </ListItem>
+
+            <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+              <Left>
+                <FeatherIcon name="facebook" size={22} color="#A3A3A2" />
+              </Left>
+              <Body style={{borderBottomWidth: 0}}>
+                <Text style={{color: '#A3A3A2'}}>
+                  Facebook verification needed
+                </Text>
+              </Body>
+
+              <Right style={{borderBottomWidth: 0}}>
+                <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={styles.verificationArrow}/>
+              </Right>
+            </ListItem>
+          </View> */}
+
+          {/* <View style={styles.likeShareSection}>
+            <ListItem
+              onPress={ () => { Actions.likedItems({ userInfo: userInfo }) }} 
+              icon 
+              style={styles.verificationListItem}>
+              <Left>
+                <FeatherIcon name="heart" size={22} color="#A3A3A2" />
+              </Left>
+              <Body style={{borderBottomWidth: 0}}>
+                <Text style={{color: "#A3A3A2"}}>
+                  View your liked items
+                </Text>
+              </Body>
+
+              <Right style={{borderBottomWidth: 0}}>
+                <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={{marginLeft: 10, marginTop: 14}}/>
+              </Right>
+            </ListItem>
+
+            <ListItem onPress={Actions.forgotPassword} icon style={styles.verificationListItem}>
+              <Left>
+                <FeatherIcon name="share-2" size={22} color="#A3A3A2" />
+              </Left>
+              <Body style={{borderBottomWidth: 0}}>
+                <Text style={{color: "#A3A3A2"}}>
+                  View your shared items
+                </Text>
+              </Body>
+
+              <Right style={{borderBottomWidth: 0}}>
+                <FeatherIcon name="arrow-right" color="#A3A3A2" size={24} style={{marginLeft: 10, marginTop: 14}}/>
+              </Right>
+            </ListItem>
+          </View> */}
+
+          {/* Store Title and Heading Section START */}
+          {/* <View style={styles.storeSection}>
+            <FeatherIcon 
+              name="edit-2" 
+              size={24} 
+              color="#A3A3A2" 
+              style={styles.storeEditIcon} 
+              onPress={ () => { Actions.editStore({ userItems: data }) }} 
+            />
+
+            <View style={styles.storeContent}>
+              <Text style={styles.storeTitle}>
+                Welcome to Zoltowski Shop
+              </Text>
+
+              <Text style={styles.storeDesc}>
+                One-of-a-kind unique items for every kind of Men
+              </Text>
+            </View>
+
+            <TouchableOpacity style={styles.storeAnalyticsButton}>
+              <Text style={styles.storeAnalyticsButtonText}>
+                View Analytics
+              </Text>
+            </TouchableOpacity>
+          </View> */}
+          {/* Store Title and Heading Section END */}
+
           {/* Profile page product feed START */}
           <View style={styles.itemFeedSection}>
             <View style={styles.itemRow}>
@@ -179,9 +356,14 @@ class Profile extends React.Component {
                 itemInfo.map((item, index) => {
                   const hashTags = item.HashTags;
                   let itemHashTags = [];
+
                   const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
+
                   const itemPrice = (Number(item.price).toFixed(2) / 100);
-                  // let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);                  
+                  // let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
+                  
+                  // let cartUserIdArray = [];
+                  
                   // const locationCoordinates = item.User.location.coordinates;
 
                   for(let i = 0; i < hashTags.length; i++) {
@@ -241,8 +423,75 @@ class Profile extends React.Component {
                   );
                 })
               }
+              {/* {
+                data.map((item, index) => {
+                  const hashTags = item.HashTags;
+                  const thumbnailUrl = `https://s3.us-east-2.amazonaws.com/swaptem/${item.ItemFiles[0].thumbPath}`;
+                  let itemPrice = Number(item.price).toFixed(2);
+                  let itemHashTags = [];
+                  let itemDistance = (Number(item.distance) / 1609.344).toFixed(2);
+                  let cartUserIdArray = [];
+                  const locationCoordinates = item.User.location.coordinates;
+                  
+                  for(let i = 0; i < hashTags.length; i++) {
+                    let text = `#${hashTags[i].text}`;
+                    itemHashTags.push(text);
+                  }
+
+                  return (
+                    <TouchableOpacity
+                      style={{
+                        marginBottom: 10, 
+                        width: "44%",
+                        marginLeft: index === 0 || index % 2 === 0 ? 16 : 0,
+                        marginRight: index === 0 || index % 2 === 0 ? 16 : 0
+                      }} 
+                      key={item.id}
+                      onPress={ () => { Actions.singleProduct({ singleProduct: item, locationCoordinates: locationCoordinates }) }}
+                    >
+                    <View style={styles.itemCardTopSection}>
+                      <Image 
+                        source={{uri: thumbnailUrl}}
+                        style={styles.itemImage}
+                      />
+                      
+                      <View style={styles.itemPillSection}>
+                        {
+                          item.sell === true ?
+                          <View style={styles.sellPill}>
+                            <Text style={styles.sellPillText}>
+                              Sell
+                            </Text>
+                          </View>
+                          : null
+                        }
+
+                        {
+                          item.swap === true ?
+                          <View style={styles.swapPill}>
+                            <Text style={styles.swapPillText}>
+                              Swap
+                            </Text>
+                          </View>
+                          : null
+                        }
+                      </View>
+
+                      <Text style={styles.itemHashTag}>
+                        {itemHashTags.join(" ")}
+                      </Text>
+
+                      <Text style={styles.itemPrice}>
+                        {`$${itemPrice}`}
+                      </Text>
+                    </View>
+                    </TouchableOpacity>
+                  );
+                })
+              } */}
             </View>
           </View>
+              
           {/* Profile page product feed END */}                  
         </View>
       </Content>
