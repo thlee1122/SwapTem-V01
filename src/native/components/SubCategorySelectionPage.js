@@ -4,37 +4,75 @@ import { View, Image, TouchableOpacity, SafeAreaView,
 import { Container, Content, List, Text }                 from 'native-base';
 import { Actions }                                        from 'react-native-router-flux';
 import Ionicons                                                     from 'react-native-vector-icons/Ionicons';
-import FeatherIcon          from 'react-native-vector-icons/Feather';
+import FeatherIcon                            from 'react-native-vector-icons/Feather';
+// import { FashionSubCategories, ElectronicsSubCategories, 
+//          BooksSubCategories, HomeSubCategories, 
+//          GamingSubCategories }         from '../data/sampleRegisterItemData';
 // import { connect }                                     from 'react-redux';
 
-class MainCategorySelectionPage extends Component {
+class SubCategorySelectionPage extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      mainCategorySearchText: '',
+      subCategorySearchText: '',
+
+      // mainCategorySearchText: '',
       // mainCategoriesData: []
-      finalSelectedMainCategory: ''
+      finalSelectedMainCategory: '',
+
+      finalSelectedSubCategory: '',
+
+      // subCategoryArray: []
     };
+
+    this.subCategoryArray = [];
   }
 
   componentWillMount() {
     // const { mainCategoriesData } = this.props;
-    const { selectedMainCategory } = this.props;
+    const { selectedMainCategory, selectedSubCategory } = this.props;
+
+    // this.state.selectedMainCategory === "Fashion" ? fashionSubCategories
+    // : this.state.selectedMainCategory === "Electronics" ? electronicsSubCategories
+    // : this.state.selectedMainCategory === "Home & Kitchen" ? homeSubCategories
+
+    // let tempSubCategoryArray = [];
+
+    // if(selectedMainCategory === "Fashion") {
+    //   this.subCategoryArray = FashionSubCategories;
+
+    // } else if(selectedMainCategory === "Electronics") {
+    //   this.subCategoryArray = ElectronicsSubCategories;
+
+    // } else if(selectedMainCategory === "Home & Kitchen") {
+    //   this.subCategoryArray = HomeSubCategories;
+    // }
 
     this.setState({
-      finalSelectedMainCategory: selectedMainCategory
+      finalSelectedMainCategory: selectedMainCategory,
+
+      finalSelectedSubCategory: selectedSubCategory,
+
+      // subCategoryArray: tempSubCategoryArray
     });
+
 
     // this.setState({
     //   mainCategoriesData
     // });
   }
 
-  handleMainCategorySelection = (categoryName) => {
+  handleSubCategorySelection = (categoryName) => {
     this.setState({
-      finalSelectedMainCategory: categoryName
+      finalSelectedSubCategory: categoryName
     });
   }
+
+  // handleMainCategorySelection = (categoryName) => {
+  //   this.setState({
+  //     finalSelectedMainCategory: categoryName
+  //   });
+  // }
 
   handleContinueButton = () => {
     this.props.handleMainCategoryContinue(this.state.finalSelectedMainCategory);
@@ -42,26 +80,63 @@ class MainCategorySelectionPage extends Component {
   }
 
   render() {
-    const { selectedMainCategory } = this.props;
-    let { mainCategoriesData } = this.props;
+    const { selectedMainCategory, subCategoriesData } = this.props;
+    // let { mainCategoriesData } = this.props;
     const { height, width } = Dimensions.get('window');
 
-    if(this.state.mainCategorySearchText !== "") {
+    if(this.state.subCategorySearchText !== "") {
       // let searchResults = metaDatatags.filter((tag) => {
       //   return ((tag.text).toLowerCase()).startsWith(this.state.textValue.toLowerCase()) === true
       // });
 
-      mainCategoriesData = mainCategoriesData.filter((item) => {
+      // this.subCategoryArray = this.subCategoryArray.filter((item) => {
+      //   return (
+      //     ((item.name).toLowerCase()).startsWith(this.state.subCategorySearchText.toLowerCase()) === true
+      //   );
+      // });
+
+      // this.setState({
+      //   subCategoryArray: this.state.subCategoryArray.filter((item) => {
+      //     return (
+      //       ((item.name).toLowerCase()).startsWith(this.state.subCategorySearchText.toLowerCase()) === true
+      //     );
+      //   })
+      // });
+
+      // mainCategoriesData = mainCategoriesData.filter((item) => {
+      //   console.log("@#@#@#@#@# item", item.name.toLowerCase());
+      //   console.log("2222", this.state.mainCategorySearchText.toLowerCase())
+      //   return (
+      //     ((item.name).toLowerCase()).startsWith(this.state.mainCategorySearchText.toLowerCase()) === true
+      //   );
+      // })
+
+      subCategoriesData = subCategoriesData.filter((item) => {
         // console.log("@#@#@#@#@# item", item.name.toLowerCase());
         // console.log("2222", this.state.mainCategorySearchText.toLowerCase())
         return (
-          ((item.name).toLowerCase()).startsWith(this.state.mainCategorySearchText.toLowerCase()) === true
+          ((item.name).toLowerCase()).startsWith(this.state.subCategorySearchText.toLowerCase()) === true
         );
       })
     }
+
+    // if(this.state.mainCategorySearchText !== "") {
+    //   // let searchResults = metaDatatags.filter((tag) => {
+    //   //   return ((tag.text).toLowerCase()).startsWith(this.state.textValue.toLowerCase()) === true
+    //   // });
+
+    //   mainCategoriesData = mainCategoriesData.filter((item) => {
+    //     console.log("@#@#@#@#@# item", item.name.toLowerCase());
+    //     console.log("2222", this.state.mainCategorySearchText.toLowerCase())
+    //     return (
+    //       ((item.name).toLowerCase()).startsWith(this.state.mainCategorySearchText.toLowerCase()) === true
+    //     );
+    //   })
+    // }
     
     
-    // console.log("~~~ Main Category Selection page, this.props", this.props);
+    console.log("~~~ Sub Category Selection page, this.props", this.props);
+    // console.log("8888888 this.state.subCategoryArray", this.state.subCategoryArray);
 
     // console.log("****** mainCategoriesData", mainCategoriesData);
 
@@ -112,35 +187,40 @@ class MainCategorySelectionPage extends Component {
                 marginTop: 60
               }}
               keyboardType="default"
-              placeholder="Search main category"
-              onChangeText={(text) => this.setState({mainCategorySearchText: text})}
+              placeholder={`Search ${selectedMainCategory} Sub Category`}
+              onChangeText={(text) => this.setState({subCategorySearchText: text})}
             />
             <Ionicons size={32} name="ios-search" style={{position: 'absolute', right: 24, top: 138}}/>
           </View>
 
           <View style={{marginTop: 63}}>
             <Text style={{fontSize: 12, color: "#A3A3A2", lineHeight: 16, padding: 16}}>
-              Main Category
+              {`${selectedMainCategory} Sub Category`}
             </Text>
           </View>
 
           <View>
             {
-              mainCategoriesData.map((item, index) => {
+              subCategoriesData.map((item, index) => {
                 return (
                   <TouchableOpacity 
                     key={item.id}
                     style={{
-                      backgroundColor: item.name === this.state.finalSelectedMainCategory ? 'black' : 'white', 
+                      backgroundColor: item.name === this.state.finalSelectedSubCategory ? 'black' : 'white', 
                       height: 56, 
                       padding: 16
                     }}
-                    onPress={ () => this.handleMainCategorySelection(item.name)}
+
+                    onPress={ () => this.handleSubCategorySelection(item.name)}
+
+                    // onPress={ () => this.handleMainCategorySelection(item.name)}
+
+
                     // onPress={ () => this.handleScheduleMeetUpButton(swapCard) }
                   >
                     <Text 
                       style={{
-                        color: item.name === this.state.finalSelectedMainCategory ? 'white' : '#A3A3A2', 
+                        color: item.name === this.state.finalSelectedSubCategory ? 'white' : '#A3A3A2', 
                         fontSize: 16, 
                         lineHeight: 24
                       }}
@@ -153,7 +233,7 @@ class MainCategorySelectionPage extends Component {
             }
           </View>
 
-          <View style={{alignSelf: 'center'}}>
+          {/* <View style={{alignSelf: 'center'}}>
             <TouchableOpacity 
               style={{
                 flexDirection: 'row', 
@@ -186,7 +266,7 @@ class MainCategorySelectionPage extends Component {
                 Continue
               </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           </SafeAreaView>
         </Content>
@@ -196,5 +276,5 @@ class MainCategorySelectionPage extends Component {
   }
 }
 
-export default MainCategorySelectionPage;
+export default SubCategorySelectionPage;
 

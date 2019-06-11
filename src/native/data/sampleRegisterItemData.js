@@ -24,124 +24,137 @@ export const mainCategories = [
 ];
 
 export const FashionSubCategories = [
-  {  
-    name: "Fashion Sub Categories",
-    children: [{
-        name: "Clothing",
-        id: 0,
-      },{
-        name: "Shoes",
-        id: 1,
-      },{
-        name: "Bags",
-        id: 2,
-      },{
-        name: "Accessories",
-        id: 3,
-      }]
+  {
+    name: "Clothign",
+    id: 0
+  },
+  {
+    name: "Shoes",
+    id: 1
+  },
+  {
+    name: "Bags",
+    id: 2
+  },
+  {
+    name: "Accessories",
+    id: 3
   },
 ];
 
 export const GamingSubCategories = [
-  {  
-    name: "Gaming Sub Categories",
-    children: [{
-        name: "Gaming Consoles",
-        id: 0,
-      },{
-        name: "Gaming Accessories",
-        id: 1,
-      },{
-        name: "Game CD",
-        id: 2,
-      }]
+  {
+    name: "Gaming Consoles",
+    id: 0
+  },
+  {
+    name: "Gaming Accessories",
+    id: 1
+  },
+  {
+    name: "Game CD",
+    id: 2
   },
 ];
 
 
 export const BooksSubCategories = [
-  {  
-    name: "Books Sub Categories",
-    children: [{
-        name: "Textbooks",
-        id: 0,
-      },{
-        name: "Comics & Graphic Novels",
-        id: 1,
-      },{
-        name: "Magazines",
-        id: 2,
-      },{
-        name: "Books",
-        id: 3,
-      }]
+  {
+    name: "Textbooks",
+    id: 0
+  },
+  {
+    name: "Comics & Graphic Novels",
+    id: 1
+  },
+  {
+    name: "Magazines",
+    id: 2
+  },
+  {
+    name: "Books",
+    id: 3
   },
 ];
 
 export const ElectronicsSubCategories = [
-  {  
-    name: "Electronics Sub Categories",
-    children: [{
-        name: "TV & Video",
-        id: 0,
-      },{
-        name: "Home Audio & Theater",
-        id: 1,
-      },{
-        name: "Camera, Photo & Video",
-        id: 2,
-      },{
-        name: "Cell Phones & Accessories",
-        id: 3,
-      },{
-        name: "Computers, Tablets & Network Hardware",
-        id: 4,
-      },{
-        name: "Portable Audio & Headphones",
-        id: 5,
-      },{
-        name: "Car Electronics",
-        id: 6,
-      },{
-        name: "Wearable Technology",
-        id: 7,
-      },{
-        name: "Smart Home",
-        id: 8,
-      }]
+  {
+    name: "TV & Video",
+    id: 0
   },
+  {
+    name: "Home Audio & Theater",
+    id: 1
+  },
+  {
+    name: "Camera, Photo & Video",
+    id: 2
+  },
+  {
+    name: "Cell Phones & Accessories",
+    id: 3
+  },
+  {
+    name: "Computers, Tablets & Network Hardware",
+    id: 4
+  },
+  {
+    name: "Portable Audio & Headphones",
+    id: 5
+  },
+  {
+    name: "Car Electronics",
+    id: 6
+  },
+  {
+    name: "Wearable Technology",
+    id: 7
+  },
+  {
+    name: "Smart Homes",
+    id: 8
+  }
 ];
 
 export const HomeSubCategories = [
-  {  
-    name: "Home Sub Categories",
-    children: [{
-        name: "Home Decor",
-        id: 0,
-      },{
-        name: "Furniture",
-        id: 1,
-      },{
-        name: "Kitchen & Dining",
-        id: 2,
-      },{
-        name: "Bed & Bath",
-        id: 3,
-      },{
-        name: "Mattresses",
-        id: 4,
-      },{
-        name: "Lighting",
-        id: 5,
-      },{
-        name: "Storage & Organization",
-        id: 6,
-      },{
-        name: "Appliances",
-        id: 7,
-      }]
+  {
+    name: "Home Decor",
+    id: 0
+  },
+  {
+    name: "Furniture",
+    id: 1
+  },
+  {
+    name: "Kitchen & Dining",
+    id: 2
+  },
+  {
+    name: "Bed & Bath",
+    id: 3
+  },
+  {
+    name: "Mattresses",
+    id: 4
+  },
+  {
+    name: "Lighting",
+    id: 5
+  },
+  {
+    name: "Storage & Organization",
+    id: 6
+  },
+  {
+    name: "Appliances",
+    id: 7
   },
 ];
+
+
+
+
+
 
 export const items = [
   {  

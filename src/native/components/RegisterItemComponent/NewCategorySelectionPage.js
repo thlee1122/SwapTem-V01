@@ -23,7 +23,9 @@ class NewCategorySelectionPage extends React.Component {
     this.state = {
       showCategoryDropdowns: false,
 
-      selectedMainCategory: ""
+      selectedMainCategory: "",
+
+      selectedSubCategory: ""
     };
 
     this.predictionMainCategoryName = "";
@@ -34,6 +36,8 @@ class NewCategorySelectionPage extends React.Component {
     this.predictionTag = "";
 
     this.tempMainCategories = [];
+
+    this.tempSubCategories = [];
   }
 
   componentWillMount() {
@@ -49,18 +53,26 @@ class NewCategorySelectionPage extends React.Component {
     const tempElectronicsSubCategories = electronicsSubCategories[0].children;
     const tempHomeSubCategories = homeSubCategories[0].children;
 
-    console.log("@@@@@@ predictions", predictions);
-    console.log("@@@@@@ predictionCategory", predictionCategory);
-    console.log("@@@@@@ predictionTag", predictionTag);
-    console.log("@@@@@@ parentId", parentId);
-    console.log("@@@@@@ subId", subId);
-    console.log("@@@@@ tempMainCategories", tempMainCategories);
+    // console.log("@@@@@@ predictions", predictions);
+    // console.log("@@@@@@ predictionCategory", predictionCategory);
+    // console.log("@@@@@@ predictionTag", predictionTag);
+    // console.log("@@@@@@ parentId", parentId);
+    // console.log("@@@@@@ subId", subId);
+    // console.log("@@@@@ tempMainCategories", tempMainCategories);
 
     this.predictionMainCategoryId = [parentId];
     this.predictionSubCategoryId = [subId];
     this.predictionTag = predictionTag;
 
     this.tempMainCategories = tempMainCategories.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
+
+
+    // this.tempSubCategories = this.predictionMainCategoryName === "Fashion" ? FashionSubCategories 
+    // : this.predictionMainCategoryName === "Electronics" ? ElectronicsSubCategories
+    // : this.predictionMainCategoryName === "Home & Kitchen" ? HomeSubCategories
+    // : null;
+
+    // console.log("7777777 this.predictionMainCategoryName", this.predictionMainCategoryName);  
 
     tempMainCategories.map((item, index) => {
       if(item.id === parentId) {
@@ -72,10 +84,21 @@ class NewCategorySelectionPage extends React.Component {
       }
     });
 
+    this.tempSubCategories = this.predictionMainCategoryName === "Fashion" ? FashionSubCategories 
+    : this.predictionMainCategoryName === "Electronics" ? ElectronicsSubCategories
+    : this.predictionMainCategoryName === "Home & Kitchen" ? HomeSubCategories
+    : null;
+
+    console.log("7777777 this.predictionMainCategoryName", this.predictionMainCategoryName);
+
     if(this.predictionMainCategoryName === "Fashion") {
       tempFashionSubCategories.map((item, index) => {
         if(item.id === subId) {
           this.predictionSubCategoryName = item.name;
+
+          this.setState({
+            selectedSubCategory: this.predictionSubCategoryName
+          });
         }
       });
 
@@ -83,6 +106,10 @@ class NewCategorySelectionPage extends React.Component {
       tempElectronicsSubCategories.map((item, index) => {
         if(item.id === subId) {
           this.predictionSubCategoryName = item.name;
+
+          this.setState({
+            selectedSubCategory: this.predictionSubCategoryName
+          });
         }
       });
 
@@ -90,6 +117,10 @@ class NewCategorySelectionPage extends React.Component {
       tempHomeSubCategories.map((item, index) => {
         if(item.id === subId) {
           this.predictionSubCategoryName = item.name;
+
+          this.setState({
+            selectedSubCategory: this.predictionSubCategoryName
+          });
         }
       });
     }
@@ -101,11 +132,27 @@ class NewCategorySelectionPage extends React.Component {
     };
   }
 
-  handleEdit = (inputType) => {
-    if(inputType === "categorySelection") {
+  // handleEdit = (inputType) => {
+  //   if(inputType === "categorySelection") {
+  //     this.setState({
+  //       showCategoryDropdowns: !this.state.showCategoryDropdowns
+  //     });
+  //   }
+  // }
+
+  handleMainCategoryContinue = (mainCategory) => {
+    console.log("@#@#@#@ mainCategory", mainCategory);
+
+    console.log("555555 this.predictionMainCategoryName", this.predictionMainCategoryName);
+
+    this.setState({
+      selectedMainCategory: mainCategory
+    });
+
+    if(mainCategory !== this.predictionMainCategoryName) {
       this.setState({
-        showCategoryDropdowns: !this.state.showCategoryDropdowns
-      });
+        selectedSubCategory: 'Please select sub category'
+      })
     }
   }
 
@@ -124,6 +171,9 @@ class NewCategorySelectionPage extends React.Component {
     // StatusBar.setBackgroundColor('red', true);
 
     const imageFile = require("../../../images/02.png")
+
+    // console.log("~~~~~ this.state.selectedMainCategory", this.state.selectedMainCategory);
+    // console.log("666666 fashionSubCategories", fashionSubCategories);
 
     // console.log("111111 mainCategoriesData", mainCategoriesData);
     // console.log("222222 this.tempMainCategories", this.tempMainCategories);
@@ -193,7 +243,8 @@ class NewCategorySelectionPage extends React.Component {
 
                 onPress={ () => { Actions.mainCategorySelection({ 
                   mainCategoriesData: this.tempMainCategories, 
-                  selectedMainCategory: this.state.selectedMainCategory
+                  selectedMainCategory: this.state.selectedMainCategory,
+                  handleMainCategoryContinue: this.handleMainCategoryContinue
                   // locationCoordinates: locationCoordinates 
                 }) }}
               >
@@ -229,9 +280,26 @@ class NewCategorySelectionPage extends React.Component {
                   width: '100%',
                   flexDirection: 'row'
                 }}
+
+                onPress={ () => { Actions.subCategorySelection({ 
+                  subCategoriesData: this.tempSubCategories,
+                  selectedMainCategory: this.state.selectedMainCategory,
+                  selectedSubCategory: this.state.selectedSubCategory
+                  // subCategoriesData: fashionSubCategories,
+                    // this.state.selectedMainCategory === "Fashion" ? fashionSubCategories
+                    // : this.state.selectedMainCategory === "Electronics" ? electronicsSubCategories
+                    // : this.state.selectedMainCategory === "Home & Kitchen" ? homeSubCategories
+                    // : null,
+                  // mainCategoriesData: this.tempMainCategories, 
+                  // selectedMainCategory: this.state.selectedMainCategory,
+
+                  // handleMainCategoryContinue: this.handleMainCategoryContinue
+
+                  // locationCoordinates: locationCoordinates 
+                }) }}
               >
                 <Text style={{fontSize: 16, lineHeight: 24, paddingTop: 14}}>
-                  {this.predictionSubCategoryName}
+                  {this.state.selectedSubCategory}
                 </Text>
 
                 <MaterialCommunityIcons 
