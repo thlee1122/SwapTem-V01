@@ -191,7 +191,7 @@ class HashTagSelectionPage extends React.Component {
               }
 
 
-              <View style={{marginTop: 40}}>
+              <View style={{marginTop: 24}}>
                 <TextInput
                   style={{
                     height: 64, 
@@ -214,7 +214,7 @@ class HashTagSelectionPage extends React.Component {
                 />
                 <Ionicons size={28} name="ios-search" style={{position: 'absolute', left: 0, top: 16}}/>
 
-                
+
               </View>
             </View>
           </View>
