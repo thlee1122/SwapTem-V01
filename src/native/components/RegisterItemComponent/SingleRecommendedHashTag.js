@@ -11,7 +11,8 @@ class SingleRecommendedHashTag extends React.Component {
 
     this.state = {
       recommendedHashTagPillColor: 'white',
-      recommendedHashTagPillTextColor: '#00529b'
+      recommendedHashTagPillTextColor: 'black',
+      recommendedHashTagPillBorder: '#A3A3A2'
     }
 
     this.recommendedHashTagClicked = false
@@ -22,13 +23,15 @@ class SingleRecommendedHashTag extends React.Component {
 
     if(this.recommendedHashTagClicked === true) {
       this.setState({
-        recommendedHashTagPillColor: '#00529b',
-        recommendedHashTagPillTextColor: 'white'
+        recommendedHashTagPillColor: 'black',
+        recommendedHashTagPillTextColor: 'white',
+        recommendedHashTagPillBorder: 'black'
       });
     } else if(this.recommendedHashTagClicked === false) {
       this.setState({
         recommendedHashTagPillColor: 'white',
-        recommendedHashTagPillTextColor: '#00529b'
+        recommendedHashTagPillTextColor: 'black',
+        recommendedHashTagPillBorder: '#A3A3A2'
       });
     }
 
@@ -45,16 +48,17 @@ class SingleRecommendedHashTag extends React.Component {
           key={index}
           style={{
             borderWidth: 1,
-            borderColor: "#00529b",
-            paddingTop: 8,
-            paddingBottom: 8,
-            paddingRight: 15,
-            paddingLeft: 15,
+            borderColor: this.state.recommendedHashTagPillBorder, 
+            // borderColor: "#00529b",
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingRight: 18,
+            paddingLeft: 18,
             // backgroundColor: "#00529b",
             backgroundColor: this.state.recommendedHashTagPillColor,
-            borderRadius: 5,
-            marginRight: 15,
-            marginBottom: 10
+            borderRadius: 20,
+            marginRight: 20,
+            marginBottom: 24
           }}
           onPress={(e) => this.handleHashTagClick(index, singlePrediction)}
         >
@@ -62,6 +66,7 @@ class SingleRecommendedHashTag extends React.Component {
             style={{
               // color: 'white',
               color: this.state.recommendedHashTagPillTextColor,
+              fontSize: 14,
               fontWeight: 'bold'
             }}
           >

@@ -31,6 +31,12 @@ class NewCategorySelectionPage extends React.Component {
     this.predictionTag = "";
     this.tempMainCategories = [];
     this.tempSubCategories = [];
+
+
+    this.finalCategories = {
+      finalMainCategory: "",
+      finalSubCategory: ""
+    };
   }
 
   componentWillMount() {
@@ -58,6 +64,8 @@ class NewCategorySelectionPage extends React.Component {
         this.setState({
           selectedMainCategory: item.name
         });
+
+        this.finalCategories["finalMainCategory"] = item.name;
       }
     });
 
@@ -74,6 +82,8 @@ class NewCategorySelectionPage extends React.Component {
           this.setState({
             selectedSubCategory: this.predictionSubCategoryName
           });
+
+          this.finalCategories["finalSubCategory"] = item.name;
         }
       });
 
@@ -85,6 +95,8 @@ class NewCategorySelectionPage extends React.Component {
           this.setState({
             selectedSubCategory: this.predictionSubCategoryName
           });
+
+          this.finalCategories["finalSubCategory"] = item.name;
         }
       });
 
@@ -96,6 +108,8 @@ class NewCategorySelectionPage extends React.Component {
           this.setState({
             selectedSubCategory: this.predictionSubCategoryName
           });
+
+          this.finalCategories["finalSubCategory"] = item.name;
         }
       });
     }
@@ -117,20 +131,26 @@ class NewCategorySelectionPage extends React.Component {
         this.setState({
           selectedSubCategory: 'Please select sub category'
         })
+
+        this.finalCategories["finalSubCategory"] = "";
       }
+
+      this.finalCategories["finalMainCategory"] = category;
 
     } else if(type === "sub category continue button") {
       this.setState({
         selectedSubCategory: category
       })
+
+      this.finalCategories["finalSubCategory"] = category;
     }
   }
 
   render() {
     const { mainCategories, fashionSubCategories, electronicsSubCategories, homeSubCategories, 
-            predictions, onSelectedItemsChange, onSelectedItemObjectsChange,
+            predictions,
             newMainCategorySelected, newMainCategory, newSubCategorySelected, 
-            newSubCategory, handleInputSubmit, handleRecommendCategoryButton } = this.props;
+            newSubCategory, handlePageContinueButton } = this.props;
 
     const { height, width } = Dimensions.get('window');
     const imageFile = require("../../../images/02.png");
@@ -264,14 +284,23 @@ class NewCategorySelectionPage extends React.Component {
 
           <View style={{alignSelf: 'center'}}>
             <TouchableOpacity 
+              disabled={
+                this.finalCategories["finalMainCategory"] === "" || this.finalCategories["finalSubCategory"] === "" ?
+                true : false
+              }
               style={{
                 flexDirection: 'row', 
                 borderWidth: 1,
                 borderRadius: 30,
                 width: 278,
                 height: 58,
-                marginTop: 50
+                marginTop: 50,
+                borderColor: this.finalCategories["finalMainCategory"] === "" || this.finalCategories["finalSubCategory"] === "" ? "#CECECE" : "black",
+                backgroundColor: this.finalCategories["finalMainCategory"] === "" || this.finalCategories["finalSubCategory"] === "" ? "#CECECE" : "white",
+                
+
               }}
+              onPress={ () => handlePageContinueButton("category selection", this.finalCategories) }
             >
               <Text 
                 style={{
@@ -281,6 +310,7 @@ class NewCategorySelectionPage extends React.Component {
                   flex: 1,
                   textAlign: 'center',
                   marginTop: 18,
+                  color: this.finalCategories["finalMainCategory"] === "" || this.finalCategories["finalSubCategory"] === "" ? "white" : "black",
                 }}
               >
                 Continue

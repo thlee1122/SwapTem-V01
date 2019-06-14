@@ -80,11 +80,12 @@ class RegisterItemComponent extends Component {
       files: [],
       gender: "",
       size: "",
-      categories: {
-        mainCategory: [],
-        categoryLevelTwo: [],
-        categoryLevelThree: []
-      },
+      // categories: {
+      //   mainCategory: [],
+      //   categoryLevelTwo: [],
+      //   categoryLevelThree: []
+      // },
+      categories: {},
       selectedSwapCategories: [],
     };
 
@@ -634,6 +635,27 @@ class RegisterItemComponent extends Component {
     }
   }
 
+  handlePageContinueButton = (pageName, selectedItems) => {
+    if(pageName === "category selection") {
+      this.registerDataObj["categories"] = selectedItems;
+
+      console.log("11111ggggg selectedItems", selectedItems);
+      console.log("22222ggggg this.registerDataObj", this.registerDataObj);
+
+      if(selectedItems.finalMainCategory === "Fashion") {
+        this.setState({
+          itemRegisterStep: this.state.itemRegisterStep + 1
+        });
+
+      } else {
+        this.setState({
+          itemRegisterStep: this.state.itemRegisterStep + 2
+        });
+      }
+    }
+
+  }
+
   render() {
     const { registerItem } = this.props;
     const imageDetection = get(registerItem, "imageDetection", {});
@@ -664,18 +686,27 @@ class RegisterItemComponent extends Component {
                 electronicsSubCategories={this.electronicsSubCategories}
                 homeSubCategories={this.homeSubCategories}
                 predictions={this.state.predictions}
-                onSelectedItemsChange={this.onSelectedItemsChange}
-                onSelectedItemObjectsChange={this.onSelectedItemObjectsChange}
+                // onSelectedItemsChange={this.onSelectedItemsChange}
+                // onSelectedItemObjectsChange={this.onSelectedItemObjectsChange}
                 newMainCategory={this.state.newMainCategory}
                 newMainCategorySelected={this.state.newMainCategorySelected}
                 newSubCategorySelected={this.state.newSubCategorySelected}
                 newSubCategory={this.state.newSubCategory}
-                handleInputSubmit={this.handleInputSubmit}
-                handleRecommendCategoryButton={this.handleRecommendCategoryButton}
+                // handleInputSubmit={this.handleInputSubmit}
+                // handleRecommendCategoryButton={this.handleRecommendCategoryButton}
+
+                handlePageContinueButton={this.handlePageContinueButton}
               />
               : null
             }
             {/* Category Level 1 & 2 Selection Page END*/}
+
+            
+
+
+
+
+
 
             {/* Filter Page (Only for Fashion) START*/}
             {
@@ -712,6 +743,14 @@ class RegisterItemComponent extends Component {
               : null
             }
             {/* Filter Page (Only for Fashion) END*/}
+
+
+
+
+
+
+
+
 
             {/* HashTag Selection Page START*/}
             {
