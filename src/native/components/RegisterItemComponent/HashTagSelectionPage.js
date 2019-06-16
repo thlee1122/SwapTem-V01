@@ -4,14 +4,11 @@ import { View, Dimensions, ActivityIndicator,
          TouchableOpacity, StatusBar, 
          SafeAreaView, Image, TextInput }                            from 'react-native';
 import { Text, Button }                             from 'native-base';
-// import MentionsTextInput                            from 'react-native-mentions';
 import styles                                       from '../../styles/RegisterItemStyles';
 import * as hashTagData                                 from '../../data/sampleHashTagData.json';
 import Ionicons                                     from 'react-native-vector-icons/Ionicons';
 import SingleRecommendedHashTag                     from './SingleRecommendedHashTag';
 import { getRecommendedHashTags }                       from '../../../actions/recommendedHashTagsActions';
-
-
 
 class HashTagSelectionPage extends React.Component {
   constructor(props) {
@@ -21,7 +18,9 @@ class HashTagSelectionPage extends React.Component {
       keyword: "",
       hashTagSampleData: [],
       data: [],
-      hashTags: "",
+
+      hashTags: [],
+      hashTagText: "",
 
       // predictions: {},
 
@@ -30,10 +29,30 @@ class HashTagSelectionPage extends React.Component {
       recommendedHashTagClicked: false,
       recommendedHashTagPillColor: 'white',
       recommendedHashTagPillTextColor: '#00529b',
+
+
+      showSuggestionSection: false,
+
+      finalHashTags: [],
+
+
+      currentHashTagText: ''
     }
     
-    this.recommendedHashTagIndx = [];
-    this.hashTags = "";
+    // this.recommendedHashTagIndx = [];
+    
+
+    this.hashTagText = "";
+
+
+
+    this.hashTagSampleData = [];
+
+
+    this.finalHashTags = [];
+
+
+    this.newlyAddedHashTags = [];
   }
 
   componentDidMount() {
@@ -41,9 +60,7 @@ class HashTagSelectionPage extends React.Component {
 
     getRecommendedHashTags();
 
-    this.setState({
-      hashTagSampleData: hashTagData.results
-    });
+    this.hashTagSampleData = hashTagData.results;
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -52,70 +69,194 @@ class HashTagSelectionPage extends React.Component {
         recommendedHashTags: nextProps.recommendedHashTags.recommendedHashTags
       });
     }
-
-    // if(this.props.predictions !== nextProps.predictions) {
-    //   this.setState({
-    //     predictions: nextProps.predictions
-    //   });
-    // }
-  }
-
-  renderSuggestionsRow({ item }, hidePanel) {
-    return (
-      <TouchableOpacity 
-        key={item.hashTagValue} 
-        style={{marginTop: 13}}
-        onPress={() => this.onSuggestionTap(item.hashTagValue, hidePanel)}
-      >
-        <View key={item.hashTagValue}>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{left: 15, fontSize: 15}}>{item.hashTagValue}</Text>
-            <Text style={{position: 'absolute', right: 15, fontSize: 15}}>{(item.numberOfPosts).toLocaleString('en')} posts</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
-  onSuggestionTap = (hashTagValue, hidePanel) => {
-    hidePanel();
-    const comment = this.state.hashTags.slice(0, - this.state.keyword.length)
-
-    this.setState({
-      data: [],
-      hashTags: this.state.hashTags + " "+ hashTagValue
-    })
-
-    this.hashTags = this.hashTags + " " + hashTagValue;
-    this.props.handleTextChange("hashTagPageSelection", this.hashTags, null, true);
-  }
-
-  callback = (keyword) => {
-    const { hashTagSampleData } = this.state;
-    const regex = new RegExp(`${keyword.trim()}`, 'i');
-    let newValue = hashTagSampleData.filter(hashTag => hashTag.hashTagValue.search(regex) >= 0);
-
-    if (this.reqTimer) {
-      clearTimeout(this.reqTimer);
-    }
-
-    this.reqTimer = setTimeout(() => {
-      this.setState({
-        keyword: keyword,
-        data: [...newValue]
-      })
-    }, 200);
   }
 
   handleRecommendedHashTag = (index, singlePrediction, clicked) => {
     if(clicked === true) {
-      this.recommendedHashTagIndx.push(singlePrediction);
+      // debugger;
+      // this.recommendedHashTagIndx.push(singlePrediction);
+
+      // this.setState({
+      //   hashTags: this.recommendedHashTagIndx
+      // });
+
+      const tempState = this.state.finalHashTags;
+      tempState.push(singlePrediction);
+
+      this.setState({
+        finalHashTags: [...tempState],
+        hashTagText: this.state.hashTagText.concat(` ${singlePrediction}`)
+      });
+
+      this.finalHashTags.push(singlePrediction);
 
     } else if(clicked === false) {
-      this.recommendedHashTagIndx = this.recommendedHashTagIndx.filter(item => item !== singlePrediction);
+      // debugger;
+      // this.recommendedHashTagIndx = this.recommendedHashTagIndx.filter(item => item !== singlePrediction);
+
+      // this.setState({
+      //   hashTags: this.recommendedHashTagIndx
+      // });
+
+      this.finalHashTags = this.finalHashTags.filter((singleFinalHashTag) => {
+        return (
+          singleFinalHashTag !== singlePrediction
+        ); 
+      });
+
+      let tempState = this.state.finalHashTags;
+
+      tempState = tempState.filter((singleFinalHashTag) => {
+        return (
+          singleFinalHashTag !== singlePrediction
+        ); 
+      });
+
+      let tempHashTagText = this.state.hashTagText;
+      tempHashTagText = tempHashTagText.replace(singlePrediction, '');
+
+      // tempState.push(singlePrediction);
+
+      this.setState({
+        finalHashTags: [...tempState],
+
+        hashTagText: tempHashTagText
+      });
+
+      // this.finalHashTags.filter
     }
 
-    this.props.handleTextChange("hashTagPageSelection", singlePrediction, clicked);
+    console.log("44444 this.finalHashTags", this.finalHashTags);
+  }
+
+  handleHashTagTextInput = (hashTag) => {
+    // const hashTag = event.nativeEvent.text;
+    console.log("121212121212121 hashTag", hashTag);
+    // console.log("&&&&&&&& event.nativeEvent", event.nativeEvent);
+
+    // *** find the last space from hashTag string
+
+    // var lastslashindex = uri.lastIndexOf('/');
+    // var result= uri.substring(lastslashindex  + 1).replace(".png","");
+
+    let tempCurrentHashTagText = hashTag.substring((hashTag.lastIndexOf(" "))+1);
+    console.log("666666 tempCurrentHashTagText", tempCurrentHashTagText);
+    console.log("777777 tempCurrentHashTagText.indexOf()", tempCurrentHashTagText.indexOf(" "));
+
+    this.setState({
+      hashTagText: hashTag,
+
+
+      showSuggestionSection: true,
+
+
+
+      // currentHashTagText: hashTag
+      currentHashTagText: tempCurrentHashTagText
+    });
+
+    this.hashTagText = hashTag;
+
+    // console.log("666666 this.hashTagText", this.hashTagText);
+    // console.log("777777 this.hashTagText.indexOf()", this.hashTagText.indexOf(" "));
+
+    //Check if the hashTag contains space
+    //*** Check this.state.currentHashTagText length
+    //*** Check if this.state.currentHashTagText contains space
+
+    //*** if tempCurrentHashTagText.length > 1 && e.space === true
+
+    if(tempCurrentHashTagText.indexOf(" ") !== -1) {
+      debugger;
+      let currentHashTag = tempCurrentHashTagText.trim();
+
+      this.finalHashTags.push(currentHashTag);
+
+      const tempFinalHashTagState = this.state.finalHashTags;
+      tempFinalHashTagState.push(currentHashTag);
+
+      // this.setState({
+      //   finalHashTags: [...tempState]
+      // });
+
+
+      const tempState = this.state.recommendedHashTags;
+      tempState.push(currentHashTag);
+
+      this.setState({
+        recommendedHashTags: [...tempState],
+        finalHashTags: [...tempFinalHashTagState],
+
+        currentHashTagText: ''
+      });
+
+      this.newlyAddedHashTags.push(currentHashTag);
+    }
+
+    // if(this.hashTagText.indexOf(" ") !== -1) {
+    //   let currentHashTag = hashTag.trim();
+
+    //   this.finalHashTags.push(currentHashTag);
+
+    //   const tempFinalHashTagState = this.state.finalHashTags;
+    //   tempFinalHashTagState.push(currentHashTag);
+
+    //   // this.setState({
+    //   //   finalHashTags: [...tempState]
+    //   // });
+
+
+    //   const tempState = this.state.recommendedHashTags;
+    //   tempState.push(currentHashTag);
+
+    //   this.setState({
+    //     recommendedHashTags: [...tempState],
+    //     finalHashTags: [...tempFinalHashTagState],
+
+    //     currentHashTagText: ''
+    //   });
+
+    //   this.newlyAddedHashTags.push(currentHashTag);
+    // }
+  } 
+
+  onSuggestionTap = (hashTagValue) => {
+    this.setState({
+      showSuggestionSection: false
+    });
+
+    const tempState = this.state.recommendedHashTags;
+    tempState.push(hashTagValue);
+
+    const tempFinalHashTagState = this.state.finalHashTags;
+    tempFinalHashTagState.push(hashTagValue);
+
+    let tempHashTagText = this.state.hashTagText;
+
+    console.log("1111111 tempHashTagText", tempHashTagText);
+    tempHashTagText = tempHashTagText.replace(this.state.currentHashTagText, hashTagValue);
+
+    console.log("2222222 tempHashTagText", tempHashTagText);
+    console.log("3333333 this.state.currentHashTagText", this.state.currentHashTagText);
+    console.log("4444444 hashTagValue", hashTagValue);
+
+    this.setState({
+      recommendedHashTags: [...tempState],
+      finalHashTags: [...tempFinalHashTagState],
+
+
+      // hashTagText: hashTagValue,
+
+      hashTagText: tempHashTagText
+    });
+
+    this.finalHashTags.push(hashTagValue);
+
+    this.newlyAddedHashTags.push(hashTagValue);
+  }
+
+  handleTextInputKeyPress = (e) => {
+    console.log("~~~~~~~~~~~~~~~ e", e.nativeEvent);
   }
 
   render() {
@@ -124,9 +265,19 @@ class HashTagSelectionPage extends React.Component {
     const { width } = Dimensions.get('window');
     const imageFile = require("../../../images/03.png");
 
+    this.hashTagSampleData = hashTagData.results;
 
-    // console.log("@@@@@ inside HashTagSelectionPage this.props", this.props);
-    // console.log("@@@@@ inside HashTagSelectionPage this.state", this.state);
+    console.log("5555 this.finalHashTags", this.finalHashTags);
+
+    if(this.state.hashTagText.startsWith("#") && this.state.hashTagText.length > 1) {
+      if((this.state.hashTagText[1].toUpperCase() !== this.state.hashTagText[1].toLowerCase())) {
+        this.hashTagSampleData = this.hashTagSampleData.filter((sampleHashTag) => {
+          return (
+            ((sampleHashTag.hashTagValue).toLowerCase()).startsWith(this.state.hashTagText.toLowerCase()) === true
+          ); 
+        });
+      } 
+    }
 
     return (
       <React.Fragment>
@@ -166,7 +317,6 @@ class HashTagSelectionPage extends React.Component {
               </Text>
 
               {
-                // Object.keys(this.state.predictions).length !== 0 && this.state.predictions.prediction.length !== 0 ?
                 this.state.recommendedHashTags.length !== 0 ?
                 <React.Fragment>
                   <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row', marginTop: 30}}>
@@ -180,6 +330,7 @@ class HashTagSelectionPage extends React.Component {
                             index={index}
                             handleRecommendedHashTag={this.handleRecommendedHashTag}
                             singlePrediction={singleItem}
+                            newlyAddedHashTags={this.newlyAddedHashTags}
                           />
                         );
                       })
@@ -190,7 +341,6 @@ class HashTagSelectionPage extends React.Component {
                 : null
               }
 
-
               <View style={{marginTop: 24}}>
                 <TextInput
                   style={{
@@ -199,119 +349,103 @@ class HashTagSelectionPage extends React.Component {
                     borderBottomWidth: 1,
                     borderBottomColor: '#A3A3A2',
                     width: '100%',
-                    // margin: 5,
-                    // marginRight: 10,
                     alignSelf: 'center',
                     fontSize: 16,
                     lineHeight: 28,
                     color: 'black',
                     paddingLeft: 32
-                    // marginTop: 60
                   }}
                   keyboardType="default"
                   placeholder='Type hashtag'
-                  // onChangeText={(text) => this.setState({subCategorySearchText: text})}
+                  // value={this.state.finalHashTags.join(" ")}
+                  // value={this.state.hashTags.join(" ")}
+                  value={this.state.hashTagText}
+                  onChangeText={(text) => this.handleHashTagTextInput(text)}
+
+                  onKeyPress={(e) => this.handleTextInputKeyPress(e)}
+
+
+                  // onChange={(event) => this.handleHashTagTextInput(event)}
                 />
                 <Ionicons size={28} name="ios-search" style={{position: 'absolute', left: 0, top: 16}}/>
-
-
               </View>
+
+              {
+                this.state.hashTagText.startsWith("#") && this.state.hashTagText.length > 1 && 
+                this.state.showSuggestionSection === true ?
+                <View>
+                  {
+                    this.hashTagSampleData.map((item) => {
+                      return(
+                        <TouchableOpacity 
+                          key={item.hashTagValue} 
+                          style={{
+                            paddingTop: 16, 
+                            paddingBottom: 16,
+                            borderBottomColor: '#ECEBEB',
+                            borderBottomWidth: 1
+                          }}
+                          onPress={() => this.onSuggestionTap(item.hashTagValue)}
+                        >
+                          <View key={item.hashTagValue}>
+                            <View style={{flexDirection: 'row'}}>
+                              <Text style={{left: 8, fontSize: 14, color: '#A3A3A2', lineHeight: 24}}>{item.hashTagValue}</Text>
+                              <Text style={{position: 'absolute', right: 8, fontSize: 14, color: '#A3A3A2', lineHeight: 24}}>{(item.numberOfPosts).toLocaleString('en')} posts</Text>
+                            </View>
+                          </View>
+                        </TouchableOpacity>
+                      );
+                    })
+                  }
+                </View> : null
+              }
+            </View>
+
+            <View style={{alignSelf: 'center'}}>
+              <TouchableOpacity 
+                disabled={ this.state.finalHashTags.length === 0 ? true : false }
+                style={{
+                  flexDirection: 'row', 
+                  borderWidth: 1,
+                  borderRadius: 30,
+                  width: 278,
+                  height: 58,
+                  marginTop: 50,
+                  borderColor: this.state.finalHashTags.length === 0 ? "#CECECE" : "black",
+                  backgroundColor: this.state.finalHashTags.length === 0 ? "#CECECE" : "white",
+                  
+
+                }}
+                // onPress={ () => handlePageContinueButton("category selection", this.finalCategories) }
+              >
+                <Text 
+                  style={{
+                    fontSize: 14, 
+                    fontWeight: 'bold', 
+                    lineHeight: 20,
+                    flex: 1,
+                    textAlign: 'center',
+                    marginTop: 18,
+                    color: this.state.finalHashTags.length === 0 ? "white" : "black",
+                  }}
+                >
+                  Continue
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </SafeAreaView>
-
-
-        {/* <View style={styles.hashTagPage}>
-          <Text style={styles.hashTagPageTitle}>Please Select Hashtags.</Text>
-          <Text style={styles.hashTagPageSubTitle}>
-            These hashtags will be used for categories as well as for the title.
-          </Text>
-          
-          {
-            // Object.keys(this.state.predictions).length !== 0 && this.state.predictions.prediction.length !== 0 ?
-            this.state.recommendedHashTags.length !== 0 ?
-            <React.Fragment>
-              <Text style={{color: "#00529b", marginBottom: 10}}>
-                Select to use <Text style={{fontWeight: 'bold', color: "#00529b"}}>Recommended Hash Tags. </Text>
-              </Text>
-              <View style={{flex: 1, flexWrap: 'wrap', flexDirection: 'row'}}>
-                {
-                  this.state.recommendedHashTags.map((item, index) => {
-                    let singleItem = item
-
-                    return (
-                      <SingleRecommendedHashTag
-                        key={index}
-                        index={index}
-                        handleRecommendedHashTag={this.handleRecommendedHashTag}
-                        singlePrediction={singleItem}
-                      />
-                    );
-                  })
-                  
-                }
-              </View>
-            </React.Fragment>
-            : null
-          }
-          
-          <View style={styles.hashTagPageContent}>
-            <MentionsTextInput
-              textInputStyle={{ 
-                borderColor: '#E3E1E1', 
-                borderWidth: 1, 
-                padding: 5, 
-                fontSize: 15, 
-                marginBottom: 10, 
-                paddingLeft: 15, 
-                paddingTop: 10, 
-                width: 330,
-                alignSelf: 'center'
-              }}
-              suggestionsPanelStyle={{ backgroundColor: '#FBFBFB', borderWidth: 1, borderColor: "#E3E1E1", width: 330, alignSelf: 'center'}}
-              loadingComponent={() => <View style={{ flex: 1, width, justifyContent: 'center', alignItems: 'center' }}><ActivityIndicator /></View>}
-              textInputMinHeight={40}
-              textInputMaxHeight={80}
-              trigger={'#'}
-              triggerLocation={'new-word-only'}
-              value={hashTags}
-              onChangeText={(text) => handleTextChange("hashTagPageSelection", text)}
-              triggerCallback={this.callback.bind(this)}
-              renderSuggestionsRow={this.renderSuggestionsRow.bind(this)}
-              suggestionsData={this.state.data}
-              keyExtractor={(item, index) => item.UserName}
-              suggestionRowHeight={40}
-              horizontal={false}
-              MaxVisibleRowCount={2.6}
-              placeholder="Type # tags"
-            />
-            <Button 
-              style={styles.hashTagePageButton}
-              onPress={(e) => handleInputSubmit("hashTagsInput")}
-              disabled={hashTags !== "" && hashTags.length > 2 ? false : true}
-            >
-              <Text style={styles.hashTagePageButtonText}>Next</Text>
-            </Button>
-          </View>
-        </View> */}
       </React.Fragment>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  // registerItem: state.registerItem || {},
   recommendedHashTags: state.recommendedHashTags || {}
 });
 
 const mapDispatchToProps = {
-  // postItem: postItem,
-  // getMetadata: getMetadata,
-  // getItem: getItem,
-  // detectImage: detectImage,
   getRecommendedHashTags: getRecommendedHashTags
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HashTagSelectionPage);
-
-// export default HashTagSelectionPage;

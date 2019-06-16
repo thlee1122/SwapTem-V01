@@ -18,6 +18,20 @@ class SingleRecommendedHashTag extends React.Component {
     this.recommendedHashTagClicked = false
   }
 
+  componentWillMount() {
+    const { newlyAddedHashTags, singlePrediction } = this.props;
+
+    if(newlyAddedHashTags.indexOf(singlePrediction) !== -1) {
+      this.setState({
+        recommendedHashTagPillColor: 'black',
+        recommendedHashTagPillTextColor: 'white',
+        recommendedHashTagPillBorder: 'black'
+      });
+
+      this.recommendedHashTagClicked = true;
+    }
+  }
+
   handleHashTagClick = (index, singlePrediction) => {
     this.recommendedHashTagClicked = !this.recommendedHashTagClicked;
 
@@ -40,7 +54,10 @@ class SingleRecommendedHashTag extends React.Component {
 
   render() {
     const { index, singlePrediction, handleRecommendedHashTag, 
-            recommendedHashTagPillColor, recommendedHashTagPillTextColor} = this.props;
+            recommendedHashTagPillColor, recommendedHashTagPillTextColor, 
+            newlyAddedHashTags } = this.props;
+
+            // console.log("@#@#@#@#@ newlyAddedHashTags", newlyAddedHashTags);
 
     return (
       <React.Fragment>
