@@ -658,7 +658,15 @@ class RegisterItemComponent extends Component {
         itemRegisterStep: this.state.itemRegisterStep + 1
       });
     }
+  }
 
+  handleBackButton = (pageName) => {
+    if(pageName === "hashTag selection") {
+      //go back to category selection page
+      this.setState({
+        itemRegisterStep: 1
+      });
+    }
   }
 
   render() {
@@ -765,6 +773,7 @@ class RegisterItemComponent extends Component {
                 handleTextChange={this.handleTextChange}
                 handleInputSubmit={this.handleInputSubmit}
                 handlePageContinueButton={this.handlePageContinueButton}
+                handleBackButton={this.handleBackButton}
                 // getRecommendedHashTags={this.props.getRecommendedHashTags}
               />
               : null 

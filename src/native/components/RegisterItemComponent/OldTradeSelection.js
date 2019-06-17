@@ -1,7 +1,7 @@
 import React                                        from "react";
 import { 
-  View, Image, Animated, ScrollView, StatusBar, SafeAreaView, 
-  TextInput, KeyboardAvoidingView, Platform,
+  View, Image, Animated, ScrollView, 
+  TextInput, KeyboardAvoidingView, Platform, 
   TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';  
 import {
   Container, Content, List, ListItem, Body, 
@@ -15,8 +15,6 @@ import { clothingTypes, shoesTypes, bagsTypes,
 import InterestedCategorySection                    from './InterestedCategorySection';
 import SwapCategorySelection                        from './SwapCategorySelection';
 
-import FeatherIcon                                  from 'react-native-vector-icons/Feather';
-
 class TradeSelection extends React.Component {
 
   render() {
@@ -26,55 +24,12 @@ class TradeSelection extends React.Component {
             selectedSwapCategories, onSelectedItemsChange, onSelectedItemObjectsChange } = this.props;
 
 
-            // console.log("&&&&&& selectedSwapCategories", selectedSwapCategories);
-            // console.log("&&&&&& interestedCategories", interestedCategories);
-
-
-    const imageFile = require("../../../images/03.png");
-    const { width } = Dimensions.get('window');
-
+            console.log("&&&&&& selectedSwapCategories", selectedSwapCategories);
+            console.log("&&&&&& interestedCategories", interestedCategories);
 
     return (
       <React.Fragment>
-        <StatusBar
-          barStyle="light-content"
-          translucent={true}
-          style={{ color: 'white', zIndex: 10 }}
-        />
-
-        <SafeAreaView style={{marginTop: -20, backgroundColor: 'black'}}>
-          <View
-            style={{backgroundColor: 'black', height: 300}}
-          >
-            <TouchableOpacity 
-              style={{
-                paddingLeft: 10,
-                paddingTop: 32
-                // marginTop: 32
-              }} 
-              // onPress={() => {handleBackButton("hashTag selection")}}
-            >
-              <FeatherIcon name="arrow-left" size={30} color={"white"}/>
-            </TouchableOpacity>
-            
-            <View style={{flexDirection: 'row', marginLeft: 16, marginTop: 132, marginRight: 16}}>
-              <Image 
-                source={imageFile}
-                style={{
-                  width: 70,
-                  height: 50,
-                  alignSelf: 'center',
-                  marginRight: 20,
-                }}
-              />
-              <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 30, width: width * 0.68}}>
-                Please turn on selections you want for your item
-              </Text>
-            </View>
-          </View>
-        </SafeAreaView>
-
-        {/* <View style={styles.tradeSection}>
+        <View style={styles.tradeSection}>
           <Text style={styles.tradeSectionTitle}>Trade Selection</Text>
           {
             tradeSelectionError === false ?
@@ -174,7 +129,7 @@ class TradeSelection extends React.Component {
           >
             <Text style={styles.hashTagePageButtonText}>Next</Text>
           </Button>
-        </View> */}
+        </View>
       </React.Fragment>
     );
   }

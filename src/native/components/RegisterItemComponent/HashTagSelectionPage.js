@@ -5,6 +5,7 @@ import { View, Dimensions, TouchableOpacity,
 import { Text }                             from 'native-base';
 import * as hashTagData                                 from '../../data/sampleHashTagData.json';
 import Ionicons                                     from 'react-native-vector-icons/Ionicons';
+import FeatherIcon                                  from 'react-native-vector-icons/Feather';
 import SingleRecommendedHashTag                     from './SingleRecommendedHashTag';
 import { getRecommendedHashTags }                       from '../../../actions/recommendedHashTagsActions';
 
@@ -196,7 +197,7 @@ class HashTagSelectionPage extends React.Component {
   }
 
   render() {
-    const { handlePageContinueButton } = this.props;
+    const { handlePageContinueButton, handleBackButton } = this.props;
     const { width } = Dimensions.get('window');
     const imageFile = require("../../../images/03.png");
 
@@ -224,7 +225,18 @@ class HashTagSelectionPage extends React.Component {
           <View
             style={{backgroundColor: 'black', height: 300}}
           >
-            <View style={{flexDirection: 'row', marginLeft: 16, marginTop: 180, marginRight: 16}}>
+            <TouchableOpacity 
+              style={{
+                paddingLeft: 10,
+                paddingTop: 32
+                // marginTop: 32
+              }} 
+              onPress={() => {handleBackButton("hashTag selection")}}
+            >
+              <FeatherIcon name="arrow-left" size={30} color={"white"}/>
+            </TouchableOpacity>
+            
+            <View style={{flexDirection: 'row', marginLeft: 16, marginTop: 132, marginRight: 16}}>
               <Image 
                 source={imageFile}
                 style={{
