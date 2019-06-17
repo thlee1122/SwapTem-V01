@@ -652,6 +652,11 @@ class RegisterItemComponent extends Component {
           itemRegisterStep: this.state.itemRegisterStep + 2
         });
       }
+
+    } else if(pageName === "hashTag selection") {
+      this.setState({
+        itemRegisterStep: this.state.itemRegisterStep + 1
+      });
     }
 
   }
@@ -759,6 +764,7 @@ class RegisterItemComponent extends Component {
                 hashTags={this.state.hashTags}
                 handleTextChange={this.handleTextChange}
                 handleInputSubmit={this.handleInputSubmit}
+                handlePageContinueButton={this.handlePageContinueButton}
                 // getRecommendedHashTags={this.props.getRecommendedHashTags}
               />
               : null 
