@@ -234,7 +234,7 @@ class HashTagSelectionPage extends React.Component {
                   marginRight: 20,
                 }}
               />
-              <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 26, width: width * 0.7, marginTop: 10}}>
+              <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 26, width: width * 0.68, marginTop: 10}}>
                 Please select hashtags
               </Text>
             </View>
