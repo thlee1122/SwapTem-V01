@@ -523,13 +523,13 @@ class RegisterItemComponent extends Component {
     }
   }
 
-  handleEdit = (inputType) => {
-    if(inputType === "interestedCategoryEdit") {
-      this.setState({
-        interestedCategoryEdit: !this.state.interestedCategoryEdit
-      });
-    }
-  }
+  // handleEdit = (inputType) => {
+  //   if(inputType === "interestedCategoryEdit") {
+  //     this.setState({
+  //       interestedCategoryEdit: !this.state.interestedCategoryEdit
+  //     });
+  //   }
+  // }
 
   handleTextInputFocus = (inputType) => {
     if(inputType === "itemDescInput") {
@@ -790,10 +790,10 @@ class RegisterItemComponent extends Component {
                 sellToggle={this.state.sellToggle}
                 rentToggle={this.state.rentToggle}
                 handleSwitch={this.handleSwitch}
-                handleEdit={this.handleEdit}
+                // handleEdit={this.handleEdit}
 
                 interestedCategories={this.state.interestedCategories}
-                interestedCategoryEdit={this.state.interestedCategoryEdit}
+                // interestedCategoryEdit={this.state.interestedCategoryEdit}
 
                 selectedSwapCategoriesState={this.state.selectedSwapCategories}
 

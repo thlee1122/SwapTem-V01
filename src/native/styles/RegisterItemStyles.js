@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
   mainView: {
@@ -318,16 +319,20 @@ export default StyleSheet.create({
   },
 
   swapCategorySelectionSection: {
+    backgroundColor: 'white',
     flexDirection: 'column', 
-    marginTop: 20, 
-    width: 350, 
-    alignSelf: 'center'
+    marginTop: width * 0.3, 
+    width: '100%',
+    paddingLeft: 16,
+    paddingRight: 16 
+    // alignSelf: 'center'
   },
 
   swapCategorySubTitle: {
     color: 'red',
     fontSize: 13,
     marginTop: 5,
+    marginBottom: 16
   },
 
   swapCategoryErrorMsg: {
@@ -616,10 +621,12 @@ export default StyleSheet.create({
   },
 
   interestedCategorySection: {
-    width: 350, 
-    alignSelf: 'center', 
+    // width: 350, 
+    width: '100%',
+    // flex: 1,
+    // alignSelf: 'center', 
     flexDirection: 'column', 
-    marginTop: 20, 
+    marginTop: 32, 
     marginBottom: 5
   },
 
@@ -629,29 +636,32 @@ export default StyleSheet.create({
 
   interestedCategoryTitle: {
     fontWeight: 'bold', 
-    lineHeight: 25, 
+    lineHeight: 30, 
     width: 305, 
-    fontSize: 20,
-    marginBottom: 10,
+    fontSize: 16,
+    marginBottom: 24,
   },
 
   interestedCategoryEditButton: {
-    width: 20,
+    width: 30,
     height: 30,
     backgroundColor: 'white',
-    marginLeft: 15
+    marginLeft: 15,
+    marginTop: 5,
+    position: 'absolute',
+    right: 0
   },
 
   interestedCategoryInstruction: {
-    marginTop: 5, 
-    color: '#00529b', 
+    // marginTop: 5, 
+    color: '#A3A3A2', 
     fontSize: 16
   },
 
   selectedInterestedCategories: {
     fontWeight: 'bold', 
-    marginTop: 15, 
-    color: '#00529b'
+    marginTop: 30, 
+    color: '#A3A3A2'
   }
 });
 

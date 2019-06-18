@@ -17,10 +17,11 @@ class InterestedCategorySection extends React.Component {
           </Text>
 
           <TouchableOpacity
-            onPress={(e) => handleEdit("interestedCategoryEdit")}
+            // onPress={(e) => handleEdit("interestedCategoryEdit")}
+            onPress={(e) => handleEdit()}
             style={styles.interestedCategoryEditButton}
           >
-            <MaterialIcon name="edit" size={20} color="#00529b" />
+            <MaterialIcon name="edit" size={25} color="#A3A3A2" />
           </TouchableOpacity>
         </View>
 

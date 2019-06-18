@@ -1,4 +1,5 @@
 import React                                        from "react";
+import { Actions }                                      from 'react-native-router-flux';
 import { 
   View, Image, Animated, ScrollView, StatusBar, SafeAreaView, 
   TextInput, KeyboardAvoidingView, Platform,
@@ -19,10 +20,35 @@ import FeatherIcon                                  from 'react-native-vector-ic
 
 class TradeSelection extends React.Component {
 
+  handleEdit = () => {
+    const { swapCategorySelectionError, selectedSwapCategories, 
+            onSelectedItemsChange, onSelectedItemObjectsChange } = this.props;
+
+    Actions.swapCategorySelection({ 
+      selectedSwapCategoriesState: {selectedSwapCategories},
+      swapCategorySelectionError: {swapCategorySelectionError},
+      selectedSwapCategories: {selectedSwapCategories},
+      onSelectedItemsChange: {onSelectedItemsChange},
+      onSelectedItemObjectsChange: {onSelectedItemObjectsChange},
+    });
+
+    {/* <SwapCategorySelection 
+      selectedSwapCategoriesState={selectedSwapCategories}
+      swapCategorySelectionError={swapCategorySelectionError}
+      selectedSwapCategories={selectedSwapCategories}
+      onSelectedItemsChange={onSelectedItemsChange}
+      onSelectedItemObjectsChange={onSelectedItemObjectsChange}
+    /> */}
+  }
+
   render() {
     const { tradeSelectionError, swapToggle, sellToggle, rentToggle, 
-            handleSwitch, handleInputSubmit, handleEdit, interestedCategories,
-            interestedCategoryEdit, selectedSwapCategoriesState, swapCategorySelectionError,
+            handleSwitch, handleInputSubmit, 
+            // handleEdit, 
+
+            interestedCategories,
+            // interestedCategoryEdit, 
+            selectedSwapCategoriesState, swapCategorySelectionError,
             selectedSwapCategories, onSelectedItemsChange, onSelectedItemObjectsChange } = this.props;
 
 
@@ -70,6 +96,168 @@ class TradeSelection extends React.Component {
               <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 30, width: width * 0.68}}>
                 Please turn on selections you want for your item
               </Text>
+            </View>
+          </View>
+
+          <View style={{paddingTop: 31, paddingLeft: 16, paddingRight: 16, backgroundColor: 'white'}}>
+            <View style={{flexDirection: 'column'}}>
+              <Text style={{fontSize: 16, lineHeight: 24, fontWeight: 'bold'}}>
+                Trade selections
+              </Text>
+
+              <View style={{marginLeft: 0, marginTop: 37}}>
+                <View
+                  style={{
+                    flex: 1, 
+                    flexDirection: 'row', 
+                    marginBottom: 32
+                  }}
+                >
+                  <Text
+                    style={{
+                      flex:1, 
+                      // fontWeight: 'bold', 
+                      fontSize: 16, 
+                      lineHeight: 24
+                      // color: "#3578e5"
+                    }}
+                  >
+                    Swap
+                  </Text>
+                  <Switch
+                    value={swapToggle}
+                    onValueChange={ (val) => handleSwitch("SwapSwitch", val)}
+                    circleSize={25}
+                    barHeight={25}
+                    circleBorderWidth={1}
+                    backgroundActive={'black'}
+                    switchWidthMultiplier={2.2}
+                    switchLeftPx={1.7}
+                    switchRightPx={1.7}
+                    // style={styles.tradeSelectionSwitch}
+                    style={{
+                      right: 10
+                    }}
+                  />
+                </View>
+
+                <View
+                  style={{
+                    flex: 1, 
+                    flexDirection: 'row', 
+                    marginBottom: 32
+                  }}
+                >
+                  <Text
+                    style={{
+                      flex:1, 
+                      // fontWeight: 'bold', 
+                      fontSize: 16, 
+                      lineHeight: 24
+                      // color: "#3578e5"
+                    }}
+                  >
+                    Sell
+                  </Text>
+                  <Switch
+                    value={sellToggle}
+                    onValueChange={ (val) => handleSwitch("SellSwitch", val)}
+                    circleSize={25}
+                    barHeight={25}
+                    circleBorderWidth={1}
+                    backgroundActive={'black'}
+                    switchWidthMultiplier={2.2}
+                    switchLeftPx={1.7}
+                    switchRightPx={1.7}
+                    style={styles.tradeSelectionSwitch}
+                  />
+                </View>
+
+                <View
+                  style={{
+                    flex: 1, 
+                    flexDirection: 'row', 
+                    marginBottom: 32
+                  }}
+                >
+                  <Text
+                    style={{
+                      flex:1, 
+                      // fontWeight: 'bold', 
+                      fontSize: 16, 
+                      lineHeight: 24
+                      // color: "#3578e5"
+                    }}
+                  >
+                    Rent
+                  </Text>
+                  <Switch
+                    value={rentToggle}
+                    onValueChange={ (val) => handleSwitch("RentSwitch", val)}
+                    circleSize={25}
+                    barHeight={25}
+                    circleBorderWidth={1}
+                    backgroundActive={'black'}
+                    switchWidthMultiplier={2.2}
+                    switchLeftPx={1.7}
+                    switchRightPx={1.7}
+                    style={styles.tradeSelectionSwitch}
+                  />
+                </View>
+              </View>
+
+              {
+                swapToggle === true &&
+                <InterestedCategorySection 
+                  handleEdit={this.handleEdit}
+                  interestedCategories={interestedCategories}
+                />
+              }
+
+              {/* {
+                swapToggle === true && interestedCategoryEdit === true &&
+                <SwapCategorySelection 
+                  selectedSwapCategoriesState={selectedSwapCategories}
+                  swapCategorySelectionError={swapCategorySelectionError}
+                  selectedSwapCategories={selectedSwapCategories}
+                  onSelectedItemsChange={onSelectedItemsChange}
+                  onSelectedItemObjectsChange={onSelectedItemObjectsChange}
+                />
+              } */}
+            </View>
+
+            <View style={{alignSelf: 'center'}}>
+              <TouchableOpacity 
+                // disabled={ this.state.finalHashTags.length === 0 ? true : false }
+                disabled={swapToggle === false && sellToggle === false && rentToggle === false ? true : false}
+                style={{
+                  flexDirection: 'row', 
+                  borderWidth: 1,
+                  borderRadius: 30,
+                  width: 278,
+                  height: 58,
+                  marginTop: 60,
+                  marginBottom: 40,
+                  borderColor: swapToggle === false && sellToggle === false && rentToggle === false ? "#CECECE" : "black",
+                  backgroundColor: swapToggle === false && sellToggle === false && rentToggle === false ? "#CECECE" : "white",
+                }}
+                // onPress={ () => handlePageContinueButton("hashTag selection", this.finalHashTags) }
+                onPress={(e) => handleInputSubmit("TradeSelectionInput")}
+              >
+                <Text 
+                  style={{
+                    fontSize: 14, 
+                    fontWeight: 'bold', 
+                    lineHeight: 20,
+                    flex: 1,
+                    textAlign: 'center',
+                    marginTop: 18,
+                    color: swapToggle === false && sellToggle === false && rentToggle === false ? "white" : "black",
+                  }}
+                >
+                  Continue
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </SafeAreaView>

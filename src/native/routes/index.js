@@ -111,6 +111,9 @@ import TermsPage from '../components/TermsPage';
 import MainCategorySelectionPage  from '../components/MainCategorySelectionPage';
 import SubCategorySelectionPage   from '../components/SubCategorySelectionPage';
 
+import SwapCategorySelection from '../components/RegisterItemComponent/SwapCategorySelection';
+import TradeSelection from '../components/RegisterItemComponent/TradeSelection';
+
 
 import { Actions }                                        from 'react-native-router-flux';
 
@@ -413,6 +416,9 @@ const Index = (
 
           <Scene back key="mainCategorySelection" component={MainCategorySelectionPage} />
           <Scene back key="subCategorySelection" component={SubCategorySelectionPage} />
+
+          <Scene back key="tradeSelection" component={TradeSelection} />
+          <Scene back key="swapCategorySelection" component={SwapCategorySelection} />
         </Stack>
 
          {/* <Stack
