@@ -61,7 +61,7 @@ class RegisterItemComponent extends Component {
 
       swapCategorySelectionError: false,
       interestedCategoryEdit: false,
-      interestedCategories: ["Books", "Electronics", "Fashion"],
+      // interestedCategories: ["Books", "Electronics", "Fashion"],
       selectedSwapCategories: [],
 
       conditionClicked: false,
@@ -286,6 +286,11 @@ class RegisterItemComponent extends Component {
     } else if(selectionType === "subCategorySelection") {
       this.categories.categoryLevelTwo = selectedItems[0].name;
 
+
+
+
+
+    // ** once swap category selection page is done you don't need this
     } else if(selectionType === "swapCategorySelection") {
       const categories = ["Books", "Electronics", "Fashion"];
       let temp = [];
@@ -297,6 +302,9 @@ class RegisterItemComponent extends Component {
       this.setState({
         interestedCategories: categories.concat(temp)
       });
+
+
+
 
     } else if(inputType === "ValueInput") {
       this.setState({
@@ -523,13 +531,22 @@ class RegisterItemComponent extends Component {
     }
   }
 
-  // handleEdit = (inputType) => {
-  //   if(inputType === "interestedCategoryEdit") {
-  //     this.setState({
-  //       interestedCategoryEdit: !this.state.interestedCategoryEdit
-  //     });
-  //   }
-  // }
+
+
+
+  handleEditContinue = (pageName) => {
+    if(pageName === "Swap Category Page") {
+      console.log("Continue button has been clicked!!!!!");
+    }
+
+    // if(inputType === "interestedCategoryEdit") {
+    //   this.setState({
+    //     interestedCategoryEdit: !this.state.interestedCategoryEdit
+    //   });
+    // }
+  }
+
+
 
   handleTextInputFocus = (inputType) => {
     if(inputType === "itemDescInput") {
@@ -666,6 +683,11 @@ class RegisterItemComponent extends Component {
       this.setState({
         itemRegisterStep: 1
       });
+
+    } else if(pageName === "trade selection") {
+      this.setState({
+        itemRegisterStep: 3
+      });
     }
   }
 
@@ -790,9 +812,9 @@ class RegisterItemComponent extends Component {
                 sellToggle={this.state.sellToggle}
                 rentToggle={this.state.rentToggle}
                 handleSwitch={this.handleSwitch}
-                // handleEdit={this.handleEdit}
+                handleEditContinue={this.handleEditContinue}
 
-                interestedCategories={this.state.interestedCategories}
+                // interestedCategories={this.state.interestedCategories}
                 // interestedCategoryEdit={this.state.interestedCategoryEdit}
 
                 selectedSwapCategoriesState={this.state.selectedSwapCategories}
@@ -802,6 +824,8 @@ class RegisterItemComponent extends Component {
                 selectedSwapCategories={this.registerDataObj["selectedSwapCategories"]}
                 onSelectedItemsChange={this.onSelectedItemsChange}
                 onSelectedItemObjectsChange={this.onSelectedItemObjectsChange}
+
+                handleBackButton={this.handleBackButton}
               />
               : null
             }

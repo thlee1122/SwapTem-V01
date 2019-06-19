@@ -321,7 +321,7 @@ export default StyleSheet.create({
   swapCategorySelectionSection: {
     backgroundColor: 'white',
     flexDirection: 'column', 
-    marginTop: width * 0.3, 
+    marginTop: width * 0.15, 
     width: '100%',
     paddingLeft: 16,
     paddingRight: 16 

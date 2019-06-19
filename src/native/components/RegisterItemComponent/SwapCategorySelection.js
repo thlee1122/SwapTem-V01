@@ -1,108 +1,180 @@
 import React                                        from "react";
 import { Actions }                                      from 'react-native-router-flux';
-import { View, TextInput, TouchableOpacity }                          from 'react-native';
+import { View, TextInput, TouchableOpacity, 
+         StatusBar, SafeAreaView }                          from 'react-native';
 import { Text, Button, Container }                             from 'native-base';
 // import SectionedMultiSelect                         from 'react-native-sectioned-multi-select';
 import styles                                       from '../../styles/RegisterItemStyles';
 import { items }                                    from '../../data/sampleRegisterItemData';
 
+import SingleSwapFirstLevelCategory       from './SingleSwapFirstLevelCategory';
+
 class SwapCategorySelection extends React.Component {
-  
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedSwapCategories: [],
+
+      dropDownSectionClicked: false,
+
+      // firstLevelClicked: false
+    };
+
+    this.sampleSwapCategories = [
+      {
+        firstLevel: "Fashion",
+        secondLevel: ["Clothing", "Shoes", "Bags", "Accessories"]
+      },
+      {
+        firstLevel: "Electronics",
+        secondLevel: ["TV & Video", "Home Audio & Theater", "Camera, Photo & Video", "Cell Phones & Accessories"]
+      },
+      {
+        firstLevel: "Electronics",
+        secondLevel: ["TV & Video", "Home Audio & Theater", "Camera, Photo & Video", "Cell Phones & Accessories"]
+      },
+      {
+        firstLevel: "Books",
+        secondLevel: ["Textbooks", "Fiction Books", "Magazine", "Novels",]
+      },
+
+    ]
+  }
+
+  handleDropdown = () => {
+    this.setState({
+      dropDownSectionClicked: !this.state.dropDownSectionClicked
+    });
+  }
+
+  // handleFirstLevelCategoryClick = () => {
+  //   this.setState({
+  //     firstLevelClicked: !this.state.firstLevelClicked
+  //   });
+  // }
 
   render() {
     const { selectedSwapCategoriesState, swapCategorySelectionError, selectedSwapCategories,
-    onSelectedItemsChange, onSelectedItemObjectsChange } = this.props;
-
+    onSelectedItemsChange, onSelectedItemObjectsChange, handleSwapCategoryContinue} = this.props;
     newSelectedSwapCategories = [22, 23];
 
+    console.log("&&&&&&&&&&&", this.state);
+
     return (
-      <Container style={{backgroundColor: 'white'}}>
-      <View style={styles.swapCategorySelectionSection}>
-        <Text style={{fontWeight: 'bold', fontSize: 32, marginBottom: 56, textAlign: 'center'}}>
-          Select Swap Categories
-        </Text>
-        <Text
-          style={[ styles.swapCategorySubTitle,
-                {display: selectedSwapCategoriesState.length > 5 ? "flex" : "none"}]}
-        >
-          Please only select up to 5 categories.
-        </Text>
-        <Text style={[styles.swapCategoryErrorMsg, 
-          {fontSize: 16, marginBottom: 32, lineHeight: 22, color: swapCategorySelectionError === true && selectedSwapCategories.length < 1 
-          ? "red" : "#A3A3A2"}]}>
-          Please select categories that you are willing to SWAP.
-        </Text>
-
-        <TouchableOpacity
-          style={{
-            // flexDirection: 'row', 
-            borderWidth: 1,
-            borderRadius: 10,
-            width: '100%',
-            height: 60,
-            marginTop: 20,
-            marginBottom: 20,
-            borderColor: "#A3A3A2",
-            backgroundColor: 'white'
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 14, 
-              fontWeight: 'bold', 
-              lineHeight: 20,
-              flex: 1,
-              // textAlign: 'center',
-              marginTop: 18,
-              color: "#A3A3A2",
-              paddingLeft: 16
-            }}
-          >
-            Select swap categories
+      <SafeAreaView style={{marginTop: -20, backgroundColor: 'white'}}>
+        <View style={styles.swapCategorySelectionSection}>
+          <Text style={{fontWeight: 'bold', fontSize: 32, marginBottom: 56, textAlign: 'center'}}>
+            {
+              this.state.selectedSwapCategories.length === 0 ?
+              "Select Swap Categories"
+              : (this.state.selectedSwapCategories).join(" ")
+            }
           </Text>
-        </TouchableOpacity>
-
-
-        
-        <View style={{alignSelf: 'center', marginTop: 50}}>
-          <TouchableOpacity 
-            // disabled={ this.state.finalHashTags.length === 0 ? true : false }
-            // disabled={swapToggle === false && sellToggle === false && rentToggle === false ? true : false}
-            style={{
-              flexDirection: 'row', 
-              borderWidth: 1,
-              borderRadius: 30,
-              width: 278,
-              height: 58,
-              // marginTop: 60,
-              marginBottom: 40,
-              borderColor: 'black',
-              backgroundColor: 'white'
-              // borderColor: swapToggle === false && sellToggle === false && rentToggle === false ? "#CECECE" : "black",
-              // backgroundColor: swapToggle === false && sellToggle === false && rentToggle === false ? "#CECECE" : "white",
-            }}
-            // onPress={ () => handlePageContinueButton("hashTag selection", this.finalHashTags) }
-            // onPress={(e) => handleInputSubmit("TradeSelectionInput")}
-            // onPress={(e) => Actions.tradeSelection()}
+          <Text
+            style={[ styles.swapCategorySubTitle,
+                  {display: selectedSwapCategoriesState.length > 5 ? "flex" : "none"}]}
           >
-            <Text 
+            Please only select up to 5 categories.
+          </Text>
+          <Text style={[styles.swapCategoryErrorMsg, 
+            {fontSize: 16, marginBottom: 32, lineHeight: 22, color: swapCategorySelectionError === true && selectedSwapCategories.length < 1 
+            ? "red" : "#A3A3A2"}]}>
+            Please select categories that you are willing to SWAP.
+          </Text>
+
+          <TouchableOpacity
+            style={{
+              borderWidth: 1,
+              borderRadius: 10,
+              width: '100%',
+              height: 60,
+              marginTop: 20,
+              marginBottom: 20,
+              borderColor: "#A3A3A2",
+              backgroundColor: 'white'
+            }}
+            onPress={(e) => this.handleDropdown()}
+          >
+            <Text
               style={{
                 fontSize: 14, 
                 fontWeight: 'bold', 
                 lineHeight: 20,
                 flex: 1,
-                textAlign: 'center',
                 marginTop: 18,
-                color: 'black'
-                // color: swapToggle === false && sellToggle === false && rentToggle === false ? "white" : "black",
+                color: "#A3A3A2",
+                paddingLeft: 16
               }}
             >
-              Continue
+              Select swap categories
             </Text>
           </TouchableOpacity>
-        </View>
 
-        {/* <SectionedMultiSelect
+          {
+            this.state.dropDownSectionClicked === true ?
+            <View style={{marginTop: 40}}>
+            {
+              this.sampleSwapCategories.map((singleSwapCategory, index) => {
+                // console.log("^^^^^^^^ singleSwapCategory", singleSwapCategory);
+                return (
+                  <SingleSwapFirstLevelCategory
+                    key={index}
+                    firtLevelCategory={singleSwapCategory.firstLevel}
+                    // handleFirstLevelCategoryClick={this.handleFirstLevelCategoryClick}
+                    singleSwapCategory={singleSwapCategory}
+                    // firstLevelClicked={this.state.firstLevelClicked}
+                  />
+                )
+              })
+            }
+            </View>
+            : null
+          }
+          
+          <View style={{alignSelf: 'center', marginTop: 50}}>
+            <TouchableOpacity 
+              style={{
+                flexDirection: 'row', 
+                borderWidth: 1,
+                borderRadius: 30,
+                width: 278,
+                height: 58,
+                marginBottom: 40,
+                borderColor: 'black',
+                backgroundColor: 'white'
+              }}
+              onPress={(e) => handleSwapCategoryContinue()}
+            >
+              <Text 
+                style={{
+                  fontSize: 14, 
+                  fontWeight: 'bold', 
+                  lineHeight: 20,
+                  flex: 1,
+                  textAlign: 'center',
+                  marginTop: 18,
+                  color: 'black'
+                }}
+              >
+                Continue
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+}
+
+export default SwapCategorySelection;
+
+
+
+
+
+{/* <SectionedMultiSelect
           hideTags
           style={styles.swapCategorySelectionBox}
           items={items} 
@@ -160,10 +232,3 @@ class SwapCategorySelection extends React.Component {
             }
           }}
         /> */}
-      </View>
-      </Container>
-    );
-  }
-}
-
-export default SwapCategorySelection;
