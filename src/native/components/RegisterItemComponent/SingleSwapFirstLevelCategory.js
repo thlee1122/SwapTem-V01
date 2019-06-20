@@ -3,6 +3,8 @@ import { Actions }                                      from 'react-native-route
 import { View, TextInput, TouchableOpacity, 
          StatusBar, SafeAreaView }                          from 'react-native';
 import { Text, Button, Container }                             from 'native-base';
+import MaterialIcons                                  from 'react-native-vector-icons/MaterialIcons';
+import SingleSwapSecondLevelCategory                  from './SingleSwapSecondLevelCategory';
 // import SectionedMultiSelect                         from 'react-native-sectioned-multi-select';
 
 
@@ -13,7 +15,9 @@ class SingleSwapFirstLevelCategory extends React.Component {
     super(props);
 
     this.state = {
-      firstLevelClicked: false
+      firstLevelClicked: false,
+
+      // secondLevelClicked: false
     }
   }
 
@@ -24,7 +28,7 @@ class SingleSwapFirstLevelCategory extends React.Component {
   }
 
   render() {
-    const { firtLevelCategory, singleSwapCategory } = this.props;
+    const { firstLevelCategory, singleSwapCategory, addSwapCategory, removeSwapCategory } = this.props;
 
     return (
       <View style={{borderBottomWidth: 1, borderBottomColor: '#ECEBEB'}}>
@@ -35,8 +39,18 @@ class SingleSwapFirstLevelCategory extends React.Component {
           <View>
             <View style={{flexDirection: 'row'}}>
               <Text style={{fontSize: 16, fontWeight: 'bold', padding: 16}}>
-                {firtLevelCategory}
+                {firstLevelCategory}
               </Text>
+
+              <MaterialIcons
+                name={this.state.firstLevelClicked === true ? "keyboard-arrow-down" : "keyboard-arrow-up"}
+                size={25}
+                style={{
+                  position: 'absolute',
+                  right: 0,
+                  top: 14
+                }}
+              />
             </View>
 
             {
@@ -50,17 +64,13 @@ class SingleSwapFirstLevelCategory extends React.Component {
                 {
                   singleSwapCategory.secondLevel.map((singleSecondLevel, index) => {
                     return (
-                      <TouchableOpacity
+                      <SingleSwapSecondLevelCategory
                         key={index}
-                        style={{
-                          borderTopWidth: 1,
-                          borderTopColor: '#ECEBEB'
-                        }}
-                      >
-                        <Text style={{paddingTop: 16, paddingBottom: 16, color: '#A3A3A2'}}>
-                          {singleSecondLevel}
-                        </Text>
-                      </TouchableOpacity>
+                        singleSecondLevel={singleSecondLevel}
+                        firstLevelCategory={firstLevelCategory}
+                        addSwapCategory={addSwapCategory}
+                        removeSwapCategory={removeSwapCategory}
+                      />
                     )
                   })
                 }

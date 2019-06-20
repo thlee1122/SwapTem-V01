@@ -32,15 +32,57 @@ class SwapCategorySelection extends React.Component {
         secondLevel: ["TV & Video", "Home Audio & Theater", "Camera, Photo & Video", "Cell Phones & Accessories"]
       },
       {
-        firstLevel: "Electronics",
-        secondLevel: ["TV & Video", "Home Audio & Theater", "Camera, Photo & Video", "Cell Phones & Accessories"]
-      },
-      {
         firstLevel: "Books",
         secondLevel: ["Textbooks", "Fiction Books", "Magazine", "Novels",]
-      },
+      }
+    ];
 
-    ]
+    // this.selectedCategoryObj = {
+    //   firstLevelCategory: '',
+    //   secondLevelCategory: []
+    // };
+
+    this.selectedSwapCategoriesObj = {
+      Fashion: [],
+      Electronics: [],
+      Books: []
+    }
+      
+
+
+  }
+
+  addSwapCategory = (firstLevelCategory, singleSecondLevelCategory) => {
+    if(firstLevelCategory === "Fashion") {
+      this.selectedSwapCategoriesObj["Fashion"].push(singleSecondLevelCategory);
+
+    } else if(firstLevelCategory === "Electronics") {
+      this.selectedSwapCategoriesObj["Electronics"].push(singleSecondLevelCategory);
+
+    } else if(firstLevelCategory === "Books") {
+      this.selectedSwapCategoriesObj["Books"].push(singleSecondLevelCategory);
+    }
+
+    console.log("44444 this.selectedCategoryObj", this.selectedSwapCategoriesObj);
+  }
+
+  removeSwapCategory = (firstLevelCategory, singleSecondLevelCategory) => {
+    if(firstLevelCategory === "Fashion") {
+
+      this.selectedSwapCategoriesObj["Fashion"] = this.selectedSwapCategoriesObj["Fashion"].filter((selectedSwapCategory) => {
+        return selectedSwapCategory !== singleSecondLevelCategory
+      });
+
+    } else if(firstLevelCategory === "Electronics") {
+      this.selectedSwapCategoriesObj["Electronics"] = this.selectedSwapCategoriesObj["Electronics"].filter((selectedSwapCategory) => {
+        return selectedSwapCategory !== singleSecondLevelCategory
+      });
+
+    } else if(firstLevelCategory === "Books") {
+      this.selectedSwapCategoriesObj["Books"] = this.selectedSwapCategoriesObj["Books"].filter((selectedSwapCategory) => {
+        return selectedSwapCategory !== singleSecondLevelCategory
+      });
+    }
   }
 
   handleDropdown = () => {
@@ -121,10 +163,12 @@ class SwapCategorySelection extends React.Component {
                 return (
                   <SingleSwapFirstLevelCategory
                     key={index}
-                    firtLevelCategory={singleSwapCategory.firstLevel}
+                    firstLevelCategory={singleSwapCategory.firstLevel}
                     // handleFirstLevelCategoryClick={this.handleFirstLevelCategoryClick}
                     singleSwapCategory={singleSwapCategory}
                     // firstLevelClicked={this.state.firstLevelClicked}
+                    addSwapCategory={this.addSwapCategory}
+                    removeSwapCategory={this.removeSwapCategory}
                   />
                 )
               })
