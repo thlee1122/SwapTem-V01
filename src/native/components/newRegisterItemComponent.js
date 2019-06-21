@@ -570,7 +570,7 @@ class RegisterItemComponent extends Component {
       })
     } else if(inputType === "itemValueInput") {
       this.setState({
-        itemValueInputColor: "#00529b"
+        itemValueInputColor: "black"
       })
     } else if(inputType === "textbookNameInput") {
       this.setState({
@@ -708,6 +708,11 @@ class RegisterItemComponent extends Component {
     } else if(pageName === "description input") {
       this.setState({
         itemRegisterStep: 5
+      });
+
+    } else if(pageName === "value input") {
+      this.setState({
+        itemRegisterStep: 6
       });
     }
   }
@@ -897,6 +902,7 @@ class RegisterItemComponent extends Component {
                 handleTextInputBlur={this.handleTextInputBlur}
                 handleInputSubmit={this.handleInputSubmit}
                 handleSubmit={this.handleSubmit}
+                handleBackButton={this.handleBackButton}
               />
               : null
             }

@@ -8,7 +8,7 @@ import FeatherIcon                                  from 'react-native-vector-ic
 class DescriptionSection extends React.Component {
   render() {
     const { descInputFieldColor, itemDescription, handleTextChange, handleTextInputFocus, 
-            handleTextInputBlur, numOfDescCharacters, handleInputSubmit} = this.props;
+            handleTextInputBlur, numOfDescCharacters, handleInputSubmit, handleBackButton} = this.props;
 
 
     const imageFile = require("../../../images/04.png");

@@ -5,18 +5,15 @@ import styles                                       from '../../styles/RegisterI
 import FeatherIcon                                  from 'react-native-vector-icons/Feather';
 
 class ValueInputSection extends React.Component {
-
   handleSubmit = (inputType) => {
     const { handleInputSubmit, handleSubmit } = this.props;
-
     handleInputSubmit(inputType);
     handleSubmit(inputType);
   }
 
   render() {
-    const { itemValueError, itemValueInputColor, itemValue, handleTextChange,
-            handleTextInputFocus, handleTextInputBlur, handleInputSubmit, handleSubmit} = this.props;
-
+    const { itemValueInputColor, itemValue, handleTextChange, handleTextInputFocus, 
+            handleTextInputBlur, handleInputSubmit, handleSubmit, handleBackButton } = this.props;
     const imageFile = require("../../../images/04.png");
     const { width } = Dimensions.get('window');
 
@@ -29,15 +26,10 @@ class ValueInputSection extends React.Component {
         />
 
         <SafeAreaView style={{marginTop: -20, backgroundColor: 'black'}}>
-          <View
-            style={{backgroundColor: 'black', height: 300}}
-          >
+          <View style={{backgroundColor: 'black', height: 300}}>
             <TouchableOpacity 
-              style={{
-                paddingLeft: 10,
-                paddingTop: 32
-              }} 
-              onPress={() => {handleBackButton("description input")}}
+              style={{ paddingLeft: 10, paddingTop: 32}} 
+              onPress={() => {handleBackButton("value input")}}
             >
               <FeatherIcon name="arrow-left" size={30} color={"white"}/>
             </TouchableOpacity>
@@ -69,18 +61,58 @@ class ValueInputSection extends React.Component {
                 Based on the information provided, <Text style={{fontWeight: 'bold', color: "black"}}>RECOMMENDED VALUE</Text> is <Text style={{fontWeight: 'bold', color: "black"}}>$20.00.</Text>
               </Text>
 
-               <TextInput
-                  style={[ styles.valueSectionTextInput,
-                            {borderBottomColor: itemValueInputColor}]}
-                  ref="itemValueInput"
-                  paddingLeft={10}
-                  placeholder="Please input value for your item. Ex. 20.00"
-                  value={itemValue}
-                  keyboardType='numeric'
-                  onChangeText={(text) => handleTextChange("itemValueInput", text)}
-                  onFocus={(e) => handleTextInputFocus("itemValueInput")}
-                  onBlur={(e) => handleTextInputBlur("itemValueInput")}
-                />
+              <TextInput
+                style={{
+                  width: '100%',
+                  height: 56, 
+                  color: "black", 
+                  fontWeight: 'bold',
+                  fontSize: 15,
+                  borderBottomWidth: 2,
+                  marginTop: 32,
+                  borderBottomColor: itemValueInputColor
+                }}
+                ref="itemValueInput"
+                paddingLeft={10}
+                placeholder="Please input price for your item. Ex. 20.00"
+                value={itemValue}
+                keyboardType='numeric'
+                onChangeText={(text) => handleTextChange("itemValueInput", text)}
+                onFocus={(e) => handleTextInputFocus("itemValueInput")}
+                onBlur={(e) => handleTextInputBlur("itemValueInput")}
+              />
+
+              <View style={{alignSelf: 'center'}}>
+                <TouchableOpacity 
+                  disabled={itemValue === "" ? true : false}
+                  style={{
+                    flexDirection: 'row', 
+                    borderWidth: 1,
+                    borderRadius: 30,
+                    width: 278,
+                    height: 58,
+                    marginTop: 60,
+                    marginBottom: 40,
+                    borderColor: itemValue === "" ? "#CECECE" : "black",
+                    backgroundColor: itemValue === "" ? "#CECECE" : "white",
+                  }}
+                  onPress={(e) => this.handleSubmit("ValueInput")}
+                >
+                  <Text 
+                    style={{
+                      fontSize: 14, 
+                      fontWeight: 'bold', 
+                      lineHeight: 20,
+                      flex: 1,
+                      textAlign: 'center',
+                      marginTop: 18,
+                      color: itemValue === "" ? "white" : "black",
+                    }}
+                  >
+                    Continue
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </SafeAreaView>
@@ -90,42 +122,3 @@ class ValueInputSection extends React.Component {
 }
 
 export default ValueInputSection;
-
-{/* <React.Fragment>
-      <View style={styles.valueSection}>
-        <Text style={{fontWeight: 'bold', fontSize: 25, marginBottom: 10}}>SET VALUE</Text>
-        <Text style={styles.valueSectionSubTitle}>
-          Based on the information provided, <Text style={{fontWeight: 'bold', color: "#00529b"}}>RECOMMENDED VALUE</Text> is <Text style={{fontWeight: 'bold', color: "#00529b"}}>$20.00.</Text>
-        </Text>
-
-        {
-          itemValueError === true ?
-            <Text style={styles.valueSectionErrorMsg}>
-              Please enter value for your item
-            </Text>
-          :
-            <React.Fragment></React.Fragment>
-        }
-
-        <TextInput
-          style={[ styles.valueSectionTextInput,
-                    {borderBottomColor: itemValueInputColor}]}
-          ref="itemValueInput"
-          paddingLeft={10}
-          placeholder="Please input value for your item. Ex. 20.00"
-          value={itemValue}
-          keyboardType='numeric'
-          onChangeText={(text) => handleTextChange("itemValueInput", text)}
-          onFocus={(e) => handleTextInputFocus("itemValueInput")}
-          onBlur={(e) => handleTextInputBlur("itemValueInput")}
-        />
-
-        <Button 
-          style={[styles.hashTagePageButton, {marginTop: 30}]}
-          onPress={(e) => this.handleSubmit("ValueInput")}
-          disabled={itemValue !== "" ? false : true}
-        >
-          <Text style={styles.hashTagePageButtonText}>Submit</Text>
-        </Button>
-      </View>
-    </React.Fragment> */}
