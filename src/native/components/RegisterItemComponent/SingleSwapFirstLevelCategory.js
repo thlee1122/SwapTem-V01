@@ -5,19 +5,13 @@ import { View, TextInput, TouchableOpacity,
 import { Text, Button, Container }                             from 'native-base';
 import MaterialIcons                                  from 'react-native-vector-icons/MaterialIcons';
 import SingleSwapSecondLevelCategory                  from './SingleSwapSecondLevelCategory';
-// import SectionedMultiSelect                         from 'react-native-sectioned-multi-select';
-
-
 
 class SingleSwapFirstLevelCategory extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       firstLevelClicked: false,
-
-      // secondLevelClicked: false
     }
   }
 
@@ -28,7 +22,8 @@ class SingleSwapFirstLevelCategory extends React.Component {
   }
 
   render() {
-    const { firstLevelCategory, singleSwapCategory, addSwapCategory, removeSwapCategory } = this.props;
+    const { firstLevelCategory, singleSwapCategory, addSwapCategory, 
+            removeSwapCategory, selectedSwapCategoryObj } = this.props;
 
     return (
       <View style={{borderBottomWidth: 1, borderBottomColor: '#ECEBEB'}}>
@@ -70,6 +65,7 @@ class SingleSwapFirstLevelCategory extends React.Component {
                         firstLevelCategory={firstLevelCategory}
                         addSwapCategory={addSwapCategory}
                         removeSwapCategory={removeSwapCategory}
+                        selectedSwapCategoryObj={selectedSwapCategoryObj}
                       />
                     )
                   })

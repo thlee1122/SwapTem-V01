@@ -5,9 +5,8 @@ import MaterialIcon                                 from 'react-native-vector-ic
 import styles                                       from '../../styles/RegisterItemStyles';
 
 class InterestedCategorySection extends React.Component {
-
   render() {
-    const { interestedCategories, handleEdit } = this.props;
+    const { interestedCategories, handleEdit, selectedSwapCategories } = this.props;
 
     return (
       <View style={styles.interestedCategorySection}>
@@ -17,7 +16,6 @@ class InterestedCategorySection extends React.Component {
           </Text>
 
           <TouchableOpacity
-            // onPress={(e) => handleEdit("interestedCategoryEdit")}
             onPress={(e) => handleEdit()}
             style={styles.interestedCategoryEditButton}
           >
@@ -30,7 +28,11 @@ class InterestedCategorySection extends React.Component {
         </Text>
 
         <Text style={styles.selectedInterestedCategories}>
-          { interestedCategories.join(", ") }
+          {
+            selectedSwapCategories.length === 0 ?
+              interestedCategories.join(", ")
+            : selectedSwapCategories.join(", ")
+          }
         </Text>
       </View>
     );

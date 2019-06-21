@@ -366,11 +366,26 @@ class RegisterItemComponent extends Component {
         itemRegisterStep: this.state.itemRegisterStep + 1
       });
 
+
+
+
+
+
     } else if(inputType === "TradeSelectionInput") {
+
+      //mainCategory is finalSelectedSwapCategoryObj
+
+
+      this.registerDataObj["selectedSwapCategories"] = mainCategory;
+
       this.setState({
         // tradeSelectionSubmitted: true,
         itemRegisterStep: this.state.itemRegisterStep + 1
       });
+
+
+
+
 
     } else if(inputType === "ConditionSelectionInput") {
       this.setState({
@@ -551,7 +566,7 @@ class RegisterItemComponent extends Component {
   handleTextInputFocus = (inputType) => {
     if(inputType === "itemDescInput") {
       this.setState({
-        descInputFieldColor: "#00529b"
+        descInputFieldColor: "black"
       })
     } else if(inputType === "itemValueInput") {
       this.setState({
@@ -687,6 +702,12 @@ class RegisterItemComponent extends Component {
     } else if(pageName === "trade selection") {
       this.setState({
         itemRegisterStep: 3
+      });
+
+
+    } else if(pageName === "description input") {
+      this.setState({
+        itemRegisterStep: 5
       });
     }
   }
@@ -856,6 +877,9 @@ class RegisterItemComponent extends Component {
                 handleTextInputBlur={this.handleTextInputBlur}
                 numOfDescCharacters={this.state.numOfDescCharacters}
                 handleInputSubmit={this.handleInputSubmit}
+
+
+                handleBackButton={this.handleBackButton}
               />
               : null
             }

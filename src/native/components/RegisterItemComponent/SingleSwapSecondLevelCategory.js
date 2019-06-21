@@ -1,53 +1,42 @@
 import React                                        from "react";
-import { Actions }                                      from 'react-native-router-flux';
-import { View, TextInput, TouchableOpacity, 
-         StatusBar, SafeAreaView }                          from 'react-native';
-import { Text, Button, Container }                             from 'native-base';
+import { View, TouchableOpacity, Text}                          from 'react-native';
 import MaterialIcons                                  from 'react-native-vector-icons/MaterialIcons';
-// import SectionedMultiSelect                         from 'react-native-sectioned-multi-select';
-
-
 
 class SingleSwapSecondLevelCategory extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      // firstLevelClicked: false,
-
       secondLevelClicked: false
     }
-
-    // this.selectedCategoryObj = {
-    //   firstLevelCategory: '',
-    //   secondLevelCategory: []
-    // };
 
     this.secondLevelClicked = false;
   }
 
+  componentWillMount() {
+    const { selectedSwapCategoryObj, firstLevelCategory, singleSecondLevel } = this.props;
 
+    if(selectedSwapCategoryObj[firstLevelCategory].indexOf(singleSecondLevel) !== -1) {
+      this.setState({
+        secondLevelClicked: true
+      });
+    }
+  }
 
-  // handleFirstLevelCategoryClick = () => {
-  //   this.setState({
-  //     firstLevelClicked: !this.state.firstLevelClicked
-  //   });
-  // }
+  componentWillReceiveProps = (nextProps) => {
+    const { singleSecondLevel, firstLevelCategory } = this.props;
+
+    if(this.props.selectedSwapCategoryObj !== nextProps.selectedSwapCategoryObj) {
+      if(nextProps.selectedSwapCategoryObj[firstLevelCategory].indexOf(singleSecondLevel) !== -1) {
+        this.setState({
+          secondLevelClicked: true
+        });
+      }
+    }
+  }
 
   handleSecondLevelCategoryClick = (firstLevelCategory, singleSecondLevel) => {
-
     const { addSwapCategory, removeSwapCategory } = this.props;
-
-    console.log("!!!!! second level has been clicked", firstLevelCategory);
-
-    // const selectedCategoryObj = {
-    //   firstLevelCategory: '',
-    //   secondLevelCategory: []
-    // };
-
-    // this.selectedCategoryObj["firstLevelCategory"] = firstLevelCategory;
-    // this.selectedCategoryObj["secondLevelCategory"].push(singleSecondLevel);
 
     this.setState({
       secondLevelClicked: !this.state.secondLevelClicked
@@ -57,11 +46,10 @@ class SingleSwapSecondLevelCategory extends React.Component {
 
     if(this.secondLevelClicked === true) {
       addSwapCategory(firstLevelCategory, singleSecondLevel);
+
     } else if(this.secondLevelClicked === false) {
       removeSwapCategory(firstLevelCategory, singleSecondLevel);
     }
-
-    // console.log("222222 selectedCategoryObj", this.selectedCategoryObj);
   }
 
   render() {
@@ -70,7 +58,6 @@ class SingleSwapSecondLevelCategory extends React.Component {
     return (
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
-          // key={index}
           style={{
             borderTopWidth: 1,
             borderTopColor: '#ECEBEB',
@@ -92,7 +79,6 @@ class SingleSwapSecondLevelCategory extends React.Component {
               position: 'absolute',
               right: 0,
               top: 16,
-              // marginRight: 16
             }}
           />
         }

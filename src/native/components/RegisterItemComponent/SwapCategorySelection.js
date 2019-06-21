@@ -1,25 +1,22 @@
 import React                                        from "react";
 import { Actions }                                      from 'react-native-router-flux';
-import { View, TextInput, TouchableOpacity, 
+import { View, TouchableOpacity, Text,
          StatusBar, SafeAreaView }                          from 'react-native';
-import { Text, Button, Container }                             from 'native-base';
-// import SectionedMultiSelect                         from 'react-native-sectioned-multi-select';
 import styles                                       from '../../styles/RegisterItemStyles';
-import { items }                                    from '../../data/sampleRegisterItemData';
-
 import SingleSwapFirstLevelCategory       from './SingleSwapFirstLevelCategory';
 
 class SwapCategorySelection extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       selectedSwapCategories: [],
-
       dropDownSectionClicked: false,
-
-      // firstLevelClicked: false
+      selectedSwapCategoryObj: {
+        Fashion: [],
+        Electronics: [],
+        Books: []
+      },
     };
 
     this.sampleSwapCategories = [
@@ -37,50 +34,148 @@ class SwapCategorySelection extends React.Component {
       }
     ];
 
-    // this.selectedCategoryObj = {
-    //   firstLevelCategory: '',
-    //   secondLevelCategory: []
-    // };
-
-    this.selectedSwapCategoriesObj = {
+    this.finalSelectedSwapCategoryObj = {
       Fashion: [],
       Electronics: [],
       Books: []
     }
-      
-
-
   }
 
   addSwapCategory = (firstLevelCategory, singleSecondLevelCategory) => {
+    let tempState = this.state.selectedSwapCategories;
+    tempState.push(singleSecondLevelCategory);
+
+    this.setState({
+      selectedSwapCategories: [...tempState]
+    });
+
     if(firstLevelCategory === "Fashion") {
-      this.selectedSwapCategoriesObj["Fashion"].push(singleSecondLevelCategory);
+      this.finalSelectedSwapCategoryObj["Fashion"].push(singleSecondLevelCategory);
+
+      const tempState = this.state.selectedSwapCategoryObj["Fashion"];
+      tempState.push(singleSecondLevelCategory);
+
+      const tempObj = {
+        Fashion: [...tempState],
+        Electronics: [...this.state.selectedSwapCategoryObj["Electronics"]],
+        Books: [...this.state.selectedSwapCategoryObj["Books"]]
+      }
+
+     this.setState({
+        selectedSwapCategoryObj: tempObj
+     });
 
     } else if(firstLevelCategory === "Electronics") {
-      this.selectedSwapCategoriesObj["Electronics"].push(singleSecondLevelCategory);
+      this.finalSelectedSwapCategoryObj["Electronics"].push(singleSecondLevelCategory);
+
+      const tempState = this.state.selectedSwapCategoryObj["Electronics"];
+      tempState.push(singleSecondLevelCategory);
+
+      const tempObj = {
+        Fashion: [...this.state.selectedSwapCategoryObj["Fashion"]],
+        Electronics: [...tempState],
+        Books: [...this.state.selectedSwapCategoryObj["Books"]]
+      }
+
+     this.setState({
+        selectedSwapCategoryObj: tempObj
+     });
 
     } else if(firstLevelCategory === "Books") {
-      this.selectedSwapCategoriesObj["Books"].push(singleSecondLevelCategory);
-    }
+      this.finalSelectedSwapCategoryObj["Books"].push(singleSecondLevelCategory);
 
-    console.log("44444 this.selectedCategoryObj", this.selectedSwapCategoriesObj);
+      const tempState = this.state.selectedSwapCategoryObj["Books"];
+      tempState.push(singleSecondLevelCategory);
+
+      const tempObj = {
+        Fashion: [...this.state.selectedSwapCategoryObj["Fashion"]],
+        Electronics: [...this.state.selectedSwapCategoryObj["Electronics"]],
+        Books: [...tempState]
+      }
+
+     this.setState({
+        selectedSwapCategoryObj: tempObj
+     });
+    }
   }
 
   removeSwapCategory = (firstLevelCategory, singleSecondLevelCategory) => {
-    if(firstLevelCategory === "Fashion") {
+    let tempState = this.state.selectedSwapCategories;
 
-      this.selectedSwapCategoriesObj["Fashion"] = this.selectedSwapCategoriesObj["Fashion"].filter((selectedSwapCategory) => {
+    tempState = tempState.filter((singleTempState) => {
+      return (
+        singleTempState !== singleSecondLevelCategory
+      );
+    });
+
+    this.setState({
+      selectedSwapCategories: [...tempState]
+    });
+
+    if(firstLevelCategory === "Fashion") {
+      this.finalSelectedSwapCategoryObj["Fashion"] = this.finalSelectedSwapCategoryObj["Fashion"].filter((selectedSwapCategory) => {
         return selectedSwapCategory !== singleSecondLevelCategory
+      });
+
+      let tempState = this.state.selectedSwapCategoryObj["Fashion"];
+      tempState = tempState.filter((singleTempState) => {
+        return (
+          singleTempState !== singleSecondLevelCategory
+        );
+      });
+
+      const tempObj = {
+        Fashion: [...tempState],
+        Electronics: [...this.state.selectedSwapCategoryObj["Electronics"]],
+        Books: [...this.state.selectedSwapCategoryObj["Books"]]
+      }
+
+      this.setState({
+        selectedSwapCategoryObj: tempObj
       });
 
     } else if(firstLevelCategory === "Electronics") {
-      this.selectedSwapCategoriesObj["Electronics"] = this.selectedSwapCategoriesObj["Electronics"].filter((selectedSwapCategory) => {
+      this.finalSelectedSwapCategoryObj["Electronics"] = this.finalSelectedSwapCategoryObj["Electronics"].filter((selectedSwapCategory) => {
         return selectedSwapCategory !== singleSecondLevelCategory
       });
 
+      let tempState = this.state.selectedSwapCategoryObj["Electronics"];
+      tempState = tempState.filter((singleTempState) => {
+        return (
+          singleTempState !== singleSecondLevelCategory
+        );
+      });
+
+      const tempObj = {
+        Fashion: [...this.state.selectedSwapCategoryObj["Fashion"]],
+        Electronics: [...tempState],
+        Books: [...this.state.selectedSwapCategoryObj["Books"]]
+      }
+
+      this.setState({
+        selectedSwapCategoryObj: tempObj
+      });
+
     } else if(firstLevelCategory === "Books") {
-      this.selectedSwapCategoriesObj["Books"] = this.selectedSwapCategoriesObj["Books"].filter((selectedSwapCategory) => {
+      this.finalSelectedSwapCategoryObj["Books"] = this.finalSelectedSwapCategoryObj["Books"].filter((selectedSwapCategory) => {
         return selectedSwapCategory !== singleSecondLevelCategory
+      });
+
+      let tempState = this.state.selectedSwapCategoryObj["Books"];
+      tempState = tempState.filter((singleTempState) => {
+        return (
+          singleTempState !== singleSecondLevelCategory
+        );
+      });
+
+      const tempObj = {
+        Fashion: [...this.state.selectedSwapCategoryObj["Fashion"]],
+        Electronics: [...this.state.selectedSwapCategoryObj["Electronics"]],
+        Books: [...tempState]
+      }
+
+      this.setState({
+        selectedSwapCategoryObj: tempObj
       });
     }
   }
@@ -91,35 +186,25 @@ class SwapCategorySelection extends React.Component {
     });
   }
 
-  // handleFirstLevelCategoryClick = () => {
-  //   this.setState({
-  //     firstLevelClicked: !this.state.firstLevelClicked
-  //   });
-  // }
-
   render() {
     const { selectedSwapCategoriesState, swapCategorySelectionError, selectedSwapCategories,
     onSelectedItemsChange, onSelectedItemObjectsChange, handleSwapCategoryContinue} = this.props;
     newSelectedSwapCategories = [22, 23];
 
-    console.log("&&&&&&&&&&&", this.state);
-
     return (
       <SafeAreaView style={{marginTop: -20, backgroundColor: 'white'}}>
         <View style={styles.swapCategorySelectionSection}>
           <Text style={{fontWeight: 'bold', fontSize: 32, marginBottom: 56, textAlign: 'center'}}>
-            {
-              this.state.selectedSwapCategories.length === 0 ?
-              "Select Swap Categories"
-              : (this.state.selectedSwapCategories).join(" ")
-            }
+            Select Swap Categories
           </Text>
+          
           <Text
             style={[ styles.swapCategorySubTitle,
                   {display: selectedSwapCategoriesState.length > 5 ? "flex" : "none"}]}
           >
             Please only select up to 5 categories.
           </Text>
+          
           <Text style={[styles.swapCategoryErrorMsg, 
             {fontSize: 16, marginBottom: 32, lineHeight: 22, color: swapCategorySelectionError === true && selectedSwapCategories.length < 1 
             ? "red" : "#A3A3A2"}]}>
@@ -155,26 +240,23 @@ class SwapCategorySelection extends React.Component {
           </TouchableOpacity>
 
           {
-            this.state.dropDownSectionClicked === true ?
+            this.state.dropDownSectionClicked === true &&
             <View style={{marginTop: 40}}>
             {
               this.sampleSwapCategories.map((singleSwapCategory, index) => {
-                // console.log("^^^^^^^^ singleSwapCategory", singleSwapCategory);
                 return (
                   <SingleSwapFirstLevelCategory
                     key={index}
                     firstLevelCategory={singleSwapCategory.firstLevel}
-                    // handleFirstLevelCategoryClick={this.handleFirstLevelCategoryClick}
                     singleSwapCategory={singleSwapCategory}
-                    // firstLevelClicked={this.state.firstLevelClicked}
                     addSwapCategory={this.addSwapCategory}
                     removeSwapCategory={this.removeSwapCategory}
+                    selectedSwapCategoryObj={this.state.selectedSwapCategoryObj}
                   />
                 )
               })
             }
             </View>
-            : null
           }
           
           <View style={{alignSelf: 'center', marginTop: 50}}>
@@ -186,10 +268,11 @@ class SwapCategorySelection extends React.Component {
                 width: 278,
                 height: 58,
                 marginBottom: 40,
-                borderColor: 'black',
-                backgroundColor: 'white'
+                borderColor: this.state.selectedSwapCategories.length === 0 ? "#CECECE" : 'black',
+                backgroundColor: this.state.selectedSwapCategories.length === 0 ? "#CECECE" :'white'
               }}
-              onPress={(e) => handleSwapCategoryContinue()}
+              disabled={this.state.selectedSwapCategories.length === 0 ? true : false}
+              onPress={(e) => handleSwapCategoryContinue(this.finalSelectedSwapCategoryObj, this.state.selectedSwapCategories)}
             >
               <Text 
                 style={{
@@ -199,7 +282,7 @@ class SwapCategorySelection extends React.Component {
                   flex: 1,
                   textAlign: 'center',
                   marginTop: 18,
-                  color: 'black'
+                  color: this.state.selectedSwapCategories.length === 0 ? "white" : 'black'
                 }}
               >
                 Continue
@@ -213,66 +296,3 @@ class SwapCategorySelection extends React.Component {
 }
 
 export default SwapCategorySelection;
-
-
-
-
-
-{/* <SectionedMultiSelect
-          hideTags
-          style={styles.swapCategorySelectionBox}
-          items={items} 
-          // uniqueKey='name'
-          uniqueKey="id"
-          subKey='children'
-          selectText='Select Swap Categories'
-          showDropDowns={true}
-          readOnlyHeadings={true}
-          ref={(component) => { this.multiSelect = component }}
-          onSelectedItemsChange={(selectedItems) => onSelectedItemsChange("swapCategorySelection", selectedItems)}
-          onSelectedItemObjectsChange={(selectedItems) => onSelectedItemObjectsChange("swapCategorySelection", selectedItems)}
-          selectedItems={selectedSwapCategories}
-          // selectedItems={newSelectedSwapCategories}
-          submitButtonText="Submit"
-          colors={{
-            success: '#3578e5',
-            chipColor: '#3578e5'
-          }}
-
-          styles={{
-            backdrop: {
-              justifyContent: 'center',
-            },
-            container: {
-              width: '80%',
-              height: '70%',
-              flex: 0,
-              alignSelf: 'center',
-              marginTop: -20,
-            },
-            selectToggle: {
-              // backgroundColor: '#CCC',
-              backgroundColor: 'white',
-              borderWidth: 0.5,
-              padding: 20,
-              height: 60,
-              marginTop: 8,
-              width: '100%',
-              // alignItems: 'center', 
-              // alignSelf: 'center',
-              borderRadius: 5,
-              marginBottom: 8
-            },
-            selectToggleText: {
-              color: 'black',
-              zIndex: 10,
-              height: 40,
-              flex: 1,
-              paddingTop: 8
-            },
-            selectToggleIconComponent: {
-              color: 'white',
-              zIndex: 10
-            }
-          }}
-        /> */}

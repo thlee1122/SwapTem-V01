@@ -1,13 +1,8 @@
 import React                                        from "react";
 import { Actions }                                      from 'react-native-router-flux';
-import { 
-  View, Image, Animated, ScrollView, StatusBar, SafeAreaView, 
-  TextInput, KeyboardAvoidingView, Platform,
-  TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';  
-import {
-  Container, Content, List, ListItem, Body, 
-  Left, Right, Text, Button, Tabs, Tab, 
-  TabHeading, Card, CardItem }                      from 'native-base';
+import { View, Image, StatusBar, SafeAreaView, 
+         TouchableOpacity, Dimensions } from 'react-native';  
+import { Text, Button }                      from 'native-base';
 import { Dropdown }                                 from 'react-native-material-dropdown';
 import { Switch }                                   from 'react-native-switch';
 import styles                                       from '../../styles/RegisterItemStyles';
@@ -15,7 +10,6 @@ import { clothingTypes, shoesTypes, bagsTypes,
          accessoriesTypes }                         from '../../data/sampleRegisterItemData';
 import InterestedCategorySection                    from './InterestedCategorySection';
 import SwapCategorySelection                        from './SwapCategorySelection';
-
 import FeatherIcon                                  from 'react-native-vector-icons/Feather';
 
 class TradeSelection extends React.Component {
@@ -25,9 +19,11 @@ class TradeSelection extends React.Component {
     this.state = {
       editButtonClicked: false,
       interestedCategories: ["Books", "Electronics", "Fashion"],
+      selectedSwapCategories: []
     };
-  }
 
+    this.finalSelectedSwapCategoryObj = {};
+  }
 
   handleEdit = () => {
     this.setState({
@@ -35,24 +31,23 @@ class TradeSelection extends React.Component {
     });
   }
 
-  handleSwapCategoryContinue = () => {
+  handleSwapCategoryContinue = (finalSelectedSwapCategoryObj, swapCategoriesState) => {
     this.setState({
-      editButtonClicked: false
+      editButtonClicked: false,
+      selectedSwapCategories: swapCategoriesState
     });
+
+    this.finalSelectedSwapCategoryObj = finalSelectedSwapCategoryObj;
   }
 
   render() {
-    const { tradeSelectionError, swapToggle, sellToggle, rentToggle, 
-            handleSwitch, handleInputSubmit,
-            // interestedCategories,
-            selectedSwapCategoriesState, swapCategorySelectionError,
+    const { tradeSelectionError, swapToggle, sellToggle, rentToggle, handleSwitch, 
+            handleInputSubmit, selectedSwapCategoriesState, swapCategorySelectionError,
             selectedSwapCategories, onSelectedItemsChange, onSelectedItemObjectsChange,
             handleBackButton } = this.props;
 
-
-    const imageFile = require("../../../images/03.png");
+    const imageFile = require("../../../images/04.png");
     const { width } = Dimensions.get('window');
-
 
     return (
       <React.Fragment>
@@ -111,10 +106,8 @@ class TradeSelection extends React.Component {
                     <Text
                       style={{
                         flex:1, 
-                        // fontWeight: 'bold', 
                         fontSize: 16, 
                         lineHeight: 24
-                        // color: "#3578e5"
                       }}
                     >
                       Swap
@@ -129,7 +122,6 @@ class TradeSelection extends React.Component {
                       switchWidthMultiplier={2.2}
                       switchLeftPx={1.7}
                       switchRightPx={1.7}
-                      // style={styles.tradeSelectionSwitch}
                       style={{
                         right: 10
                       }}
@@ -146,10 +138,8 @@ class TradeSelection extends React.Component {
                     <Text
                       style={{
                         flex:1, 
-                        // fontWeight: 'bold', 
                         fontSize: 16, 
                         lineHeight: 24
-                        // color: "#3578e5"
                       }}
                     >
                       Sell
@@ -178,10 +168,8 @@ class TradeSelection extends React.Component {
                     <Text
                       style={{
                         flex:1, 
-                        // fontWeight: 'bold', 
                         fontSize: 16, 
                         lineHeight: 24
-                        // color: "#3578e5"
                       }}
                     >
                       Rent
@@ -206,24 +194,13 @@ class TradeSelection extends React.Component {
                   <InterestedCategorySection 
                     handleEdit={this.handleEdit}
                     interestedCategories={this.state.interestedCategories}
+                    selectedSwapCategories={this.state.selectedSwapCategories}
                   />
                 }
-
-                {/* {
-                  swapToggle === true && interestedCategoryEdit === true &&
-                  <SwapCategorySelection 
-                    selectedSwapCategoriesState={selectedSwapCategories}
-                    swapCategorySelectionError={swapCategorySelectionError}
-                    selectedSwapCategories={selectedSwapCategories}
-                    onSelectedItemsChange={onSelectedItemsChange}
-                    onSelectedItemObjectsChange={onSelectedItemObjectsChange}
-                  />
-                } */}
               </View>
 
               <View style={{alignSelf: 'center'}}>
                 <TouchableOpacity 
-                  // disabled={ this.state.finalHashTags.length === 0 ? true : false }
                   disabled={swapToggle === false && sellToggle === false && rentToggle === false ? true : false}
                   style={{
                     flexDirection: 'row', 
@@ -236,8 +213,7 @@ class TradeSelection extends React.Component {
                     borderColor: swapToggle === false && sellToggle === false && rentToggle === false ? "#CECECE" : "black",
                     backgroundColor: swapToggle === false && sellToggle === false && rentToggle === false ? "#CECECE" : "white",
                   }}
-                  // onPress={ () => handlePageContinueButton("hashTag selection", this.finalHashTags) }
-                  onPress={(e) => handleInputSubmit("TradeSelectionInput")}
+                  onPress={(e) => handleInputSubmit("TradeSelectionInput", this.finalSelectedSwapCategoryObj)}
                 >
                   <Text 
                     style={{
@@ -265,13 +241,7 @@ class TradeSelection extends React.Component {
             onSelectedItemObjectsChange={onSelectedItemObjectsChange}
             handleSwapCategoryContinue={this.handleSwapCategoryContinue}
           />
-        }
-
-        
-
-
-
-       
+        }  
       </React.Fragment>
     );
   }
@@ -279,104 +249,3 @@ class TradeSelection extends React.Component {
 
 export default TradeSelection;
 
- {/* <View style={styles.tradeSection}>
-          <Text style={styles.tradeSectionTitle}>Trade Selection</Text>
-          {
-            tradeSelectionError === false ?
-              <Text style={styles.tradeSectionSubTitle}>
-                Turn on selections you want for your item.
-              </Text>
-            : null
-          }
-
-          {
-            tradeSelectionError === true ?
-              <Text style={{fontSize: 13, color: 'red', marginTop: 5, marginBottom: 10}}>
-                Please select at least 1 trade selection.
-              </Text>
-            :
-              <React.Fragment></React.Fragment>
-          }
-          
-          <View style={styles.tradeSelectionSection}>
-            <View style={styles.tradeSingleSelectionSection}>
-              <Text style={styles.tradeSingleSelectionSectionText}>Swap</Text>
-
-              <Switch
-                value={swapToggle}
-                onValueChange={ (val) => handleSwitch("SwapSwitch", val)}
-                circleSize={25}
-                barHeight={25}
-                circleBorderWidth={1}
-                backgroundActive={'#3578e5'}
-                switchWidthMultiplier={2.2}
-                switchLeftPx={1.7}
-                switchRightPx={1.7}
-                style={styles.tradeSelectionSwitch}
-              />
-            </View>
-
-            <View style={styles.tradeSingleSelectionSection}>
-              <Text style={styles.tradeSingleSelectionSectionText}>Sell</Text>
-
-              <Switch
-                value={sellToggle}
-                onValueChange={ (val) => handleSwitch("SellSwitch", val)}
-                circleSize={25}
-                barHeight={25}
-                circleBorderWidth={1}
-                backgroundActive={'#3578e5'}
-                switchWidthMultiplier={2.2}
-                switchLeftPx={1.7}
-                switchRightPx={1.7}
-                style={styles.tradeSelectionSwitch}
-              />
-            </View>
-
-            <View style={styles.tradeSingleSelectionSection}>
-              <Text style={styles.tradeSingleSelectionSectionText}>Rent</Text>
-              <Switch
-                value={rentToggle}
-                onValueChange={ (val) => handleSwitch("RentSwitch", val) }
-                circleSize={25}
-                barHeight={25}
-                circleBorderWidth={1}
-                backgroundActive={'#3578e5'}
-                switchWidthMultiplier={2.2}
-                switchLeftPx={1.7}
-                switchRightPx={1.7}
-                style={styles.tradeSelectionSwitch}
-              />
-            </View>
-          </View>
-
-
-          {
-            swapToggle === true ?
-            <InterestedCategorySection 
-              handleEdit={handleEdit}
-              interestedCategories={interestedCategories}
-            />
-            : null
-          }
-
-          {
-            swapToggle === true && interestedCategoryEdit === true ?
-            <SwapCategorySelection 
-              selectedSwapCategoriesState={selectedSwapCategories}
-              swapCategorySelectionError={swapCategorySelectionError}
-              selectedSwapCategories={selectedSwapCategories}
-              onSelectedItemsChange={onSelectedItemsChange}
-              onSelectedItemObjectsChange={onSelectedItemObjectsChange}
-            />
-            : null
-          }
-
-          <Button 
-            style={styles.hashTagePageButton}
-            onPress={(e) => handleInputSubmit("TradeSelectionInput")}
-            disabled={swapToggle === false && sellToggle === false && rentToggle === false ? true : false}
-          >
-            <Text style={styles.hashTagePageButtonText}>Next</Text>
-          </Button>
-        </View> */}
