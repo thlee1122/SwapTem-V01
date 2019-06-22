@@ -324,6 +324,8 @@ class RegisterItemComponent extends Component {
 
   handleInputSubmit = (inputType, mainCategory, subCategory) => {
     if(inputType === "categoryInput") {
+
+      //**** Probably not going to need this
       if(this.state.newMainCategorySelected === false) {
         this.registerDataObj["categories"].mainCategory = mainCategory[0];
       } else {
@@ -346,7 +348,21 @@ class RegisterItemComponent extends Component {
         });
       }
 
+    } else if(inputType === "fashionTypeInput") {
+      console.log("&&&&&&& currentFilterValue", mainCategory);
+
+      this.registerDataObj.categories["finalFilterType"] = mainCategory;
+
+      this.setState({
+        itemRegisterStep: 2
+      })
+
+
     } else if(inputType === "typeGenderSizeInput") {
+
+      //** mainCategory here means current selected size
+      this.registerDataObj.size = mainCategory;
+
       this.setState({
         itemRegisterStep: this.state.itemRegisterStep + 1
       });
@@ -401,23 +417,29 @@ class RegisterItemComponent extends Component {
     }
   }
 
-  handleDropDown = (dropDownName, value, id) => {
-    if(dropDownName === "sizeDropdown") {
-      this.registerDataObj["size"] = value;
-      this.setState({
-        sizeError: false
-      });
+  // handleDropDown = (dropDownName, value, id) => {
+  //   if(dropDownName === "sizeDropdown") {
+  //     this.registerDataObj["size"] = value;
+  //     this.setState({
+  //       sizeError: false
+  //     });
 
-    } else if(dropDownName === "fashionTypeDropdown") {
-      this.registerDataObj["categories"].categoryLevelThree = [id];
-      this.registerDataObj["category"] = id;
+  //   } else if(dropDownName === "fashionTypeDropdown") {
+  //     // this.registerDataObj["categories"].categoryLevelThree = [id];
+  //     // this.registerDataObj["category"] = id;
 
-      this.setState({
-        categoryLevelThree: value,
-        typeSelectionError: false
-      });
-    }
-  }
+  //     // this.setState({
+  //     //   categoryLevelThree: value,
+  //     //   typeSelectionError: false
+  //     // });
+
+  //     this.registerDataObj["categories"].filterType = value;
+
+  //     this.setState({
+  //       categoryLevelThree: value
+  //     });
+  //   }
+  // }
 
   handleRecommendCategoryButton = (inputType, mainCategoryId, mainCategoryName, subCategoryId, subCategoryName) => {
     if(inputType === "mainCategory") {
@@ -674,14 +696,22 @@ class RegisterItemComponent extends Component {
       console.log("11111ggggg selectedItems", selectedItems);
       console.log("22222ggggg this.registerDataObj", this.registerDataObj);
 
-      if(selectedItems.finalMainCategory === "Fashion") {
+      if(selectedItems.finalMainCategory === "Fashion" 
+          // && this.registerDataObj["categories"].finalSubCategory !== "Clothing"
+        ) {
         this.setState({
-          itemRegisterStep: this.state.itemRegisterStep + 1
+          itemRegisterStep: this.state.itemRegisterStep + 1.5
         });
+
+      // } else if(selectedItems.finalMainCategory === "Fashion" && this.registerDataObj["categories"].finalSubCategory === "Clothing") {
+      //   this.setState({
+      //     itemRegisterStep: this.state.itemRegisterStep + 1.5
+      //   })
 
       } else {
         this.setState({
-          itemRegisterStep: this.state.itemRegisterStep + 2
+          // itemRegisterStep: this.state.itemRegisterStep + 2
+          itemRegisterStep: 3
         });
       }
 
@@ -716,6 +746,11 @@ class RegisterItemComponent extends Component {
       });
 
     } else if(pageName === "gender and size input") {
+      this.setState({
+        itemRegisterStep: 1
+      });
+
+    } else if(pageName === "filter type selection") {
       this.setState({
         itemRegisterStep: 1
       })
@@ -776,17 +811,21 @@ class RegisterItemComponent extends Component {
 
             {/* Filter Page (Only for Fashion) START*/}
             {
-              this.state.itemRegisterStep === 2 &&
-              (this.registerDataObj["categories"].categoryLevelTwo === "4a380c0c-9b9e-459d-b988-b7d9b2720d7d" ||
-              this.registerDataObj["categories"].categoryLevelTwo === "07f12a59-6272-49c5-ad38-ba7623c0cf84" ||
-              this.registerDataObj["categories"].categoryLevelTwo === "6a60e00e-f8e5-4f49-92fb-62d2d1154452" ||
-              this.registerDataObj["categories"].categoryLevelTwo === "ed8f58f9-aed2-449b-b61c-7fb92ea36b8e")  ?
+              this.state.itemRegisterStep === 2.5 ?
+              // (this.registerDataObj["categories"].categoryLevelTwo === "4a380c0c-9b9e-459d-b988-b7d9b2720d7d" ||
+              // this.registerDataObj["categories"].categoryLevelTwo === "07f12a59-6272-49c5-ad38-ba7623c0cf84" ||
+              // this.registerDataObj["categories"].categoryLevelTwo === "6a60e00e-f8e5-4f49-92fb-62d2d1154452" ||
+              // this.registerDataObj["categories"].categoryLevelTwo === "ed8f58f9-aed2-449b-b61c-7fb92ea36b8e")  ?
 
               <FashionTypeSelection 
                 typeSelectionError={this.state.typeSelectionError}
-                handleDropDown={this.handleDropDown}
+                // handleDropDown={this.handleDropDown}
                 categories={this.registerDataObj["categories"]}
                 fashionSubCategories={this.fashionSubCategories}
+
+                handleBackButton={this.handleBackButton}
+
+                handleInputSubmit={this.handleInputSubmit}
               />
               : null
             }
@@ -803,7 +842,7 @@ class RegisterItemComponent extends Component {
                 handleSelection={this.handleSelection}
                 categories={this.registerDataObj["categories"]}
                 sizeError={this.state.sizeError}
-                handleDropDown={this.handleDropDown}
+                // handleDropDown={this.handleDropDown}
                 handleInputSubmit={this.handleInputSubmit}
 
                 handleBackButton={this.handleBackButton}
