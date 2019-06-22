@@ -87,6 +87,7 @@ class RegisterItemComponent extends Component {
       // },
       categories: {},
       selectedSwapCategories: [],
+      hashTags: []
     };
 
     this.categories = {
@@ -716,6 +717,10 @@ class RegisterItemComponent extends Component {
       }
 
     } else if(pageName === "hashTag selection") {
+      console.log("@#@#@#@#2 selectedItems", selectedItems);
+
+      this.registerDataObj["hashTags"] = selectedItems;
+
       this.setState({
         itemRegisterStep: this.state.itemRegisterStep + 1
       });

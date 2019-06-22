@@ -188,12 +188,24 @@ class SwapCategorySelection extends React.Component {
 
   render() {
     const { selectedSwapCategoriesState, swapCategorySelectionError, selectedSwapCategories,
-    onSelectedItemsChange, onSelectedItemObjectsChange, handleSwapCategoryContinue} = this.props;
+    onSelectedItemsChange, onSelectedItemObjectsChange, handleSwapCategoryContinue, handleBackButton} = this.props;
     newSelectedSwapCategories = [22, 23];
 
     return (
       <SafeAreaView style={{marginTop: -20, backgroundColor: 'white'}}>
         <View style={styles.swapCategorySelectionSection}>
+
+          <TouchableOpacity 
+            style={{
+              paddingLeft: 10,
+              paddingTop: 32
+            }} 
+            onPress={() => {handleBackButton()}}
+          >
+            <FeatherIcon name="arrow-left" size={30} color={"white"}/>
+          </TouchableOpacity>
+
+
           <Text style={{fontWeight: 'bold', fontSize: 32, marginBottom: 56, textAlign: 'center'}}>
             Select Swap Categories
           </Text>

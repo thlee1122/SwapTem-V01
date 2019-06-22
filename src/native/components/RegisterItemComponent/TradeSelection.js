@@ -40,6 +40,12 @@ class TradeSelection extends React.Component {
     this.finalSelectedSwapCategoryObj = finalSelectedSwapCategoryObj;
   }
 
+  handleBackButton = () => {
+    this.setState({
+      editButtonClicked: false
+    });
+  }
+
   render() {
     const { tradeSelectionError, swapToggle, sellToggle, rentToggle, handleSwitch, 
             handleInputSubmit, selectedSwapCategoriesState, swapCategorySelectionError,
@@ -240,6 +246,8 @@ class TradeSelection extends React.Component {
             onSelectedItemsChange={onSelectedItemsChange}
             onSelectedItemObjectsChange={onSelectedItemObjectsChange}
             handleSwapCategoryContinue={this.handleSwapCategoryContinue}
+
+            handleBackButton={this.handleBackButton}
           />
         }  
       </React.Fragment>
