@@ -714,6 +714,11 @@ class RegisterItemComponent extends Component {
       this.setState({
         itemRegisterStep: 6
       });
+
+    } else if(pageName === "gender and size input") {
+      this.setState({
+        itemRegisterStep: 1
+      })
     }
   }
 
@@ -800,6 +805,8 @@ class RegisterItemComponent extends Component {
                 sizeError={this.state.sizeError}
                 handleDropDown={this.handleDropDown}
                 handleInputSubmit={this.handleInputSubmit}
+
+                handleBackButton={this.handleBackButton}
               />
               : null
             }

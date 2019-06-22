@@ -25,7 +25,7 @@ export const mainCategories = [
 
 export const FashionSubCategories = [
   {
-    name: "Clothign",
+    name: "Clothing",
     id: 0
   },
   {
