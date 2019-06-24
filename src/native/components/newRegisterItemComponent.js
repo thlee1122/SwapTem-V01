@@ -118,6 +118,8 @@ class RegisterItemComponent extends Component {
     const category = get(metadata, "category", {});
     const mainCategories = get(category, "SubCategory", []);
 
+    console.log("11111 this.props", this.props);
+
     this.pickImage();
     // this.handleRecommendCategory();
 

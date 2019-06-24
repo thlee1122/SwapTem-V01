@@ -212,7 +212,7 @@ class GenderSizeSection extends React.Component {
                     >
                       {
                         this.state.currentSizeValue === "" ?
-                        "Select swap categories"
+                        "Select size"
                         : `US ${this.state.currentSizeValue}`
                       }
                     </Text>

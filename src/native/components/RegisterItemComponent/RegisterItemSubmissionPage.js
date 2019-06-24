@@ -1,5 +1,5 @@
 import React, { Component }                               from 'react';
-import { View, Image, TouchableOpacity}                   from 'react-native';
+import { View, Image, TouchableOpacity, Dimensions }                   from 'react-native';
 import { Container, Content, List, Text }                 from 'native-base';
 import get                                                from 'lodash.get';
 import MaterialIcon                                     from 'react-native-vector-icons/MaterialIcons';
@@ -11,6 +11,7 @@ class RegisterItemSubmissionPage extends Component {
     const itemTitle = get(registerDataObj, "itemTitle", "");
     const hashTags = get(registerDataObj, "hashTags", []);
     const itemValue = get(registerDataObj, "itemValue", "");
+    const { height } = Dimensions.get('window');
 
     let temp = "";
     let itemHashTags = [];
@@ -44,7 +45,7 @@ class RegisterItemSubmissionPage extends Component {
 
     return (
       <React.Fragment>
-        <View style={{flexDirection: 'column', alignSelf: 'center', alignItems: 'center', marginTop: 50}}>
+        <View style={{flexDirection: 'column', alignSelf: 'center', alignItems: 'center', marginTop: height * 0.2}}>
           <Text style={{fontWeight: '500', fontSize: 20, letterSpacing: 2, marginTop: 20, marginBottom: 10}}>
             {"Congratulations!".toUpperCase()}
           </Text>
@@ -72,7 +73,7 @@ class RegisterItemSubmissionPage extends Component {
             </Text>
           </View>
 
-          <View style={{alignSelf: 'center', marginTop: 25}}>
+          <View style={{alignSelf: 'center', marginTop: 64}}>
             <TouchableOpacity 
               style={{
                 flexDirection: 'row', 
@@ -102,8 +103,7 @@ class RegisterItemSubmissionPage extends Component {
             </TouchableOpacity>
           </View>
 
-          <View style={{flexDirection: 'column', marginTop: 30, marginLeft: 10, marginRight: 10}}>
-            
+          {/* <View style={{flexDirection: 'column', marginTop: 30, marginLeft: 10, marginRight: 10}}>
             <Text style={{fontSize: 16, fontWeight: '500', letterSpacing: 1.5, lineHeight: 25, marginBottom: 20}}>
               People around you are looking for these items, got any to sell?
             </Text>
@@ -143,7 +143,7 @@ class RegisterItemSubmissionPage extends Component {
                 })
               }
             </View>
-          </View>
+          </View> */}
         </View>
       </React.Fragment>
     );
