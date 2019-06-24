@@ -85,6 +85,7 @@ class RegisterItemComponent extends Component {
       //   categoryLevelTwo: [],
       //   categoryLevelThree: []
       // },
+      condition: "",
       categories: {},
       selectedSwapCategories: [],
       hashTags: []
@@ -405,6 +406,10 @@ class RegisterItemComponent extends Component {
 
 
     } else if(inputType === "ConditionSelectionInput") {
+      //** mainCategory here means selected condition
+
+      this.registerDataObj["condition"] = mainCategory;
+
       this.setState({
         // conditionSelectionSubmitted: true,
         itemRegisterStep: this.state.itemRegisterStep + 1
@@ -415,7 +420,18 @@ class RegisterItemComponent extends Component {
         // descriptionSelectionSubmitted: true,
         itemRegisterStep: this.state.itemRegisterStep + 1
       });
+
+    } else if(inputType === "textbook selection") {
+      //** mainCategory here means finalTextbookObj
+
+      this.registerDataObj["textbookInfo"] = mainCategory;
+
+      this.setState({
+        itemRegisterStep: 3
+      })
     }
+
+
   }
 
   // handleDropDown = (dropDownName, value, id) => {
@@ -709,6 +725,12 @@ class RegisterItemComponent extends Component {
       //     itemRegisterStep: this.state.itemRegisterStep + 1.5
       //   })
 
+
+      } else if(selectedItems.finalMainCategory === "Books" && selectedItems.finalSubCategory === "Textbooks") {
+        this.setState({
+          itemRegisterStep: 1.5
+        }); 
+
       } else {
         this.setState({
           // itemRegisterStep: this.state.itemRegisterStep + 2
@@ -758,8 +780,19 @@ class RegisterItemComponent extends Component {
     } else if(pageName === "filter type selection") {
       this.setState({
         itemRegisterStep: 1
+      });
+
+    } else if(pageName === "condition selection") {
+      this.setState({
+        itemRegisterStep: 4
+      });
+
+    } else if(pageName === "textbook selection") {
+      this.setState({
+        itemRegisterStep: 1
       })
     }
+
   }
 
   render() {
@@ -807,7 +840,15 @@ class RegisterItemComponent extends Component {
             }
             {/* Category Level 1 & 2 Selection Page END*/}
 
-            
+            {
+              this.state.itemRegisterStep === 1.5 ?
+              <TextbookSelectionSection
+                handleBackButton={this.handleBackButton}
+                handleInputSubmit={this.handleInputSubmit}
+              />
+
+              : null
+            }
 
 
 
@@ -916,6 +957,8 @@ class RegisterItemComponent extends Component {
                 handleSelection={this.handleSelection}
                 conditionClicked={this.state.conditionClicked}
                 handleInputSubmit={this.handleInputSubmit}
+
+                handleBackButton={this.handleBackButton}
               />
               : null
             }

@@ -72,6 +72,7 @@ class NewCategorySelectionPage extends React.Component {
     this.tempSubCategories = this.predictionMainCategoryName === "Fashion" ? FashionSubCategories 
     : this.predictionMainCategoryName === "Electronics" ? ElectronicsSubCategories
     : this.predictionMainCategoryName === "Home & Kitchen" ? HomeSubCategories
+    : this.predictionMainCategoryName === "Books" ? BooksSubCategories
     : null;
 
     if(this.predictionMainCategoryName === "Fashion") {
@@ -158,6 +159,7 @@ class NewCategorySelectionPage extends React.Component {
     this.tempSubCategories = this.state.selectedMainCategory === "Fashion" ? FashionSubCategories 
     : this.state.selectedMainCategory === "Electronics" ? ElectronicsSubCategories
     : this.state.selectedMainCategory === "Home & Kitchen" ? HomeSubCategories
+    : this.state.selectedMainCategory === "Books" ? BooksSubCategories
     : null;
 
     return (

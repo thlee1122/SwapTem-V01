@@ -231,11 +231,13 @@ export default StyleSheet.create({
 
   textBookSectionInputbox: {
     width: 350,
-    height: 40, 
-    color: "#00529b", 
+    height: 60, 
+    color: "black", 
     fontWeight: 'bold',
-    fontSize: 15,
-    borderBottomWidth: 2,
+    fontSize: 16,
+    borderBottomWidth: 1,
+    marginTop: 12,
+    // padding: 16
   },
 
   courseNameSection: {
@@ -321,7 +323,7 @@ export default StyleSheet.create({
   swapCategorySelectionSection: {
     backgroundColor: 'white',
     flexDirection: 'column', 
-    marginTop: width * 0.15, 
+    marginTop: width * 0.1, 
     width: '100%',
     paddingLeft: 16,
     paddingRight: 16 

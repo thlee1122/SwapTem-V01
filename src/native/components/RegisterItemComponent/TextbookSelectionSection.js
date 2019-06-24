@@ -1,147 +1,225 @@
-import React                                        from "react";
-import { View, TextInput }                                     from 'react-native';
-import { Text, Button }                             from 'native-base';
-import { Dropdown }                                 from 'react-native-material-dropdown';
-import SectionedMultiSelect                         from 'react-native-sectioned-multi-select';
-import { Switch }                                   from 'react-native-switch';
+import React                                                from "react";
+import { View, TextInput, Text, SafeAreaView, StatusBar,
+         TouchableOpacity, Image, Dimensions }              from 'react-native';
+import FeatherIcon                                          from 'react-native-vector-icons/Feather';
 import styles                                       from '../../styles/RegisterItemStyles';
-import { topSizes, pantSizes, shoesSizes,
-          colleges }          from '../../data/sampleRegisterItemData';
 
 class TextbookSelectionSection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      textBookName: "",
+      textbookInputBorderColor: '#ECEBEB',
+      courseName: "",
+      courseInputBorderColor: '#ECEBEB',
+      collegeName: "",
+      collegeInputBorderColor: '#ECEBEB'
+    };
+  }
+
+  handleTextChange = (inputBoxName, text) => {
+    if(inputBoxName === "textbook name") {
+      this.setState({
+        textBookName: text
+      });
+
+    } else if(inputBoxName === "course name") {
+      this.setState({
+        courseName: text
+      });
+
+    } else if(inputBoxName === "college name") {
+      this.setState({
+        collegeName: text
+      });
+    }
+  }
+
+  handleTextInputFocus = (inputBoxName, action) => {
+    if(inputBoxName === "textbook name") {
+      if(action === "Focus") {
+        this.setState({
+          textbookInputBorderColor: 'black'
+        });
+
+      } else if(action === "Blur") {
+        this.setState({
+          textbookInputBorderColor: '#ECEBEB'
+        });
+      }
+
+    } else if(inputBoxName === "course name") {
+      if(action === "Focus") {
+        this.setState({
+          courseInputBorderColor: 'black'
+        });
+
+      } else if(action === "Blur") {
+        this.setState({
+          courseInputBorderColor: '#ECEBEB'
+        });
+      }
+
+    } else if(inputBoxName === "college name") {
+      if(action === "Focus") {
+        this.setState({
+          collegeInputBorderColor: 'black'
+        });
+
+      } else if(action === "Blur") {
+        this.setState({
+          collegeInputBorderColor: '#ECEBEB'
+        });
+      }
+    } 
+  }
+
+  handleContinueButton = () => {
+    const { handleInputSubmit } = this.props;
+
+    const finalTextbookObj = {
+      textBookName: this.state.textBookName,
+      courseName: this.state.courseName,
+      collegeName: this.state.collegeName
+    };
+
+    handleInputSubmit("textbook selection", finalTextbookObj);
+  }
 
   render() {
-    const { textBookNameError, textbookNameInputColor, textbookName, handleTextChange,
-      handleTextInputFocus, handleTextInputBlur, courseNameError, courseName, courseNameInputColor,
-      collegeNameError, collegeName, onSelectedItemsChange, handleInputSubmit
-    } = this.props;
+    const { handleInputSubmit, handleBackButton } = this.props;
+    const imageFile = require("../../../images/04.png");
+    const { width } = Dimensions.get('window');
 
     return (
       <React.Fragment>
-        <View style={styles.textBookSection}>
-          <Text style={{fontWeight: 'bold', fontSize: 22, marginBottom: 10}}>Textbook Title <Text style={{fontSize:20}}>(Optional)</Text></Text>
-          {
-            textBookNameError === true ?
-              <Text style={styles.textBookSectionSubTitle}>
-                Please input name for your textbook.
+         <StatusBar
+          barStyle="light-content"
+          translucent={true}
+          style={{ color: 'white', zIndex: 10 }}
+        />
+
+        <SafeAreaView style={{marginTop: -20, backgroundColor: 'black'}}>
+          <View style={{backgroundColor: 'black', height: 300}}>
+            <TouchableOpacity 
+              style={{ paddingLeft: 10, paddingTop: 32 }} 
+              onPress={() => {handleBackButton("textbook selection")}}
+            >
+              <FeatherIcon name="arrow-left" size={30} color={"white"}/>
+            </TouchableOpacity>
+            
+            <View style={{flexDirection: 'row', marginLeft: 16, marginTop: 132, marginRight: 16}}>
+              <Image 
+                source={imageFile}
+                style={{
+                  width: 70,
+                  height: 50,
+                  alignSelf: 'center',
+                  marginRight: 20,
+                }}
+              />
+              <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 30, width: width * 0.68, paddingTop: 10}}>
+                Textbook Info Input (Optional)
               </Text>
-            :
-              <React.Fragment></React.Fragment>
-          }
+            </View>
+          </View>
 
-          <TextInput
-            style={[ styles.textBookSectionInputbox,
-                  {borderBottomColor: textbookNameInputColor}]}
-            ref="textbookNameInput"
-            paddingLeft={10}
-            placeholder="Ex. Introductory Business Statistics"
-            value={textbookName}
-            onChangeText={(text) => handleTextChange("textbookNameInput", text)}
-            onFocus={(e) => handleTextInputFocus("textbookNameInput")}
-            onBlur={(e) => handleTextInputBlur("textbookNameInput")}
-          >
-          </TextInput>
-        </View>
+          <View style={{paddingTop: 31, paddingLeft: 16, paddingRight: 16, backgroundColor: 'white'}}>
+            <View style={{flexDirection: 'column'}}>
+              <View>
+                <Text style={{fontSize: 14, lineHeight: 16, color: '#A3A3A2'}}>
+                  {`Please input `}
+                  <Text style={{fontSize: 14, lineHeight: 16, fontWeight: 'bold', color: 'black'}}>
+                    textbook name.
+                  </Text>
+                </Text>
 
-        <View style={[styles.courseNameSection, {marginTop: 25}]}>
-          <Text style={{fontWeight: 'bold', fontSize: 22, marginBottom: 10}}>Course Name <Text style={{fontSize:20}}>(Optional)</Text></Text>
-          <Text style={[styles.collegeSectionSubTitle, {fontSize: 16, lineHeight: 22, color: '#00529b'}]}>
-            Input name of the course for the corresponding textbook.
-          </Text>
-          {
-            courseNameError === true ?
-              <Text style={styles.courseNameSectionErrorMsg}>
-                Please input course name for your textbook.
-              </Text>
-            :
-              <React.Fragment></React.Fragment>
-          }
-          <TextInput
-            style={[ styles.textBookSectionInputbox,
-                  {borderBottomColor: courseNameInputColor}]}
-            ref="courseNameInput"
-            paddingLeft={10}
-            placeholder="Ex. Computer Science I"
-            value={courseName}
-            onChangeText={(text) => handleTextChange("courseNameInput", text)}
-            onFocus={(e) => handleTextInputFocus("courseNameInput")}
-            onBlur={(e) => handleTextInputBlur("courseNameInput")}
-          >
-          </TextInput>
+                <TextInput
+                  style={[ styles.textBookSectionInputbox, {borderBottomColor: this.state.textbookInputBorderColor}]}
+                  ref="textbookNameInput"
+                  paddingLeft={10}
+                  placeholder="Ex. Java Programming Basic"
+                  value={this.state.textBookName}
+                  onChangeText={(text) => this.handleTextChange("textbook name", text)}
+                  onFocus={(e) => this.handleTextInputFocus("textbook name", "Focus")}
+                  onBlur={(e) => this.handleTextInputFocus("textbook name", "Blur")}
+                />
+              </View>
 
-        </View>
+              <View style={{marginTop: 48}}>
+                <Text style={{fontSize: 14, lineHeight: 16, color: '#A3A3A2'}}>
+                  Please input 
+                  <Text style={{fontSize: 14, lineHeight: 16, fontWeight: 'bold', color: 'black'}}>
+                    {` course name `}
+                  </Text>
+                  for this textbook.
+                </Text>
 
-        <View style={[styles.collegeSection, {marginTop: 25}]}>
-          <Text style={{fontWeight: 'bold', fontSize: 22, marginBottom: 10}}>College Name <Text style={{fontSize:20}}>(Optional)</Text></Text>
-          <Text style={[styles.collegeSectionSubTitle, {fontSize: 16, lineHeight: 22, color: collegeNameError === false ? '#00529b' : "red"}]}>
-            Select name of your current college you are attending.
-          </Text>
+                <TextInput
+                  style={[ styles.textBookSectionInputbox, {borderBottomColor: this.state.courseInputBorderColor}]}
+                  ref="courseNameInput"
+                  paddingLeft={10}
+                  placeholder="Ex. Computer Science I"
+                  value={this.state.courseName}
+                  onChangeText={(text) => this.handleTextChange("course name", text)}
+                  onFocus={(e) => this.handleTextInputFocus("course name", "Focus")}
+                  onBlur={(e) => this.handleTextInputFocus("course name", "Blur")}
+                />
+              </View>
 
-          <SectionedMultiSelect
-            hideTags
-            style={styles.collegeSelectionBox}
-            items={colleges} 
-            uniqueKey='name'
-            subKey='children'
-            selectText='Select Your College'
-            showDropDowns={true}
-            readOnlyHeadings={true}
-            single={true}
-            ref={(component) => { this.multiSelect = component }}
-            onSelectedItemsChange={(selectedItems) => onSelectedItemsChange("collegeSelection", selectedItems)}
-            selectedItems={collegeName}
-            submitButtonText="Submit"
-            colors={{
-              success: '#3578e5',
-              chipColor: '#3578e5'
-            }}
+              <View style={{marginTop: 48}}>
+                <Text style={{fontSize: 14, lineHeight: 16, color: '#A3A3A2'}}>
+                  {`Please input `}
+                  <Text style={{fontSize: 14, lineHeight: 16, fontWeight: 'bold', color: 'black'}}>
+                    college / university name.
+                  </Text>
+                </Text>
 
-            styles={{
-              backdrop: {
-                justifyContent: 'center',
-              },
-              container: {
-                width: '80%',
-                height: '70%',
-                flex: 0,
-                alignSelf: 'center',
-                marginTop: -20
-              },
-              selectToggle: {
-                backgroundColor: '#CCC',
-                borderWidth: 0.5,
-                padding: 20,
-                height: 40,
-                marginTop: 8,
-                width: 350,
-                alignItems: 'center', 
-                alignSelf: 'center',
-                borderRadius: 5,
-                marginBottom: 8
-              },
-              selectToggleText: {
-                color: 'black',
-                zIndex: 10,
-                height: 40,
-                flex: 1,
-                paddingTop: 8
-              },
-              selectToggleIconComponent: {
-                color: 'white',
-                zIndex: 10
-              }
-            }}
-          />
-        </View>
+                <TextInput
+                  style={[ styles.textBookSectionInputbox, {borderBottomColor: this.state.collegeInputBorderColor}]}
+                  ref="collegeNameInput"
+                  paddingLeft={10}
+                  placeholder="New York University"
+                  value={this.state.collegeName}
+                  onChangeText={(text) => this.handleTextChange("college name", text)}
+                  onFocus={(e) => this.handleTextInputFocus("college name", "Focus")}
+                  onBlur={(e) => this.handleTextInputFocus("college name", "Blur")}
+                />
+              </View>
+            </View>
 
-        <Button 
-          style={[styles.hashTagePageButton, {marginTop: 30}]}
-          onPress={(e) => handleInputSubmit("textbookCollegeCourseInput")}
-          // disabled={gender !== "" && size !== "" && type.length !== 0 && genderClicked === true ? false : true}
-          // disabled={courseName !== "" && textbookName !== "" && collegeName.length !== 0 ? false : true}
-        >
-          <Text style={styles.hashTagePageButtonText}>Next</Text>
-        </Button>
+            <View style={{alignSelf: 'center', marginTop: 50}}>
+              <TouchableOpacity 
+                style={{
+                  flexDirection: 'row', 
+                  borderWidth: 1,
+                  borderRadius: 15,
+                  width: 278,
+                  height: 58,
+                  marginBottom: 40,
+                  borderColor: "black",
+                  backgroundColor: "white"
+                }}
+                onPress={(e) => this.handleContinueButton()}
+              >
+                <Text 
+                  style={{
+                    fontSize: 14, 
+                    fontWeight: 'bold', 
+                    lineHeight: 20,
+                    flex: 1,
+                    textAlign: 'center',
+                    marginTop: 18,
+                    color: "black"
+                  }}
+                >
+                  Continue
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </SafeAreaView>
       </React.Fragment>
     );
   }

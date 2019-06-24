@@ -90,7 +90,7 @@ class TradeSelection extends React.Component {
                   }}
                 />
                 <Text style={{fontSize: 24, color: 'white', fontWeight: 'bold', lineHeight: 30, width: width * 0.68}}>
-                  Please turn on selections you want for your item
+                  Trade selections
                 </Text>
               </View>
             </View>
@@ -98,7 +98,7 @@ class TradeSelection extends React.Component {
             <View style={{paddingTop: 31, paddingLeft: 16, paddingRight: 16, backgroundColor: 'white'}}>
               <View style={{flexDirection: 'column'}}>
                 <Text style={{fontSize: 16, lineHeight: 24, fontWeight: 'bold'}}>
-                  Trade selections
+                  Please turn on selections you want for your item
                 </Text>
 
                 <View style={{marginLeft: 0, marginTop: 37}}>

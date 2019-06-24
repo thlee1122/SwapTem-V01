@@ -4,6 +4,7 @@ import { View, TouchableOpacity, Text,
          StatusBar, SafeAreaView }                          from 'react-native';
 import styles                                       from '../../styles/RegisterItemStyles';
 import SingleSwapFirstLevelCategory       from './SingleSwapFirstLevelCategory';
+import FeatherIcon                                  from 'react-native-vector-icons/Feather';
 
 class SwapCategorySelection extends React.Component {
   constructor(props) {
@@ -197,12 +198,13 @@ class SwapCategorySelection extends React.Component {
 
           <TouchableOpacity 
             style={{
-              paddingLeft: 10,
-              paddingTop: 32
+              // paddingLeft: 10,
+              paddingTop: 0,
+              marginBottom: 56
             }} 
             onPress={() => {handleBackButton()}}
           >
-            <FeatherIcon name="arrow-left" size={30} color={"white"}/>
+            <FeatherIcon name="arrow-left" size={30} color={"black"}/>
           </TouchableOpacity>
 
 

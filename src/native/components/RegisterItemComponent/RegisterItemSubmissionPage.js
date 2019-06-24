@@ -2,13 +2,9 @@ import React, { Component }                               from 'react';
 import { View, Image, TouchableOpacity}                   from 'react-native';
 import { Container, Content, List, Text }                 from 'native-base';
 import get                                                from 'lodash.get';
-import { Actions }                                        from 'react-native-router-flux';
 import MaterialIcon                                     from 'react-native-vector-icons/MaterialIcons';
-// import { connect }                                     from 'react-redux';
-// import styles                                             from '../styles/InboxStyles';
 
 class RegisterItemSubmissionPage extends Component {
-
   render() {
     const { registerDataObj } = this.props;
     const files = get(registerDataObj, "files", []);
@@ -23,19 +19,10 @@ class RegisterItemSubmissionPage extends Component {
       return item !== ""
     });
 
-    console.log("#### temp", temp);
-
     for(let i = 0; i < temp.length; i++) {
-      let text = `#${temp[i]}`;
+      let text = `${temp[i]}`;
       itemHashTags.push(text);
     }
-
-    console.log("&&&&& itemHashTags", itemHashTags);
-
-
-    console.log("@@@@@ registerDataObj", registerDataObj);
-    console.log("!!!!! files", files);
-    console.log("~~~~~ files[0]", files[0]);
 
     const sampleItems = [
       {
@@ -57,7 +44,7 @@ class RegisterItemSubmissionPage extends Component {
 
     return (
       <React.Fragment>
-        <View style={{flexDirection: 'column', alignSelf: 'center', alignItems: 'center'}}>
+        <View style={{flexDirection: 'column', alignSelf: 'center', alignItems: 'center', marginTop: 50}}>
           <Text style={{fontWeight: '500', fontSize: 20, letterSpacing: 2, marginTop: 20, marginBottom: 10}}>
             {"Congratulations!".toUpperCase()}
           </Text>
@@ -73,7 +60,6 @@ class RegisterItemSubmissionPage extends Component {
                 width: 150,
                 height: 150,
                 alignSelf: 'center'
-                // borderWidth: 1
               }}
             />
 
@@ -84,38 +70,37 @@ class RegisterItemSubmissionPage extends Component {
             <Text style={{fontSize: 18, marginTop: 5, textAlign: 'center'}}>
               {`$${(itemValue).toFixed(2)} USD`}
             </Text>
-
           </View>
 
-          {/* <TouchableOpacity 
-            style={{
-              borderWidth: 1, 
-              borderColor: "#00529b", 
-              borderRadius: 5, 
-              width: 250, 
-              height: 45,
-              marginTop: 30
-            }}
-          >
-            <Text style={{fontSize: 18, color: "#00529b", letterSpacing: 2, padding: 5, flex: 1, textAlign: 'center', marginTop: 5}}>
-              Feature listing
-            </Text>
-          </TouchableOpacity> */}
-
-          <TouchableOpacity 
-            style={{
-              backgroundColor: '#00529b', 
-              borderColor: "#00529b", 
-              borderRadius: 5, 
-              marginTop: 30,
-              width: 250,
-              height: 45
-            }}
-          >
-            <Text style={{fontSize: 18, color: "white", letterSpacing: 2, padding: 5, flex: 1, textAlign: 'center', marginTop: 5}}>
-              View listing
-            </Text>
-          </TouchableOpacity>
+          <View style={{alignSelf: 'center', marginTop: 25}}>
+            <TouchableOpacity 
+              style={{
+                flexDirection: 'row', 
+                borderWidth: 1,
+                borderRadius: 15,
+                width: 278,
+                height: 58,
+                marginBottom: 40,
+                borderColor: "black",
+                backgroundColor: "white"
+              }}
+              // onPress={(e) => this.handleContinueButton()}
+            >
+              <Text 
+                style={{
+                  fontSize: 14, 
+                  fontWeight: 'bold', 
+                  lineHeight: 20,
+                  flex: 1,
+                  textAlign: 'center',
+                  marginTop: 18,
+                  color: "black"
+                }}
+              >
+                View Listing
+              </Text>
+            </TouchableOpacity>
+          </View>
 
           <View style={{flexDirection: 'column', marginTop: 30, marginLeft: 10, marginRight: 10}}>
             
@@ -153,7 +138,6 @@ class RegisterItemSubmissionPage extends Component {
                           {item.numberOfSearches}
                         </Text>
                       </View>
-
                     </View>
                   );
                 })
