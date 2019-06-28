@@ -6,7 +6,18 @@ import { View, Image, ScrollView, TouchableOpacity,
          Dimensions, ActivityIndicator }                from 'react-native';  
 import { Container, Text, Button}                       from 'native-base';
 import MentionsTextInput                                from 'react-native-mentions';
-import { ImagePicker, Permissions }                     from 'expo';
+
+
+// import { ImagePicker, Permissions }                     from 'expo';
+
+
+// import ImagePicker from 'react-native-image-picker';
+
+import ImagePicker from 'react-native-image-crop-picker';
+
+
+
+
 import MaterialIcon                                     from 'react-native-vector-icons/MaterialIcons';
 import styles                                           from '../styles/RegisterItemStyles';
 import { items, colleges, shoesSizes, 
@@ -200,56 +211,66 @@ class RegisterItemComponent extends Component {
     }
   }
 
-  takePhoto = async () => {
-    let { status } = await Permissions.askAsync(Permissions.CAMERA);
+  pickImage = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+    });
+  }
+
+  // takePhoto = async () => {
+  //   let { status } = await Permissions.askAsync(Permissions.CAMERA);
     
-    if(status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access camera roll was denied',
-      });
-    }
+  //   if(status !== 'granted') {
+  //     this.setState({
+  //       errorMessage: 'Permission to access camera roll was denied',
+  //     });
+  //   }
 
-    let cameraResult = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
+  //   let cameraResult = await ImagePicker.launchCameraAsync({
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //   });
   
-    if (!cameraResult.cancelled ) {
-      this.setState({ pictureUrl: cameraResult.uri });
-      this.registerDataObj['files'].push(cameraResult.uri);
-    }
-  };
+  //   if (!cameraResult.cancelled ) {
+  //     this.setState({ pictureUrl: cameraResult.uri });
+  //     this.registerDataObj['files'].push(cameraResult.uri);
+  //   }
+  // };
 
-  pickImage = async () => {
-    let { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    let bodyFormData = new FormData();
+  // pickImage = async () => {
+  //   let { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  //   let bodyFormData = new FormData();
 
-    if(status !== 'granted') {
-      this.setState({
-        errorMessage: 'Permission to access camera roll was denied',
-      });
-    }
+  //   if(status !== 'granted') {
+  //     this.setState({
+  //       errorMessage: 'Permission to access camera roll was denied',
+  //     });
+  //   }
 
-    let galleryResult = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
+  //   let galleryResult = await ImagePicker.launchImageLibraryAsync({
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //   });
   
-    if (!galleryResult.cancelled) {
-      this.setState({ pictureUrl: galleryResult.uri });
-      this.registerDataObj['files'].push(galleryResult.uri);
+  //   if (!galleryResult.cancelled) {
+  //     this.setState({ pictureUrl: galleryResult.uri });
+  //     this.registerDataObj['files'].push(galleryResult.uri);
 
-      bodyFormData.append('file', {
-        uri: galleryResult.uri,
-        type: 'image/jpeg',
-        name: 'teste'
-      });
-    }
+  //     bodyFormData.append('file', {
+  //       uri: galleryResult.uri,
+  //       type: 'image/jpeg',
+  //       name: 'teste'
+  //     });
+  //   }
 
-    if(this.registerDataObj['files'].length !== 0) {
-      this.props.detectImage(bodyFormData);
-    }
-  };
+  //   if(this.registerDataObj['files'].length !== 0) {
+  //     this.props.detectImage(bodyFormData);
+  //   }
+  // };
 
   onSelectedItemsChange = (selectionType, selectedItems, predictionMainCategoryId) => {
     if(selectionType === "swapCategorySelection") {
