@@ -1,17 +1,26 @@
 {
-  "name": "rnsk-firebase-cloud-functions",
-  "description": "React Native Starter Kit Firebase Cloud Functions",
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
   "dependencies": {
-    "firebase-admin": "^4.1.1",
-    "firebase-functions": "^0.5.1"
+    "firebase-admin": "^8.0.0",
+    "firebase-functions": "^3.0.0",
+    "twilio": "^3.0.0-rc.13"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^6.0.0",
-    "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "eslint": "^5.12.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "firebase-functions-test": "^0.1.6"
   },
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
-  }
+  "private": true
 }

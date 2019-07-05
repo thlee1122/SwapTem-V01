@@ -11,23 +11,23 @@ const {
 
 let firebaseInitialized = false;
 
-if (
-  apiKey !== 'null'
-  && authDomain !== 'null'
-  && databaseURL !== 'null'
-  && storageBucket !== 'null'
-  && messagingSenderId !== 'null'
-) {
-  FirebaseModule.initializeApp({
-    apiKey,
-    authDomain,
-    databaseURL,
-    storageBucket,
-    messagingSenderId,
-  });
+// if (
+//   apiKey !== 'null'
+//   && authDomain !== 'null'
+//   && databaseURL !== 'null'
+//   && storageBucket !== 'null'
+//   && messagingSenderId !== 'null'
+// ) {
+//   FirebaseModule.initializeApp({
+//     apiKey,
+//     authDomain,
+//     databaseURL,
+//     storageBucket,
+//     messagingSenderId,
+//   });
 
-  firebaseInitialized = true;
-}
+//   firebaseInitialized = true;
+// }
 
 export const FirebaseRef = firebaseInitialized ? FirebaseModule.database().ref() : null;
 export const Firebase = firebaseInitialized ? FirebaseModule : null;

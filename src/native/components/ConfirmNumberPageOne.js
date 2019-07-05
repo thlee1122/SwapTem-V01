@@ -1,19 +1,36 @@
 import React, { Component }                               from 'react';
-import { View, TouchableOpacity, ScrollView, 
+import { View, TouchableOpacity, 
          SafeAreaView, Dimensions, TextInput }                       from 'react-native';
 import { Container, Content, Text }                       from 'native-base';
 import { Actions }                                        from 'react-native-router-flux';
-import MaterialCommunityIcons                       from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons      from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
+
+const ROOT_URL = 'https://us-central1-one-time-password-5b1e8.cloudfunctions.net';
 
 class ConfirmNumberPageOne extends Component {
   constructor(props) {
     super(props);
-    this.selectedSelections = [];
 
     this.state = { 
-      selectedSelections: []
+      phone: '',
+      error: ''
     };
+  }
+
+  handleSubmit = async () => {
+    try {
+      await axios.post(`${ROOT_URL}/createUser`, { phone: this.state.phone })
+      await axios.post(`${ROOT_URL}/requestOneTimePassword`, { phone: this.state.phone })
+
+    } catch(err) {
+      this.setState({ error: err });
+    }
+
+    if(this.state.error === "") {
+      Actions.confirmNumberPageTwo({ 
+        userPhoneNumber: this.state.phone 
+      });
+    }
   }
 
   render() {
@@ -47,11 +64,9 @@ class ConfirmNumberPageOne extends Component {
                   fontSize: 16
                 }}
                 placeholder="+1"
-                // onChangeText={(text) => this.setState({text})}
               />
 
               <TextInput
-                // editable={false}
                 style={{
                   height: 56, 
                   borderColor: 'black', 
@@ -63,9 +78,11 @@ class ConfirmNumberPageOne extends Component {
                   alignSelf: 'center',
                   fontSize: 16
                 }}
+                maxLength={10}
                 keyboardType="phone-pad"
                 placeholder="(XXX) XXX-XXXX"
-                // onChangeText={(text) => this.setState({text})}
+                value={this.state.phone}
+                onChangeText={(text) => this.setState({phone: text})}
               />
             </View>
 
@@ -73,15 +90,13 @@ class ConfirmNumberPageOne extends Component {
               <TouchableOpacity 
                 style={{
                   flexDirection: 'row', 
-                  
-                  // right: 0,
                   borderWidth: 1,
                   borderRadius: 30,
                   width: 278,
                   height: 58,
                   marginTop: 150
                 }}
-                onPress={ () => { Actions.confirmNumberPageTwo() }}
+                onPress={this.handleSubmit}
               >
                 <Text 
                   style={{

@@ -6,7 +6,14 @@ import { View, Image, ScrollView, TouchableOpacity,
          Dimensions, ActivityIndicator }                from 'react-native';  
 import { Container, Text, Button}                       from 'native-base';
 import MentionsTextInput                                from 'react-native-mentions';
+
+
+
 import { ImagePicker, Permissions }                     from 'expo';
+// import ImagePicker from 'react-native-image-crop-picker';
+
+
+
 import MaterialIcon                                     from 'react-native-vector-icons/MaterialIcons';
 import styles                                           from '../styles/RegisterItemStyles';
 import { items, colleges, shoesSizes, 
@@ -199,6 +206,16 @@ class RegisterItemComponent extends Component {
       });
     }
   }
+
+  // pickImage = () => {
+  //   ImagePicker.openPicker({
+  //     width: 300,
+  //     height: 400,
+  //     cropping: true
+  //   }).then(image => {
+  //     console.log(image);
+  //   });
+  // }
 
   takePhoto = async () => {
     let { status } = await Permissions.askAsync(Permissions.CAMERA);
