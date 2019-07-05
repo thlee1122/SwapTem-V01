@@ -77,6 +77,7 @@ class ConfirmNumberPageTwo extends Component {
 
     if(this.state.error === '') {
       console.log("5555 submission successful");
+      Actions.signUpPage();
     }
   }
 
