@@ -13,8 +13,11 @@ class ConfirmNumberPageOne extends Component {
 
     this.state = { 
       phone: '',
-      error: ''
+      error: '',
+      disableButton: true
     };
+
+    this.phone = '';
   }
 
   handleSubmit = async () => {
@@ -33,6 +36,25 @@ class ConfirmNumberPageOne extends Component {
     }
   }
 
+  handleTextChange = (text) => {
+    this.setState({
+      phone: text
+    });
+
+    this.phone = text;
+
+    if(this.phone.length === 10 && (/^\d+$/.test(this.phone) === true)) {
+      this.setState({
+        disableButton: false
+      });
+
+    } else {
+      this.setState({
+        disableButton: true
+      });
+    }
+  }
+
   render() {
     const { height, width } = Dimensions.get('window');
 
@@ -47,9 +69,16 @@ class ConfirmNumberPageOne extends Component {
               <Text style={{fontSize: 16, lineHeight: 24, marginTop: 5, textAlign: 'center'}}>
                 This helps us confirm your identity and secure your account.
               </Text>
+
+              {
+                this.state.error !== "" &&
+                <Text style={{fontSize: 16, lineHeight: 24, marginTop: 24, textAlign: 'center', color: 'red'}}>
+                  This phone number is already being used. Please input valid phone number
+                </Text>
+              }
             </View>
 
-            <View style={{flexDirection: 'row', marginLeft: 16, marginRight: 16, marginTop: 64}}>
+            <View style={{flexDirection: 'row', marginLeft: 16, marginRight: 16, marginTop: 48}}>
               <TextInput
                 editable={false}
                 style={{
@@ -82,7 +111,7 @@ class ConfirmNumberPageOne extends Component {
                 keyboardType="phone-pad"
                 placeholder="(XXX) XXX-XXXX"
                 value={this.state.phone}
-                onChangeText={(text) => this.setState({phone: text})}
+                onChangeText={(text) => this.handleTextChange(text)}
               />
             </View>
 
@@ -94,8 +123,11 @@ class ConfirmNumberPageOne extends Component {
                   borderRadius: 30,
                   width: 278,
                   height: 58,
-                  marginTop: 150
+                  marginTop: 150,
+                  backgroundColor: this.state.disableButton === true ? "#CECECE" : 'white',
+                  borderColor: this.state.disableButton === true ? "#CECECE" : 'black'
                 }}
+                disabled={this.state.disableButton}
                 onPress={this.handleSubmit}
               >
                 <Text 
@@ -106,6 +138,7 @@ class ConfirmNumberPageOne extends Component {
                     flex: 1,
                     textAlign: 'center',
                     marginTop: 18,
+                    color: this.state.disableButton === true ? 'white' : 'black'
                   }}
                 >
                   Continue
