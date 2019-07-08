@@ -114,6 +114,8 @@ import SubCategorySelectionPage   from '../components/SubCategorySelectionPage';
 import SwapCategorySelection from '../components/RegisterItemComponent/SwapCategorySelection';
 import TradeSelection from '../components/RegisterItemComponent/TradeSelection';
 
+import SwapCardPage from '../components/SwapCardPage/';
+
 
 import { Actions }                                        from 'react-native-router-flux';
 
@@ -266,7 +268,7 @@ const Index = (
     hideNavBar
     // navBar={NavBar}
   >
-    <Stack
+    {/* <Stack
       key="loginPages"
       hideNavBar
     >
@@ -290,7 +292,7 @@ const Index = (
       <Scene key="interestPage" back title="Select your interests" component={InterestSelectionPage} />
 
       <Scene key="termsPage" back title="SwapTem Terms" component={TermsPage} />
-    </Stack>
+    </Stack> */}
 
     
     
@@ -374,6 +376,14 @@ const Index = (
           <Scene key="payment" component={PaymentPage} />
         </Stack> */}
 
+        <Stack
+          navBar={NavBar}
+          key="swap-cards-main-page"
+          title="Swap Cards"
+          icon={() => <MaterialCommunityIcons name="cards-outline" size={30} color="black" style={{marginTop:3}}/>}
+        >
+          <Scene key="swap-cards" component={SwapCardPage} />
+        </Stack>
 
 
 
