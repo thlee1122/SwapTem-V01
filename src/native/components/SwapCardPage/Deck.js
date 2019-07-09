@@ -126,7 +126,7 @@ class Deck extends Component {
           { this.props.renderCard(item) }
         </Animated.View>
       );
-    });
+    })
   }
 
   render() {

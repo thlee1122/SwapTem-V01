@@ -52,6 +52,14 @@ class SwapCardPage extends Component {
     );
   }
 
+  onSwipeRight = () => {
+    console.log("Swipped Right!");
+  }
+
+  onSwipeLeft = () => {
+    console.log("Swipped Left!");
+  }
+
   render() {
     return (
       <View style={{backgroundColor: 'white', flex: 1}}>
@@ -59,6 +67,8 @@ class SwapCardPage extends Component {
           renderCard={this.renderCard}
           data={DATA}
           renderNoMoreCards={this.renderNoMoreCards}
+          onSwipeRight={this.onSwipeRight}
+          onSwipeLeft={this.onSwipeLeft}
         />
       </View>
     );
