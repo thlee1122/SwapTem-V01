@@ -36,12 +36,29 @@ class SwapCardPage extends Component {
     );
   }
 
+  renderNoMoreCards = () => {
+    return (
+      <Card title="All Done!">
+        <Text style={{marginBottom: 10}}>
+          There's no more content here!
+        </Text>
+
+        <Button
+          // icon={{ name: 'code' }}
+          backgroundColor='#03A9F4'
+          title="Get More!"
+        />
+      </Card>
+    );
+  }
+
   render() {
     return (
       <View style={{backgroundColor: 'white', flex: 1}}>
         <Deck 
           renderCard={this.renderCard}
           data={DATA}
+          renderNoMoreCards={this.renderNoMoreCards}
         />
       </View>
     );
