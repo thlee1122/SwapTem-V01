@@ -118,14 +118,14 @@ class Deck extends Component {
         )
       }
 
-      return (
-        <Animated.View 
-          key={item.id} 
-          style={styles.cardStyle}
-        >
-          { this.props.renderCard(item) }
-        </Animated.View>
-      );
+      // return (
+      //   <Animated.View 
+      //     key={item.id} 
+      //     style={styles.cardStyle}
+      //   >
+      //     { this.props.renderCard(item) }
+      //   </Animated.View>
+      // );
     }).reverse();
   }
 
